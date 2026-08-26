@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>风格图鉴 · 风格 · 运镜 · AI工具全攻略</title>
+<style>
+  /* ===== 基础变量 ===== */
+  :root{
+    --accent:#2e86de;
+    --accent-2:#54a0ff;
+    --ink:#1a1a2e;
+    --ink-2:#4a4a6a;
+    --ink-3:#8a8aaa;
+    --line:#e5e8ef;
+    --bg:#f5f7fb;
+    --surface:#ffffff;
+    --surface-2:#f8f9fc;
+    --shadow:0 4px 20px rgba(46,134,222,.08);
+    --radius:16px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .container{
+    max-width:800px;
+    margin:0 auto;
+    padding:20px 16px 60px;
+  }
+
+  /* ===== 页头 ===== */
+  .page-head{
+    display:flex;align-items:center;gap:12px;
+    margin:10px 0 20px;
+  }
+  .page-head .bow{font-size:32px;}
+  .page-head h1{
+    font-size:24px;font-weight:800;color:var(--ink);
+    letter-spacing:-.5px;
+  }
+  .page-head .sub{
+    font-size:13px;color:var(--ink-3);
+    margin-left:auto;
+  }
+
+  /* ===== 卡片 ===== */
+  .card{
+    background:var(--surface);
+    border-radius:var(--radius);
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+  }
+  .card-h{
+    display:flex;align-items:center;gap:8px;
+    font-size:15px;font-weight:700;color:var(--ink);
+    margin-bottom:10px;
+  }
+  .card-h .btn{margin-left:auto;}
+
+  .btn{
+    border:none;cursor:pointer;
+    padding:6px 14px;border-radius:10px;
+    font-size:13px;font-weight:600;
+    transition:all .2s;
+  }
+  .btn-accent{
+    background:var(--accent);color:#fff;
+  }
+  .btn-accent:hover{background:var(--accent-2);}
+
+  .txt{font-size:13px;color:var(--ink-2);line-height:1.7;}
+
+  /* ===== 卡片染色 ===== */
+  .tint-purple{background:linear-gradient(135deg,#faf5ff,#ffffff);}
+  .tint-rose{background:linear-gradient(135deg,#fff5f7,#ffffff);}
+  .tint-indigo{background:linear-gradient(135deg,#eef0ff,#ffffff);}
+  .tint-amber{background:linear-gradient(135deg,#fff9e6,#ffffff);}
+  .tint-mint{background:linear-gradient(135deg,#f0faf3,#ffffff);}
+  .tint-violet{background:linear-gradient(135deg,#f5f0ff,#ffffff);}
+  .tint-sky{background:linear-gradient(135deg,#eaf4ff,#ffffff);}
+  .tint-orange{background:linear-gradient(135deg,#fff3e6,#ffffff);}
+  .tint-pink{background:linear-gradient(135deg,#fff0f5,#ffffff);}
+  .tint-blue{background:linear-gradient(135deg,#e8f0ff,#ffffff);}
+  .tint-red{background:linear-gradient(135deg,#fff0f0,#ffffff);}
+  .tint-gray{background:linear-gradient(135deg,#f5f5f7,#ffffff);}
+  .tint-green{background:linear-gradient(135deg,#edfaf0,#ffffff);}
+
+  /* ===== 风格图鉴 ===== */
+  .style-tabs{
+    display:flex;gap:8px;
+  }
+  .style-tab{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:14px 12px;border:1px solid var(--line);
+    border-radius:12px;background:var(--surface);
+    cursor:pointer;transition:all .2s ease;
+  }
+  .style-tab:hover{
+    border-color:var(--accent);background:rgba(46,134,222,.04);
+    transform:translateY(-1px);
+  }
+  .style-tab.active{
+    border-color:var(--accent);background:rgba(46,134,222,.08);
+    box-shadow:0 0 0 2px rgba(46,134,222,.15);
+  }
+  .style-tab-ico{font-size:24px;}
+  .style-tab-name{font-weight:700;color:var(--ink);font-size:14px;}
+  .style-tab-count{
+    font-size:11px;color:var(--ink-3);
+    background:var(--bg);padding:2px 8px;border-radius:10px;
+  }
+  .style-tab.active .style-tab-count{
+    background:var(--accent);color:#fff;
+  }
+
+  .style-desc{
+    font-size:13px;color:var(--ink-2);line-height:1.6;
+    margin:6px 0 10px;
+  }
+  .style-tags{
+    display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;
+  }
+  .style-tag{
+    font-size:11px;padding:3px 10px;border-radius:12px;
+    background:var(--bg);color:var(--ink-2);
+    border:1px solid var(--line);font-weight:500;
+  }
+  .style-sub{
+    font-size:12px;color:var(--ink-3);
+    padding-top:8px;border-top:1px dashed var(--line);
+    line-height:1.6;
+  }
+  .style-sub b{color:var(--ink-2);font-weight:600;}
+
+  .style-prompt{
+    margin-top:10px;padding:10px 12px;
+    background:rgba(46,134,222,.05);
+    border:1px solid rgba(46,134,222,.15);
+    border-radius:10px;
+  }
+  .sp-title{
+    font-size:13px;font-weight:600;color:var(--accent);
+    margin-bottom:8px;
+  }
+  .sp-lang{
+    font-size:11px;color:var(--ink-3);
+    margin:6px 0 3px;
+  }
+  .sp-text{
+    font-size:12px;color:var(--ink-2);
+    background:#fff;
+    padding:8px 10px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    line-height:1.6;
+    cursor:pointer;
+    transition:all .2s;
+    user-select:none;
+    position:relative;
+  }
+  .sp-text:hover{
+    border-color:var(--accent);
+    background:rgba(46,134,222,.03);
+  }
+  .sp-text::after{
+    content:'点击复制';
+    position:absolute;top:6px;right:8px;
+    font-size:10px;color:var(--accent);
+    opacity:0;transition:opacity .2s;
+  }
+  .sp-text:hover::after{opacity:1;}
+
+  .ai-tool-tabs{
+    display:flex;gap:8px;
+  }
+  .ai-tool-tab{
+    flex:1;padding:10px 12px;border:1px solid var(--line);
+    border-radius:10px;background:var(--surface);
+    cursor:pointer;font-size:13px;font-weight:600;
+    color:var(--ink-2);transition:all .2s ease;
+  }
+  .ai-tool-tab:hover{
+    border-color:var(--accent);color:var(--accent);
+  }
+  .ai-tool-tab.active{
+    border-color:var(--accent);background:rgba(46,134,222,.08);
+    color:var(--accent);
+  }
+
+  .tool-badge{
+    font-size:11px;padding:2px 8px;border-radius:10px;
+    font-weight:700;margin-left:8px;
+  }
+  .tool-best{background:#fff3e0;color:#ff9800;}
+  .tool-free{background:#e8f5e9;color:#4caf50;}
+  .tool-easy{background:#e3f2fd;color:#2196f3;}
+  .tool-cn{background:#fce4ec;color:#e91e63;}
+  .tool-fast{background:#f3e5f5;color:#9c27b0;}
+
+  .tool-specs{
+    margin:8px 0;
+    background:var(--bg);
+    border-radius:10px;
+    padding:8px 12px;
+  }
+  .tool-spec-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:4px 0;font-size:12px;
+    border-bottom:1px dashed var(--line);
+  }
+  .tool-spec-row:last-child{border-bottom:none;}
+  .tool-spec-row > span:first-child{
+    color:var(--ink-3);font-weight:500;
+  }
+  .tool-spec-row .rating{
+    color:var(--ink-2);font-weight:600;
+  }
+
+  .sub-tbl{
+    width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;
+  }
+  .sub-tbl th{
+    background:var(--bg);padding:8px 6px;text-align:center;
+    font-weight:700;color:var(--ink);border-bottom:2px solid var(--line);
+  }
+  .sub-tbl td{
+    padding:8px 6px;text-align:center;border-bottom:1px solid var(--line);
+    color:var(--ink-2);
+  }
+  .sub-tbl tr:last-child td{border-bottom:none;}
+  .sub-tbl tr:hover{background:rgba(46,134,222,.04);}
+
+  /* ===== Toast ===== */
+  .toast{
+    position:fixed;top:20px;left:50%;transform:translateX(-50%);
+    background:var(--ink);color:#fff;
+    padding:10px 20px;border-radius:10px;
+    font-size:13px;z-index:9999;
+    box-shadow:0 4px 20px rgba(0,0,0,.2);
+    animation:toastIn .3s ease;
+  }
+  .toast.success{background:#4caf50;}
+  .toast.error{background:#f44336;}
+  @keyframes toastIn{
+    from{opacity:0;transform:translate(-50%,-10px);}
+    to{opacity:1;transform:translate(-50%,0);}
+  }
+
+  /* ===== 页脚 ===== */
+  .footer{
+    text-align:center;padding:20px 0;
+    font-size:12px;color:var(--ink-3);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="page-head"><span class="bow">🎨</span><h1>风格图鉴</h1><span class="sub">· 风格 · 运镜 · AI工具全攻略</span></div>
+
+  <!-- 分类切换 -->
+  <div class="card">
+    <div class="style-tabs">
+      <button class="style-tab active" data-stylecat="anime" onclick="switchStyleCat('anime')">
+        <span class="style-tab-ico">🎌</span>
+        <span class="style-tab-name">动漫风格</span>
+      </button>
+      <button class="style-tab" data-stylecat="real" onclick="switchStyleCat('real')">
+        <span class="style-tab-ico">🎬</span>
+        <span class="style-tab-name">真人风格</span>
+      </button>
+      <button class="style-tab" data-stylecat="camera" onclick="switchStyleCat('camera')">
+        <span class="style-tab-ico">📹</span>
+        <span class="style-tab-name">运镜指南</span>
+      </button>
+      <button class="style-tab" data-stylecat="aitool" onclick="switchStyleCat('aitool')">
+        <span class="style-tab-ico">🛠️</span>
+        <span class="style-tab-name">AI工具</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 动漫风格 -->
+  <div id="styleCatAnime">
+    <div class="card tint-purple">
+      <div class="card-h">🎌 日系动漫</div>
+      <div class="style-desc">经典日本动画风格，线条流畅、色彩鲜明、人物美型，是最主流的动漫风格。</div>
+      <div class="style-tags">
+        <span class="style-tag">大眼萌系</span>
+        <span class="style-tag">色彩鲜艳</span>
+        <span class="style-tag">线条简洁</span>
+        <span class="style-tag">表情丰富</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>少年Jump风、少女漫风、京都动画风、新海诚风、吉卜力风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">日系动漫风格，一位美少女站在樱花树下，长发飘逸，大眼睛，温暖的阳光透过树叶，色彩鲜艳，线条流畅，高清细节，京都动画风格</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Japanese anime style, a beautiful girl standing under cherry blossom tree, flowing long hair, big eyes, warm sunlight through leaves, vibrant colors, clean line art, high detail, Kyoto Animation style</div>
+      </div>
+    </div>
+
+    <div class="card tint-rose">
+      <div class="card-h">🏮 古风仙侠</div>
+      <div class="style-desc">中国传统古风与仙侠元素结合，飘逸灵动、仙气飘飘，国漫代表性风格。</div>
+      <div class="style-tags">
+        <span class="style-tag">水墨韵味</span>
+        <span class="style-tag">飘逸长发</span>
+        <span class="style-tag">古装华服</span>
+        <span class="style-tag">仙风道骨</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>水墨国风、3D国漫风、Q版古风、魔道祖师风、斗萝大陆风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">古风仙侠风格，一位白衣剑仙站在云雾缭绕的山巅，长发飘逸，手持长剑，仙风道骨，水墨韵味，山水意境，仙鹤飞舞，仙气飘飘，国漫风格</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Chinese ancient fairy style, a white-robed sword immortal standing on a misty mountain peak, flowing long hair, holding a sword, ethereal aura, ink wash painting aesthetic, mountain landscape, flying cranes, xianxia atmosphere, Chinese donghua style</div>
+      </div>
+    </div>
+
+    <div class="card tint-indigo">
+      <div class="card-h">🌆 赛博朋克</div>
+      <div class="style-desc">未来科技与霓虹灯光交织，高对比度色彩、机械义体、雨夜都市，氛围感极强。</div>
+      <div class="style-tags">
+        <span class="style-tag">霓虹灯光</span>
+        <span class="style-tag">机械义体</span>
+        <span class="style-tag">雨夜都市</span>
+        <span class="style-tag">高对比度</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>赛博朋克边缘行者风、攻壳机动队风、蒸汽朋克混合风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">赛博朋克动漫风格，霓虹灯光映照下的未来都市，雨夜街道，全息广告投影，机械义体少女，高对比度色彩，紫粉色调，赛博朋克边缘行者风格，电影级光影</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Cyberpunk anime style, neon-lit futuristic city, rainy night street, holographic advertisements, cyborg girl with mechanical arms, high contrast colors, purple and pink tones, Cyberpunk Edgerunners style, cinematic lighting</div>
+      </div>
+    </div>
+
+    <div class="card tint-amber">
+      <div class="card-h">💥 热血少年</div>
+      <div class="style-desc">Jump系热血战斗风格，张力十足、速度线密集、人物肌肉感强，燃向首选。</div>
+      <div class="style-tags">
+        <span class="style-tag">张力十足</span>
+        <span class="style-tag">速度线</span>
+        <span class="style-tag">肌肉感</span>
+        <span class="style-tag">夸张表情</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>海贼王风、火影忍者风、咒术回战风、鬼灭之刃风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">热血少年动漫风格，战斗场景，少年主角释放能量大招，速度线效果，夸张表情，肌肉感十足，张力满点，火焰特效，Jump风格，动态构图，高燃画面</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Shonen anime style, battle scene, young protagonist releasing power attack, speed lines, exaggerated expression, muscular build, dynamic tension, flame effects, Jump style, dynamic composition, epic action</div>
+      </div>
+    </div>
+
+    <div class="card tint-mint">
+      <div class="card-h">🌸 治愈系</div>
+      <div class="style-desc">温暖治愈的日常系画风，柔和的色彩、细腻的光影，给人安静舒适的感觉。</div>
+      <div class="style-tags">
+        <span class="style-tag">柔和色调</span>
+        <span class="style-tag">温暖光影</span>
+        <span class="style-tag">日常场景</span>
+        <span class="style-tag">细腻氛围</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>吉卜力风、新海诚日常风、京阿尼治愈风、宫崎骏童话风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">治愈系动漫风格，温暖的午后阳光，女孩坐在窗边看书，柔和色调，细腻光影，绿植点缀，宁静日常，吉卜力风格，舒适氛围，温暖治愈，柔和水彩质感</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Healing anime style, warm afternoon sunlight, girl reading by the window, soft color palette, delicate lighting and shadow, green plants, peaceful daily life, Studio Ghibli style, cozy atmosphere, warm and comforting, soft watercolor texture</div>
+      </div>
+    </div>
+
+    <div class="card tint-violet">
+      <div class="card-h">🦇 暗黑哥特</div>
+      <div class="style-desc">黑暗神秘的哥特风格，十字架、古堡、蔷薇元素，华丽而阴郁，氛围感拉满。</div>
+      <div class="style-tags">
+        <span class="style-tag">暗色调</span>
+        <span class="style-tag">哥特建筑</span>
+        <span class="style-tag">蔷薇十字</span>
+        <span class="style-tag">神秘感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>吸血鬼风格、黑执事风、潘多拉之心风、暗黑童话风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">暗黑哥特动漫风格，神秘古堡前的吸血鬼少女，黑色礼服，红色蔷薇，月光下的十字架，暗色调，华丽阴郁，氛围感拉满，黑执事风格，精致细节</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Dark gothic anime style, vampire girl in front of mysterious castle, black dress, red roses, cross under moonlight, dark color palette, ornate and melancholic, atmospheric, Black Butler style, exquisite details</div>
+      </div>
+    </div>
+
+    <div class="card tint-sky">
+      <div class="card-h">⚙️ 蒸汽朋克</div>
+      <div class="style-desc">维多利亚时代美学与蒸汽机械结合，齿轮、铜管、飞艇，复古与科幻的奇妙融合。</div>
+      <div class="style-tags">
+        <span class="style-tag">齿轮机械</span>
+        <span class="style-tag">黄铜质感</span>
+        <span class="style-tag">维多利亚风</span>
+        <span class="style-tag">飞艇城市</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>工业革命风、甲铁城风、蒸汽都市风、机械绅士风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">蒸汽朋克动漫风格，维多利亚时代的机械都市，齿轮与铜管，蒸汽飞艇，黄铜质感，戴着护目镜的少女，复古与科幻融合，甲铁城风格，精密机械细节</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Steampunk anime style, Victorian-era mechanical city, gears and brass pipes, steam airship, brass texture, girl with goggles, retro and sci-fi fusion, Kabaneri style, intricate mechanical details</div>
+      </div>
+    </div>
+
+    <div class="card tint-orange">
+      <div class="card-h">🖌️ 水彩手绘</div>
+      <div class="style-desc">手绘水彩质感，色彩柔和通透、笔触感明显，文艺气息浓厚，适合抒情场景。</div>
+      <div class="style-tags">
+        <span class="style-tag">水彩质感</span>
+        <span class="style-tag">笔触明显</span>
+        <span class="style-tag">色彩通透</span>
+        <span class="style-tag">文艺气息</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>淡彩手绘风、厚涂油画风、铅笔素描风、马克笔手绘风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">水彩手绘风格，女孩站在花海中，柔和通透的色彩，明显的笔触感，水彩晕染效果，文艺气息，淡彩手绘，温暖阳光，梦幻氛围，插画风格</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Watercolor hand-painted style, girl standing in flower field, soft and transparent colors, visible brush strokes, watercolor bleeding effect, literary atmosphere, light watercolor painting, warm sunlight, dreamy atmosphere, illustration style</div>
+      </div>
+    </div>
+
+    <div class="card tint-pink">
+      <div class="card-h">🧸 Q版萌系</div>
+      <div class="style-desc">二头身/三头身Q版风格，圆滚滚的造型、大大的眼睛，可爱到爆炸。</div>
+      <div class="style-tags">
+        <span class="style-tag">二头身</span>
+        <span class="style-tag">圆滚滚</span>
+        <span class="style-tag">大眼睛</span>
+        <span class="style-tag">软萌可爱</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>SD/Q版、粘土人风、像素风Q版、chibi风格
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Q版萌系风格，二头身可爱小女孩，圆滚滚的脸，超大眼睛，软萌可爱，粉色系，表情开心，chibi风格，粘土人质感，简单背景，治愈系萌物</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Chibi cute style, 2-headed adorable little girl, round face, huge eyes, soft and cute, pink color scheme, happy expression, chibi style, nendoroid texture, simple background, healing kawaii</div>
+      </div>
+    </div>
+
+    <div class="card tint-blue">
+      <div class="card-h">🦸 美漫超级英雄</div>
+      <div class="style-desc">美式漫画风格，硬朗线条、肌肉夸张、色彩浓烈，充满力量感和视觉冲击。</div>
+      <div class="style-tags">
+        <span class="style-tag">硬朗线条</span>
+        <span class="style-tag">肌肉夸张</span>
+        <span class="style-tag">浓烈色彩</span>
+        <span class="style-tag">力量感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>漫威风、DC风、DC动画电影风、蜘蛛侠平行宇宙风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">美漫超级英雄风格，英雄站在城市顶端，硬朗线条，肌肉夸张，浓烈色彩，力量感十足，漫画网点效果，漫威风格，动态姿势，披风飘扬，史诗感</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">American comic superhero style, hero standing on top of city, bold lines, exaggerated muscles, strong colors, powerful presence, comic halftone effect, Marvel style, dynamic pose, flowing cape, epic feel</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 真人风格 -->
+  <div id="styleCatReal" style="display:none">
+    <div class="card tint-amber">
+      <div class="card-h">🎞️ 电影感</div>
+      <div class="style-desc">院线级别的电影质感，浅景深、胶片颗粒感、精准布光，每一帧都是大片。</div>
+      <div class="style-tags">
+        <span class="style-tag">浅景深</span>
+        <span class="style-tag">胶片颗粒</span>
+        <span class="style-tag">电影布光</span>
+        <span class="style-tag">宽画幅</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>好莱坞大片风、文艺片风、IMAX质感、王家卫风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">电影感真人风格，一位男子站在落地窗前，侧光勾勒面部轮廓，浅景深虚化背景，胶片颗粒质感，暖色调，85mm镜头，f/1.4大光圈，宽画幅，院线电影质感，阿莱调色</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Cinematic real person style, a man standing by floor-to-ceiling window, side light outlining facial contours, shallow depth of field, film grain texture, warm tones, 85mm lens, f/1.4 aperture, widescreen, Hollywood film quality, ARRI color grading</div>
+      </div>
+    </div>
+
+    <div class="card tint-rose">
+      <div class="card-h">🌸 日系胶片</div>
+      <div class="style-desc">日本胶片摄影风格，柔和的色调、轻微过曝、温暖的肤色，清新自然有质感。</div>
+      <div class="style-tags">
+        <span class="style-tag">柔和色调</span>
+        <span class="style-tag">胶片颗粒</span>
+        <span class="style-tag">温暖肤色</span>
+        <span class="style-tag">清新自然</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>富士胶片风、柯达Portra风、日系写真风、滨田英明风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">日系胶片风格，女孩在阳光下微笑，柔和色调，轻微过曝，温暖肤色，富士Provia 400H胶片质感，颗粒细腻，清新自然，日系写真，滨田英明风格，逆光人像</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Japanese film photography style, girl smiling in sunlight, soft tones, slight overexposure, warm skin tones, Fujifilm Provia 400H film texture, fine grain, fresh and natural, Japanese portrait, Hideaki Hamada style, backlit portrait</div>
+      </div>
+    </div>
+
+    <div class="card tint-red">
+      <div class="card-h">🌃 复古港风</div>
+      <div class="style-desc">90年代香港电影/写真风格，浓郁色彩、高对比度、朦胧柔光，怀旧氛围感。</div>
+      <div class="style-tags">
+        <span class="style-tag">浓郁色彩</span>
+        <span class="style-tag">柔光朦胧</span>
+        <span class="style-tag">高对比</span>
+        <span class="style-tag">怀旧感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>王家卫电影风、港片黄金年代风、港式写真风、茶餐厅风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">复古港风真人风格，90年代香港街头，霓虹灯牌下的女子，浓郁色彩，高对比度，柔光朦胧效果，怀旧胶片质感，王家卫电影风格，重庆森林感，暖绿调</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Retro Hong Kong style, 90s Hong Kong street, woman under neon signs, rich colors, high contrast, soft glow effect, nostalgic film texture, Wong Kar-wai film style, Chungking Express vibe, warm green tones</div>
+      </div>
+    </div>
+
+    <div class="card tint-indigo">
+      <div class="card-h">🌃 赛博朋克真人</div>
+      <div class="style-desc">真人版赛博朋克，霓虹灯光映射在湿润街道上，机械义肢、全息广告、未来都市。</div>
+      <div class="style-tags">
+        <span class="style-tag">霓虹反光</span>
+        <span class="style-tag">雨夜街道</span>
+        <span class="style-tag">全息投影</span>
+        <span class="style-tag">未来都市</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>银翼杀手风、攻壳机动队真人风、赛博朋克2077风、东京涩谷风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">赛博朋克真人风格，雨夜霓虹街道，湿润地面反射彩色灯光，机械义肢女子，全息广告牌，未来都市背景，紫蓝色调，银翼杀手2049质感，电影级光影，烟雾氛围</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Cyberpunk real person style, rainy neon street, wet ground reflecting colorful lights, woman with mechanical prosthetic limbs, holographic billboards, futuristic city background, purple and blue tones, Blade Runner 2049 quality, cinematic lighting, smoky atmosphere</div>
+      </div>
+    </div>
+
+    <div class="card tint-violet">
+      <div class="card-h">🏯 古风真人</div>
+      <div class="style-desc">古装仙侠/武侠真人风格，飘逸汉服、仙气妆容、山水意境，东方美学极致。</div>
+      <div class="style-tags">
+        <span class="style-tag">飘逸汉服</span>
+        <span class="style-tag">山水意境</span>
+        <span class="style-tag">仙气妆容</span>
+        <span class="style-tag">东方美学</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>仙侠剧风、武侠电影风、汉服写真风、敦煌飞天风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">古风真人风格，汉服女子站在竹林中，飘逸长裙，仙气妆容，山水意境背景，柔和晨雾，东方美学，85mm人像镜头，自然柔光，精致发饰，仙侠剧质感</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Chinese ancient style real person, Hanfu woman standing in bamboo forest, flowing dress, ethereal makeup, mountain landscape background, soft morning mist, oriental aesthetics, 85mm portrait lens, natural soft light, exquisite hair accessories, xianxia drama quality</div>
+      </div>
+    </div>
+
+    <div class="card tint-blue">
+      <div class="card-h">🎬 欧美大片</div>
+      <div class="style-desc">好莱坞商业大片风格，高饱和度、强烈明暗对比、英雄式布光，视觉冲击力强。</div>
+      <div class="style-tags">
+        <span class="style-tag">高饱和</span>
+        <span class="style-tag">强对比</span>
+        <span class="style-tag">英雄布光</span>
+        <span class="style-tag">IMAX质感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>漫威电影风、速度与激情风、变形金刚风、碟中谍风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">欧美大片风格，硬汉主角站在爆炸火光前，高饱和度色彩，强烈明暗对比，英雄式布光，IMAX宽画幅，漫威电影质感，动态模糊，史诗级场面，电影级特效</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Hollywood blockbuster style, tough guy protagonist standing in front of explosion fire, high saturation colors, strong light and shadow contrast, heroic lighting, IMAX widescreen, Marvel film quality, motion blur, epic scene, cinematic VFX</div>
+      </div>
+    </div>
+
+    <div class="card tint-pink">
+      <div class="card-h">💫 韩式清新</div>
+      <div class="style-desc">韩剧/韩系写真风格，干净清透的皮肤、柔和的色彩、精致的构图，初恋感满满。</div>
+      <div class="style-tags">
+        <span class="style-tag">清透皮肤</span>
+        <span class="style-tag">柔和色彩</span>
+        <span class="style-tag">精致构图</span>
+        <span class="style-tag">初恋感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>韩剧女主风、韩系证件照风、梨泰院风、韩国胶片风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">韩式清新风格，清纯女孩在樱花树下，干净清透的皮肤质感，柔和马卡龙色调，精致构图，韩剧女主感，初恋感，柔和自然光，韩国画报风格，甜美微笑</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Korean fresh style, pure girl under cherry blossom tree, clean and translucent skin texture, soft macaron tones, exquisite composition, K-drama heroine vibe, first love feeling, soft natural light, Korean pictorial style, sweet smile</div>
+      </div>
+    </div>
+
+    <div class="card tint-mint">
+      <div class="card-h">📷 写实纪录片</div>
+      <div class="style-desc">真实记录风格，自然光线、真实场景、无过度修饰，真实感和代入感强。</div>
+      <div class="style-tags">
+        <span class="style-tag">自然光</span>
+        <span class="style-tag">真实场景</span>
+        <span class="style-tag">手持感</span>
+        <span class="style-tag">纪录片感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>街头纪实风、人物专访风、自然纪录片风、Vlog日常风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">写实纪录片风格，老人坐在巷口门口，自然光线，真实生活场景，无过度修饰，手持相机感，街头纪实，真实感和代入感强，纪录片质感，人文摄影，生活化构图</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Documentary realism style, elderly man sitting at alley entrance, natural lighting, real life scene, no over-editing, handheld camera feel, street photography, strong sense of authenticity and immersion, documentary quality, humanistic photography, candid composition</div>
+      </div>
+    </div>
+
+    <div class="card tint-gray">
+      <div class="card-h">👔 时尚杂志</div>
+      <div class="style-desc">Vogue/ELLE级别的时尚大片风格，高级感布光、精致造型、极简构图。</div>
+      <div class="style-tags">
+        <span class="style-tag">高级布光</span>
+        <span class="style-tag">极简构图</span>
+        <span class="style-tag">时尚造型</span>
+        <span class="style-tag">杂志质感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>Vogue封面风、商业人像风、棚拍硬照风、时尚街拍风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">时尚杂志风格，高级感棚拍人像，模特穿设计师服装，三灯布光法，极简背景，Vogue封面质感，锐利画质，高级灰调，时尚大片，专业商业摄影，气场全开</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Fashion magazine style, high-end studio portrait, model in designer clothing, three-point lighting setup, minimalist background, Vogue cover quality, sharp image, high-end gray tones, fashion editorial, professional commercial photography, powerful presence</div>
+      </div>
+    </div>
+
+    <div class="card tint-sky">
+      <div class="card-h">🌃 夜景霓虹</div>
+      <div class="style-desc">都市夜景风格，霓虹灯光、玻璃幕墙反射、车流光轨，都市感和赛博感兼具。</div>
+      <div class="style-tags">
+        <span class="style-tag">霓虹灯光</span>
+        <span class="style-tag">玻璃反射</span>
+        <span class="style-tag">车流光轨</span>
+        <span class="style-tag">都市感</span>
+      </div>
+      <div class="style-sub">
+        <b>常见子类：</b>东京夜景风、上海陆家嘴风、香港夜景风、纽约时代广场风
+      </div>
+      <div class="style-prompt">
+        <div class="sp-title">💡 提示词模板</div>
+        <div class="sp-lang">🇨🇳 中文：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">夜景霓虹风格，都市天际线夜景，玻璃幕墙反射五彩灯光，车流光轨，繁华都市感，霓虹招牌，长曝光效果，上海陆家嘴风格，蓝调时刻，电影感夜景</div>
+        <div class="sp-lang">🇺🇸 English：</div>
+        <div class="sp-text" onclick="copyPrompt(this)">Night neon style, city skyline at night, glass curtain walls reflecting colorful lights, car light trails, bustling urban feeling, neon signs, long exposure effect, Shanghai Lujiazui style, blue hour, cinematic night scene</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 运镜指南 -->
+  <div id="styleCatCamera" style="display:none">
+    <div class="card tint-blue">
+      <div class="card-h">🎬 推镜（Push In）</div>
+      <div class="style-desc">镜头逐渐靠近被摄主体，营造压迫感、紧张感或突出人物情绪变化，是最常用的情绪强化手法。</div>
+      <div class="style-tags">
+        <span class="style-tag">强调情绪</span>
+        <span class="style-tag">营造压迫</span>
+        <span class="style-tag">聚焦重点</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>人物震惊/愤怒瞬间、揭示重要信息、从环境聚焦到人物表情<br>
+        <b>AI提示词写法：</b>slow push-in shot, close-up on face, dramatic reveal
+      </div>
+    </div>
+
+    <div class="card tint-amber">
+      <div class="card-h">🎬 拉镜（Pull Out）</div>
+      <div class="style-desc">镜头逐渐拉远，从特写扩展到广阔场景，揭示环境规模、展现孤独感或形成强烈反差。</div>
+      <div class="style-tags">
+        <span class="style-tag">揭示环境</span>
+        <span class="style-tag">孤独感</span>
+        <span class="style-tag">反差对比</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>人物身处宏大场景、揭示世界规模、结尾升华情绪<br>
+        <b>AI提示词写法：</b>slow pull-back shot, revealing vast landscape, epic scale
+      </div>
+    </div>
+
+    <div class="card tint-rose">
+      <div class="card-h">🎬 环绕镜头（Orbit / 360°）</div>
+      <div class="style-desc">镜头围绕主体旋转，极具视觉冲击力，常用于高光时刻、人物出场、战斗pose定格。</div>
+      <div class="style-tags">
+        <span class="style-tag">视觉冲击</span>
+        <span class="style-tag">高光时刻</span>
+        <span class="style-tag">360度</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>角色变身/觉醒、战斗高潮pose、人物气场展示、名场面定格<br>
+        <b>AI提示词写法：</b>360 degree orbit shot, spinning around character, dynamic action pose
+      </div>
+    </div>
+
+    <div class="card tint-purple">
+      <div class="card-h">🎬 跟拍/移动镜头（Tracking）</div>
+      <div class="style-desc">镜头跟随人物移动，保持画面稳定，营造代入感和沉浸感，适合奔跑、追逐、行走场景。</div>
+      <div class="style-tags">
+        <span class="style-tag">代入感</span>
+        <span class="style-tag">沉浸感</span>
+        <span class="style-tag">动态跟随</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>角色奔跑追逐、街头行走、第一人称跟随、并肩对话<br>
+        <b>AI提示词写法：</b>tracking shot, following from behind, side view walking, steady cam
+      </div>
+    </div>
+
+    <div class="card tint-mint">
+      <div class="card-h">🎬 仰拍/俯拍（Low Angle / High Angle）</div>
+      <div class="style-desc">仰拍凸显人物强大气场和压迫感，俯拍则营造渺小、脆弱、上帝视角感，对比强烈。</div>
+      <div class="style-tags">
+        <span class="style-tag">气场对比</span>
+        <span class="style-tag">权力感</span>
+        <span class="style-tag">渺小感</span>
+      </div>
+      <div class="style-sub">
+        <b>仰拍适用：</b>反派登场、强者威压、英雄觉醒、建筑宏伟感<br>
+        <b>俯拍适用：</b>人物孤独无助、宏大场景中的小人物、战斗场面全景<br>
+        <b>AI提示词写法：</b>low angle shot, looking up at powerful figure / bird's eye view, top-down shot
+      </div>
+    </div>
+
+    <div class="card tint-indigo">
+      <div class="card-h">🎬 慢动作（Slow Motion）</div>
+      <div class="style-desc">时间仿佛凝固，放大关键瞬间的情绪张力，用于高潮、转折、唯美画面，是燃向剪辑必备。</div>
+      <div class="style-tags">
+        <span class="style-tag">情绪放大</span>
+        <span class="style-tag">高潮瞬间</span>
+        <span class="style-tag">唯美画面</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>出拳/拔刀瞬间、眼泪滴落、唯美回眸、爆炸冲击、关键反转<br>
+        <b>AI提示词写法：</b>slow motion, cinematic slow-mo, 240fps, motion blur, dramatic moment
+      </div>
+    </div>
+
+    <div class="card tint-red">
+      <div class="card-h">🎬 快速切换/蒙太奇（Montage）</div>
+      <div class="style-desc">短镜头快速切换，节奏紧凑信息量大，用于表现时间流逝、训练成长、多线叙事并行。</div>
+      <div class="style-tags">
+        <span class="style-tag">节奏紧凑</span>
+        <span class="style-tag">信息量大</span>
+        <span class="style-tag">时间流逝</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>修炼成长蒙太奇、多人视角切换、时间飞逝表现、燃向卡点剪辑<br>
+        <b>剪辑要点：</b>每个镜头2-3秒，音乐卡点，动作衔接匹配
+      </div>
+    </div>
+
+    <div class="card tint-sky">
+      <div class="card-h">🎬 一镜到底（Long Take / One Shot）</div>
+      <div class="style-desc">单个连续长镜头，真实感和沉浸感极强，展示完整动作或空间关系，高级感拉满。</div>
+      <div class="style-tags">
+        <span class="style-tag">沉浸感</span>
+        <span class="style-tag">真实感</span>
+        <span class="style-tag">高级感</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>完整打斗动作、场景空间展示、对话跟拍、氛围感长镜头<br>
+        <b>AI提示词写法：</b>one continuous take, long tracking shot, seamless, no cuts
+      </div>
+    </div>
+
+    <div class="card tint-orange">
+      <div class="card-h">🎬 越肩镜头（Over the Shoulder）</div>
+      <div class="style-desc">从一人肩膀后拍另一人，对话场景最常用，既能看清对方表情又有第一人称代入感。</div>
+      <div class="style-tags">
+        <span class="style-tag">对话场景</span>
+        <span class="style-tag">代入感</span>
+        <span class="style-tag">经典构图</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>两人对话、对峙谈判、观察视角<br>
+        <b>AI提示词写法：</b>over the shoulder shot, OTS, two people talking, cinematic composition
+      </div>
+    </div>
+
+    <div class="card tint-violet">
+      <div class="card-h">🎬 变焦推拉（Dolly Zoom）</div>
+      <div class="style-desc">主体大小不变但背景空间感剧烈变化，制造不安、眩晕、惊悚感，希区柯克经典手法。</div>
+      <div class="style-tags">
+        <span class="style-tag">眩晕感</span>
+        <span class="style-tag">不安情绪</span>
+        <span class="style-tag">视觉奇观</span>
+      </div>
+      <div class="style-sub">
+        <b>适用场景：</b>人物震惊/恐惧瞬间、现实扭曲感、超自然现象揭示<br>
+        <b>AI提示词写法：</b>dolly zoom effect, vertigo shot, background warping, Hitchcock zoom
+      </div>
+    </div>
+  </div>
+
+  <!-- AI工具推荐 -->
+  <div id="styleCatAiTool" style="display:none">
+    <!-- 子分类切换 -->
+    <div class="card">
+      <div class="ai-tool-tabs">
+        <button class="ai-tool-tab active" onclick="switchAiToolTab('image')">🖼️ 生图工具</button>
+        <button class="ai-tool-tab" onclick="switchAiToolTab('video')">🎥 视频生成</button>
+        <button class="ai-tool-tab" onclick="switchAiToolTab('compare')">📊 对比速查</button>
+      </div>
+    </div>
+
+    <!-- 生图工具 -->
+    <div id="aiToolImage">
+      <div class="card tint-purple">
+        <div class="card-h">
+          ⭐ Midjourney
+          <span class="tool-badge tool-best">画质天花板</span>
+        </div>
+        <div class="style-desc">AI生图画质天花板，艺术感和细节碾压级，风格化表现最强，适合出高质量海报和概念图。</div>
+        <div class="style-tags">
+          <span class="style-tag">画质顶级</span>
+          <span class="style-tag">艺术感强</span>
+          <span class="style-tag">风格多样</span>
+          <span class="style-tag">需翻墙</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>速度</span><span class="rating">⭐⭐⭐ 中等（约1分钟）</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐⭐⭐ 天花板</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">⚡ 云端生成，本地无要求</span></div>
+          <div class="tool-spec-row"><span>价格</span><span>约$10/月起</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>高质量海报、概念设计、艺术创作、商业出图
+        </div>
+      </div>
+
+      <div class="card tint-blue">
+        <div class="card-h">
+          ⭐ Stable Diffusion / ComfyUI
+          <span class="tool-badge tool-free">开源免费</span>
+        </div>
+        <div class="style-desc">开源生图框架，自由度最高，可本地部署，模型选择多，支持ControlNet精确控制，是专业玩家首选。</div>
+        <div class="style-tags">
+          <span class="style-tag">开源免费</span>
+          <span class="style-tag">可控性强</span>
+          <span class="style-tag">本地部署</span>
+          <span class="style-tag">模型丰富</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>速度</span><span class="rating">取决于显卡（4090约10秒/张）</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐⭐ 取决于模型</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">💻 需8G+显存显卡</span></div>
+          <div class="tool-spec-row"><span>价格</span><span>免费（自购显卡）</span></div>
+        </div>
+        <div class="style-sub">
+          <b>推荐模型：</b>Realistic Vision（真人）、MeinaMix（动漫）、Counterfeit（二次元）、MajicMix（写实）<br>
+          <b>适合：</b>精细控制、批量出图、风格定制、工作流自动化
+        </div>
+      </div>
+
+      <div class="card tint-mint">
+        <div class="card-h">
+          ⭐ DALL·E 3 / Flux
+          <span class="tool-badge tool-easy">新手友好</span>
+        </div>
+        <div class="style-desc">OpenAI出品，文字理解能力最强，描述什么出什么，几乎不需要调参数，新手零门槛。</div>
+        <div class="style-tags">
+          <span class="style-tag">理解能力强</span>
+          <span class="style-tag">零门槛</span>
+          <span class="style-tag">ChatGPT集成</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>速度</span><span class="rating">⭐⭐⭐⭐ 快（约30秒）</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐⭐ 优秀</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">⚡ 云端生成，本地无要求</span></div>
+          <div class="tool-spec-row"><span>价格</span><span>ChatGPT Plus $20/月</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>新手入门、快速出图、文字要求精确的场景
+        </div>
+      </div>
+
+      <div class="card tint-rose">
+        <div class="card-h">
+          ⭐ 即梦 / 可灵（字节）
+          <span class="tool-badge tool-cn">国产推荐</span>
+        </div>
+        <div class="style-desc">字节跳动出品，国内直接可用，中文理解好，出图质量高，生成速度快，性价比之选。</div>
+        <div class="style-tags">
+          <span class="style-tag">国内可用</span>
+          <span class="style-tag">中文好</span>
+          <span class="style-tag">速度快</span>
+          <span class="style-tag">性价比高</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>速度</span><span class="rating">⭐⭐⭐⭐⭐ 很快（约20秒）</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐⭐ 优秀</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">⚡ 云端生成，本地无要求</span></div>
+          <div class="tool-spec-row"><span>价格</span><span>免费额度 + 会员约30元/月</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>国内用户、中文Prompt、日常出图、学生党
+        </div>
+      </div>
+    </div>
+
+    <!-- 视频生成工具 -->
+    <div id="aiToolVideo" style="display:none">
+      <div class="card tint-purple">
+        <div class="card-h">
+          ⭐ Kling 可灵
+          <span class="tool-badge tool-best">综合最佳</span>
+        </div>
+        <div class="style-desc">快手出品，目前AI视频生成第一梯队，画质高、动作自然、支持人物一致性，国内直接可用。</div>
+        <div class="style-tags">
+          <span class="style-tag">画质顶尖</span>
+          <span class="style-tag">动作自然</span>
+          <span class="style-tag">国内可用</span>
+          <span class="style-tag">人物一致</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>生成速度</span><span class="rating">⭐⭐⭐ 约3-5分钟/5秒</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐⭐⭐ 第一梯队</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">⚡ 云端生成，本地无要求</span></div>
+          <div class="tool-spec-row"><span>最长时长</span><span>10秒（可延长）</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>高质量AI视频、漫剧制作、人物一致性要求高的场景
+        </div>
+      </div>
+
+      <div class="card tint-blue">
+        <div class="card-h">
+          ⭐ Sora
+          <span class="tool-badge tool-best">画质天花板</span>
+        </div>
+        <div class="style-desc">OpenAI出品，视频生成画质天花板，电影级质感，物理模拟真实，但目前需邀请制且限制较多。</div>
+        <div class="style-tags">
+          <span class="style-tag">电影级画质</span>
+          <span class="style-tag">物理真实</span>
+          <span class="style-tag">需邀请</span>
+          <span class="style-tag">60秒</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>生成速度</span><span class="rating">⭐⭐ 较慢（约10分钟+）</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐⭐⭐ 天花板</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">⚡ 云端生成，本地无要求</span></div>
+          <div class="tool-spec-row"><span>最长时长</span><span>60秒</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>顶级画质要求、电影级概念短片、预算充足的项目
+        </div>
+      </div>
+
+      <div class="card tint-mint">
+        <div class="card-h">
+          ⭐ Runway Gen-3 / Pika
+          <span class="tool-badge tool-fast">老牌强者</span>
+        </div>
+        <div class="style-desc">海外老牌AI视频工具，功能完善，支持图生视频、视频转视频、运动笔刷控制，创意性强。</div>
+        <div class="style-tags">
+          <span class="style-tag">功能丰富</span>
+          <span class="style-tag">创意性强</span>
+          <span class="style-tag">控制度高</span>
+          <span class="style-tag">需翻墙</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>生成速度</span><span class="rating">⭐⭐⭐ 约3-5分钟/4秒</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐⭐ 优秀</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">⚡ 云端生成，本地无要求</span></div>
+          <div class="tool-spec-row"><span>最长时长</span><span>10秒（可延长）</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>创意视频、风格化视频、精细运动控制
+        </div>
+      </div>
+
+      <div class="card tint-amber">
+        <div class="card-h">
+          ⭐ 即梦 AI（字节）
+          <span class="tool-badge tool-cn">性价比高</span>
+        </div>
+        <div class="style-desc">字节跳动出品，国内直接用，生成速度快，价格便宜，适合日常快速出片和练手。</div>
+        <div class="style-tags">
+          <span class="style-tag">国内可用</span>
+          <span class="style-tag">速度快</span>
+          <span class="style-tag">便宜</span>
+          <span class="style-tag">中文好</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>生成速度</span><span class="rating">⭐⭐⭐⭐⭐ 很快（约1-2分钟）</span></div>
+          <div class="tool-spec-row"><span>画质</span><span class="rating">⭐⭐⭐ 良好</span></div>
+          <div class="tool-spec-row"><span>算力要求</span><span class="rating">⚡ 云端生成，本地无要求</span></div>
+          <div class="tool-spec-row"><span>最长时长</span><span>5秒</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>快速出片、日常练手、预算有限、新手入门
+        </div>
+      </div>
+
+      <div class="card tint-rose">
+        <div class="card-h">
+          💻 本地部署方案（低算力）
+          <span class="tool-badge tool-free">免费离线</span>
+        </div>
+        <div class="style-desc">显卡不够也能玩！推荐几款轻量级本地视频生成模型，4G显存也能跑，适合学习和研究。</div>
+        <div class="style-tags">
+          <span class="style-tag">本地部署</span>
+          <span class="style-tag">低显存</span>
+          <span class="style-tag">免费</span>
+          <span class="style-tag">可离线</span>
+        </div>
+        <div class="tool-specs">
+          <div class="tool-spec-row"><span>Stable Video Diffusion</span><span class="rating">8G显存可跑，图生视频，2-4秒</span></div>
+          <div class="tool-spec-row"><span>AnimateDiff</span><span class="rating">6G显存可跑，动漫视频效果好</span></div>
+          <div class="tool-spec-row"><span>CogVideo</span><span class="rating">智源出品，中文支持好</span></div>
+          <div class="tool-spec-row"><span>MoonValley</span><span class="rating">文本生成视频，偏动漫风格</span></div>
+        </div>
+        <div class="style-sub">
+          <b>适合：</b>有一定动手能力、想省会员费、对画质要求不高、想深入研究
+        </div>
+      </div>
+    </div>
+
+    <!-- 对比速查 -->
+    <div id="aiToolCompare" style="display:none">
+      <div class="card">
+        <div class="card-h">📊 生图工具对比速查</div>
+        <table class="sub-tbl">
+          <tr>
+            <th>工具</th>
+            <th>画质</th>
+            <th>速度</th>
+            <th>价格</th>
+            <th>国内可用</th>
+            <th>推荐指数</th>
+          </tr>
+          <tr>
+            <td><b>Midjourney</b></td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>⭐⭐⭐</td>
+            <td>$$$$</td>
+            <td>❌ 需翻墙</td>
+            <td>🔥🔥🔥🔥🔥</td>
+          </tr>
+          <tr>
+            <td><b>Stable Diffusion</b></td>
+            <td>⭐⭐⭐⭐</td>
+            <td>看显卡</td>
+            <td>免费</td>
+            <td>✅ 本地部署</td>
+            <td>🔥🔥🔥🔥</td>
+          </tr>
+          <tr>
+            <td><b>DALL·E 3</b></td>
+            <td>⭐⭐⭐⭐</td>
+            <td>⭐⭐⭐⭐</td>
+            <td>$$$</td>
+            <td>❌ 需翻墙</td>
+            <td>🔥🔥🔥🔥</td>
+          </tr>
+          <tr>
+            <td><b>即梦/可灵</b></td>
+            <td>⭐⭐⭐⭐</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>¥</td>
+            <td>✅ 直接用</td>
+            <td>🔥🔥🔥🔥</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-h">📊 视频生成工具对比速查</div>
+        <table class="sub-tbl">
+          <tr>
+            <th>工具</th>
+            <th>画质</th>
+            <th>速度</th>
+            <th>最长时长</th>
+            <th>国内可用</th>
+            <th>推荐指数</th>
+          </tr>
+          <tr>
+            <td><b>可灵 Kling</b></td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>⭐⭐⭐</td>
+            <td>10秒</td>
+            <td>✅ 直接用</td>
+            <td>🔥🔥🔥🔥🔥</td>
+          </tr>
+          <tr>
+            <td><b>Sora</b></td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>⭐⭐</td>
+            <td>60秒</td>
+            <td>❌ 需邀请</td>
+            <td>🔥🔥🔥🔥</td>
+          </tr>
+          <tr>
+            <td><b>Runway / Pika</b></td>
+            <td>⭐⭐⭐⭐</td>
+            <td>⭐⭐⭐</td>
+            <td>10秒+</td>
+            <td>❌ 需翻墙</td>
+            <td>🔥🔥🔥🔥</td>
+          </tr>
+          <tr>
+            <td><b>即梦</b></td>
+            <td>⭐⭐⭐</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>5秒</td>
+            <td>✅ 直接用</td>
+            <td>🔥🔥🔥</td>
+          </tr>
+          <tr>
+            <td><b>AnimateDiff</b></td>
+            <td>⭐⭐⭐</td>
+            <td>看显卡</td>
+            <td>2-4秒</td>
+            <td>✅ 本地</td>
+            <td>🔥🔥🔥</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card tint-amber">
+        <div class="card-h">💡 选型建议</div>
+        <div class="txt" style="line-height:1.8">
+          <b>新手入门首选：</b>即梦 / 可灵（国内直接用，便宜好用）<br>
+          <b>追求最高画质：</b>Midjourney（图）+ 可灵（视频）<br>
+          <b>想免费自己玩：</b>Stable Diffusion + AnimateDiff（有显卡就行）<br>
+          <b>低算力配置：</b>6G显存选 SD 1.5，8G显存选 SDXL，12G+ 随便玩<br>
+          <b>漫剧制作推荐：</b>可灵 Kling（人物一致性好，画质高）<br>
+          <b>批量工作流：</b>ComfyUI + 各种节点，自动化出图
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    风格图鉴 · 风格 · 运镜 · AI工具全攻略
+  </div>
+</div>
+
+<script>
+/* ===== 风格图鉴 Tab切换 ===== */
+var _styleCurrentCat = 'anime';
+
+function switchStyleCat(cat){
+  _styleCurrentCat = cat;
+  var animeEl = document.getElementById('styleCatAnime');
+  var realEl = document.getElementById('styleCatReal');
+  var camEl = document.getElementById('styleCatCamera');
+  var aiEl = document.getElementById('styleCatAiTool');
+  var tabs = document.querySelectorAll('.style-tab');
+  tabs.forEach(function(t){
+    if(t.dataset.stylecat === cat){
+      t.classList.add('active');
+    }else{
+      t.classList.remove('active');
+    }
+  });
+  if(animeEl) animeEl.style.display = (cat === 'anime') ? 'block' : 'none';
+  if(realEl) realEl.style.display = (cat === 'real') ? 'block' : 'none';
+  if(camEl) camEl.style.display = (cat === 'camera') ? 'block' : 'none';
+  if(aiEl) aiEl.style.display = (cat === 'aitool') ? 'block' : 'none';
+}
+
+/* AI工具子tab切换 */
+function switchAiToolTab(tab){
+  var tabs = document.querySelectorAll('.ai-tool-tab');
+  tabs.forEach(function(t,i){
+    t.classList.remove('active');
+  });
+  if(tabs[0] && tab === 'image') tabs[0].classList.add('active');
+  if(tabs[1] && tab === 'video') tabs[1].classList.add('active');
+  if(tabs[2] && tab === 'compare') tabs[2].classList.add('active');
+
+  var imgEl = document.getElementById('aiToolImage');
+  var vidEl = document.getElementById('aiToolVideo');
+  var cmpEl = document.getElementById('aiToolCompare');
+  if(imgEl) imgEl.style.display = (tab === 'image') ? 'block' : 'none';
+  if(vidEl) vidEl.style.display = (tab === 'video') ? 'block' : 'none';
+  if(cmpEl) cmpEl.style.display = (tab === 'compare') ? 'block' : 'none';
+}
+
+/* 复制提示词 */
+function copyPrompt(el){
+  var text = el.textContent || el.innerText;
+  if(!text) return;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){
+      showToast('✅ 提示词已复制到剪贴板', 'success');
+    }).catch(function(){
+      fallbackCopy(text);
+    });
+  }else{
+    fallbackCopy(text);
+  }
+}
+function fallbackCopy(text){
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try{
+    document.execCommand('copy');
+    showToast('✅ 提示词已复制到剪贴板', 'success');
+  }catch(e){
+    showToast('复制失败，请手动复制', 'error');
+  }
+  document.body.removeChild(ta);
+}
+
+/* Toast 提示 */
+function showToast(msg, type){
+  var toast = document.createElement('div');
+  toast.className = 'toast ' + (type || '');
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(function(){ toast.remove(); }, 2500);
+}
+
+/* 初始化 */
+document.addEventListener('DOMContentLoaded', function(){
+  switchStyleCat('anime');
+  switchAiToolTab('image');
+});
+</script>
+</body>
+</html>
