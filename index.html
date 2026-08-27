@@ -158,6 +158,55 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .pl-modal-edit-actions button{padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none}
 .pl-modal-edit-actions .save{background:var(--accent);color:#fff}
 .pl-modal-edit-actions .cancel{background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+
+/* 无版权音乐库 */
+.music-page{padding:16px}
+.music-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.music-head h2{font-size:18px;font-weight:800;color:var(--ink);margin:0}
+.music-head .sub{font-size:12px;color:var(--ink-3)}
+.music-stat{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap}
+.music-stat-item{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg);color:var(--ink-2)}
+.music-stat-item b{color:var(--accent)}
+.music-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.music-cat{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:all .2s;white-space:nowrap}
+.music-cat:hover{border-color:var(--accent);color:var(--accent)}
+.music-cat.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.music-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.music-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;transition:all .2s;cursor:pointer}
+.music-card:hover{box-shadow:0 6px 20px rgba(46,134,222,.1);border-color:var(--accent);transform:translateY(-2px)}
+.music-card-top{display:flex;align-items:center;gap:12px}
+.music-play-btn{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#2e86de,#54a0ff);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(46,134,222,.3)}
+.music-play-btn:hover{transform:scale(1.1);box-shadow:0 6px 18px rgba(46,134,222,.4)}
+.music-play-btn.playing{background:linear-gradient(135deg,#f368e0,#ff9ff3);animation:musicPulse 1.5s ease infinite}
+@keyframes musicPulse{0%,100%{box-shadow:0 4px 12px rgba(243,104,224,.3)}50%{box-shadow:0 4px 20px rgba(243,104,224,.6)}}
+.music-info{flex:1;min-width:0}
+.music-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.music-artist{font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.music-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.music-tag{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--bg);color:var(--ink-2)}
+.music-tag.scene{background:#e8f5e9;color:#4caf50}
+.music-tag.mood{background:#fff3e0;color:#ff9800}
+.music-tag.source{background:#e8f0ff;color:#2e86de}
+.music-card-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.music-card.expanded .music-card-detail{display:block}
+.music-detail-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;color:var(--ink-2)}
+.music-detail-row b{color:var(--ink);font-weight:600}
+.music-desc{font-size:12px;color:var(--ink-2);line-height:1.6;margin-top:8px;padding:8px 10px;background:var(--bg);border-radius:6px;border-left:3px solid var(--accent)}
+.music-actions{display:flex;gap:6px;margin-top:10px}
+.music-action-btn{flex:1;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
+.music-action-btn.primary{background:var(--accent);color:#fff}
+.music-action-btn.primary:hover{opacity:.9}
+.music-action-btn.secondary{background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+.music-action-btn.secondary:hover{color:var(--accent);border-color:var(--accent)}
+.music-source-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.music-source-pixabay{background:#e8f5e9;color:#2e7d32}
+.music-source-youtube{background:#ffebee;color:#c62828}
+.music-source-fma{background:#e8f0ff;color:#1565c0}
+.music-source-epidemic{background:#f3e5f5;color:#6a1b9a}
+.music-source-artlist{background:#fff3e0;color:#e65100}
+.music-source-uppbeat{background:#e0f7fa;color:#00838f}
+.music-duration{font-size:11px;color:var(--ink-3);margin-left:auto;flex-shrink:0}
+
 /* AI智能体工作台 */
 .agent-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .agent-tab{display:flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2);transition:all .2s;white-space:nowrap}
@@ -2959,6 +3008,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </div>
 
 
+
+<div class="section" id="sec-music">
+ <div class="music-page">
+  <div class="music-head">
+   <span class="bow">🎵</span>
+   <div>
+    <h2>无版权音乐库</h2>
+    <span class="sub">精选短剧专用BGM · 标注来源 · 可商用</span>
+   </div>
+   <div class="music-stat">
+    <div class="music-stat-item">共 <b id="musicTotalCount">48</b> 首</div>
+    <div class="music-stat-item"><b>8</b> 个分类</div>
+   </div>
+  </div>
+
+  <div class="music-cats" id="musicCats">
+   <button class="music-cat active" onclick="switchMusicCat('all')">🎧 全部</button>
+   <button class="music-cat" onclick="switchMusicCat('opening')">🎬 开场片头</button>
+   <button class="music-cat" onclick="switchMusicCat('battle')">⚔️ 战斗热血</button>
+   <button class="music-cat" onclick="switchMusicCat('sad')">😢 悲伤抒情</button>
+   <button class="music-cat" onclick="switchMusicCat('happy')">😊 欢快轻松</button>
+   <button class="music-cat" onclick="switchMusicCat('suspense')">😱 悬疑紧张</button>
+   <button class="music-cat" onclick="switchMusicCat('warm')">💖 温馨治愈</button>
+   <button class="music-cat" onclick="switchMusicCat('guofeng')">🏮 古风国风</button>
+   <button class="music-cat" onclick="switchMusicCat('scifi')">🚀 科幻未来</button>
+  </div>
+
+  <div class="music-list" id="musicList">
+   <!-- 音乐卡片将通过JS生成 -->
+  </div>
+ </div>
+</div>
+
 <!-- 提示词详情模态框 -->
 <div class="pl-modal-overlay" id="plModalOverlay" onclick="closePromptModal(event)">
   <div class="pl-modal" onclick="event.stopPropagation()">
@@ -4162,6 +4244,439 @@ function switchPlCat(cat){
  var target=document.getElementById('plCat-'+cat);
  if(target) target.style.display='block';
 }
+
+/* ========== 无版权音乐库 ========== */
+var MUSIC_DATA=[
+ // ========== 开场片头 ==========
+ {id:1,cat:'opening',title:'Epic Hero Ascent',artist:'Infraction',duration:'2:45',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'大气/史诗/震撼',scene:'开场片头/主角登场/预告PV',
+  bpm:'140',instrument:'管弦乐+合唱+鼓点',
+  desc:'经典史诗级开场音乐，从低沉弦乐逐步推向高潮，适合短剧第一集开场、主角霸气登场、预告PV等场景。前30秒铺垫氛围感强，抓人耳球。',
+  tags:['开场','史诗','震撼','管弦']},
+ {id:2,cat:'opening',title:'Cinematic Dubstep Intro',artist:'MaxKoMusic',duration:'1:58',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'现代/酷炫/科技感',scene:'现代剧开场/转场/卡点',
+  bpm:'128',instrument:'电子合成器+重低音+鼓点',
+  desc:'现代感十足的开场音乐，重低音+合成器，适合都市/校园/现代题材短剧开场，也适合卡点转场和信息展示段落。',
+  tags:['开场','电子','酷炫','卡点']},
+ {id:3,cat:'opening',title:'Adventure Beginning',artist:'Lesfm',duration:'2:30',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'冒险/希望/轻快',scene:'奇幻冒险开场/新旅程/日常开篇',
+  bpm:'110',instrument:'吉他+长笛+轻鼓',
+  desc:'充满冒险感的开场曲，轻快的吉他旋律搭配长笛，适合奇幻、冒险、日常类短剧开场，给人"新故事开始了"的感觉。',
+  tags:['开场','冒险','轻快','希望']},
+ {id:4,cat:'opening',title:'Dark Cinematic Teaser',artist:'EugeneShootSound',duration:'1:42',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'暗黑/悬疑/压迫',scene:'悬疑剧开场/反派登场/预告',
+  bpm:'90',instrument:'低沉弦乐+氛围音效+鼓点',
+  desc:'暗黑悬疑风格开场，低沉压抑的弦乐逐步推进，适合悬疑、犯罪、惊悚类短剧开场，营造紧张未知的氛围。',
+  tags:['开场','暗黑','悬疑','预告']},
+ {id:5,cat:'opening',title:'Inspiring Ambient Piano',artist:'Music Unlimited',duration:'3:12',
+  source:'Free Music Archive',sourceUrl:'https://freemusicarchive.org/',
+  mood:'治愈/温暖/文艺',scene:'文艺片开场/回忆/慢节奏',
+  bpm:'72',instrument:'钢琴+弦乐+氛围合成器',
+  desc:'温柔治愈的钢琴开场曲，适合文艺、爱情、成长类短剧开场，缓慢铺陈情绪，让观众静下心来进入故事。',
+  tags:['开场','治愈','钢琴','文艺']},
+ {id:6,cat:'opening',title:'Oriental Epic Opening',artist:'Gnomusique',duration:'2:58',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'国风/大气/史诗',scene:'古装剧开场/仙侠/历史',
+  bpm:'100',instrument:'古筝+笛子+大鼓+弦乐',
+  desc:'国风史诗开场，古筝与笛子主旋律配合大鼓，适合古装、仙侠、历史题材短剧开场，大气磅礴有东方韵味。',
+  tags:['开场','国风','史诗','古装']},
+
+ // ========== 战斗热血 ==========
+ {id:7,cat:'battle',title:'Aggressive Fight',artist:'Infraction',duration:'2:15',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'激烈/紧张/热血',scene:'打斗戏/追逐戏/高潮对决',
+  bpm:'150',instrument:'重鼓+电吉他+贝斯+音效',
+  desc:'高强度战斗音乐，密集鼓点+失真吉他，适合武打、追逐、高潮对决场景。节奏递进明显，可配合分镜卡点。',
+  tags:['战斗','热血','激烈','追逐']},
+ {id:8,cat:'battle',title:'Epic Battle Trailer',artist:'Eitan Epstein',duration:'2:40',
+  source:'Artlist',sourceUrl:'https://artlist.io/',
+  mood:'史诗/宏大/悲壮',scene:'大决战/战争场面/军团对决',
+  bpm:'130',instrument:'管弦乐团+合唱+军鼓+铜管',
+  desc:'史诗级战争配乐，管弦乐+人声合唱，适合大规模战争、最终决战、军团对决等大场面，悲壮又震撼。',
+  tags:['战斗','史诗','战争','合唱']},
+ {id:9,cat:'battle',title:'Cyberpunk Action',artist:'MaxKoMusic',duration:'2:05',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'酷炫/科技/紧张',scene:'赛博朋克打斗/现代动作戏/黑客入侵',
+  bpm:'140',instrument:'合成器+电子鼓+贝斯+音效',
+  desc:'赛博朋克风格战斗曲，电子合成器+重低音，适合科幻、赛博朋克、现代动作戏，科技感十足。',
+  tags:['战斗','赛博朋克','电子','科技']},
+ {id:10,cat:'battle',title:'Sword Dance',artist:'Gnomusique',duration:'2:22',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'古风/潇洒/紧张',scene:'武侠打斗/剑术对决/轻功追逐',
+  bpm:'120',instrument:'古筝+琵琶+笛子+鼓',
+  desc:'国风武侠战斗曲，古筝琵琶快速轮指+笛子旋律，适合武侠、仙侠题材的打斗场景，潇洒飘逸有节奏感。',
+  tags:['战斗','国风','武侠','器乐']},
+ {id:11,cat:'battle',title:'Chase Scene Tension',artist:'SoundGallery',duration:'1:48',
+  source:'Epidemic Sound',sourceUrl:'https://www.epidemicsound.com/',
+  mood:'紧迫/追逐/心跳感',scene:'追逐戏/逃跑/倒计时',
+  bpm:'160',instrument:'心跳鼓点+弦乐断奏+音效',
+  desc:'紧张追逐配乐，持续加速的节奏+心跳感鼓点，适合追逐、逃跑、倒计时等紧迫场景，让观众跟着屏息。',
+  tags:['战斗','追逐','紧张','倒计时']},
+ {id:12,cat:'battle',title:'Powerful Boss Fight',artist:'Infraction',duration:'2:35',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'压迫/史诗/高潮',scene:'BOSS战/最终对决/主角觉醒',
+  bpm:'145',instrument:'重型鼓+铜管+电吉他+合唱',
+  desc:'BOSS战专属配乐，压迫感强的前奏+爆发式高潮，适合最终BOSS战、主角觉醒反败为胜等关键场景。',
+  tags:['战斗','BOSS','觉醒','高潮']},
+
+ // ========== 悲伤抒情 ==========
+ {id:13,cat:'sad',title:'Sad Emotional Piano',artist:'Lesfm',duration:'3:20',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'悲伤/感人/催泪',scene:'生离死别/回忆杀/哭戏',
+  bpm:'68',instrument:'钢琴+小提琴+大提琴',
+  desc:'经典悲伤钢琴曲，旋律催人泪下，适合生离死别、回忆杀、哭戏等情感爆发场景。是短剧最常用的BGM之一。',
+  tags:['悲伤','催泪','钢琴','回忆']},
+ {id:14,cat:'sad',title:'Heartbreak Violin',artist:'Music Unlimited',duration:'2:55',
+  source:'Free Music Archive',sourceUrl:'https://freemusicarchive.org/',
+  mood:'心碎/遗憾/凄美',scene:'分手/错过/误会解开',
+  bpm:'60',instrument:'小提琴+钢琴+弦乐',
+  desc:'小提琴主导的悲伤曲目，如泣如诉的旋律，适合分手、错过、误会终于解开但为时已晚等虐心场景。',
+  tags:['悲伤','小提琴','遗憾','虐心']},
+ {id:15,cat:'sad',title:'Melancholy Memories',artist:'EugeneShootSound',duration:'3:05',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'忧郁/回忆/思念',scene:'睹物思人/回忆过往/思念',
+  bpm:'70',instrument:'钢琴+氛围合成器+雨声',
+  desc:'氛围感悲伤曲，钢琴+雨声效果，适合回忆、思念、睹物思人等场景，自带雨天忧郁滤镜。',
+  tags:['悲伤','回忆','氛围感','雨天']},
+ {id:16,cat:'sad',title:'Ancient Sorrow',artist:'Gnomusique',duration:'2:48',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'古风/凄美/悲凉',scene:'古装悲剧/生死相隔/国破家亡',
+  bpm:'58',instrument:'二胡+古筝+箫',
+  desc:'国风悲伤曲，二胡如泣如诉，适合古装悲剧、生死相隔、国破家亡等大悲场景，东方韵味的凄美。',
+  tags:['悲伤','国风','二胡','古装']},
+ {id:17,cat:'sad',title:'Cinematic Sad Strings',artist:'Eitan Epstein',duration:'3:30',
+  source:'Artlist',sourceUrl:'https://artlist.io/',
+  mood:'宏大/悲壮/史诗感',scene:'牺牲/灾难/宏大悲剧',
+  bpm:'65',instrument:'交响弦乐团+铜管+钢琴',
+  desc:'交响级悲伤配乐，弦乐团奏出悲壮旋律，适合角色牺牲、大灾难、宏大悲剧等场景，有史诗感。',
+  tags:['悲伤','交响','牺牲','宏大']},
+ {id:18,cat:'sad',title:'Soft Goodbye',artist:'Lesfm',duration:'2:40',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'温柔/不舍/释然',scene:'离别/远行/温柔告别',
+  bpm:'72',instrument:'钢琴+吉他+弦乐',
+  desc:'温柔的告别曲，不是撕心裂肺而是带着不舍的释然，适合送别、远行、温柔分手等场景，后劲很足。',
+  tags:['悲伤','温柔','离别','治愈']},
+
+ // ========== 欢快轻松 ==========
+ {id:19,cat:'happy',title:'Ukulele Happy',artist:'Lesfm',duration:'2:15',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'欢快/轻松/阳光',scene:'日常喜剧/甜蜜日常/轻松时刻',
+  bpm:'100',instrument:'尤克里里+口哨+拍手+铃鼓',
+  desc:'阳光欢快的尤克里里小曲，口哨+拍手增加轻松感，适合日常喜剧、甜蜜日常、轻松搞笑等场景。',
+  tags:['欢快','轻松','尤克里里','日常']},
+ {id:20,cat:'happy',title:'Funny Comedy Music',artist:'MaxKoMusic',duration:'1:52',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'搞笑/滑稽/喜剧',scene:'搞笑桥段/出糗/喜剧反转',
+  bpm:'110',instrument:'木琴+低音提琴+鼓刷+滑音管',
+  desc:'经典喜剧配乐，木琴+滑音管的滑稽音效，适合出糗、搞笑桥段、喜剧反转等场景，一出来就想笑。',
+  tags:['欢快','搞笑','喜剧','滑稽']},
+ {id:21,cat:'happy',title:'Sweet Romantic',artist:'Music Unlimited',duration:'2:35',
+  source:'Free Music Archive',sourceUrl:'https://freemusicarchive.org/',
+  mood:'甜蜜/浪漫/心动',scene:'恋爱发糖/心动瞬间/甜蜜约会',
+  bpm:'85',instrument:'钢琴+吉他+小提琴+铃鼓',
+  desc:'甜到冒泡的恋爱BGM，适合发糖、心动瞬间、甜蜜约会等场景。短剧恋爱线必备音乐。',
+  tags:['欢快','甜蜜','恋爱','心动']},
+ {id:22,cat:'happy',title:'Chill Lo-Fi Beat',artist:'Infraction',duration:'2:48',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'慵懒/舒适/随性',scene:'休闲日常/学习工作/逛街',
+  bpm:'80',instrument:'爵士鼓+钢琴+贝斯+黑胶噪',
+  desc:'Lo-Fi风格轻松曲，慵懒舒适，适合休闲日常、学习工作、逛街走路等背景场景，不抢戏又有氛围。',
+  tags:['欢快','Lo-Fi','慵懒','背景']},
+ {id:23,cat:'happy',title:'Playful Children',artist:'Lesfm',duration:'2:05',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'可爱/童真/欢乐',scene:'萌娃/宠物/可爱桥段',
+  bpm:'95',instrument:'钟琴+木琴+小鼓+长笛',
+  desc:'童趣满满的欢快音乐，钟琴+木琴音色，适合萌娃、宠物、Q版可爱桥段，听完心情变好。',
+  tags:['欢快','可爱','童趣','萌']},
+ {id:24,cat:'happy',title:'Upbeat Pop',artist:'MaxKoMusic',duration:'2:20',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'活力/青春/阳光',scene:'青春校园/运动/蒙太奇',
+  bpm:'120',instrument:'电吉他+鼓+贝斯+合成器',
+  desc:'活力四射的流行摇滚，适合青春校园、运动、成长蒙太奇等场景，充满正能量。',
+  tags:['欢快','青春','摇滚','活力']},
+
+ // ========== 悬疑紧张 ==========
+ {id:25,cat:'suspense',title:'Mystery Suspense',artist:'EugeneShootSound',duration:'2:30',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'悬疑/不安/未知',scene:'调查推理/发现线索/谜团',
+  bpm:'75',instrument:'氛围合成器+钢琴单音+弦乐长音',
+  desc:'悬疑氛围曲，持续的不安感+零星的音效点缀，适合调查推理、发现线索、探索未知等场景。',
+  tags:['悬疑','推理','氛围','不安']},
+ {id:26,cat:'suspense',title:'Ticking Clock Tension',artist:'SoundGallery',duration:'2:10',
+  source:'Epidemic Sound',sourceUrl:'https://www.epidemicsound.com/',
+  mood:'紧迫/倒计时/窒息感',scene:'倒计时/炸弹/最后期限',
+  bpm:'120',instrument:'秒针声+弦乐断奏+低音鼓',
+  desc:'倒计时专属配乐，持续的秒针声+逐步加强的弦乐，适合炸弹倒计时、最后期限、命悬一线等场景。',
+  tags:['悬疑','倒计时','紧迫','窒息']},
+ {id:27,cat:'suspense',title:'Horror Ambient',artist:'Eitan Epstein',duration:'3:00',
+  source:'Artlist',sourceUrl:'https://artlist.io/',
+  mood:'恐怖/阴森/压抑',scene:'鬼屋/恐怖场景/惊悚画面',
+  bpm:'55',instrument:'低频嗡鸣+金属刮擦+人声吟唱',
+  desc:'恐怖氛围音乐，低频嗡鸣+各种诡异音效，适合鬼屋、惊悚、超自然恐怖场景，听了后背发凉。',
+  tags:['悬疑','恐怖','阴森','惊悚']},
+ {id:28,cat:'suspense',title:'Detective Noir',artist:'Lesfm',duration:'2:45',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'冷峻/侦探/复古',scene:'侦探推理/ noir风格/调查',
+  bpm:'85',instrument:'爵士萨克斯+钢琴+低音提琴',
+  desc:'黑色电影风格侦探曲，萨克斯+爵士钢琴，适合侦探推理、卧底调查、noir风格场景，酷劲十足。',
+  tags:['悬疑','侦探','爵士','复古']},
+ {id:29,cat:'suspense',title:'Creeping Danger',artist:'Infraction',duration:'1:55',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'潜伏/逼近/危机感',scene:'跟踪/潜入/危险逼近',
+  bpm:'95',instrument:'低音提琴拨奏+打击乐+氛围音效',
+  desc:'危险逼近感配乐，低音提琴拨奏像脚步声，适合跟踪、潜入、悄悄靠近等场景，观众跟着紧张。',
+  tags:['悬疑','潜入','跟踪','危险']},
+ {id:30,cat:'suspense',title:'Plot Twist Reveal',artist:'MaxKoMusic',duration:'1:40',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'反转/震惊/恍然大悟',scene:'真相揭露/反转/伏笔回收',
+  bpm:'100',instrument:'弦乐+铜管+鼓点+音效',
+  desc:'反转揭露专用音乐，从悬疑铺垫到爆发式揭示，适合真相揭露、剧情大反转、伏笔回收等场景。',
+  tags:['悬疑','反转','真相','揭露']},
+
+ // ========== 温馨治愈 ==========
+ {id:31,cat:'warm',title:'Acoustic Breeze',artist:'Benjamin Tissot',duration:'2:35',
+  source:'Bensound',sourceUrl:'https://www.bensound.com/',
+  mood:'温暖/治愈/平静',scene:'日常生活/家庭温情/平静时刻',
+  bpm:'80',instrument:'木吉他+钢琴+轻鼓+沙锤',
+  desc:'温柔治愈的木吉他曲，像午后的微风，适合家庭温情、日常生活、平静时刻等场景，百听不厌。',
+  tags:['温馨','治愈','吉他','日常']},
+ {id:32,cat:'warm',title:'Sunny Day',artist:'Lesfm',duration:'2:20',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'阳光/温暖/舒适',scene:'清晨/散步/美好生活',
+  bpm:'90',instrument:'钢琴+木吉他+小提琴+钟琴',
+  desc:'充满阳光感的温暖音乐，适合清晨起床、散步、美好生活展示等场景，像晒到太阳一样舒服。',
+  tags:['温馨','阳光','治愈','生活']},
+ {id:33,cat:'warm',title:'Tender Moments',artist:'Music Unlimited',duration:'3:10',
+  source:'Free Music Archive',sourceUrl:'https://freemusicarchive.org/',
+  mood:'温柔/感动/暖心',scene:'亲情/友情/暖心瞬间',
+  bpm:'70',instrument:'钢琴+弦乐+竖琴',
+  desc:'温柔感人的配乐，适合亲情、友情、暖心瞬间等场景，不是悲伤而是感动到哭那种。',
+  tags:['温馨','感动','亲情','暖心']},
+ {id:34,cat:'warm',title:'Cozy Coffee Shop',artist:'Infraction',duration:'2:50',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'慵懒/舒适/惬意',scene:'咖啡馆/书店/休闲约会',
+  bpm:'75',instrument:'爵士钢琴+低音提琴+鼓刷',
+  desc:'咖啡馆爵士风格，慵懒舒适，适合咖啡馆、书店、休闲约会等场景，轻松惬意的背景音。',
+  tags:['温馨','爵士','咖啡馆','慵懒']},
+ {id:35,cat:'warm',title:'Childhood Memory',artist:'Gnomusique',duration:'2:45',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'怀旧/童年/温暖',scene:'童年回忆/旧时光/怀旧',
+  bpm:'68',instrument:'音乐盒+钢琴+长笛',
+  desc:'音乐盒音色的怀旧曲，像回到童年的感觉，适合童年回忆、旧时光、怀旧闪回等场景。',
+  tags:['温馨','怀旧','童年','音乐盒']},
+ {id:36,cat:'warm',title:'Lullaby Goodnight',artist:'Lesfm',duration:'3:00',
+  source:'YouTube Audio Library',sourceUrl:'https://studio.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/music',
+  mood:'安静/温柔/入眠',scene:'入睡/晚安/温柔收尾',
+  bpm:'55',instrument:'钢琴+竖琴+音乐盒',
+  desc:'摇篮曲风格的安静音乐，适合入睡、晚安、一集收尾等场景，温柔地结束一段故事。',
+  tags:['温馨','安静','摇篮曲','晚安']},
+
+ // ========== 古风国风 ==========
+ {id:37,cat:'guofeng',title:'Bamboo Grove Hermit',artist:'Gnomusique',duration:'3:05',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'清雅/隐逸/禅意',scene:'竹林/隐士/文人雅士',
+  bpm:'60',instrument:'古琴+箫+竹笛+木鱼',
+  desc:'禅意十足的古风曲，古琴+箫，适合竹林隐士、文人雅士、品茶论道等场景，意境高远。',
+  tags:['古风','禅意','古琴','隐逸']},
+ {id:38,cat:'guofeng',title:'Palace Banquet',artist:'Gnomusique',duration:'2:50',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'华丽/盛大/宫廷',scene:'皇宫宴会/大典/庆典',
+  bpm:'90',instrument:'编钟+笙+古筝+鼓',
+  desc:'宫廷宴会风格古曲，编钟+笙的华丽配置，适合皇宫宴会、大典、庆典等大场面，富丽堂皇。',
+  tags:['古风','宫廷','华丽','宴会']},
+ {id:39,cat:'guofeng',title:'Swordman Journey',artist:'Gnomusique',duration:'2:40',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'潇洒/江湖/豪迈',scene:'侠客独行/江湖游历/送别',
+  bpm:'85',instrument:'笛子+古筝+二胡+鼓',
+  desc:'江湖侠客风格曲，笛子主旋律潇洒飘逸，适合侠客独行、江湖游历、长亭送别等场景。',
+  tags:['古风','武侠','潇洒','江湖']},
+ {id:40,cat:'guofeng',title:'Fairy Mountain Mist',artist:'Gnomusique',duration:'3:15',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'仙气/飘渺/空灵',scene:'仙山/仙境/御剑飞行',
+  bpm:'65',instrument:'古筝+笛子+竖琴+氛围合成',
+  desc:'仙气飘渺的仙侠音乐，古筝+笛子+空灵氛围，适合仙山、仙境、御剑飞行等场景，飘飘欲仙。',
+  tags:['古风','仙侠','仙气','空灵']},
+ {id:41,cat:'guofeng',title:'Traditional Wedding',artist:'Gnomusique',duration:'2:25',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'喜庆/热闹/古典',scene:'古代婚礼/节庆/喜事',
+  bpm:'100',instrument:'唢呐+锣鼓+二胡+笛子',
+  desc:'中式喜庆音乐，唢呐+锣鼓的经典配置，适合古代婚礼、节庆、喜事等热闹场景。',
+  tags:['古风','喜庆','婚礼','唢呐']},
+ {id:42,cat:'guofeng',title:'Wuxia Duel',artist:'Gnomusique',duration:'2:15',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'紧张/对峙/高手过招',scene:'高手对决/比武/江湖恩怨',
+  bpm:'110',instrument:'古筝+琵琶+大鼓+笛',
+  desc:'武侠对决专用曲，快速的古筝琵琶轮指+大鼓，适合高手对决、比武招亲、江湖恩怨等场景。',
+  tags:['古风','武侠','对决','紧张']},
+
+ // ========== 科幻未来 ==========
+ {id:43,cat:'scifi',title:'Cyberpunk City',artist:'MaxKoMusic',duration:'2:40',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'酷炫/霓虹/未来感',scene:'赛博朋克城市/夜景/科技感',
+  bpm:'100',instrument:'合成器+808鼓+贝斯+音效',
+  desc:'赛博朋克城市漫步曲，合成器营造的霓虹感，适合赛博朋克城市场景、夜景、高科技展示。',
+  tags:['科幻','赛博朋克','电子','霓虹']},
+ {id:44,cat:'scifi',title:'Space Ambient',artist:'EugeneShootSound',duration:'3:20',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'浩瀚/神秘/宇宙',scene:'太空/宇宙飞船/外星世界',
+  bpm:'55',instrument:'氛围合成器+Pad+太空音效',
+  desc:'宇宙太空氛围音乐，浩瀚无垠的感觉，适合太空、宇宙飞船航行、外星世界探索等场景。',
+  tags:['科幻','太空','氛围','宇宙']},
+ {id:45,cat:'scifi',title:'AI Awakening',artist:'Infraction',duration:'2:25',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'科技/觉醒/神秘',scene:'AI觉醒/机械启动/未来科技',
+  bpm:'90',instrument:'合成器+电子鼓+人声采样+音效',
+  desc:'AI觉醒风格科幻曲，从微弱到强大的递进，适合AI觉醒、机械启动、未来科技展示等场景。',
+  tags:['科幻','AI','觉醒','科技']},
+ {id:46,cat:'scifi',title:'Epic Space Battle',artist:'Eitan Epstein',duration:'2:50',
+  source:'Artlist',sourceUrl:'https://artlist.io/',
+  mood:'史诗/宏大/星际战争',scene:'太空战/舰队对决/星战',
+  bpm:'130',instrument:'管弦乐+合成器+军鼓+音效',
+  desc:'史诗级太空战配乐，管弦乐+电子合成器结合，适合太空舰队大战、星际战争等大场面。',
+  tags:['科幻','太空战','史诗','舰队']},
+ {id:47,cat:'scifi',title:'Hi-Tech Corporate',artist:'SoundGallery',duration:'2:30',
+  source:'Epidemic Sound',sourceUrl:'https://www.epidemicsound.com/',
+  mood:'高端/科技/专业',scene:'科技公司/实验室/数据展示',
+  bpm:'100',instrument:'合成器+钢琴+电子鼓',
+  desc:'高端科技感背景乐，干净利落的电子音色，适合科技公司、实验室、数据展示等场景。',
+  tags:['科幻','科技','公司','实验室']},
+ {id:48,cat:'scifi',title:'Post-Apocalypse',artist:'MaxKoMusic',duration:'2:55',
+  source:'Pixabay Music',sourceUrl:'https://pixabay.com/music/',
+  mood:'荒凉/废土/孤独',scene:'末日废土/废墟/幸存者',
+  bpm:'70',instrument:'氛围合成器+失真吉他+低频鼓',
+  desc:'末日后废土风格，荒凉孤独感，适合末日废土、废墟探索、幸存者之路等场景。',
+  tags:['科幻','末日','废土','荒凉']}
+];
+
+function renderMusicList(cat){
+  var list=document.getElementById('musicList');
+  if(!list)return;
+  var filtered=cat==='all'?MUSIC_DATA:MUSIC_DATA.filter(function(m){return m.cat===cat});
+  // 更新计数
+  var totalEl=document.getElementById('musicTotalCount');
+  if(totalEl)totalEl.textContent=filtered.length;
+
+  var html='';
+  filtered.forEach(function(m){
+    var sourceClass='';
+    if(m.source.indexOf('Pixabay')>-1)sourceClass='music-source-pixabay';
+    else if(m.source.indexOf('YouTube')>-1)sourceClass='music-source-youtube';
+    else if(m.source.indexOf('Free Music')>-1)sourceClass='music-source-fma';
+    else if(m.source.indexOf('Epidemic')>-1)sourceClass='music-source-epidemic';
+    else if(m.source.indexOf('Artlist')>-1)sourceClass='music-source-artlist';
+    else if(m.source.indexOf('Bensound')>-1)sourceClass='music-source-uppbeat';
+    else sourceClass='music-source-fma';
+
+    html+='<div class="music-card" data-id="'+m.id+'" onclick="toggleMusicCard('+m.id+')">';
+    html+='<div class="music-card-top">';
+    html+='<div class="music-play-btn" onclick="event.stopPropagation();playMusicPreview('+m.id+')">▶</div>';
+    html+='<div class="music-info">';
+    html+='<div class="music-title">'+m.title+'</div>';
+    html+='<div class="music-artist">'+m.artist+'</div>';
+    html+='</div>';
+    html+='<span class="music-duration">'+m.duration+'</span>';
+    html+='</div>';
+    html+='<div class="music-tags">';
+    html+='<span class="music-tag scene">🎬 '+m.scene.split('/')[0]+'</span>';
+    html+='<span class="music-tag mood">🎵 '+m.mood.split('/')[0]+'</span>';
+    html+='<span class="music-tag source music-source-badge '+sourceClass+'">🔗 '+m.source.split(' ')[0]+'</span>';
+    html+='</div>';
+    html+='<div class="music-card-detail">';
+    html+='<div class="music-detail-row"><span>🎤 艺术家</span><b>'+m.artist+'</b></div>';
+    html+='<div class="music-detail-row"><span>⏱️ 时长</span><b>'+m.duration+'</b></div>';
+    html+='<div class="music-detail-row"><span>🥁 BPM</span><b>'+m.bpm+'</b></div>';
+    html+='<div class="music-detail-row"><span>🎹 乐器</span><b>'+m.instrument+'</b></div>';
+    html+='<div class="music-detail-row"><span>😌 情绪</span><b>'+m.mood+'</b></div>';
+    html+='<div class="music-detail-row"><span>🎬 使用场景</span><b>'+m.scene+'</b></div>';
+    html+='<div class="music-detail-row"><span>🔗 来源平台</span><b>'+m.source+'</b></div>';
+    html+='<div class="music-desc">💡 '+m.desc+'</div>';
+    html+='<div class="music-actions">';
+    html+='<button class="music-action-btn primary" onclick="event.stopPropagation();openMusicSource('+m.id+')">🔗 前往来源</button>';
+    html+='<button class="music-action-btn secondary" onclick="event.stopPropagation();copyMusicInfo('+m.id+')">📋 复制信息</button>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+  });
+  list.innerHTML=html;
+}
+
+function switchMusicCat(cat){
+  document.querySelectorAll('.music-cat').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+  });
+  renderMusicList(cat);
+}
+
+function toggleMusicCard(id){
+  var card=document.querySelector('.music-card[data-id="'+id+'"]');
+  if(card)card.classList.toggle('expanded');
+}
+
+function openMusicSource(id){
+  var m=MUSIC_DATA.find(function(x){return x.id===id});
+  if(m&&m.sourceUrl)window.open(m.sourceUrl,'_blank');
+}
+
+function copyMusicInfo(id){
+  var m=MUSIC_DATA.find(function(x){return x.id===id});
+  if(!m)return;
+  var text='【音乐信息】\n'+
+    '名称：'+m.title+'\n'+
+    '艺术家：'+m.artist+'\n'+
+    '时长：'+m.duration+'\n'+
+    'BPM：'+m.bpm+'\n'+
+    '情绪：'+m.mood+'\n'+
+    '使用场景：'+m.scene+'\n'+
+    '乐器：'+m.instrument+'\n'+
+    '来源：'+m.source+'\n'+
+    '来源链接：'+m.sourceUrl+'\n'+
+    '描述：'+m.desc;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('音乐信息已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('音乐信息已复制','success');
+  }
+}
+
+var currentPlayingId=null;
+function playMusicPreview(id){
+  // 切换播放状态显示
+  var btns=document.querySelectorAll('.music-play-btn');
+  btns.forEach(function(b){b.classList.remove('playing');b.innerHTML='▶'});
+  if(currentPlayingId===id){
+    currentPlayingId=null;
+    showToast('预览已停止','info');
+    return;
+  }
+  var btn=document.querySelector('.music-card[data-id="'+id+'"] .music-play-btn');
+  if(btn){btn.classList.add('playing');btn.innerHTML='⏸'}
+  currentPlayingId=id;
+  // 模拟预览 - 实际播放需要音频文件
+  var m=MUSIC_DATA.find(function(x){return x.id===id});
+  showToast('正在预览：'+m.title+' (请前往来源平台完整收听)','info');
+  // 10秒后自动停止模拟
+  setTimeout(function(){
+    if(currentPlayingId===id){
+      if(btn){btn.classList.remove('playing');btn.innerHTML='▶'}
+      currentPlayingId=null;
+    }
+  },10000);
+}
+
+// 初始化音乐列表
+document.addEventListener('DOMContentLoaded',function(){
+  renderMusicList('all');
+});
 
 /* ========== 提示词卡片模态框 ========== */
 var currentPlCard=null;
