@@ -449,74 +449,74 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <div class="sub">风格 · 运镜 · AI工具</div>
  </div>
  <nav class="nav">
- <div class="nav-item has-submenu active" data-section="styleguide" onclick="toggleSubmenu(this,'styleguide')">
+ <div class="nav-item has-submenu active" data-section="styleguide" onclick="toggleSubmenu('styleguide')">
  <span class="ico">🎨</span><span class="lbl">风格图鉴</span>
  <span class="submenu-arrow">▼</span>
  </div>
  <div class="submenu open" id="submenu-styleguide">
-  <div class="submenu-item active" onclick="event.stopPropagation();switchSection('styleguide')">
+  <div class="submenu-item active" data-sec="styleguide" data-tab="anime">
    <span class="sm-ico">🌸</span>动漫插画风格
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('styleguide')">
+  <div class="submenu-item" data-sec="styleguide" data-tab="photo">
    <span class="sm-ico">📸</span>真人摄影风格
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('styleguide')">
+  <div class="submenu-item" data-sec="styleguide" data-tab="camera">
    <span class="sm-ico">🎥</span>运镜与构图
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('styleguide')">
+  <div class="submenu-item" data-sec="styleguide" data-tab="tools">
    <span class="sm-ico">🤖</span>AI工具推荐
   </div>
  </div>
 
- <div class="nav-item has-submenu" data-section="prompts" onclick="toggleSubmenu(this,'prompts')">
+ <div class="nav-item has-submenu" data-section="prompts" onclick="toggleSubmenu('prompts')">
  <span class="ico">📚</span><span class="lbl">提示词素材库</span>
  <span class="submenu-arrow">▼</span>
  </div>
  <div class="submenu" id="submenu-prompts">
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('framework')">
+  <div class="submenu-item" data-sec="framework">
    <span class="sm-ico">📐</span>提示词框架
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('prompts')">
+  <div class="submenu-item" data-sec="prompts">
    <span class="sm-ico">🎭</span>提示词大全
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('expression')">
+  <div class="submenu-item" data-sec="expression">
    <span class="sm-ico">😊</span>人物表情库
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('weapon')">
+  <div class="submenu-item" data-sec="weapon">
    <span class="sm-ico">⚔️</span>武器库提示词
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('effect')">
+  <div class="submenu-item" data-sec="effect">
    <span class="sm-ico">✨</span>特效提示词
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('music')">
+  <div class="submenu-item" data-sec="music">
    <span class="sm-ico">🎵</span>无版权音乐库
   </div>
  </div>
 
- <div class="nav-item has-submenu" data-section="agents" onclick="toggleSubmenu(this,'agents')">
+ <div class="nav-item has-submenu" data-section="agents" onclick="toggleSubmenu('agents')">
  <span class="ico">🎬</span><span class="lbl">AI漫剧制作</span>
  <span class="submenu-arrow">▼</span>
  </div>
  <div class="submenu" id="submenu-agents">
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('manju')">
+  <div class="submenu-item" data-sec="agents" data-agent="manju">
    <span class="sm-ico">🎭</span>漫剧全流程
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('script')">
+  <div class="submenu-item" data-sec="agents" data-agent="script">
    <span class="sm-ico">📝</span>爆款剧本
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('giant')">
+  <div class="submenu-item" data-sec="agents" data-agent="giant">
    <span class="sm-ico">🐋</span>巨物美学
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('director')">
+  <div class="submenu-item" data-sec="agents" data-agent="director">
    <span class="sm-ico">🎬</span>小罗导演
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('seedance')">
+  <div class="submenu-item" data-sec="agents" data-agent="seedance">
    <span class="sm-ico">🎥</span>Seedance视频
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('minimax')">
+  <div class="submenu-item" data-sec="agents" data-agent="minimax">
    <span class="sm-ico">🤖</span>MiniMax视频
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('comfy')">
+  <div class="submenu-item" data-sec="agents" data-agent="comfy">
    <span class="sm-ico">🔧</span>ComfyUI工作流
   </div>
  </div>
@@ -7145,16 +7145,15 @@ function toggleSidebar(state){
 })();
 
 /* ========== 板块切换 ========== */
-function toggleSubmenu(el,key){
+function toggleSubmenu(key){
   var submenu=document.getElementById('submenu-'+key);
-  var navItem=el;
+  var navItem=document.querySelector('.nav-item.has-submenu[data-section="'+key+'"]');
+  if(!submenu || !navItem)return;
   
   if(submenu.classList.contains('open')){
-    // 关闭
     submenu.classList.remove('open');
     navItem.classList.remove('expanded');
   }else{
-    // 打开 - 先关闭所有其他子菜单
     document.querySelectorAll('.submenu').forEach(function(s){
       s.classList.remove('open');
     });
@@ -7167,21 +7166,27 @@ function toggleSubmenu(el,key){
 }
 
 function switchSection(id){
+ // Update nav item active state
  document.querySelectorAll('.nav-item.has-submenu').forEach(function(el){
  var key=el.dataset.section;
  var isActive=id===key || (key==='prompts' && ['framework','expression','weapon','effect','music','prompts'].indexOf(id)>-1) || (key==='styleguide' && id==='styleguide') || (key==='agents' && id==='agents');
  el.classList.toggle('active',isActive);
- // Auto-expand the parent submenu
  if(isActive && key!==id){
    var submenu=document.getElementById('submenu-'+key);
    if(submenu)submenu.classList.add('open');
    if(el)el.classList.add('expanded');
  }
  });
+ // Update plain nav items
+ document.querySelectorAll('.nav-item:not(.has-submenu)').forEach(function(el){
+   el.classList.toggle('active',el.dataset.section===id);
+ });
  // Highlight submenu items
  document.querySelectorAll('.submenu-item').forEach(function(el){
-   el.classList.remove('active');
+   var sec=el.getAttribute('data-sec');
+   el.classList.toggle('active',sec===id);
  });
+ // Toggle sections
  document.querySelectorAll('.section').forEach(function(el){
  el.classList.toggle('active',el.id==='sec-'+id);
  });
@@ -7191,6 +7196,22 @@ function switchSection(id){
  }
  if(window.innerWidth<=768) toggleSidebar(false);
 }
+
+// 子菜单点击事件委托
+document.addEventListener('click',function(e){
+  var subItem=e.target.closest('.submenu-item');
+  if(subItem){
+    e.stopPropagation();
+    var sec=subItem.getAttribute('data-sec');
+    var agent=subItem.getAttribute('data-agent');
+    if(sec){
+      switchSection(sec);
+    }
+    if(agent && typeof switchAgent==='function'){
+      setTimeout(function(){ switchAgent(agent); },50);
+    }
+  }
+});
 
 /* ========== 设置表单更新 ========== */
 function updateSettingsForm(){
