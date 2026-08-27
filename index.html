@@ -97,6 +97,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .footer{text-align:center;padding:20px 0;font-size:12px;color:var(--ink-3)}
 .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
 .section{display:none}.section.active{display:block}
+/* 提示词库 */
+.pl-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.pl-cat{padding:8px 16px;border:1px solid var(--line);border-radius:20px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2);transition:all .2s}
+.pl-cat:hover{border-color:var(--accent);color:var(--accent)}
+.pl-cat.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pl-card{background:var(--surface);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);border-left:4px solid var(--accent)}
+.pl-card-h{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.pl-card-h .badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700;margin-left:auto}
+.pl-badge-mj{background:#e8f0ff;color:#2e86de}.pl-badge-sd{background:#f0e8ff;color:#7c3aed}.pl-badge-gpt{background:#e8f9f0;color:#059669}
+.pl-desc{font-size:13px;color:var(--ink-2);line-height:1.6;margin-bottom:10px}
+.pl-prompt-box{margin-top:8px;padding:12px 14px;background:rgba(46,134,222,.05);border:1px solid rgba(46,134,222,.15);border-radius:10px}
+.pl-prompt-title{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:8px}
+.pl-lang-label{font-size:11px;color:var(--ink-3);margin:6px 0 3px;display:flex;align-items:center;gap:4px}
+.pl-prompt-text{font-size:12px;color:var(--ink-2);background:#fff;padding:10px 12px;border-radius:8px;border:1px solid var(--line);line-height:1.7;cursor:pointer;transition:all .2s;user-select:none;position:relative;font-family:monospace}
+.pl-prompt-text:hover{border-color:var(--accent);background:rgba(46,134,222,.03)}
+.pl-prompt-text::after{content:'📋 点击复制';position:absolute;top:6px;right:8px;font-size:10px;color:var(--accent);opacity:0;transition:opacity .2s;font-family:sans-serif}
+.pl-prompt-text:hover::after{opacity:1}
+.pl-tips{font-size:11px;color:var(--ink-3);margin-top:8px;padding:8px 10px;background:var(--bg);border-radius:8px;line-height:1.6}
+.pl-tips b{color:var(--ink-2)}
+.pl-update-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#ff9800;font-weight:600;margin-left:6px}
 </style>
 </head>
 <body>
@@ -114,6 +134,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
     </div>
     <div class="nav-item" data-section="settings" onclick="switchSection('settings')">
       <span class="ico">⚙️</span><span class="lbl">系统设置</span>
+    </div>
+    <div class="nav-item" data-section="prompts" onclick="switchSection('prompts')">
+      <span class="ico">📚</span><span class="lbl">提示词库</span>
     </div>
   </nav>
   <div class="sync-badge-wrap">
@@ -1061,6 +1084,1233 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   </div>
 </div>
 
+<!-- ========== 提示词库 ========== -->
+<div class="section" id="sec-prompts">
+  <div class="page-head"><span class="bow">📚</span><h1>提示词库</h1><span class="sub"><span class="pl-update-badge" id="plUpdateBadge">每日精选更新</span> · 16大分类 · 中英双语 · MJ V7 + GPT Image 2</span></div>
+
+  <div class="card tint-blue">
+    <div class="card-h">💡 提示词万能公式 & 每日精选说明</div>
+    <div class="txt" style="line-height:1.8">
+      <b>七段式结构：</b>主体 + 环境 + 行为/状态 + 构图 + 风格 + 画质 + 参数<br>
+      <b>MJ V7 核心变化：</b>提示词控制在60 tokens内 · 权重不超过1.6 · 产品/人像加 --style raw · 用 --no 排除概念而非物体<br>
+      <b>GPT Image 2 核心技巧：</b>自然语言描述 · 主体→环境→风格→技术参数 · 500词以内 · 加"photorealistic"触发照片模式 · 可直接渲染文字<br>
+      <b>每日精选：</b>本库精选全网优质提示词，涵盖 Midjourney V7、GPT Image 2、SDXL 三大平台，持续更新中
+    </div>
+  </div>
+
+  <!-- 分类切换 -->
+  <div class="pl-cats" id="plCats">
+    <button class="pl-cat active" onclick="switchPlCat('portrait')">🎭 人像写真</button>
+    <button class="pl-cat" onclick="switchPlCat('anime')">🌸 动漫二次元</button>
+    <button class="pl-cat" onclick="switchPlCat('landscape')">🏔️ 风景自然</button>
+    <button class="pl-cat" onclick="switchPlCat('product')">📦 产品商业</button>
+    <button class="pl-cat" onclick="switchPlCat('fantasy')">🐉 奇幻科幻</button>
+    <button class="pl-cat" onclick="switchPlCat('food')">🍜 美食摄影</button>
+    <button class="pl-cat" onclick="switchPlCat('arch')">🏛️ 建筑室内</button>
+    <button class="pl-cat" onclick="switchPlCat('fashion')">👗 时尚编辑</button>
+    <button class="pl-cat" onclick="switchPlCat('guofeng')">🏮 国风古韵</button>
+    <button class="pl-cat" onclick="switchPlCat('concept')">🎨 3D概念艺术</button>
+    <button class="pl-cat" onclick="switchPlCat('animal')">🐾 动物宠物</button>
+    <button class="pl-cat" onclick="switchPlCat('cinema')">🎬 电影场景</button>
+    <button class="pl-cat" onclick="switchPlCat('abstract')">🌀 抽象艺术</button>
+    <button class="pl-cat" onclick="switchPlCat('kids')">🧸 儿童插画</button>
+    <button class="pl-cat" onclick="switchPlCat('festival')">🎉 节日庆典</button>
+    <button class="pl-cat" onclick="switchPlCat('darkart')">💀 暗黑艺术</button>
+  </div>
+
+  <!-- ====== 人像写真 ====== -->
+  <div id="plCat-portrait" class="pl-content">
+    <div class="pl-card">
+      <div class="pl-card-h">🎭 电影感人像特写 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">30岁女性的电影级特写，伦勃朗布光，浅景深散景背景，皮肤纹理真实可见。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">电影感人像特写，一位30岁女性，红褐色长发随意披散在肩上，几缕发丝在光线中闪耀。她平静自信地直视镜头。场景：金色夕阳下的麦田中，背景麦穗柔和虚化。光线：逆光夕阳在发丝周围形成金色光晕，反光板为面部补充柔光。色彩：浓郁琥珀色、蜂蜜金、暖赭色搭配冷色阴影。构图：中近景，85mm镜头f/1.4，极浅景深，背景可见散景圆圈。风格：电影摄影，变形镜头质感，胶片颗粒。画质：8K分辨率，超精细皮肤纹理，锐利对焦眼部。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Cinematic close-up portrait of a 30-year-old woman with auburn hair loosely falling past her shoulders, strands catching the light. She gazes directly into the camera with calm confidence. Environment: sun-drenched wheat field at golden hour, stalks softly blurred. Lighting: warm backlighting creating a golden halo, soft fill on face. Color: rich amber, honey gold, warm sienna with cool shadow accents. Composition: medium close-up, 85mm f/1.4, extremely shallow depth of field, bokeh circles. Style: cinematic photography, anamorphic lens, film grain. Quality: 8K, ultra-detailed skin texture, sharp focus on eyes.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>伦勃朗布光（Rembrandt lighting）是经典人像布光法，面部一侧形成三角形光斑。指定85mm镜头可获得最自然人像透视。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">📸 纪实人物肖像 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+      <div class="pl-desc">80岁老渔民的纪实风格肖像，饱经风霜的皮肤纹理，国家地理纪录片质感。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">纪实人物肖像，一位80岁老渔民，深深的皱纹，灰白胡茬，因几十年海上生活而眯起的慈祥疲惫双眼。穿着褪色藏蓝毛线帽和有线补丁的粗线毛衣，粗糙的双手握着盘好的绳索。场景：坐在渔村破旧木码头边，背景是斑驳剥落的船壳。光线：阴天漫射光，无强烈阴影，水面银色反光。色彩：去饱和的海岸色调——石板蓝、褪色青绿、风化木褐、肤色暖赭。构图：紧凑环境肖像，头肩部带手部可见，中画幅f/4，平视角度。风格：纪实摄影，Steve McCurry风格，真实自然。画质：8K，极致皮肤细节，毛孔级清晰度。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Documentary portrait of an elderly fisherman in his 80s with deeply weathered skin, salt-and-pepper stubble, kind but tired eyes squinting from decades on the water. Wearing a faded navy wool cap and cable-knit sweater with visible repairs, holding coiled rope in calloused hands. Environment: seated on a worn wooden dock at a fishing village, peeling paint on boat hulls in the background. Lighting: overcast diffused light, no harsh shadows, silver quality reflecting off water. Color: desaturated coastal tones — slate blue, faded teal, weathered wood brown, warm ochre skin. Composition: tight environmental portrait, head and shoulders with hands visible, medium format f/4, eye-level. Style: documentary photography, Steve McCurry influenced. Quality: 8K, extreme skin detail, pore-level clarity.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>纪实人像的关键是"不修饰"——保留皮肤瑕疵、皱纹纹理，用阴天漫射光避免过度美化。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌃 赛博朋克霓虹人像 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">霓虹灯下的赛博朋克女性肖像，雨夜香港后巷，冷暖色对比强烈。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">黑色电影风格赛博朋克人像，一位危险美丽的蛇蝎美人，穿着贴身红色丝绸开叉长裙，走过雨夜香港后巷。中文霓虹灯牌在湿润鹅卵石路面反射红蓝光芒。她单肩撑着黑伞，红唇是冷调青色灯光中唯一的暖色。附近通风口冒出烟雾。变形镜头，浅景深，电影颗粒感。超写实4K黑色电影画面。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Film noir cinematic shot. A dangerously beautiful femme fatale in a curve-hugging red silk dress with a thigh-high slit, walking through a rain-soaked Hong Kong back alley at night. Neon signs in Chinese characters reflect red and blue on the wet cobblestones. She carries a black umbrella over one shoulder, her red-painted lips the only warm color against the cold teal lighting. Smoke wisps from a nearby vent. Anamorphic lens, shallow depth of field, cinematic grain. Ultra-realistic 4K noir film frame.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>红与青的互补色对比是赛博朋克的色彩核心。指定"anamorphic lens"可获得电影宽幅变形效果。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏢 职业商务头像 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">LinkedIn级别的职业商务头像，干净背景，标准三点布光。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">职业商务头像，一位45岁南亚男性，穿着炭灰色西装和勃艮第领带。干净白色背景带微妙渐变。双灯布光——主灯45度角放置，对侧反光板补光。自信、亲和的表情。从头到耳锐利清晰，105mm人像镜头拍摄。LinkedIn风格，现代企业形象。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Professional corporate headshot of a 45-year-old South Asian man in a charcoal suit and burgundy tie. Clean white background with subtle gradient. Two-light setup — main light at 45 degrees with fill card on the opposite side. Confident, approachable expression. Sharp from ear to ear, shot on 105mm portrait lens. LinkedIn-ready, modern corporate style.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>商务头像使用105mm镜头可获得最自然的面部比例。双灯布光（主灯+补光板）是商务人像标配。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌙 氛围感爵士酒吧人像 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">昏暗爵士酒吧中的神秘女性，琥珀色聚光灯，烟雾缭绕，黑色电影美学。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">氛围感爵士酒吧内景。一位神秘女性穿着透视黑色蕾丝裙坐在天鹅绒吧台椅上，一条腿交叠露出细高跟。烟雾在她剪影周围缭绕。头顶温暖琥珀色聚光灯照亮她的面部和锁骨，其余部分隐入深邃阴影。背景中萨克斯演奏者是模糊剪影。黑色电影与现代奢华美学交汇。戏剧性伦勃朗布光，35mm胶片质感。超写实4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Moody jazz bar interior. A mysterious woman in a sheer black lace dress sits on a velvet barstool, one leg crossed showing stiletto heels. Cigarette smoke curls around her silhouette. Warm amber spotlight from above illuminates her face and exposed collarbones while the rest fades into deep shadow. A saxophone player is a blurred silhouette in the background. Film noir meets modern luxury aesthetic. Dramatic Rembrandt lighting, 35mm film look. Ultra-realistic 4K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"warm amber spotlight"+"deep shadow"组合可创造经典低调布光（low-key lighting）效果。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">📷 柯达胶片质感街拍人像 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">过期柯达Portra 800胶片质感，阳光咖啡馆中的随性抓拍，复古暖色调。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">柯达胶片质感街拍人像，一位25岁女性坐在阳光咖啡馆窗边，自然卷棕发随意扎起，穿米色亚麻衬衫，手持陶瓷咖啡杯，不看镜头的随性表情。场景：巴黎街角咖啡馆，窗外梧桐树影斑驳。光线：柔和朦胧自然窗光，轻微过曝，暗部提亮。色彩：过期Portra 800暖调——褪色橙、柔绿、暗粉，右侧边缘有漏光。构图：35mm胶片f/2.8，浅景深带轻微软焦。风格：模拟胶片摄影，可见颗粒。画质：4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Kodak film street portrait, a 25-year-old woman sitting by a sunlit cafe window, natural brown curly hair casually tied up, wearing a beige linen shirt, holding a ceramic coffee cup, candid expression not looking at camera. Setting: Parisian corner cafe, dappled plane tree shadows through window. Light: soft hazy natural window light, slight overexposure, lifted shadows. Color: expired Portra 800 warm tones — faded orange, soft green, dusty pink, light leak on right edge. Composition: 35mm film f/2.8, shallow depth of field with slightly soft focus. Style: analog film photography, visible grain. Quality: 4K.</div>
+        <div class="pl-lang-label">🤖 GPT Image 2 专用版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">A photorealistic candid photograph that looks like it was shot on expired Kodak Portra 800 35mm film. A 25-year-old woman sits by the window of a sunlit Parisian cafe, her natural brown curly hair casually tied up. She wears a beige linen shirt and holds a ceramic coffee cup, looking away from the camera with a relaxed expression. Plane tree shadows dapple through the window. The image has a slightly overexposed, hazy quality with lifted shadows, warm faded tones of orange, green, and dusty pink. There is a visible light leak on the right edge of the frame, and natural film grain throughout. Shot with a 35mm lens at f/2.8 with shallow depth of field and slightly soft focus.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>指定"过期胶片"+"漏光"可模拟真实胶片的不完美美感。GPT Image 2 直接描述"film grain"和"light leak"即可。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌅 黄金时刻环境人像 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">金色夕阳下的田野环境人像，逆光轮廓光，镜头光晕，野花散景前景。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">黄金时刻环境人像，一位28岁女性站在开阔田野中，穿着大地色棉麻连衣裙，微风吹动发丝和裙摆。光线：低角度夕阳逆光，在头发和肩膀周围形成金色轮廓光，镜头光晕从太阳方向射入。前景野花形成散景。构图：全身环境人像，85mm f/1.8。色彩：暖橙、粉红、蜂蜜金、大地棕。风格：获奖人像摄影。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Golden hour environmental portrait of a 28-year-old woman standing in an open field, wearing earth-toned cotton-linen dress, wind gently moving her hair and dress hem. Light: low-angle sunset backlighting creating a golden rim light around hair and shoulders, lens flare from sun direction. Wildflowers creating foreground bokeh. Composition: full-body environmental portrait, 85mm f/1.8. Color: warm orange, pink, honey gold, earth brown. Style: award-winning portrait photography. Quality: 8K. --ar 16:9 --v 7</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>黄金时刻（golden hour）是日出后/日落前1小时的光线，色温约3000-4000K。指定"rim light"和"lens flare"增强氛围。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🖤 低调影棚黑白人像 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">纯阴影与光的低光黑白人像，单侧硬光，Peter Lindbergh美学。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">低调影棚人像，一位35岁女性，深邃五官，单侧硬光从右侧照射在面部投下深影，黑色背景，眼中单一眼神光。可见皮肤毛孔和纹理，Phase One IQ4 150mm，极致细节，黑白摄影，高对比度，暗部纯黑。Peter Lindbergh美学。--ar 4:5 --style raw --no color</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dramatic low-key studio portrait, a 35-year-old woman with striking features, single harsh side light from the right casting deep shadows across half the face, black background, single catchlight in eyes. Visible skin pores and texture, Phase One IQ4 150mm, extreme detail, black and white photograph, high contrast with crushed blacks. Peter Lindbergh aesthetic. --ar 4:5 --style raw --no color</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>MJ V7 用 --no color 强制纯黑白而非去色。低光人像（low-key）核心是"大面积暗+小面积亮"。</div>
+    </div>
+  </div>
+
+  <!-- ====== 动漫二次元 ====== -->
+  <div id="plCat-anime" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🌸 新海诚风格樱花少女 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+      <div class="pl-desc">新海诚风格的樱花树下少女，云层细节丰富，光线通透，色彩鲜艳。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">新海诚风格动漫插画，一位少女站在盛开的樱花树下，长发随风飘动，大眼睛闪烁光芒。蓝天白云层次分明，阳光透过花瓣洒下斑驳光影。花瓣在空中飞舞，远处的城市天际线若隐若现。色彩鲜艳通透，云层细节精致，光线柔和温暖。高清4K，壁纸级画质，新海诚《你的名字》风格，每一帧都是壁纸。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Makoto Shinkai style anime illustration, a girl standing under blooming cherry blossom trees, long hair flowing in the wind, big eyes sparkling. Layered blue sky with detailed clouds, sunlight filtering through petals creating dappled light. Petals dancing in the air, distant city skyline faintly visible. Vibrant transparent colors, exquisite cloud details, soft warm light. 4K HD, wallpaper quality, Makoto Shinkai "Your Name" style, every frame is a wallpaper.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>新海诚风格的核心是"云层细节"和"光线通透感"。加上"every frame is a wallpaper"可强化壁纸级画质。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">⚔️ 热血战斗名场面 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">Jump系热血战斗风格，速度线、火焰特效、动态构图，张力满点。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">热血少年动漫风格，战斗场景高潮瞬间，少年主角释放能量大招，金色火焰特效环绕全身，速度线效果强化动态感，夸张的表情充满 determination。背景是崩塌的城市废墟，碎石悬浮空中。动态构图，低角度仰拍，张力满点。Jump系漫画风格，高燃画面，线条锐利，色彩浓烈，4K高清。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Shonen anime style, epic battle climax scene, young protagonist unleashing ultimate energy attack, golden flame effects surrounding entire body, speed lines enhancing dynamic motion, exaggerated expression full of determination. Background is crumbling city ruins, debris floating mid-air. Dynamic composition, low angle looking up, maximum tension. Jump manga style, high-burn visuals, sharp linework, intense colors, 4K HD.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"speed lines"+"low angle"+"dynamic composition"三件套是热血战斗画面的标配组合。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏠 吉卜力治愈日常 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">吉卜力风格的治愈系日常场景，柔和水彩质感，温暖光影。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">吉卜力工作室风格动漫插画，女孩坐在乡村木屋窗台边看书，窗外是翠绿山丘和金色麦田。柔和午后阳光透过窗户洒入，空气中飘浮着细小尘埃光斑。猫咪蜷缩在脚边。温暖色调，水彩质感笔触，细腻光影变化，绿植点缀窗台。宁静治愈的日常氛围，宫崎骏动画风格，4K高清细节。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Studio Ghibli style anime illustration, a girl sitting by a countryside wooden house windowsill reading a book, outside are green hills and golden wheat fields. Soft afternoon sunlight streaming through the window, tiny dust particles glowing in the air. A cat curled up at her feet. Warm color palette, watercolor texture brushwork, delicate light and shadow changes, green plants on the windowsill. Peaceful healing daily atmosphere, Hayao Miyazaki animation style, 4K detailed.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>吉卜力风格关键词组合："watercolor texture"+"warm color palette"+"peaceful daily atmosphere"。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🤖 机甲战斗场景 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">巨型机甲VS怪兽的史诗战斗，日出工作室动画风格，动态姿势。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">史诗级机甲战斗场景，巨型机器人与怪兽在城市废墟中对峙，机器人的金属装甲反射着爆炸火光，怪兽浑身覆盖鳞片喷吐蓝色能量 beam。摧毁的城市天际线背景，建筑碎片在空中飞散。戏剧性爆炸特效，动态战斗姿势，日出工作室动画风格，高对比度色彩，赛璐璐渲染，4K壁纸级画质。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Epic mecha battle scene, giant robot versus kaiju monster in city ruins, the robot's metal armor reflecting explosion firelight, the monster covered in scales breathing blue energy beam. Destroyed city skyline background, building debris flying through the air. Dramatic explosion effects, dynamic combat poses, Sunrise studio animation style, high contrast colors, cel-shaded rendering, 4K wallpaper quality.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"cel-shaded rendering"（赛璐璐渲染）是日系动画的核心渲染方式。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌙 暗黑哥特吸血鬼 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+      <div class="pl-desc">暗黑哥特动漫风格，吸血鬼少女，月光十字架，华丽阴郁。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">暗黑哥特动漫风格，神秘古堡前的吸血鬼少女，黑色蕾丝礼服，苍白的皮肤，红色蔷薇花缠绕在哥特拱门上。月光穿过云层照在十字架上，暗色调画面中只有月光和血红色蔷薇是亮点。华丽阴郁的氛围，黑执事风格，精致服饰细节，暗黑童话美学，4K高清。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dark gothic anime style, vampire girl in front of a mysterious castle, black lace dress, pale skin, red roses entwining gothic arches. Moonlight breaking through clouds onto a cross, the only highlights in the dark tone are moonlight and blood-red roses. Ornate and melancholic atmosphere, Black Butler style, exquisite costume details, dark fairy tale aesthetics, 4K HD.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>暗黑风格的关键是"大面积暗调+小面积高饱和亮点"的明暗对比策略。</div>
+    </div>
+  </div>
+
+  <!-- ====== 风景自然 ====== -->
+  <div id="plCat-landscape" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🏔️ 金色山巅日出全景 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">阿尔卑斯山日出全景，云海环绕山峰，冰川湖面镜面反射。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">全景风光摄影，日出时分的锯齿状阿尔卑斯山峰，最高峰顶沐浴金色光芒，山谷仍笼罩在冷蓝阴影中。薄云层在峰下方形成云海，山峰如岛屿般浮现。前景冰川湖面如镜面般反射橙粉色天空。环境：高海拔阿尔卑斯山地，北坡残雪，裸露花岗岩壁。光线：金色时刻日出，水平光横扫山面，山峰高山辉光。色彩：金铜色、玫瑰粉、深钴蓝阴影、冷灰花岗岩、深青色高山湖水。构图：21:9超宽全景，前景岩石与水面，中景云海，远景山峰，强烈纵深层次。风格：大画幅风光摄影，Ansel Adams风格。画质：8K超宽，极致锐利，丰富动态范围。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Panoramic view of jagged alpine peaks at sunrise, highest summits catching golden light while valleys remain in cool blue shadow. Thin cloud layer below peaks creates sea-of-clouds effect with summits emerging like islands. Glacial lake in foreground reflects orange-pink sky with mirror stillness. Environment: high-altitude alpine terrain, sparse snow on north-facing slopes, exposed granite. Lighting: golden hour sunrise, horizontal light raking mountain faces, alpenglow on peaks. Color: burnished gold, rose pink, deep cobalt shadows, cool grey granite, dark teal water. Composition: 21:9 panoramic, foreground rocks and water, midground clouds, background peaks. Style: large format landscape photography, Ansel Adams. Quality: 8K ultra-wide, extreme sharpness, rich dynamic range.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"alpenglow"（高山辉光）是日出日落时山顶的粉色光芒，是指定高山氛围的黄金关键词。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌌 北极光冰雪镜面 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">北极光下的冰冻湖面完美镜面反射，极光窗帘般垂落，银河隐现。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">北极光填满天际，电光绿和深紫色光帘如瀑布般垂落在冰冻北极景观上空。完美静止的冰封湖面以水晶般清晰度反射极光，形成对称镜面效果。积雪松树黑色剪影排列岸边。银河在极光缝隙中若隐若现。环境：偏远北极荒野，深雪，绝对寂静。光线：极光为主光源，在雪和冰上投射微妙绿色辉光，无月光。色彩：电光绿和翡翠绿极光，深紫色边缘，深蓝海军色天空，纯白雪面带绿色阴影。构图：超广角，低地平线位于下三分之一，垂直极光光帘为引导线。风格：天文摄影，长曝光质感。画质：8K，无噪点夜空，清晰星点。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Northern lights filling the sky with sweeping curtains of electric green and deep violet above a frozen Arctic landscape. Perfectly still frozen lake reflects aurora with crystalline clarity, creating symmetrical mirror effect. Dark silhouettes of snow-laden pines line the shore. Milky Way peeks through gaps in aurora curtains. Environment: remote Arctic wilderness, deep snow, absolute stillness. Lighting: aurora as primary light source casting subtle green glow across snow, no moonlight. Color: electric green and emerald aurora, deep violet edges, dark navy sky, pure white snow with green-tinted shadows. Composition: ultra-wide, low horizon at lower third, vertical aurora curtains as leading lines. Style: astrophotography, long-exposure quality. Quality: 8K, noise-free night sky, crisp stars.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>极光摄影的关键是"长曝光质感"+"无月光"。指定"crystalline clarity"可获得完美镜面反射。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🍁 京都秋日庭院 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">京都日式庭院的深秋美景，红桥锦鲤池，红枫倒影，茶室灯笼。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">传统日式庭院深秋全景，中心是一座弧形红色木桥横跨平静的锦鲤池。灿烂的红枫和橙枫环绕画面，树叶倒映在深色镜面般的水面中，对岸石灯笼静静伫立。白、金、红三色锦鲤在水面下游动。长满青苔的石阶通向竹林深处的茅草茶室。环境：精心维护的京都庭院，池边耙过的碎石，修剪的松树增加垂直结构。光线：柔和阴天光线饱和秋色无强烈阴影，茶室内纸灯笼微光。色彩：火红、焦橙、金黄、深常绿、暗色水面、灰石。构图：低视角桥面高度，弧桥为引导线，16:9。风格：富士Velvia胶片饱和色彩，侘寂美学。画质：8K，叶脉清晰，水面平滑。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Traditional Japanese garden in peak autumn, centered on a curved red wooden bridge over a calm koi pond. Brilliant red and orange maples frame the scene, leaves reflected in dark mirror-like water, stone lantern on the far bank. White, gold, and red koi swim beneath the surface. Moss-covered stepping stones lead to a thatched tea house among bamboo groves. Environment: meticulously maintained Kyoto garden, raked gravel at pond edges, pruned pines. Lighting: soft overcast light saturating autumn colors, subtle glow from paper lantern inside tea house. Color: fiery reds, burnt orange, golden yellow, deep evergreen, dark water, muted grey stone. Composition: low bridge-level perspective, curved bridge as leading line, 16:9. Style: Fujifilm Velvia saturated color, wabi-sabi aesthetic. Quality: 8K, tack-sharp foliage, smooth water surface.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"Fujifilm Velvia"是指定高饱和胶片色彩质感的关键词，特别适合自然风景。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌴 热带雨林瀑布 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">热带雨林深处的瀑布，丁达尔光束穿透树冠，雾气弥漫。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">热带雨林深处的壮观瀑布场景，水流从长满苔藓的悬崖倾泻而下，形成多层跌水。阳光穿透茂密树冠形成丁达尔光束，照亮飘浮的水雾。蕨类和兰花攀附在岩石上，彩色蝴蝶在水面飞舞。前景是清澈的翡翠绿水潭，水底的鹅卵石清晰可见。环境：哥斯达黎加热带雨林，高湿度，弥漫雾气。光线：丁达尔效应光束穿透树冠，水雾散射形成彩虹。色彩：翡翠绿、深翠绿、棕褐色岩石、白色水雾、彩虹色。构图：广角竖构图，瀑布为视觉中心。风格：国家地理自然摄影。画质：8K，水滴细节可见。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Spectacular waterfall scene deep in a tropical rainforest, water cascading down moss-covered cliff face forming multiple tiers. Sunlight piercing through dense canopy creating Tyndall effect light beams, illuminating floating water mist. Ferns and orchids clinging to rocks, colorful butterflies dancing above the water. Foreground is a clear emerald pool, pebbles visible at the bottom. Environment: Costa Rican tropical rainforest, high humidity,弥漫 mist. Lighting: Tyndall effect beams through canopy, water mist scattering creating rainbow. Color: emerald green, deep jungle green, brown rock, white mist, rainbow hues. Composition: vertical wide-angle, waterfall as visual center. Style: National Geographic nature photography. Quality: 8K, visible water droplet detail.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"Tyndall effect"（丁达尔效应）是指定光束穿透雾气/树冠的专业术语，比"god rays"更精确。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏜️ 沙漠星空银河 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">纳米比亚红沙漠下的银河拱桥，枯树剪影，星空摄影极致。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">沙漠星空摄影，纳米比亚苏丝斯黎红沙漠，前景是一棵枯死骆驼刺树剪影立于红色沙丘脊线上，背景是横跨天穹的银河拱桥。天空：银河核心清晰可见，色彩从地平线暖橙到天顶深紫蓝，可见星云粉红斑。沙丘：红色沙丘曲线在星光下呈暗红色。光线：仅星光和银河光。构图：14mm f/2.8，低角度，树居中。色彩：银河紫蓝粉、沙丘暗红、天空深蓝。风格：星空摄影，多张拼接。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Desert astrophotography, Namibia Sossusvlei red desert, foreground silhouette of dead camel thorn tree on red dune ridge, background Milky Way arch spanning sky. Sky: Milky Way core clearly visible, color gradient from warm orange at horizon to deep purple-blue at zenith, visible pink nebula patches. Dunes: red dune curves in dim starlight showing dark red. Light: only starlight and Milky Way glow. Composition: 14mm f/2.8, low angle, tree centered. Color: Milky Way purple-blue-pink, dune dark red, sky deep blue. Style: astrophotography, multi-shot panorama. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>星空摄影三要素：大光圈(f/2.8以下)+高ISO(3200+)+长曝光(不超500/焦距秒)。沙漠的极低光污染是拍摄银河理想地点。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🧊 冰川蓝洞内部 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">冰岛蓝色冰洞内部，透明蓝冰拱顶，光线穿透冰层。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">冰岛蓝色冰洞内部场景，站在冰川蓝洞内部向上仰拍，冰洞拱顶呈现半透明的钴蓝色，阳光从冰层外侧穿透进来使整个冰洞内壁散发光芒。细节：冰壁内有气泡和火山灰条纹纹理，冰面有不规则波浪起伏。光线：日光穿透厚冰层后变成纯净蓝光，冰洞入口处有暖白光射入形成冷暖对比。构图：超广角12mm f/8，仰拍，圆形构图强调拱顶。色彩：冰洞内部钴蓝、入口暖白、冰内气泡白。风格：冰洞探险摄影。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Inside Iceland blue ice cave, looking up from inside a glacial ice tunnel, the cave ceiling shows translucent cobalt blue, sunlight penetrating through the ice from outside making the entire inner wall glow. Details: air bubbles and volcanic ash stripe textures inside ice walls, irregular wavy undulations on ice surface. Light: sunlight turning pure blue after passing through thick ice, warm white light entering from cave mouth creating warm-cool contrast. Composition: ultra-wide 12mm f/8, looking up, circular composition emphasizing dome. Color: cave interior cobalt blue, entrance warm white, ice bubbles white. Style: ice cave exploration photography. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>蓝冰洞的蓝色来自冰层对红光的吸收——越厚的冰越蓝。12mm超广角仰拍最能展现冰洞穹顶空间感。</div>
+    </div>
+  </div>
+
+  <!-- ====== 产品商业 ====== -->
+  <div id="plCat-product" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🎧 极简科技产品 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">无线耳机的极简产品摄影，苹果风格，白色大理石台面。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">产品摄影，磨砂黑色充电盒中的无线耳机，放置在白色大理石台面上。极简构图，大量留白。左上方单一柔光在右侧投下轻柔阴影。充电盒微开，可见内部耳机。45度角拍摄，90mm微距镜头。苹果风格产品摄影——干净、高端、向往感。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Product photography of wireless earbuds in a matte black charging case on a white marble surface. Clean minimalist composition with plenty of negative space. Single soft light from upper left creating gentle shadow to the right. Case is slightly open showing the earbuds nestled inside. Shot from a 45-degree angle on a 90mm macro lens. Apple-style product photography — clean, premium, aspirational.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"negative space"（留白）是极简产品摄影的关键。45度角是最通用的产品展示角度。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">💎 奢华护肤品 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">磨砂玻璃精华瓶配金色滴管，白色牡丹花床，高端化妆品广告风格。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">奢华护肤品摄影——磨砂玻璃精华瓶配金色滴管帽，放置在新鲜白色牡丹花床上。上方柔和漫射自然光。瓶身表面有水滴暗示新鲜感。浅景深，花朵在背景中柔和虚化。暖奶油色调。高端化妆品广告风格，中画幅Phase One拍摄。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Luxury skincare product shot — frosted glass serum bottle with gold dropper cap on a bed of fresh white peonies. Soft diffused natural light from above. Water droplets on the bottle surface suggesting freshness. Shallow depth of field with the flowers going soft in the background. Warm cream color palette. High-end cosmetics campaign style, shot on Phase One medium format.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"water droplets"暗示新鲜感是护肤品摄影的经典手法。Phase One中画幅相机指定最高商业画质。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">👟 运动鞋动态飞溅 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">未来感运动鞋悬浮空中，彩色粉末飞溅，纯黑背景，商业广告级。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">动态产品摄影，未来感跑步运动鞋悬浮在空中，电光蓝和珊瑚色彩色粉末在周围凝固飞溅。纯黑背景。三点布光——主光从上方，两侧补光创造边缘定义。鞋面网面材质的每个纹理细节清晰可见。Nike广告风格。超锐利，商业级画质。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dynamic product shot of a futuristic running sneaker suspended in mid-air with a splash of colored powder (electric blue and coral) frozen around it. Pure black background. Three-point lighting setup — key light from above, accent lights from both sides creating edge definition. Every texture detail of the mesh upper visible. Nike campaign aesthetic. Ultra-sharp, commercial quality.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"frozen around it"指定凝固瞬间效果。纯黑背景+边缘补光是商业产品摄影的标准打法。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🍺 高速饮料飞溅 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">精酿啤酒开罐瞬间，金色液体和泡沫凝固飞溅，背光透射。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">高速产品摄影，精酿啤酒罐正在被拉开拉环，金色液体和泡沫戏剧性地凝固在半空中。背光使液体发出琥珀色光芒。罐身标签清晰可读——"SUMMIT IPA"粗体字。纯黑背景。三个补光灯创造罐身边缘光定义。商业饮料广告级画质。1/8000快门速度。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">High-speed product photography of a craft beer can being opened with a dramatic splash of golden liquid and foam frozen in mid-air. Backlit to make the liquid glow amber. Can label clearly readable — "SUMMIT IPA" in bold typography. Pure black background. Three accent lights creating rim definition on the can. Commercial beverage advertising quality. Shot at 1/8000 shutter speed.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"1/8000 shutter speed"告诉AI模拟超高速快门凝固液体的效果。"backlit"让液体发光是饮料摄影的核心。</div>
+    </div>
+  </div>
+
+  <!-- ====== 奇幻科幻 ====== -->
+  <div id="plCat-fantasy" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🐉 龙骑士高空俯瞰 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">龙骑士翱翔在云海上空，史诗奇幻概念艺术，电影级光影。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">史诗奇幻概念艺术，一位银甲骑士骑在金色巨龙背上，翱翔在云海上空。巨龙鳞片在阳光下闪耀金属光泽，翅膀展开遮天蔽日。下方是无尽的云海和隐约可见的雪山峰。骑士手持长枪，披风在风中猎猎作响。环境：高空云端之上，远处是壮丽的落日。光线：黄金时刻逆光，龙翼边缘透光，云层底部金色反射。色彩：金色、银色、深蓝天空、橙红落日、白色云海。构图：广角第三人称侧后方视角。风格：高端奇幻概念艺术，油画质感笔触。画质：4K数字绘画，高度细节。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Epic fantasy concept art, a silver-armored knight riding on the back of a massive golden dragon, soaring above a sea of clouds. Dragon scales gleaming with metallic luster in sunlight, wings spread eclipsing the sky. Below is endless cloud sea with faintly visible snowy peaks. Knight holding a lance, cape billowing in the wind. Environment: high above the clouds, magnificent sunset in the distance. Lighting: golden hour backlight, light transmitting through wing membranes, golden reflection on cloud undersides. Color: gold, silver, deep blue sky, orange-red sunset, white cloud sea. Composition: wide-angle third-person rear-side view. Style: high-end fantasy concept art, painterly brushwork. Quality: 4K digital painting, highly detailed.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"light transmitting through wing membranes"（翼膜透光）是让龙看起来更真实的关键细节。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏙️ 赛博朋克雨夜街道 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+      <div class="pl-desc">赛博朋克城市雨夜，霓虹灯反射，全息广告，银翼杀手质感。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">赛博朋克电影级广角镜头，一位孤独侦探穿着湿透的黑色风衣，站在凌晨3点的霓虹灯笼罩的东京屋顶上。巨型全息艺伎广告在天际线背后飘过，在他脸上投下变幻的粉色和青色光。细雨捕捉着光芒。飞车水平划过留下光轨。变形镜头拍摄，2.39:1宽幅比，浅景深。银翼杀手2049调色——青色阴影，橙色高光。超写实4K电影画面。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Cyberpunk cinematic wide shot. A lone detective in a wet black trench coat stands on a neon-drenched Tokyo rooftop at 3am. Giant holographic advertisements of a geisha float across the skyline behind him, casting shifting pink and cyan light on his face. Light rain catches the glow. Flying cars streak past as horizontal light trails. Shot on anamorphic lens, 2.39:1 aspect, shallow depth of field. Blade Runner 2049 color grade — teal shadows, orange highlights. Ultra-realistic 4K cinematic frame.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"Blade Runner 2049 color grade"是赛博朋克调色的黄金标准——青色阴影+橙色高光。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🚀 太空站内景 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">未来太空站内部，巨大观测窗外的地球，科幻电影质感。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">未来太空站内景，宽敞的指挥舱，巨大的弧形观测窗占据整面墙壁，窗外是壮丽的地球曲线和蓝色大气层光晕。舱内是光滑的白色面板和柔和的蓝色LED环境光。一名宇航员漂浮在零重力中，面对窗口。全息控制面板发出淡蓝色光。环境：轨道空间站，整洁极简的内饰设计。光线：地球反光为主光源从窗口射入，蓝色冷调LED补光。色彩：深蓝太空、蓝绿色地球、白色内饰、淡蓝全息光。构图：广角，窗口为视觉焦点，宇航员剪影。风格：硬科幻电影质感，星际穿越风格。画质：8K，超精细材质纹理。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Futuristic space station interior, spacious command module, massive curved observation window spanning entire wall, showing magnificent Earth curvature and blue atmosphere halo outside. Interior features smooth white panels and soft blue LED ambient lighting. An astronaut floating in zero gravity, facing the window. Holographic control panels emitting pale blue light. Environment: orbital station, clean minimalist interior design. Lighting: Earth reflected light as main source from window, blue cool LED fill. Color: deep blue space, blue-green Earth, white interior, pale blue holographic light. Composition: wide-angle, window as focal point, astronaut silhouette. Style: hard sci-fi cinematic quality, Interstellar style. Quality: 8K, ultra-fine material textures.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"Earth reflected light as main source"用地球反光做主光源，比人造光更真实自然。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌲 魔法森林传送门 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">魔法森林中的发光传送门，萤火虫飞舞，神秘氛围。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">魔法森林深处的神秘传送门，古老的石拱门上覆盖着发光的符文，拱门中心是一个旋转的蓝紫色能量漩涡。周围巨大的古树根部发出生物荧光，萤火虫在空中飞舞留下光迹。地面长满发光的蘑菇和苔藓。环境：原始魔法森林，浓雾弥漫，巨大树根形成天然拱道。光线：传送门蓝紫色光为主光源，生物荧光绿点缀，月光从树冠缝隙洒下。色彩：蓝紫色传送门、翠绿生物荧光、暗褐色树皮、深蓝夜空。构图：传送门居中，对称构图，低角度仰拍增加庄严感。风格：高端奇幻概念艺术。画质：4K，高度细节。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Mysterious portal deep in an enchanted forest, ancient stone arch covered with glowing runes, center of arch is a swirling blue-purple energy vortex. Surrounding massive ancient tree roots emit bioluminescence, fireflies dancing in the air leaving light trails. Ground covered with glowing mushrooms and moss. Environment: primordial magical forest, dense mist, giant roots forming natural archways. Lighting: portal blue-purple light as main source, bioluminescent green accents, moonlight filtering through canopy gaps. Color: blue-purple portal, emerald bioluminescence, dark brown bark, deep blue night. Composition: portal centered, symmetrical composition, low angle looking up for grandeur. Style: high-end fantasy concept art. Quality: 4K, highly detailed.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"bioluminescence"（生物荧光）是魔法森林场景的核心氛围词，比"glowing"更专业。</div>
+    </div>
+  </div>
+
+  <!-- ====== 美食摄影 ====== -->
+  <div id="plCat-food" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🍣 极致寿司微距 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">手握寿司微距特写，鱼生通透质感，美食杂志编辑风格。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">极致微距美食摄影，主厨手握寿司特写，大腹金枪鱼鱼生通透可见油脂纹理，醋米粒粒分明晶莹剔透。鱼生表面有轻微的光泽反射。寿司放置在黑色漆器板上，旁边有紫苏叶和山葵点缀。环境：高级日料吧台，暗色背景。光线：侧后方单一柔光勾画出鱼生的边缘光泽，深色阴影。色彩：鱼生深红翻粉的渐变、白色醋米、绿色紫苏、黑色器皿。构图：极近微距，f/4，鱼生纹理为焦点。风格：美食杂志编辑风格，暗调美食摄影。画质：8K，可见鱼生油脂结晶。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Extreme macro food photography, close-up of chef's hand-pressed nigiri sushi, fatty tuna belly translucent showing fat marbling, vinegar rice grains distinct and crystal clear. Slight glossy reflection on the fish surface. Sushi on a black lacquer board, accompanied by shiso leaf and wasabi. Environment: high-end sushi counter, dark background. Lighting: single soft light from rear-side outlining fish edge gloss, deep shadows. Color: tuna deep red to pink gradient, white rice, green shiso, black tableware. Composition: extreme close-up macro, f/4, fish texture as focal point. Style: food magazine editorial, dark food photography. Quality: 8K, visible fat crystallization in fish.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"translucent showing fat marbling"描述鱼生通透感和油脂纹理，是高级寿司摄影的核心。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🍞 手工酸面包平铺 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">手工酸面包俯拍平铺，切面展示气孔结构，自然侧光。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">俯拍平铺美食摄影， rustic风格手工酸面包放在木质砧板上，一片切开展示开放气孔结构。散落的面粉、锯齿面包刀、一小碟黄油。环境：深色木质桌面，乡村厨房氛围。光线：窗口自然侧光在面包皮上创造质感纹理，暗调背景。构图：俯拍，50mm镜头f/4。风格：美食杂志编辑风格。画质：8K，面包皮裂纹细节清晰。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Overhead flat-lay food photography of an artisanal sourdough bread on a rustic wooden cutting board. One slice cut showing the open crumb structure. Scattered flour, a serrated bread knife, and a small dish of butter complete the scene. Environment: dark wooden table surface, rustic kitchen atmosphere. Lighting: natural side light from a window creating texture on the crust. Moody, dark background. Shot on 50mm lens at f/4. Food magazine editorial style. 8K, crust crack detail visible.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"open crumb structure"（开放气孔结构）是描述酸面包切面的专业术语。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🍹 鸡尾酒微距 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">高级鸡尾酒微距，杯壁水珠，冰块折射，暗调氛围。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">高级鸡尾酒微距摄影，琥珀色威士忌酸酒在水晶杯中，杯壁凝结水珠，大块手工冰块折射金色光芒。柠檬皮卷悬于杯沿，表面有微微火焰。环境：暗调酒吧背景，远处有模糊的暖色灯泡光斑。光线：背光使液体发光，侧面补光勾画杯壁水珠。色彩：琥珀金、深棕、暖黄柠檬、暗色背景。构图：微距特写，f/2.8浅景深。风格：高级调酒摄影。画质：8K，冰块裂纹可见。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Macro cocktail photography, amber whiskey sour in crystal glass, condensation droplets on glass wall, large hand-cut ice cube refracting golden light. Lemon peel twist hanging on rim with slight flame. Environment: dark bar background, blurred warm bulb bokeh in distance. Lighting: backlight making liquid glow, side fill light outlining glass condensation. Color: amber gold, deep brown, warm yellow lemon, dark background. Composition: macro close-up, f/2.8 shallow depth of field. Style: premium mixology photography. Quality: 8K, ice cracks visible.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"condensation droplets"（冷凝水珠）+ "refracting"（折射）是饮品摄影的双核心细节词。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🍝 意面蒸汽升腾 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">正宗意大利手工面在暗背景中，蒸汽升腾，美食编辑风。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">美食编辑摄影，一盘手工新鲜意大利面在深色陶瓷盘中，面条上撒有帕马森干酪碎片和黑胡椒，旁边有新鲜罗勒叶。蒸汽从热面上升腾，在侧光中可见。场景：暗色木桌，散落的面粉和一把木厨刀。光线：单侧窗光从左照射，暗部深沉。构图：45度俯视，50mm f/2.8浅景深对焦面条。色彩：意面金黄、干酪白、罗勒绿、暗木桌。风格：暗调美食摄影，Bon Appetit。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Editorial food photography, a plate of handmade fresh pasta in dark ceramic dish, topped with parmesan shards and black pepper, fresh basil leaves alongside. Steam rising from hot pasta visible in side light. Setting: dark wood table, scattered flour and wooden bench scraper. Light: single side window light from left, deep shadows. Composition: 45-degree overhead, 50mm f/2.8 shallow focus on pasta. Color: pasta golden, parmesan white, basil green, dark wood table. Style: dark food photography, Bon Appetit. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>暗调美食摄影是当前最流行的美食摄影风格——暗背景+单侧光+浅景深。蒸汽在侧光中最容易被捕捉。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🥩 牛排滋滋烧烤 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">完美五分熟战斧牛排切面，肉汁溢出，铸铁锅滋滋作响。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">美食摄影，一块完美五分熟战斧牛排放在铸铁板上，已切开展示粉红色内部和焦脆外壳交界处。细节：切面有肉汁渗出，铸铁板上有滋滋的油花和迷迭香枝。光线：暖色侧光模拟烛光/火光，热气微微可见。构图：45度近景，100mm微距f/4。色彩：牛排外壳深棕焦、内部粉红、肉汁红、铸铁黑、迷迭香绿。风格：高端牛排馆美食摄影。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Food photography, a perfect medium-rare tomahawk steak on cast iron plate, sliced open showing pink interior meeting crusty seared exterior. Details: juice seeping from cut, sizzling oil droplets and rosemary sprig on cast iron. Light: warm side light simulating candle/fire glow, heat shimmer visible. Composition: 45-degree close-up, 100mm macro f/4. Color: steak crust dark brown, interior pink, juice red, cast iron black, rosemary green. Style: high-end steakhouse food photography. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>牛排摄影关键是"切面展示"——粉红内部与焦褐外壳的交界线是视觉焦点。铸铁板的油花和热气增加"滋滋感"。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🍰 草莓奶油蛋糕切面 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">多层草莓奶油蛋糕，切面层叠可见，柔光粉调，甜品广告。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">甜品广告摄影，一块多层草莓奶油蛋糕已切出，切面展示清晰的层次——从底到顶为海绵蛋糕层、粉色草莓奶油层、新鲜草莓切片层重复三组。顶部装饰整颗新鲜草莓和薄荷。光线：柔和箱光从左上方照射，蛋糕表面柔光无硬阴影。构图：正面平拍，50mm f/4。色彩：蛋糕淡金、奶油粉白、草莓鲜红、薄荷绿。风格：甜品店广告摄影，柔美粉调。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dessert advertising photography, a multi-layer strawberry cream cake sliced, cross-section showing clear layers — sponge cake, pink strawberry cream, fresh strawberry slices, repeated three times. Topped with whole fresh strawberry and mint. Light: softbox from upper left, cake surface soft without harsh shadows. Composition: front-level shot, 50mm f/4. Color: cake pale gold, cream pink-white, strawberry bright red, mint green. Style: dessert shop advertising, soft pink tone. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>蛋糕摄影核心是"切面层次展示"。柔光是甜品摄影标准——大柔光箱+反光板消除阴影。</div>
+    </div>
+  </div>
+
+  <!-- ====== 建筑室内 ====== -->
+  <div id="plCat-arch" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🏠 日式极简客厅 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">日式极简主义客厅，落地窗海景，侘寂美学，建筑摄影。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">现代日式极简主义客厅内景，整面落地玻璃窗俯瞰大海。低矮的木质茶几，米色亚麻沙发，一个陶器花瓶中插着单枝枯枝。榻榻米质感地板，原木色调。环境：海边悬崖住宅，可以看到远处的海平线和天际线。光线：自然晨光从窗口洒入，在地板上形成几何光影。色彩：原木色、米色、灰白色、窗外蓝绿色海面。构图：广角建筑摄影，对称构图，16mm镜头。风格：建筑摄影，侘寂美学。画质：8K，木纹纹理清晰。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Modern Japanese minimalist living room interior, floor-to-ceiling glass windows overlooking the ocean. Low wooden coffee table, beige linen sofa, a ceramic vase with a single dried branch. Tatami-texture flooring, natural wood tones. Environment: cliffside seaside house, visible ocean horizon and skyline. Lighting: natural morning light streaming through windows, creating geometric shadows on floor. Color: natural wood, beige, off-white, blue-green ocean outside. Composition: wide-angle architectural photography, symmetrical, 16mm lens. Style: architectural photography, wabi-sabi aesthetic. Quality: 8K, clear wood grain texture.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"wabi-sabi aesthetic"（侘寂美学）是日式极简的精髓——不完美、不对称、不永恒之美。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌿 被自然回收的城市废墟 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">城市废墟被植物重新占领，后末日世界，自然与建筑交融。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">后末日城市废墟被自然回收，摩天大楼的玻璃幕墙碎裂，藤蔓和树木从窗口生长出来，整个建筑被绿色植被覆盖。街道上长满了野花和草地，一辆锈蚀的汽车半埋在土中。鹿群在曾经的十字路口悠闲漫步。环境：被自然重新占领的城市，几十年无人迹。光线：金色夕阳穿过藤蔓覆盖的建筑骨架，丁达尔光束。色彩：翠绿植被、锈红色金属、灰色的混凝土、金色夕阳。构图：广角仰拍，建筑为框架。风格：后末日概念艺术。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Post-apocalyptic urban ruins reclaimed by nature, skyscraper glass facades shattered, vines and trees growing from windows, entire buildings covered in green vegetation. Streets overgrown with wildflowers and grass, a rusted car half-buried in soil. Deer herd wandering leisurely at a former intersection. Environment: city reclaimed by nature, decades without human presence. Lighting: golden sunset through vine-covered building skeletons, Tyndall light beams. Color: emerald vegetation, rust-red metal, grey concrete, golden sunset. Composition: wide-angle looking up, buildings as frame. Style: post-apocalyptic concept art. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>后末日建筑场景的关键是"植物入侵建筑的对比感"——自然与人造的视觉冲突。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏛️ 装饰艺术大厅 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">Art Deco风格豪华大厅，几何线条，黄铜金属，对称构图。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Art Deco装饰艺术风格豪华酒店大厅，高耸的天花板上悬挂着巨大的几何形黄铜吊灯。对称的大理石柱廊通向远方，地面是黑白几何拼接的大理石地板。黄铜电梯门，扇形装饰壁灯。环境：1920年代纽约豪华酒店，每一处细节都精致考究。光线：暖色人工照明，吊灯为主光源，壁灯营造氛围。色彩：黑色大理石、金色黄铜、奶白色石材、暖琥珀色灯光。构图：严格对称，广角，中心透视。风格：建筑摄影，装饰艺术风格。画质：8K，金属反射清晰。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Art Deco luxury hotel lobby interior, soaring ceiling with massive geometric brass chandelier. Symmetrical marble colonnade leading into the distance, floor is black-and-white geometric inlaid marble. Brass elevator doors, fan-shaped wall sconces. Environment: 1920s New York luxury hotel, every detail exquisitely crafted. Lighting: warm artificial illumination, chandelier as main source, sconces creating ambiance. Color: black marble, gold brass, cream stone, warm amber lighting. Composition: strict symmetry, wide-angle, one-point perspective. Style: architectural photography, Art Deco. Quality: 8K, clear metal reflections.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>Art Deco的标志是"几何对称"+"黄铜金属"+"黑白大理石"三件套。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">⛪ 哥特教堂彩色光 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">哥特式大教堂内部，彩色玻璃窗投下光斑，穹顶仰望。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">建筑摄影，哥特式大教堂内部，仰拍穹顶。彩色玻璃花窗：高大尖拱花窗投下红蓝紫色光斑在石柱和地面上。建筑结构：尖肋拱顶、束柱、飞扶壁剪影。光线：彩色玻璃透光是唯一光源，石质结构明暗对比强烈，体积光从花窗射入。构图：超广角12mm f/8，垂直仰拍。色彩：石材暖灰、花窗红蓝紫、光斑彩虹。风格：哥特建筑摄影。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Architectural photography, Gothic cathedral interior, looking up at ceiling. Stained glass: tall pointed-arch windows casting red-blue-violet light patches on stone columns and floor. Structure: ribbed vault, bundled columns, flying buttress silhouettes. Light: stained glass as sole light source, strong contrast on stonework, volumetric light from windows. Composition: ultra-wide 12mm f/8, vertical upward. Color: stone warm gray, stained glass red-blue-violet, rainbow light patches. Style: Gothic architectural photography. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>教堂内部摄影关键是"彩色玻璃透光"。12mm超广角仰拍能完整收录穹顶。体积光使彩色光斑可见。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏗️ 安藤忠雄清水混凝土 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">安藤忠雄风格清水混凝土别墅，光之十字，极简Brutalism。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">建筑摄影，安藤忠雄风格清水混凝土别墅，极简几何体块组合。墙面：素面清水混凝土保留模板纹理。光之十字：一面清水混凝土墙上有一个十字形开口，阳光穿透在地面投下十字光斑。水面：庭院中有一方水池倒映建筑。光线：自然光从十字开口射入形成光之十字，水面反光在天花形成波纹。构图：广角24mm f/11，一点透视。色彩：清水混凝土灰、十字光金白、水面银蓝、绿植翠。风格：Brutalism建筑，安藤忠雄美学。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Architectural photography, Tadao Ando style exposed concrete villa, minimalist geometric block composition. Walls: bare exposed concrete retaining formwork texture. Light cross: a cross-shaped opening in concrete wall, sunlight piercing through casting cross of light on floor. Water: courtyard reflecting pool mirroring building. Light: natural light through cross opening forming light cross, water reflections rippling on ceiling. Composition: wide-angle 24mm f/11, one-point perspective. Color: concrete gray, cross light gold-white, water silver-blue, plants green. Style: Brutalist architecture, Tadao Ando aesthetic. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>安藤忠雄建筑核心是"清水混凝土+自然光+几何"。光之十字是其标志性元素。清水混凝土的"模板纹理"增加真实感。</div>
+    </div>
+  </div>
+
+  <!-- ====== 时尚编辑 ====== -->
+  <div id="plCat-fashion" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">💼 Vogue级时尚大片 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">Vogue Italia风格时尚编辑，极简混凝土空间，几何光影。</div>
+      <div class="pl-card-h" style="font-size:13px"></div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">高级时尚编辑摄影，颧骨分明的深肤色男模，穿着超大号解构象牙白亚麻西装内搭裸露肌肤，配阔腿炭灰色长裤和极简银饰。一手随意插在裤袋中。环境：粗野主义混凝土内饰，几何阴影由不可见的建筑开口投射，地面有一个陶瓷花瓶插着干花枝。光线：左上方硬光投射戏剧性几何阴影，对侧深阴影。色彩：单色系——象牙白、灰烬色、炭灰色、哑光黑，肤色为唯一暖色。构图：全身照，略偏中心，50mm f/2.8，建筑线条汇聚向模特。风格：Vogue Italia美学，极简雕塑感。画质：超高分辨率，锐利对焦。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">High-fashion editorial photography, male model with sharp cheekbones and dark complexion, wearing oversized deconstructed ivory linen blazer over bare skin, wide-leg charcoal trousers, minimalist silver jewelry. One hand casually in trouser pocket. Environment: brutalist concrete interior, geometric shadows cast by unseen architectural openings, single dried flower branch in ceramic vase on floor. Lighting: hard directional light from upper left creating dramatic geometric shadows, deep shadows opposite. Color: monochromatic — ivory, ash grey, charcoal, matte black, skin as only warmth. Composition: full-body, slightly off-center, 50mm f/2.8, architectural lines converging toward model. Style: Vogue Italia aesthetic, minimalist sculptural. Quality: ultra-high resolution, razor-sharp focus.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>时尚摄影的秘诀是"单色系+一个暖色"——全画面冷调中只有肤色提供温暖对比。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">📸 街头时尚抓拍 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">东京原宿街头时尚抓拍，色彩层叠穿搭，自然不做作。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">东京原宿街头时尚抓拍人像，一位少女穿着色彩层叠的街头服饰——超大图案T恤、格子裙、厚底靴。靠在贴满演唱会海报的墙上。50mm f/2.0自然过曝光线。她正大笑着看向画面外某人。纪实风格，略欠曝增加氛围感。色彩：多彩街头服饰、海报的混色背景、自然肤色。构图：中景，墙面为背景。风格：街头时尚纪实。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Candid street portrait of a teenager in Tokyo's Harajuku district. She's wearing colorful layered streetwear — oversized graphic tee, plaid skirt, platform boots. Shot on a 50mm lens at f/2.0, standing against a wall covered in concert posters. Natural overcast light. She's mid-laugh, looking at someone off-frame. Documentary style, slightly underexposed for mood. Color: colorful streetwear, mixed-color poster background, natural skin. Composition: medium shot, wall as background. Style: street fashion documentary. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"slightly underexposed for mood"（略欠曝增加氛围感）是街头摄影的常用技巧。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🎭 双重曝光概念人像 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">人物侧面剪影中填充城市夜景，双重曝光艺术，现代图形设计。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">双重曝光概念艺术，一位女性的侧面剪影中填充着黄昏城市延时摄影——车灯光轨、点亮的摩天楼窗户和霓虹灯牌在她的轮廓中交融。她的头发溶解为缕缕云彩与天际线融合。背景：从深蓝到柔和桃色的干净渐变。环境：抽象双重曝光——城市只存在于剪影边界内。光线：内部城市散发温暖人工光，剪影边缘捕捉柔和白色轮廓光。色彩：深蓝、暖琥珀城市光、柔和桃色、霓虹粉和青色点缀。构图：侧面朝左，占据右侧三分之二，左侧留白，边缘干净融入发际粒子效果。风格：双重曝光摄影融合数字艺术，现代图形设计感。画质：4K，高对比度，干净渐变。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Double exposure concept art, a woman's profile silhouette filled with a time-lapse city at twilight — car light trails, illuminated skyscraper windows, and neon signs blending within her outline. Her hair dissolves into wisps of cloud merging with the skyline. Background: clean gradient from deep navy to soft peach. Environment: abstract double-exposure — city exists only within silhouette boundaries. Lighting: internal city glows with warm artificial light, silhouette edge catches soft white rim light. Color: deep navy, warm amber city glow, soft peach, neon pink and cyan accents. Composition: profile facing left, filling right two-thirds, negative space on left, clean edges blending into particle effects at hair. Style: double exposure photography blended with digital art, modern graphic design sensibility. Quality: 4K, high contrast, smooth gradients.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>双重曝光的关键是"城市只存在于剪影边界内"——明确告诉AI两个图层的关系。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">💄 美妆特写8K皮肤 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">化妆品广告级面部特写，金属眼影+酒红唇，环形灯眼神光。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">美妆特写摄影，女性面部极致特写，无瑕露水肌肤可见毛孔，编辑妆容——金属金眼影+酒红唇。相机：Canon EOS R5 100mm微距f/2.8。光线：环形灯在瞳孔形成圆形眼神光，柔光从上方美容碟。细节：每根睫毛清晰可见，肌肤自然光泽。构图：正面1:1。色彩：肌肤暖、金眼影、酒红唇。风格：Glossier广告级美妆。画质：8K皮肤细节。--s 150 --style raw</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Beauty close-up photography, extreme close-up of woman's face, flawless dewy skin with visible pores, editorial makeup — metallic gold eyeshadow + wine lip. Camera: Canon EOS R5 100mm macro f/2.8. Light: ring light creating circular catchlights in pupils, beauty dish from above. Details: every eyelash individually visible, natural skin luminosity. Composition: frontal 1:1. Color: warm skin, gold eyeshadow, wine lip. Style: Glossier campaign beauty. Quality: 8K skin detail. --s 150 --style raw</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>美妆摄影关键是"环形灯眼神光"（ring light catchlight）——瞳孔中的圆形反光是美妆摄影标志。100mm微距+--style raw保证皮肤真实纹理。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🧥 极简风格Lookbook <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">极简品牌Lookbook，纯色背景，自然光，COS/The Row风格。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">极简时尚Lookbook摄影，模特穿驼色羊绒大衣和白色阔腿裤，站在暖灰纯色背景前。姿态：自然站立微侧身，手插兜，淡然表情。光线：大窗自然柔光从左侧，右侧反光板补光，无硬阴影。构图：全身，50mm f/4，居中。色彩：驼色大衣、白裤、暖灰背景。风格：COS/The Row极简品牌美学。画质：8K。--s 100 --style raw</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Minimalist fashion lookbook photography, model in camel cashmere coat and white wide-leg trousers, standing against warm gray solid background. Pose: natural standing slightly turned, hands in pockets, serene expression. Light: large window natural soft light from left, reflector fill from right, no harsh shadows. Composition: full body, 50mm f/4, centered. Color: camel coat, white trousers, warm gray background. Style: COS/The Row minimalist brand aesthetic. Quality: 8K. --s 100 --style raw</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>极简时尚核心是"纯色背景+自然光+克制配色"。--s 100低风格化保持真实感。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌊 水下时尚人像 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">水下时尚摄影，裙摆水中飘展，光线穿透水面，超现实美。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">水下时尚人像，模特穿白色丝绸长裙在泳池深处，裙摆在水中如花朵绽放般展开。头发在水中飘散形成优美弧线。光线：阳光从水面上方穿透形成caustics焦散光纹在水下投射流动光网。气泡从模特周围上升。构图：低角度仰拍，模特居中，水面在画面上方。色彩：白丝绸、水中蓝绿、caustics金白光、肤色暖。风格：水下时尚摄影，超现实唯美。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Underwater fashion portrait, model in white silk gown in deep pool, dress fabric blooming like a flower in water. Hair flowing in water forming graceful curves. Light: sunlight piercing from surface above creating caustics — flowing light network projected underwater. Bubbles rising around model. Composition: low angle looking up, model centered, water surface at top of frame. Color: white silk, water blue-green, caustics gold-white, skin warm. Style: underwater fashion photography, surreal beauty. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>水下时尚关键是"caustics焦散光纹"——水面折射阳光在水下形成流动光网。白色丝绸在水中展开的形态是视觉焦点。</div>
+    </div>
+  </div>
+
+  <!-- ====== 国风古韵 ====== -->
+  <div id="plCat-guofeng" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🏯 水墨写意山水 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">宋代院体画风格水墨山水，青绿设色，留白意境，文人画传统。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">宋代院体画风格水墨山水，青绿设色，远景层叠山峦在云雾中若隐若现，中景一叶扁舟漂于江面，近景松下高士独坐抚琴。界画技法描绘的亭台楼阁点缀山间。留白占画面70%，意境深远。环境：中国古代山水，晨雾缭绕，仙鹤飞舞。光线：柔和漫射光，无强烈阴影。色彩：青绿、水墨黑、留白、淡赭石。构图：三远法——高远、深远、平远。风格：宋代院体画，工笔与写意结合。画质：4K，水墨晕染自然。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Song Dynasty academy painting style ink landscape, blue-green coloring, distant layered mountains faintly visible in mist, middle ground a small boat drifting on river, foreground a scholar sitting alone under pine playing guqin. Architectural pavilions dotted among mountains using jiehua technique. 70% of the painting is negative space, profound artistic conception. Environment: ancient Chinese landscape, morning mist, flying cranes. Lighting: soft diffused light, no harsh shadows. Color: blue-green, ink black, white space, light ochre. Composition: three-distance method — high distance, deep distance, level distance. Style: Song Dynasty academy painting, combining fine-brush and freehand. Quality: 4K, natural ink wash blending.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"三远法"（高远、深远、平远）是中国山水画的核心构图理论。指定"negative space:70%"可强化留白。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">⚔️ 武侠人物工笔 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+      <div class="pl-desc">工笔重彩武侠人物，飘逸汉服，仙气妆容，东方美学极致。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">工笔重彩风格武侠人物画，一位白衣剑仙站在云雾缭绕的山巅，长发飘逸，手持三尺青锋剑，仙风道骨。飘逸的汉服广袖在风中飞舞，精致的银色发饰。水墨韵味与工笔细腻结合，山水意境背景，仙鹤在云端飞舞。环境：仙侠世界山巅，晨雾，桃花瓣飘落。光线：柔和晨光，面部仙气妆容。色彩：白色衣袍、青色山水、银色发饰、粉色桃花、墨色山石。构图：竖构图，人物居中偏右，留白意境。风格：工笔重彩，张萱唐代仕女画法融合仙侠美学。画质：8K，服饰纹理精致。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Fine-brush heavy-color wuxia character painting, a white-robed sword immortal standing on a misty mountain peak, flowing long hair, holding a three-foot green blade sword, ethereal aura. Flowing Hanfu wide sleeves dancing in wind, exquisite silver hair accessories. Combining ink wash charm with fine-brush detail, mountain landscape background, cranes flying in clouds. Environment: xianxia world mountain peak, morning mist, peach blossom petals falling. Lighting: soft morning light, ethereal makeup. Color: white robe, cyan landscape, silver accessories, pink blossoms, ink-black rocks. Composition: vertical, figure centered-right, negative space for artistic conception. Style: fine-brush heavy-color, Tang Dynasty Zhang Xuan court lady technique fused with xianxia aesthetics. Quality: 8K, exquisite fabric textures.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>国风人物画用"工笔重彩"指定技法，配合具体朝代画家名（如张萱）可触发特定风格特征。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏮 古风庭院夜景 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">古代园林月夜，红灯笼，荷花池，中国风插画。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">古风庭院月夜场景，中国传统园林，白色围墙灰色瓦片，飞檐翘角的凉亭中悬挂红色灯笼。荷花池中月影摇曳，锦鲤在水面下游动。石桥上有一位撑着油纸伞的女子身影。环境：中国古代园林，满月当空，紫藤花垂落。光线：月光为主光源，灯笼暖光为点缀，冷暖对比。色彩：月白冷光、暖红灯笼、灰色瓦片、粉色紫藤、碧绿荷叶。构图：中景，凉亭为视觉中心，水面倒影。风格：中国风数字插画，工笔与水彩融合。画质：4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Ancient courtyard moonlit night scene, traditional Chinese garden, white walls with grey tiles, flying-eave pavilion with hanging red lanterns. Lotus pond with moon reflection swaying, koi swimming beneath surface. A woman's silhouette with oil-paper umbrella on stone bridge. Environment: ancient Chinese garden, full moon, wisteria hanging down. Lighting: moonlight as main source, warm lantern light as accent, cool-warm contrast. Color: moon-white cool light, warm red lanterns, grey tiles, pink wisteria, emerald lotus leaves. Composition: medium shot, pavilion as focal point, water reflection. Style: Chinese-style digital illustration, fine-brush fused with watercolor. Quality: 4K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>古风夜景的核心是"月光冷白+灯笼暖红"的冷暖光源对比。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🐲 敦煌飞天壁画 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">敦煌莫高窟飞天壁画风格，飘带飞扬，矿物颜料色调。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">敦煌壁画风格，飞天在祥云中飞翔，身披飘带在空中优美飘扬。面容：丰腴圆润的唐代面相，柳眉樱唇。服饰：轻纱披帛，天衣飞扬。身姿：S形动态曲线，回首微笑。背景：赭红色底+散花飞天纹样。颜料：矿物颜料色调——石青蓝、石绿、朱砂红、赭石、金箔。光线：壁画无明确光源，平面装饰风。构图：横向壁画构图。风格：敦煌莫高窟盛唐壁画。画质：4K壁画纹理。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dunhuang mural style, Apsara (Feitian) flying among auspicious clouds, ribbons gracefully streaming in air. Face: plump round Tang dynasty features, willow eyebrows, cherry lips. Garments: gossamer scarves, heavenly robes flying. Pose: S-curve dynamic, looking back smiling. Background: ochre red ground + scattered floral apsara patterns. Pigments: mineral pigment tones — azurite blue, malachite green, cinnabar red, ochre, gold leaf. Light: no clear light source, flat decorative style. Composition: horizontal mural format. Style: Dunhuang Mogao High Tang mural. Quality: 4K mural texture.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>敦煌飞天核心是"飘带飞扬的S曲线动态"。矿物颜料色调（石青/石绿/朱砂）是敦煌壁画的标志性色彩。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌸 工笔花鸟团扇 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">工笔花鸟团扇构图，折枝海棠与山雀，宋代院体画。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">工笔花鸟团扇画，圆形构图中一枝海棠花从右下斜伸入画面，枝上停一只山雀回头望。花卉：海棠花以粉白花瓣层层渲染，花蕊点藤黄。鸟：山雀以丝毛法绘制，羽毛层次分明，眼睛点漆。笔法：细笔勾线，层层晕染。色彩：海棠粉白、叶片汁绿、山雀灰褐白腹、藤黄花蕊。背景：淡米黄素绢。风格：宋代院体花鸟画，团扇构图。画质：4K绢纹理。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Gongbi flower-and-bird round fan painting, circular composition with a crabapple branch reaching in from lower right, a tit perched on branch looking back. Flower: crabapple blossoms layered in pink-white, stamens dotted with gamboge yellow. Bird: tit drawn with silk-hair method, distinct feather layers, eyes lacquered. Brushwork: fine outline, layered washes. Color: crabapple pink-white, leaves sap green, tit gray-brown white belly, stamen gamboge. Background: pale beige silk. Style: Song dynasty academy flower-bird painting, round fan composition. Quality: 4K silk texture.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>团扇画是宋代流行的圆形构图小品。关键是"折枝"构图——花枝从画面边缘伸入。丝毛法使鸟羽更逼真。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏯 江南水乡晨雾 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">江南水乡乌镇晨雾，石拱桥，乌篷船，水墨摄影。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">中国风摄影，江南水乡（乌镇风格）清晨薄雾中，一座石拱桥横跨小河，桥下乌篷船缓缓驶过。两岸是白墙黛瓦的水乡民居，垂柳依依。光线：晨雾使一切笼罩在柔和灰白调中，远处建筑朦胧可见。构图：35mm f/4，从河岸平视，石拱桥居中。色彩：去饱和的灰蓝绿调——白墙灰瓦、垂柳灰绿、晨雾银白、水面铅灰。风格：中国风摄影，水墨意境，极简。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Chinese style photography, Jiangnan water town (Wuzhen style) in morning mist, a stone arch bridge over small river, black-awning boat slowly passing beneath. Both banks are white-wall dark-tile water town houses, weeping willows. Light: morning mist veiling everything in soft gray-white, distant buildings faintly visible. Composition: 35mm f/4, eye-level from riverbank, stone bridge centered. Color: desaturated gray-blue-green — white walls gray tiles, willow gray-green, mist silver-white, water lead gray. Style: Chinese style photography, ink painting mood, minimal. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>江南水乡关键是"晨雾+去饱和"。乌篷船和石拱桥是水乡标志性元素。</div>
+    </div>
+  </div>
+
+  <!-- ====== 3D概念艺术 ====== -->
+  <div id="plCat-concept" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🏙️ 等距像素城市 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">等距视角像素风微型城市，2.5D像素艺术，可爱迷你。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">等距像素艺术微型城市，2.5D视角，可爱的迷你城市建筑群——彩色的小房子、面包店、咖啡馆、公园。每个建筑都有精致的像素细节：窗户灯光、屋顶天线、烟囱冒烟。小路上有像素小人行走。环境：晴天的小镇，蓝天白云背景。色彩：马卡龙色系，柔和粉蓝、薄荷绿、奶油黄。构图：等距45度视角，居中。风格：像素艺术，isometric。画质：4K，每个像素清晰可见。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Isometric pixel art miniature city, 2.5D perspective, adorable mini city buildings — colorful little houses, bakery, cafe, park. Each building has exquisite pixel details: lit windows, roof antennas, smoking chimneys. Tiny pixel people walking on paths. Environment: sunny small town, blue sky with white clouds background. Color: macaron palette, soft pink-blue, mint green, cream yellow. Composition: isometric 45-degree angle, centered. Style: pixel art, isometric. Quality: 4K, every pixel clearly visible.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"isometric"（等距视角）+ "pixel art"是微型城市像素画的标配关键词。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🧱 黏土渲染角色 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">3D黏土材质渲染风格角色，可爱圆润，柔和阴影。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">3D黏土渲染风格角色设计，一个可爱的圆滚滚小厨师角色，戴着白色厨师帽，穿着围裙，手持打蛋器。黏土材质质感柔软有弹性，表面有指纹痕迹。角色大眼睛圆脸，卡通比例。环境：简约的纯色背景，一个小台面。光线：柔和的三点布光，柔和阴影，温暖色调。色彩：奶油色围裙、红色领巾、肤色黏土、白色帽子。构图：正面全身，居中。风格：3D黏土渲染，Pixar风格质感。画质：4K，材质纹理细腻。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">3D clay render style character design, an adorable round little chef character wearing a white chef hat and apron, holding a whisk. Soft squishy clay material texture with visible fingerprint marks. Character with big eyes and round face, cartoon proportions. Environment: minimalist solid color background, small platform. Lighting: soft three-point lighting, gentle shadows, warm tones. Color: cream apron, red scarf, skin-tone clay, white hat. Composition: front full-body, centered. Style: 3D clay render, Pixar-quality texture. Quality: 4K, fine material texture.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"clay render"+"fingerprint marks"（指纹痕迹）是黏土材质渲染的灵魂细节。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">⚔️ 科幻武器概念设计 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">科幻武器概念设计图，多角度展示，材质标注，游戏美术风格。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">科幻武器概念设计图，未来感能量步枪，流线型设计，枪身采用碳纤维黑色和发光蓝色能量核心。多角度展示——侧面、正面、俯视图排列在同一画面。每个部件有标注线指向材质说明。环境：深灰色技术背景，网格线。光线：工作室级均匀布光，蓝色能量核心自发光。色彩：哑光黑、金属银、蓝色发光能量、白色标注线。构图：设计图排版，多角度展示。风格：游戏概念美术，工业设计图风格。画质：4K，技术细节清晰。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Sci-fi weapon concept design sheet, futuristic energy rifle, streamlined design, carbon fiber black body with glowing blue energy core. Multiple angle display — side, front, top view arranged on same canvas. Each component has annotation lines pointing to material descriptions. Environment: dark grey technical background with grid lines. Lighting: studio-level even lighting, blue energy core self-illuminating. Color: matte black, metallic silver, blue glowing energy, white annotation lines. Composition: design sheet layout, multi-angle display. Style: game concept art, industrial design sheet style. Quality: 4K, clear technical details.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>概念设计图的关键是"multiple angle display"+"annotation lines"——模拟真实工业设计流程。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🦊 低多边形动物 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">低多边形风格狐狸，几何面片，柔和色彩，游戏资产风格。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">低多边形风格3D狐狸，几何面片构成，棱角分明的造型，简化但可辨认的狐狸特征——尖耳朵、蓬松大尾巴。环境：低多边形森林背景，低多边形树木和蘑菇。光线：柔和的方向光，面片之间的明暗对比增强立体感。色彩：橙色狐狸身体、白色腹部、黑色耳尖、绿色背景植物。构图：侧面全身，居中。风格：low-poly 3D渲染，游戏资产。画质：4K，面片边缘干净锐利。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Low-poly style 3D fox, composed of geometric facets, angular design, simplified but recognizable fox features — pointy ears, fluffy big tail. Environment: low-poly forest background, low-poly trees and mushrooms. Lighting: soft directional light, facet light-shadow contrast enhancing three-dimensionality. Color: orange fox body, white belly, black ear tips, green background plants. Composition: side full-body, centered. Style: low-poly 3D render, game asset. Quality: 4K, clean sharp facet edges.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>"low-poly"风格的关键是"facets之间的明暗对比"——每个面片的不同朝向产生不同明度。</div>
+    </div>
+  </div>
+
+  <!-- ====== 动物宠物 ====== -->
+  <div id="plCat-animal" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🦊 野生狐狸雪地肖像 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">雪地中的红狐狸，鼻尖沾雪，琥珀色眼瞳，超长焦散景。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">野生动物摄影，一只红狐狸站在白雪覆盖的田野中，鼻尖沾着雪花，琥珀色眼瞳直视镜头。毛发细节：冬季厚毛每一根可见，耳尖和腹部白色，背部和尾巴橙红。场景：雪原背景，远处有枯树剪影。光线：侧逆光在毛发边缘形成银色轮廓光，雪花在光中闪烁。构图：400mm超长焦f/2.8，极浅景深，雪地完全虚化为白色散景。色彩：狐狸橙红白、雪白、天空灰蓝。风格：国家地理野生动物摄影。画质：8K，毛发极致清晰。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Wildlife photography, a red fox standing in snow-covered field, snowflake on nose tip, amber eyes looking directly at camera. Fur detail: thick winter coat every hair visible, white ear tips and belly, orange-red back and tail. Setting: snow field background, dead tree silhouettes in distance. Light: side backlight creating silver rim light on fur edges, snowflakes sparkling in light. Composition: 400mm telephoto f/2.8, extremely shallow depth of field, snow completely blurred to white bokeh. Color: fox orange-red-white, snow white, sky gray-blue. Style: National Geographic wildlife photography. Quality: 8K, fur ultra-detailed.</div>
+        <div class="pl-lang-label">🤖 GPT Image 2 专用版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">A photorealistic wildlife photograph of a red fox standing in a snow-covered field. A single snowflake rests on its nose. Its amber eyes gaze directly into the camera. The fox has a thick winter coat — every hair visible in sharp detail — with white ear tips and belly contrasting against orange-red back and tail. Side backlighting creates a silver rim light along the fur edges, and snowflakes sparkle in the light. The background is a snow field with distant bare tree silhouettes, completely blurred into soft white bokeh. Shot with a 400mm telephoto lens at f/2.8. National Geographic quality, 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>野生动物摄影核心是"超长焦+大光圈"——400mm f/2.8使背景完全虚化，突出主体。"rim light on fur"是毛发发光的关键。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🐱 猫咪窗台日光浴 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">橘猫在窗台晒太阳打盹，光线穿过毛发，灰尘微粒飘浮。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">宠物摄影，一只胖橘猫蜷缩在窗台上打盹，午后阳光从窗户斜射入穿过它的半透明耳廓使毛发发出金色光芒。细节：猫须在光中可见，空气中灰尘微粒在光柱中漂浮，猫的眼半闭。场景：窗台上有小盆栽，窗外是模糊的花园绿意。光线：午后阳光穿过窗帘缝隙形成丁达尔光柱。构图：85mm f/1.8，侧面近景。色彩：橘猫金橙、阳光暖白、窗框木棕、植物绿。风格：宠物生活方式摄影，温暖治愈。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Pet photography, a chubby orange tabby cat curled up napping on windowsill, afternoon sunlight slanting through window passing through its translucent ear making fur glow golden. Details: whiskers visible in light, dust motes floating in light beam, cat's eyes half-closed. Setting: small potted plant on sill, blurred garden greenery outside. Light: afternoon sun through curtain gap forming Tyndall light beam. Composition: 85mm f/1.8, side close-up. Color: cat golden-orange, sunlight warm white, window frame wood brown, plant green. Style: pet lifestyle photography, warm and healing. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>宠物摄影关键是"光线穿过毛发"（backlit fur）——逆光使半透明耳廓和毛发边缘发光。丁达尔光柱中的灰尘微粒增加氛围。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🦅 白头鹰飞行抓拍 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">白头鹰捕鱼瞬间，水花飞溅，翅膀展开，高速连拍。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">高速野生动物摄影，一只白头鹰在湖面上俯冲抓鱼的瞬间，利爪即将接触水面，翅膀完全展开。细节：每一根飞羽可见，鹰眼锐利聚焦水面，水花在爪下刚开始飞溅。光线：侧逆光，水滴在光中闪烁如钻石。构图：600mm超长焦f/4，1/4000秒冻结，水面占画面下方1/3。色彩：白头白尾、深棕身体、黄喙黄爪、水面蓝灰、水花白。风格：BBC野生动物摄影大赛。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">High-speed wildlife photography, a bald eagle diving to catch fish over lake at the moment talons about to touch water, wings fully spread. Details: every flight feather visible, eagle eyes sharply focused on water, splash just beginning under talons. Light: side backlight, water droplets sparkling like diamonds. Composition: 600mm super telephoto f/4, 1/4000s freeze, water in lower third. Color: white head and tail, dark brown body, yellow beak and talons, water blue-gray, splash white. Style: BBC Wildlife Photographer of the Year. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>高速飞行摄影关键是"1/4000秒以上快门"和"侧逆光"。侧逆光使水滴飞溅可见如钻石。600mm超长焦获得足够放大率。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🐶 金毛幼犬草地奔跑 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">金毛幼犬在花田中奔跑，耳朵飞扬，快乐表情，动态模糊。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">宠物摄影，一只3个月大的金毛幼犬在野花田中朝镜头奔跑，耳朵在风中飞扬，舌头伸出快乐表情。场景：膝盖高的野花田（白色雏菊+紫色矢车菊），远处是模糊的绿色山丘。光线：逆光夕阳使金色毛发发光，花朵半透明。构图：70-200mm f/2.8，1/1000秒轻微动态模糊背景，对焦幼犬眼部。色彩：金毛暖金、雏菊白、矢车菊紫、山丘翠绿、夕阳橙。风格：宠物户外摄影，快乐活力。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Pet photography, a 3-month-old golden retriever puppy running toward camera through wildflower field, ears flying in wind, tongue out happy expression. Setting: knee-high wildflowers (white daisies + purple cornflowers), blurred green hills in distance. Light: backlight sunset making golden fur glow, flowers translucent. Composition: 70-200mm f/2.8, 1/1000s with slight motion blur on background, focus on puppy's eyes. Color: golden fur warm gold, daisy white, cornflower purple, hills emerald, sunset orange. Style: pet outdoor photography, joyful energy. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>动态宠物摄影关键是"追焦"（panning）——镜头跟随主体移动，使主体清晰背景模糊。逆光使金色毛发发光是金毛摄影标配。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🐴 冰岛马鬃毛飞扬 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">冰岛马在黑色沙原上奔跑，长发鬃毛飞扬，火山背景。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">马匹摄影，一匹棕色冰岛马在冰岛黑色火山沙原上奔跑，标志性的长鬃毛和厚刘海在风中飞扬。场景：黑色沙原地面，远处是绿色苔原和雪山。光线：低角度侧光强调肌肉线条和飞扬鬃毛。构图：200mm f/2.8，侧面平拍，1/800秒冻结鬃毛动态。色彩：马棕红、鬃毛金棕、沙原纯黑、苔原翠绿、雪山白。风格：马术摄影，冰岛风情。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Equine photography, a brown Icelandic horse running on Iceland's black volcanic sand plain, signature long mane and thick forelock flying in wind. Setting: black sand ground, green tundra and snow mountains in distance. Light: low-angle side light emphasizing muscle definition and flying mane. Composition: 200mm f/2.8, side-level shot, 1/800s freezing mane motion. Color: horse chestnut-red, mane golden-brown, sand plain pure black, tundra emerald, snow mountain white. Style: equestrian photography, Icelandic flair. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>冰岛马特点是"5种步态"和"超长鬃毛"。黑色沙原与棕色马匹的对比极具视觉冲击。低角度侧光最能展现马匹肌肉。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🦋 微距蝴蝶翅膀鳞片 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">蝴蝶翅膀微距，鳞片结构可见，虹彩折射，极致细节。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">微距摄影，蓝闪蝶翅膀的极致微距，可见单个鳞片如屋瓦排列，鳞片结构折射出结构蓝色。细节：翅膀脉络可见，鳞片边缘有微小锯齿。光线：环形微距闪光灯均匀照射，每个鳞片有微妙高光。构图：100mm微距f/8，5倍放大，翅膀局部。色彩：结构蓝、鳞片边缘黑、脉络棕。风格：科学微距摄影。画质：8K，纳米级细节。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Macro photography, extreme close-up of Blue Morpho butterfly wing, individual scales visible like roof tiles, scale structures refracting structural blue. Details: wing veins visible, scale edges with micro-serrations. Light: ring macro flash evenly illuminating, each scale with subtle highlight. Composition: 100mm macro f/8, 5x magnification, wing detail. Color: structural blue, scale edge black, vein brown. Style: scientific macro photography. Quality: 8K, nano-level detail.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>蝴蝶蓝色不是色素而是"结构色"——鳞片微观结构折射光产生蓝色。5倍放大微距需要f/8保证景深。环形闪光灯是微距标配。</div>
+    </div>
+  </div>
+
+  <!-- ====== 电影场景 ====== -->
+  <div id="plCat-cinema" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🎬 黑色电影侦探场景 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">1940年代黑色电影，侦探办公室，百叶窗阴影，黑白高对比。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">电影场景，1940年代黑色电影（film noir），侦探戴软呢帽穿风衣站在昏暗办公室中，百叶窗硬阴影切割墙壁和地板。香烟烟雾在单束光柱中缭绕。窗外可见湿街面的街灯倒影。光线：高对比明暗对比（chiaroscuro），单一光源，深黑阴影。构图：35mm，低角度，--ar 2.39:1。色彩：纯黑白，高对比。风格：1940s好莱坞黑色电影，Humphrey Bogart时代。--no color --ar 2.39:1</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Film scene, 1940s film noir, detective in fedora and trench coat standing in dimly lit office, venetian blind hard shadows cutting across walls and floor. Cigarette smoke curling through single light shaft. Wet street with streetlamp reflections visible through window. Light: high-contrast chiaroscuro, single source, deep black shadows. Composition: 35mm, low angle. Style: 1940s Hollywood film noir, Humphrey Bogart era. --no color --ar 2.39:1</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>黑色电影核心是"百叶窗阴影"和"高对比chiaroscuro"。--ar 2.39:1是现代电影宽银幕比例。--no color强制纯黑白。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌆 银翼杀手赛博城市 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+      <div class="pl-desc">银翼杀手2049风格未来城市，全息广告，飞行车光轨，雨雾。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">电影概念场景，银翼杀手2049风格未来大都市夜景，巨型全息广告（日文+英文）在摩天楼间投射。飞行车在建筑间留下光轨。雨穿过霓虹形成雾霭。街道深处有撑伞人群剪影。光线：体积雾+霓虹光+变形镜头水平光晕。构图：35mm，--ar 2.39:1，--q 2。色彩：深橙、青、品红。风格：Roger Deakins摄影美学。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Cinematic concept scene, Blade Runner 2049 style futuristic metropolis at night, giant holographic ads (Japanese + English) projecting between skyscrapers. Flying vehicles leaving light trails between buildings. Rain through neon creating haze. Umbrella crowd silhouettes deep in street level. Light: volumetric fog + neon + anamorphic horizontal lens flares. Composition: 35mm, --ar 2.39:1, --q 2. Color: deep orange, teal, magenta. Style: Roger Deakins cinematography. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>--ar 2.39:1宽银幕+变形镜头光晕（anamorphic flare）是电影感关键。Roger Deakins是银翼杀手2049摄影师。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏰 魔戒史诗行军 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">指环王级史诗行军场景，旅人在山间小径走向远方古城。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">史诗电影场景，一名旅人骑马沿蜿蜒山间小径走向远方一座雕刻在山侧的古老城邦。黄金时刻光照亮石质建筑，瀑布从悬崖倾泻，绿色山谷中河流蜿蜒。巨大云层和盘旋飞鸟增强尺度感。构图：广角，--ar 21:9，--q 2，--s 400。色彩：石金、草绿、天蓝。风格：魔戒+塞尔达旷野之息概念艺术，哑光绘画质感。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Epic film scene, a lone traveler on horseback approaching a vast ancient city carved into mountainside via winding mountain path. Golden hour light illuminating stone architecture, waterfalls cascading from cliffs, winding river in green valley below. Dramatic cloud formations and circling birds for scale. Composition: wide-angle, --ar 21:9, --q 2, --s 400. Color: stone gold, grass green, sky blue. Style: Lord of the Rings + Zelda Breath of the Wild concept art, matte painting. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>史诗场景关键是"尺度对比"——渺小旅人vs巨大城市。--ar 21:9超宽画幅+--q 2最高质量+--s 400高风格化。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🎭 韦斯·安德森对称场景 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">韦斯·安德森完美对称构图，粉彩色调，古怪精致。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">韦斯·安德森风格电影场景，完美中轴对称构图。一家粉彩色调的旧式旅馆走廊，中央地毯延伸至尽头，两侧对称排列暗木门和壁灯。一个穿酒红色制服的礼宾员站在正中央面朝镜头。光线：均匀柔和正面光，无戏剧性阴影。构图：50mm正面中轴对称，--ar 16:9。色彩：粉、薄荷绿、酒红、米黄。风格：Wes Anderson美学，布达佩斯大饭店。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Wes Anderson style film scene, perfect axial symmetrical composition. Pastel-toned vintage hotel corridor, central carpet extending to end, symmetrically arranged dark wood doors and sconces on both sides. A concierge in burgundy uniform stands dead center facing camera. Light: even soft frontal light, no dramatic shadows. Composition: 50mm frontal axial symmetry, --ar 16:9. Color: pink, mint green, burgundy, cream. Style: Wes Anderson aesthetic, Grand Budapest Hotel. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>韦斯·安德森核心是"完美中轴对称"+"粉彩色调"+"古怪精致"。指定"axial symmetry"是最关键指令。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🚿 希区柯克悬疑场景 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">希区柯克式悬疑场景，低角度仰拍，阴影投墙，紧张氛围。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">希区柯克式悬疑电影场景，一位穿风衣的人在路灯下站在雾蒙蒙的街角，他的影子被路灯拉长投在身后砖墙上。光线：单一路灯从上方照射，形成强烈明暗对比和长投影。雾气在光柱中弥漫。构图：低角度仰拍，25mm广角，人物居中偏下，影子占墙面大部分。色彩：暗灰黄路灯光、雾灰、砖红墙。风格：希区柯克悬疑美学，1960年代惊悚片。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Hitchcock-style suspense film scene, a person in trench coat standing at foggy street corner under streetlamp, shadow elongated and cast on brick wall behind. Light: single streetlamp from above, strong contrast and long shadow. Fog permeating light beam. Composition: low angle looking up, 25mm wide-angle, figure centered-lower, shadow dominating wall. Color: dark gray-yellow streetlamp, fog gray, brick red wall. Style: Hitchcock suspense aesthetic, 1960s thriller. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>希区柯克美学核心是"低角度仰拍"和"长投影"——营造不安和压迫感。单光源+雾气增加悬疑氛围。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">💨 速度与激情追车 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">高速追车场景，运动模糊，火花飞溅，夜景隧道。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">动作电影场景，一辆银色跑车在隧道中高速行驶追击，车身侧面有运动模糊，前轮火花从地面飞溅。场景：隧道灯光带形成连续光条纹在车身上反射。光线：隧道顶灯+车头灯+尾灯红光。构图：追拍（panning）手法，35mm f/2.8，1/60秒，主体清晰背景条纹模糊。色彩：银色车身、隧道暖黄、尾灯红、火花橙。风格：速度与激情动作摄影。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Action movie scene, a silver sports car speeding through tunnel in pursuit, motion blur on car body sides, sparks flying from front wheels. Setting: tunnel light strips forming continuous light streaks reflecting on car body. Light: tunnel overhead + headlights + taillight red. Composition: panning technique, 35mm f/2.8, 1/60s, subject sharp background streaked. Color: silver body, tunnel warm yellow, taillight red, spark orange. Style: Fast & Furious action photography. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>追拍（panning）关键是"低快门+镜头跟随"——1/60秒使背景条纹模糊而主体清晰。隧道光带在车身上反射增加速度感。</div>
+    </div>
+  </div>
+
+  <!-- ====== 抽象艺术 ====== -->
+  <div id="plCat-abstract" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🎨 流体艺术大理石纹 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">流体丙烯倾倒艺术，大理石纹理，金属色流动，极致色彩。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">抽象流体艺术，丙烯倾倒技法（acrylic pour）形成的极致大理石纹理，金色、深紫、宝蓝和白色颜料在画面中有机流动交融。细节：细胞结构（cells）在颜料交界处形成，金属金颜料在光线中闪烁。光线：柔和顶光突出颜料的光泽和厚度。构图：俯视正方形，微距局部。色彩：金属金、深紫、宝蓝、珠白。风格：流体艺术，现代抽象。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Abstract fluid art, acrylic pour technique creating extreme marble patterns, gold, deep purple, sapphire blue and white paints organically flowing and blending. Details: cell structures forming at paint junctions, metallic gold pigment sparkling in light. Light: soft top light highlighting paint gloss and thickness. Composition: overhead square, macro detail. Color: metallic gold, deep purple, sapphire blue, pearl white. Style: fluid art, modern abstract. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>流体艺术关键是"细胞结构"（cells）——不同密度颜料交界处自然形成的圆形结构。金属颜料增加光泽层次。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌈 极简色彩几何 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">极简色彩几何构成，包豪斯风格，大色块，精确构图。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">极简几何抽象艺术，包豪斯风格色彩构成，画面被精确的直线分割为大色块——左上柠檬黄、右上海蓝、左下珊瑚粉、右下墨黑，中央一条细白线穿过。光线：无光源，平面色块。构图：黄金分割精确构图，1:1。色彩：柠檬黄、海蓝、珊瑚粉、墨黑、纯白。风格：Bauhaus几何抽象，蒙德里安影响。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Minimalist geometric abstract art, Bauhaus style color composition, image divided by precise straight lines into large color blocks — upper left lemon yellow, upper right sea blue, lower left coral pink, lower right ink black, single thin white line through center. Light: no light source, flat color blocks. Composition: golden ratio precise, 1:1. Color: lemon yellow, sea blue, coral pink, ink black, pure white. Style: Bauhaus geometric abstract, Mondrian influence. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>包豪斯风格核心是"几何精确+原色对比"。指定"Bauhaus"和"Mondrian influence"触发风格。无光源的平面色块是关键。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">✨ 发光粒子云海 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">发光粒子组成的云海，3D渲染，深空背景，科技美感。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">3D抽象艺术，数百万个发光粒子在深空黑色背景中形成云海形态，粒子从冷蓝到暖橙渐变。细节：近处粒子大而清晰，远处粒子小而模糊形成深度。光线：粒子自身发光，无外部光源。构图：广角，低角度仰视粒子云。色彩：冷蓝→青→白→暖橙渐变粒子，纯黑背景。风格：3D粒子艺术，Octane渲染。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">3D abstract art, millions of glowing particles forming cloud formation against deep space black background, particles gradient from cold blue to warm orange. Details: near particles large and sharp, far particles small and blurred creating depth. Light: particles self-illuminating, no external light. Composition: wide-angle, low angle looking up at particle cloud. Color: cold blue → cyan → white → warm orange gradient particles, pure black background. Style: 3D particle art, Octane render. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>3D粒子艺术关键是"深度感"——近大远小的粒子分布。Octane渲染器的发光材质使粒子更通透。纯黑背景使色彩更突出。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🪞 液态金属反射 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">液态铬金属流动表面，扭曲反射，镜面质感。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">抽象3D渲染，液态铬金属流动表面如融化的水银，表面扭曲反射环境色——蓝、紫、橙条纹在光滑曲面上变形。细节：表面张力形成的高光点和涟漪。光线：HDRI环境光在金属表面形成连续渐变反射。构图：45度俯视，50mm。色彩：铬银、反射蓝紫橙。风格：3D抽象艺术，Redshift渲染。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Abstract 3D render, liquid chrome metal flowing surface like melted mercury, surface distorting environmental reflections — blue, purple, orange stripes deforming on smooth curves. Details: surface tension highlight points and ripples. Light: HDRI environment light creating continuous gradient reflections on metal. Composition: 45-degree overhead, 50mm. Color: chrome silver, reflected blue-purple-orange. Style: 3D abstract art, Redshift render. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>液态金属关键是"扭曲反射"（distorted reflection）——环境色在曲面上的变形。HDRI环境光提供连续反射。指定"surface tension"增加真实感。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌫️ 烟雾光影艺术 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">彩色烟雾在黑背景中升起，激光照射，优雅流动。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">抽象烟雾摄影，彩色烟雾（品红+青蓝+金橙）在纯黑背景中优雅上升，形成有机的流动形态。光线：侧方彩色激光束照射烟雾使其颜色饱和可见，体积光效果。构图：竖版，烟雾从底部上升，--ar 9:16。色彩：烟雾品红/青蓝/金橙，背景纯黑。风格：烟雾艺术摄影，体积光。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Abstract smoke photography, colored smoke (magenta + cyan + gold-orange) elegantly rising against pure black background, forming organic flowing shapes. Light: side colored laser beams illuminating smoke making colors saturated and visible, volumetric light effect. Composition: vertical, smoke rising from bottom, --ar 9:16. Color: smoke magenta/cyan/gold-orange, pure black background. Style: smoke art photography, volumetric light. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>烟雾艺术关键是"彩色激光+纯黑背景"——激光使烟雾可见且色彩饱和，纯黑背景使烟雾形态突出。体积光效果增加立体感。</div>
+    </div>
+  </div>
+
+  <!-- ====== 儿童插画 ====== -->
+  <div id="plCat-kids" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🧸 水彩动物绘本 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">水彩儿童绘本风格，小兔子在花园里浇花，柔和色调。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">儿童绘本插画，水彩风格，一只穿蓝色围裙的小白兔在花园里用小水壶浇花。花园里有向日葵、郁金香和蝴蝶。色彩：柔和的水彩渲染——淡粉、淡黄、薄荷绿、天蓝，边缘有水彩晕染效果。风格：儿童绘本插画，Beatrix Potter风格，温馨可爱。构图：正面居中。画质：4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Children's picture book illustration, watercolor style, a small white rabbit in blue apron watering flowers in garden with small watering can. Garden has sunflowers, tulips, and butterflies. Color: soft watercolor washes — pale pink, pale yellow, mint green, sky blue, edges with watercolor bleed effect. Style: children's book illustration, Beatrix Potter style, warm and cute. Composition: frontal centered. Quality: 4K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>水彩儿童插画核心是"柔和色调+水彩晕染"。指定"Beatrix Potter"（彼得兔作者）触发经典绘本风格。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌟 蜡笔风格星空冒险 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">蜡笔质感儿童画，小朋友骑纸火箭飞向星空，童趣十足。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">儿童画风格插画，蜡笔质感，一个小朋友骑在纸做的小火箭上飞向星空。星空中有笑脸月亮、星星和飞鱼。画面有蜡笔的不均匀涂抹质感和粗糙纸纹理。色彩：高饱和度——火箭红黄、星空深蓝紫、月亮黄、星星白。风格：儿童蜡笔画，天真烂漫。构图：对角线动态。画质：4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Children's drawing style illustration, crayon texture, a child riding a paper rocket toward starry sky. Sky has smiling moon, stars, and flying fish. Image has crayon uneven涂抹 texture and rough paper grain. Color: high saturation — rocket red-yellow, sky deep blue-purple, moon yellow, stars white. Style: children's crayon drawing, innocent and imaginative. Composition: diagonal dynamic. Quality: 4K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>蜡笔质感关键是"不均匀涂抹"和"粗糙纸纹理"。指定"crayon texture"和"rough paper grain"。高饱和色彩增加童趣。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">📖 扁平矢量童话场景 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">扁平矢量插画风格童话城堡，几何图形，鲜艳配色。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">扁平矢量插画，童话城堡场景，用简单几何图形构成——三角屋顶、长方形塔楼、圆形窗户。城堡前有彩虹桥和小河。色彩：鲜艳扁平色块——城堡粉紫、屋顶红、天空青、草地绿、彩虹七色。风格：扁平设计（flat design），矢量插画，儿童App UI风格。构图：居中对称。画质：4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Flat vector illustration, fairy tale castle scene, simple geometric shapes — triangle roofs, rectangular towers, round windows. Rainbow bridge and stream in front. Color: vibrant flat color blocks — castle pink-purple, roof red, sky cyan, grass green, rainbow seven colors. Style: flat design, vector illustration, children's app UI style. Composition: centered symmetrical. Quality: 4K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>扁平矢量风格核心是"简单几何+纯色块无渐变"。指定"flat design"和"no gradient"保持风格统一。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🎈 橡皮泥立体场景 <span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">橡皮泥质感3D场景，小恐龙在火山旁，手工感十足。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">橡皮泥风格3D场景，一只绿色小恐龙站在橙色火山旁，火山冒着泡泡岩浆。所有物体都有橡皮泥质感——表面有指纹和手工痕迹，边缘圆润。光线：柔和影棚光，均匀无硬阴影。构图：正面等距视角。色彩：恐龙绿、火山橙红、岩浆黄、天空蓝。风格：橡皮泥动画风，定格动画美学。画质：4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Claymation style 3D scene, a small green dinosaur standing by orange volcano, volcano bubbling lava. All objects have clay texture — fingerprints and handmade traces on surface, rounded edges. Light: soft studio light, even without harsh shadows. Composition: frontal isometric view. Color: dinosaur green, volcano orange-red, lava yellow, sky blue. Style: claymation, stop-motion animation aesthetic. Quality: 4K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>橡皮泥风格关键是"指纹痕迹"和"圆润边缘"。指定"claymation"和"fingerprints on surface"增加手工感。柔和均匀光是定格动画标配。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌈 纸艺剪贴童话 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">剪纸拼贴风格插画，森林动物派对，纸张层次质感。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">剪纸拼贴插画风格，森林动物派对场景——小狐狸、小熊、小兔子围坐篝火旁。所有元素由不同颜色和纹理的彩纸剪贴而成，有纸张的厚度和投影。细节：剪纸边缘有不规则毛边，纸张有纹理。光线：从上方柔和光，纸张层次间有微妙投影增加深度。构图：正面场景。色彩：多彩纸张——橙狐、棕熊、白兔、绿树、红篝火。风格：纸艺拼贴，Eric Carle风格。画质：4K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Paper collage illustration style, forest animal party scene — fox, bear, bunny sitting around campfire. All elements made from differently colored and textured paper cutouts, with paper thickness and shadows. Details: irregular deckle edges, paper grain visible. Light: soft top light, subtle shadows between paper layers adding depth. Composition: frontal scene. Color: colorful papers — orange fox, brown bear, white bunny, green trees, red campfire. Style: paper collage, Eric Carle style. Quality: 4K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>纸艺拼贴核心是"纸张层次+投影"。指定"paper thickness"和"deckle edges"（毛边）。Eric Carle（好饿的毛毛虫作者）是纸艺拼贴代表。</div>
+    </div>
+  </div>
+
+  <!-- ====== 节日庆典 ====== -->
+  <div id="plCat-festival" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">🎆 跨年烟花城市夜景 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">跨年烟花在摩天楼上方绽放，城市灯火，倒影江面。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">节日庆典摄影，跨年夜巨型烟花在摩天楼天际线上方绽放，金色和红色烟火如瀑布般倾泻。城市：摩天楼灯火通明，江面完美倒映烟花和建筑。人群：江边观景台上人群剪影举手机拍摄。光线：烟花是主光源，瞬间照亮整个场景。构图：广角16mm，--ar 16:9，低角度含江面倒影。色彩：烟花金红蓝紫、建筑暖黄灯、江面深蓝。风格：城市庆典摄影。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Festival photography, New Year's Eve giant fireworks blooming above skyscraper skyline, gold and red fireworks cascading like waterfalls. City: buildings fully lit, river perfectly reflecting fireworks and architecture. Crowd: silhouettes on waterfront holding phones to record. Light: fireworks as main source, instantaneously illuminating entire scene. Composition: wide-angle 16mm, --ar 16:9, low angle including river reflection. Color: fireworks gold-red-blue-purple, building warm yellow, river deep blue. Style: city celebration photography. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>烟花摄影关键是"长曝光+低ISO+三脚架"。江面倒影使画面内容翻倍。广角收纳更多烟花。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🏮 春节灯笼庙会 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">中国春节庙会，红灯笼长廊，舞龙人群，节日暖光。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">节日摄影，中国春节庙会夜景，一条挂满红灯笼的长廊延伸至远方古庙。长廊两侧是年货摊位——糖葫芦、剪纸、鞭炮。前景：一群人围观舞龙表演，金龙在灯笼红光中翻腾。光线：红灯笼暖红光是主光源，远处处有烟花。构图：35mm，一点透视沿长廊延伸。色彩：灯笼红、金龙金、古庙灰瓦、夜空深蓝。风格：中国传统节日摄影。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Festival photography, Chinese New Year temple fair night scene, corridor lined with red lanterns extending toward distant ancient temple. Stalls on both sides — candied hawthorn, paper cuts, firecrackers. Foreground: crowd watching dragon dance, golden dragon twirling in lantern red glow. Light: red lantern warm red as main source, distant fireworks. Composition: 35mm, one-point perspective along corridor. Color: lantern red, dragon gold, temple gray tiles, night sky deep blue. Style: Chinese traditional festival photography. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>春节场景关键是"红灯笼暖红光"——这是最强烈的视觉符号。一点透视长廊增加纵深感。舞龙增加动态元素。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🎄 圣诞温馨客厅 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">圣诞夜温馨客厅，壁炉火焰，圣诞树礼物，窗外飘雪。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">节日氛围摄影，圣诞夜温馨客厅，壁炉中柴火噼啪燃烧发出暖橙光。圣诞树：角落的松树挂满金色和红色球饰、暖白灯串，树下堆满包装礼物。窗外：飘雪可见。场景：沙发上搭着红格纹毛毯，茶几上热可可杯冒蒸汽。光线：壁炉暖橙光+圣诞树暖白灯串，房间弥漫温暖金色调。构图：35mm f/2.8，广角收纳整个场景。色彩：壁炉橙、圣诞树绿、装饰金红、窗外冷蓝。风格：圣诞节家居摄影，Hygge美学。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Festival atmosphere photography, Christmas Eve cozy living room, fireplace crackling with firewood emitting warm orange glow. Christmas tree: corner pine decorated with gold and red baubles, warm white string lights, wrapped gifts piled underneath. Window: snow falling visible. Setting: red plaid blanket on sofa, hot cocoa steaming on coffee table. Light: fireplace warm orange + tree warm white lights, room bathed in warm golden tone. Composition: 35mm f/2.8, wide-angle capturing entire scene. Color: fireplace orange, tree green, decorations gold-red, window cold blue. Style: Christmas home photography, Hygge aesthetic. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>圣诞场景关键是"双层暖光源"——壁炉+圣诞树灯串。窗外冷蓝色与室内暖色形成冷暖对比。Hygge美学增加温馨感。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🎃 万圣节南瓜灯小径 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">万圣节南瓜灯小径，雾气弥漫，枯树剪影，诡异温馨。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">万圣节氛围摄影，一条乡间小径两侧排列着点亮的南瓜灯（Jack-o'-lantern），各种表情的南瓜灯发出暖橙光。雾气在小径上弥漫。枯树：两侧光秃的树木枝丫如鬼手伸向天空，剪影在月光中。光线：南瓜灯暖橙光是主光源，月光冷白从上方照射。构图：35mm，一点透视沿小径延伸。色彩：南瓜灯橙、月光蓝白、雾灰、枯树黑。风格：万圣节氛围摄影，Tim Burton影响。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Halloween atmosphere photography, a country path lined with lit Jack-o'-lanterns, various facial expressions glowing warm orange. Mist drifting along path. Dead trees: bare branches reaching like ghost hands against sky, silhouettes in moonlight. Light: pumpkin warm orange as main source, moonlight cold white from above. Composition: 35mm, one-point perspective along path. Color: pumpkin orange, moonlight blue-white, mist gray, dead tree black. Style: Halloween atmosphere photography, Tim Burton influence. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>万圣节核心是"南瓜灯暖橙+月光冷蓝"的冷暖对比。枯树剪影增加诡异感。雾气是氛围关键。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🌸 樱花季节野餐 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+      <div class="pl-desc">樱花树下野餐，花瓣纷飞，蓝天粉樱，春日温暖。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">春日樱花季摄影，公园樱花树下铺着格子野餐布，上面有便当盒、草莓和果汁。樱花花瓣在微风中纷飞飘落。场景：满开的樱花树形成粉色穹顶，远处草地有其他人群。光线：柔和春日阳光透过樱花在地面投下斑驳光影。构图：35mm f/2.8，低角度从野餐布望向樱花树冠。色彩：樱花粉、天空淡蓝、草地嫩绿、野餐布红白格。风格：春日生活方式摄影，日式花见（Hanami）。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Spring cherry blossom season photography, checkered picnic blanket under cherry tree with bento box, strawberries and juice. Petals fluttering in breeze. Setting: full-bloom cherry trees forming pink canopy, other people on grass in distance. Light: soft spring sun through cherry blossoms casting dappled shadows. Composition: 35mm f/2.8, low angle from blanket looking up at cherry canopy. Color: cherry pink, sky pale blue, grass fresh green, blanket red-white check. Style: spring lifestyle photography, Japanese Hanami. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>樱花季关键是"花瓣纷飞"和"粉色穹顶"。低角度仰拍使樱花树冠形成天然框架。日式花见（Hanami）文化增加情境感。</div>
+    </div>
+  </div>
+
+  <!-- ====== 暗黑艺术 ====== -->
+  <div id="plCat-darkart" class="pl-content" style="display:none">
+    <div class="pl-card">
+      <div class="pl-card-h">💀 骷髅花海重生 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">骷髅头骨上长满鲜花苔藓，生死对比，暗黑浪漫。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">暗黑概念艺术，一个人头骨上长满盛开的鲜花和苔藓——眼眶中伸出藤蔓和野花，颅顶有苔藓和小蘑菇，牙齿间有花瓣。生死对比：白色骨骼与鲜艳花卉的并置。光线：柔和侧光，暗色背景，骷髅和花在暗背景中突出。构图：正面特写，100mm微距f/4。色彩：骨骼白、花红粉紫、苔藓翠绿、背景深黑。风格：暗黑浪漫艺术，vanitas（虚空派）静物。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dark concept art, a human skull overgrown with blooming flowers and moss — vines and wildflowers emerging from eye sockets, moss and tiny mushrooms on crown, petals between teeth. Life-death contrast: white bone juxtaposed with vibrant flowers. Light: soft side light, dark background, skull and flowers standing out. Composition: frontal close-up, 100mm macro f/4. Color: bone white, flower red-pink-purple, moss emerald, background deep black. Style: dark romantic art, vanitas still life. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>vanitas（虚空派）是荷兰黄金时代静物画类型，象征生命短暂。骷髅+鲜花是经典生死对比主题。暗背景使主体突出。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🕯️ 幽暗古堡走廊 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">幽暗古堡石廊，烛光摇曳，蜘蛛网，哥特恐怖氛围。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">暗黑氛围摄影，幽暗中世纪古堡石廊，两侧是哥特尖拱，墙壁爬满蜘蛛网和枯藤。地面石板有裂缝和积水。光线：墙上壁烛台蜡烛摇曳发出暖橙光，照亮方圆2米，远处完全黑暗。氛围：空气中尘埃和蛛网在烛光中可见，回廊深处隐约可见一个人影剪影。构图：24mm广角，一点透视向黑暗深处延伸。色彩：石墙灰、烛光暖橙、积水暗银、黑暗纯黑。风格：哥特恐怖氛围，Castlevania美学。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dark atmosphere photography, dim medieval castle stone corridor, Gothic pointed arches on both sides, walls covered in cobwebs and dead vines. Floor stones cracked with puddles. Light: wall sconce candles flickering warm orange, illuminating 2-meter radius, complete darkness beyond. Atmosphere: dust and cobwebs visible in candlelight, faint human silhouette deep in corridor. Composition: 24mm wide-angle, one-point perspective extending into dark depths. Color: stone wall gray, candle warm orange, puddle dark silver, darkness pure black. Style: Gothic horror atmosphere, Castlevania aesthetic. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>恐怖氛围关键是"极小照明范围+大片黑暗"。烛光的"摇曳"感增加不安。深处的人影剪影是恐怖片经典手法。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🕷️ 异形生物概念设计 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">H.R. Giger风格异形生物，生物机械纹理，暗色金属。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">暗黑概念艺术，H.R. Giger风格的异形生物，生物机械混合体——细长头颅、无眼、外骨骼表面有脊椎状突起和管状纹理。身体姿态：半蹲在黑暗中，尾刺卷曲。材质：暗色甲壳质+金属管+湿润生物膜。光线：单束冷蓝光从上方照射，生物表面有湿润高光。构图：正面低角度仰拍。色彩：甲壳黑灰、金属暗银、生物膜虹彩、光线冷蓝。风格：H.R. Giger biomechanical，异形电影美学。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dark concept art, H.R. Giger style alien creature, biomechanical hybrid — elongated skull, eyeless, exoskeleton with spine-like protrusions and tubular textures. Pose: crouching in darkness, tail blade curled. Material: dark chitin + metal tubes + wet biological membrane. Light: single cold blue beam from above, wet highlights on creature surface. Composition: frontal low-angle looking up. Color: chitin black-gray, metal dark silver, membrane iridescent, light cold blue. Style: H.R. Giger biomechanical, Alien movie aesthetic. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>H.R. Giger风格核心是"biomechanical"（生物机械混合）——有机体与机械的无缝融合。暗色+湿润高光是材质关键。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">🩸 暗黑童话红帽森林 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">暗黑版小红帽在幽暗森林中，雾气弥漫，枯树包围。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">暗黑童话插画，暗黑版小红帽——一个穿暗红斗篷的小女孩独自走在幽暗森林小径上。森林：枯树歪扭如鬼手，树根盘错如蛇，黑色荆棘丛生。雾气在小腿高度弥漫。光线：透过枯枝的微弱冷白光，斗篷的暗红在小径中是唯一暖色。氛围：远处树丛中有两只发着黄光的眼睛。构图：35mm，小女孩背影在画面中央偏下，枯树从两侧向中间倾斜形成压迫感。色彩：斗篷暗红、枯树黑灰、雾灰白、光冷蓝。风格：暗黑童话，Guillermo del Toro美学。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Dark fairy tale illustration, dark version of Little Red Riding Hood — a girl in dark red cloak walking alone on dim forest path. Forest: twisted dead trees like ghost hands, tangled roots like snakes, black thorny brambles. Mist drifting at calf height. Light: faint cold white through bare branches, cloak's dark red the only warm color. Atmosphere: two yellow glowing eyes in distant bushes. Composition: 35mm, girl's back centered-lower, dead trees leaning inward from sides creating oppression. Color: cloak dark red, dead tree black-gray, mist gray-white, light cold blue. Style: dark fairy tale, Guillermo del Toro aesthetic. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>暗黑童话核心是"经典故事的扭曲"。枯树向内倾斜形成"压迫构图"。远处发光眼睛增加不安。Guillermo del Toro是暗黑童话电影代表导演。</div>
+    </div>
+
+    <div class="pl-card">
+      <div class="pl-card-h">👁️ 克苏鲁深海触手 <span class="badge pl-badge-mj">MJ V7</span></div>
+      <div class="pl-desc">克苏鲁神话风格，深海中巨大触手从黑暗中伸出，恐怖宇宙。</div>
+      <div class="pl-prompt-box">
+        <div class="pl-prompt-title">💡 完整提示词</div>
+        <div class="pl-lang-label">🇨🇳 中文版：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">克苏鲁神话概念艺术，深海中数条巨大触手从黑暗深渊中伸出，触手有吸盘和棘刺，表面覆有藤壶和海藻。尺度：触手直径数米，旁边有一艘微小潜水艇显示比例。光线：深海几乎全黑，仅有潜水艇探照灯照亮触手局部，远处触手消失在黑暗中。氛围：水中悬浮颗粒和气泡。构图：广角24mm，一点透视望向触手伸出的黑暗深渊。色彩：触手暗灰绿、吸盘淡粉、探照灯冷白、深海纯黑。风格：Lovecraftian恐怖，深海宇宙恐怖。画质：8K。</div>
+        <div class="pl-lang-label">🇺🇸 English：</div>
+        <div class="pl-prompt-text" onclick="copyPrompt(this)">Cthulhu mythos concept art, deep sea with several giant tentacles emerging from dark abyss, tentacles with suckers and spines, covered in barnacles and seaweed. Scale: tentacles several meters in diameter, tiny submarine nearby for scale. Light: near-total darkness, only submarine spotlight illuminating tentacle sections, distant tentacles vanishing into darkness. Atmosphere: suspended particles and bubbles. Composition: wide-angle 24mm, one-point perspective toward dark abyss. Color: tentacle dark gray-green, sucker pale pink, spotlight cold white, deep sea pure black. Style: Lovecraftian horror, deep sea cosmic horror. Quality: 8K.</div>
+      </div>
+      <div class="pl-tips"><b>技巧：</b>克苏鲁/宇宙恐怖核心是"不可知的巨大尺度"——微小人类vs不可理解的巨大存在。深海全黑+局部探照灯是经典恐怖布光。</div>
+    </div>
+  </div>
+
+  <div class="card tint-amber" style="margin-top:14px">
+    <div class="card-h">📖 提示词编写心法</div>
+    <div class="txt" style="line-height:1.8">
+      <b>1. 结构化思维：</b>主体 + 环境 + 光线 + 色彩 + 构图 + 风格 + 画质，七维度缺一不可<br>
+      <b>2. 具象优于抽象：</b>用"穿靛蓝工装裤的银发女机械师"代替"一个技术人员"<br>
+      <b>3. 指定镜头：</b>85mm人像 / 24mm广角风景 / 100mm微距产品 / 50mm街拍<br>
+      <b>4. 光线是灵魂：</b>golden hour / Rembrandt lighting / Tyndall effect / backlit<br>
+      <b>5. 负面提示必备：</b>blurry, low quality, deformed hands, extra fingers, watermark, text<br>
+      <b>6. 避免模糊形容词堆砌：</b>"beautiful""amazing""stunning"对AI无意义，描述具体特征更有效<br>
+      <b>7. MJ V7 权重控制：</b>权重不超过1.6（::1.5），SD用 (keyword:1.5)，过高的权重产生浑浊合成<br>
+      <b>8. MJ V7 Token精简：</b>60 tokens后边际递减，"beautiful stunning cinematic masterpiece"稀释真实信号<br>
+      <b>9. MJ V7 --style raw：</b>产品和人像摄影务必加 --style raw，避免AI自动美化导致失真<br>
+      <b>10. GPT Image 2 自然语言：</b>用完整句子描述，主体→环境→风格→技术参数，500词以内效果最佳<br>
+      <b>11. GPT Image 2 文字渲染：</b>GPT Image 2 可直接渲染文字，指定"text reading: [具体文字]"即可<br>
+      <b>12. GPT Image 2 照片模式：</b>加"photorealistic"直接触发照片模式，"real photograph"效果类似<br>
+      <b>13. 种子锁定：</b>同一seed下微调参数，找到最佳效果后批量生成<br>
+      <b>14. 宽高比选择：</b>人像4:5 / 风景16:9 / 电影2.39:1 / 社交1:1 / 竖屏9:16<br>
+      <b>15. 风格参考(--sref)：</b>MJ V7用 --sref [URL] --sw 500 引入参考图风格，效果与v6不同需调参
+    </div>
+  </div>
+</div>
+
 <!-- ========== 系统设置 ========== -->
 <div class="section" id="sec-settings">
   <div class="page-head"><span class="bow">⚙️</span><h1>系统设置</h1><span class="sub">· AI模型 · 云同步 · 数据备份</span></div>
@@ -1660,6 +2910,30 @@ function fallbackCopy(text){
   }
   document.body.removeChild(ta);
 }
+
+/* ========== 提示词库分类切换 ========== */
+function switchPlCat(cat){
+  document.querySelectorAll('.pl-cat').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+  });
+  document.querySelectorAll('.pl-content').forEach(function(el){
+    el.style.display='none';
+  });
+  var target=document.getElementById('plCat-'+cat);
+  if(target) target.style.display='block';
+}
+
+/* ========== 提示词库日期自动更新 ========== */
+(function(){
+  var badge=document.getElementById('plUpdateBadge');
+  if(badge){
+    var now=new Date();
+    var y=now.getFullYear();
+    var m=String(now.getMonth()+1).padStart(2,'0');
+    var d=String(now.getDate()).padStart(2,'0');
+    badge.textContent=y+'.'+m+'.'+d+' 精选更新';
+  }
+})();
 
 /* ========== 侧边栏切换 ========== */
 function toggleSidebar(state){
