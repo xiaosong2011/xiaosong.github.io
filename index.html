@@ -1217,6 +1217,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  <button class="pl-cat" onclick="switchPlCat('kids')">🧸 儿童插画</button>
  <button class="pl-cat" onclick="switchPlCat('festival')">🎉 节日庆典</button>
  <button class="pl-cat" onclick="switchPlCat('darkart')">💀 暗黑艺术</button>
+ <button class="pl-cat" onclick="switchPlCat('turnaround')">👤 人物三视图</button>
+ <button class="pl-cat" onclick="switchPlCat('character')">🎭 角色设定版</button>
+ <button class="pl-cat" onclick="switchPlCat('storyboard')">🎬 分镜故事版</button>
+ <button class="pl-cat" onclick="switchPlCat('scenedesign')">🏙️ 场景概念图</button>
  </div>
 
  <!-- ====== 人像写真 ====== -->
@@ -2558,7 +2562,381 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  </div>
  </div>
 
- <div class="card tint-amber" style="margin-top:14px">
+ 
+ <div id="plCat-turnaround" class="pl-content" style="display:none">
+
+  <div class="pl-card" data-id="tcard_1" onclick="openPromptModal(this)">
+   <div class="pl-card-h">👤 动漫少女三视图 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">日系动漫风格少女角色三视图，正面、侧面、背面，同一角色同一服装同一角度，确保角色一致性。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫角色三视图，同一个16岁少女，展示正面、侧面、背面三个视角，并排排列，白色背景。角色特征：深蓝色及腰长发带齐刘海，琥珀色大眼睛，小巧鼻子，微张嘴唇，肤色白皙带淡淡腮红。服装：白色水手服上衣配深蓝色领结，藏蓝色百褶短裙，白色长筒袜，棕色皮鞋。身高比例：6头身动漫比例。细节：头发发丝清晰可见，服装褶皱自然，侧面轮廓线条流畅，背面能看到头发层次感和蝴蝶结装饰。风格：日系动漫，干净线条，平涂为主带少量阴影，赛璐璐风格。画质：8K分辨率，线条锐利，颜色均匀，角色三视图完全一致，无变形。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime character turnaround sheet, same 16-year-old girl shown in three views: front, side, and back, arranged side by side on white background. Character features: dark blue waist-length hair with straight bangs, amber large eyes, small nose, slightly parted lips, fair skin with light blush. Outfit: white sailor uniform top with dark blue bow tie, navy blue pleated skirt, white knee-high socks, brown leather shoes. Proportion: 6-head tall anime proportion. Details: clear individual hair strands, natural clothing folds, smooth side profile, back view shows hair layers and bow decoration. Style: Japanese anime, clean line art, cel shading with minimal shadows. Quality: 8K, sharp lines, flat colors, perfectly consistent character across all three views, no distortion.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a character turnaround sheet showing the exact same anime girl from three angles: front view, side profile, and back view, all arranged horizontally on a clean white background. The character is a 16-year-old with dark blue waist-length hair with straight bangs, amber eyes, and fair skin. She wears a white sailor school uniform with a navy blue skirt. Make sure the character looks identical in all three views — same hair color, same eye shape, same outfit, same proportions. Use a clean Japanese anime art style with crisp lines and cel shading. The three views should be evenly spaced and clearly labeled as front, side, and back.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>三视图一致性是关键。必须强调"同一个角色""完全一致"，指定白色背景便于后期提取。6头身是日系标准比例，写实可用7.5头身。</div>
+  </div>
+
+  <div class="pl-card" data-id="tcard_2" onclick="openPromptModal(this)">
+   <div class="pl-card-h">👤 写实人物三视图 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+   <div class="pl-desc">超写实风格成年女性角色三视图，正面侧面背面，照片级真实感，适合写实漫剧角色设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">超写实人物三视图，同一个25岁东亚女性，正面、侧面、背面三个视角并排展示，纯白摄影棚背景。外貌特征：黑色长直发中分，深棕色杏仁眼，高鼻梁，饱满唇形，鹅蛋脸型，小麦色健康肤色，身材匀称。服装：黑色修身连衣裙，圆领短袖，膝盖以上长度。姿态：标准站立姿势，双臂自然垂于身体两侧，双脚并拢朝前。光线：柔和均匀的影棚布光，无强烈阴影，细节清晰可见。画质：8K超高清，照片级真实感，皮肤纹理毛孔可见，发丝清晰，服装面料质感真实。三视图角色完全一致，身高比例协调，无任何变形。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Hyperrealistic character turnaround sheet, same 25-year-old East Asian woman shown in front, side, and back views side by side on pure white studio background. Features: long straight black hair with middle part, dark brown almond eyes, high nose bridge, full lips, oval face shape, wheat-toned healthy skin, well-proportioned figure. Outfit: form-fitting black dress, round neck short sleeves, above-knee length. Pose: standard standing pose, arms hanging naturally at sides, feet together facing forward. Lighting: soft even studio lighting, no harsh shadows, all details clearly visible. Quality: 8K ultra HD, photorealistic, visible skin pores and texture, individual hair strands, realistic fabric texture. Perfectly consistent character across all three views, correct proportions, no distortion.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a photorealistic character reference sheet showing the same young East Asian woman from three different angles — front view, side profile, and back view — all standing side by side on a clean white background. She is in her mid-20s with long straight black hair and an oval face. She wears a simple black dress. The lighting should be soft and even like a professional photography studio, showing all details clearly. Make absolutely sure the person looks identical in all three views — same face, same hair, same clothes, same body type. This should look like professional reference photos for character design.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>写实三视图建议使用"影棚布光"确保各角度光照均匀。指定"双臂自然下垂"避免动作遮挡身体轮廓。SDXL配合Realistic Vision模型效果更佳。</div>
+  </div>
+
+  <div class="pl-card" data-id="tcard_3" onclick="openPromptModal(this)">
+   <div class="pl-card-h">👤 Q版角色三视图 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">Q版chibi风格角色三视图，二头身比例，可爱萌系，适合儿童向或Q版漫剧。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Q版chibi角色三视图，同一个可爱小男孩，正面、侧面、背面三个视角，并排站立，白色背景。比例：标准二头身（头身比2:1），头大身体小。外貌：超大圆形眼睛，脸颊有红晕，小嘴巴微笑，蓬松棕色短发带呆毛。服装：红色连帽卫衣，蓝色短裤，白色运动鞋，背着黄色小书包。细节：胖乎乎的小手小脚，圆润线条，整体造型圆润可爱。风格：Q版chibi卡通，明亮色彩，厚涂风格，线条圆润，无尖锐角度。表情：正面微笑，侧面能看到小翘鼻，背面能看到呆毛和帽子。画质：高清，色彩鲜艳，角色各角度完全一致，萌系风格统一。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Chibi character turnaround sheet, same cute little boy shown in front, side, and back views, standing side by side on white background. Proportion: standard 2-head tall chibi style (head to body ratio 2:1), big head small body. Features: huge round eyes, blush on cheeks, small smiling mouth, fluffy brown short hair with ahoge (cowlick). Outfit: red hoodie, blue shorts, white sneakers, yellow backpack. Details: chubby little hands and feet, rounded shapes, overall cute and round design. Style: chibi kawaii cartoon, bright colors, painterly style, rounded lines, no sharp angles. Expression: smiling from front, small button nose visible from side, ahoge and hood visible from back. Quality: high definition, vibrant colors, perfectly consistent character across all views, unified kawaii style.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create an adorable chibi-style character turnaround showing the same cute little boy in three views: front, side, and back, all on a clean white background. The character is a classic 2-head-tall chibi with an oversized head, huge sparkly eyes, rosy cheeks, and a tiny body. He has messy brown hair with a little cowlick sticking up, and he wears a red hoodie with blue shorts. Make sure the character looks exactly the same in all three views. Use a cute, rounded art style with soft lines and bright, cheerful colors. This should look like a character design sheet for a children's animation.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>Q版核心是"二头身比例"和"圆润无锐角"。呆毛(ahoge)是Q版标志性元素。背面记得画帽子/头发的层次感。</div>
+  </div>
+
+  <div class="pl-card" data-id="tcard_4" onclick="openPromptModal(this)">
+   <div class="pl-card-h">👤 国风古装三视图 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">古风仙侠风格女性角色三视图，汉服广袖长裙，仙气飘飘，适合国风漫剧角色设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">古风仙侠角色三视图，同一个白衣女仙，正面、侧面、背面三个视角并排展示，云雾缭绕的仙境背景。外貌：乌黑长发高束成飞仙髻，插着玉簪，几缕发丝垂落，柳叶眉，丹凤眼，小巧樱唇，肤如凝脂。服装：白色广袖流仙裙，淡青色镶边，腰系丝绦，裙摆拖地，袖摆飘逸，绣着暗纹祥云。姿态：亭亭玉立，双手交叠于腹前，衣袂飘飘。风格：国风工笔重彩风格，线条细腻，色彩淡雅仙气，敦煌壁画韵味。细节：正面能看到完整妆容和服饰前襟，侧面轮廓优美发髻高耸，背面能看到长发和裙摆层次感。画质：8K高清，工笔细腻，服饰纹理精致，各角度角色完全一致。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this">Chinese ancient fairy character turnaround sheet, same white-robed female immortal shown in front, side, and back views side by side, misty fairyland background. Appearance: jet black long hair in a high flying immortal bun with jade hairpin, a few strands falling, willow-leaf eyebrows, phoenix eyes, small cherry lips, porcelain skin. Outfit: white wide-sleeved flowing immortal dress with pale cyan trim, silk sash at waist, floor-length skirt, flowing sleeves with hidden cloud pattern embroidery. Pose: graceful standing posture, hands folded in front of lower abdomen, robes flowing elegantly. Style: Chinese traditional gongbi fine art style, delicate lines, ethereal color palette, Dunhuang mural aesthetic. Details: front view shows full makeup and dress front, side view shows graceful profile and tall bun, back view shows hair layers and skirt flow. Quality: 8K, fine brushwork, exquisite fabric texture, perfectly consistent character across all views.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a beautiful Chinese ancient-style fairy character design sheet showing the same woman from three angles: front view, side profile, and back view. She wears an elegant white flowing robe with wide sleeves in the traditional Hanfu style, with subtle cloud patterns embroidered on it. Her long black hair is styled in an elaborate traditional updo with jade hair ornaments. The art style should evoke traditional Chinese gongbi painting — fine lines, soft colors, and an ethereal, magical quality. Make sure the character looks identical in all three views. The overall feeling should be graceful, celestial, and distinctly Chinese aesthetic.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>国风三视图重点是发型和服饰的层次。飞仙髻、广袖、流仙裙是经典元素。建议指定"工笔风格"以获得细腻线条。</div>
+  </div>
+
+  <div class="pl-card" data-id="tcard_5" onclick="openPromptModal(this)">
+   <div class="pl-card-h">👤 赛博朋克角色三视图 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+   <div class="pl-desc">赛博朋克风格机械改造人三视图，未来科技感，霓虹灯光，适合科幻漫剧角色设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">赛博朋克角色三视图，同一个女性机械改造人，正面、侧面、背面三个视角，暗灰色背景带霓虹反光。外貌：半张脸是机械义体，右眼是发光的红色光学传感器，左侧脸是人类皮肤有雀斑，银色短发一侧剃光。身体：左臂完全是机械义肢带液压管，右肩有植入式接口。服装：黑色皮质紧身背心，破洞牛仔裤，黑色军靴，腰间挂着工具袋。细节：机械部件发出淡蓝色光，皮肤有条形码纹身，脖子后面有数据接口。风格：赛博朋克2077风格，高对比度，霓虹光效，硬核科幻质感。画质：8K超精细，金属质感真实，发光效果自然，各角度机械结构一致。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Cyberpunk character turnaround sheet, same female cyborg shown in front, side, and back views on dark gray background with neon reflections. Appearance: half face is mechanical prosthesis, right eye is glowing red optical sensor, left side of face is human skin with freckles, silver short hair with one side shaved. Body: left arm is full mechanical prosthetic with hydraulic tubes, right shoulder has implant port. Outfit: black leather crop top, ripped jeans, black combat boots, tool pouches on belt. Details: mechanical parts glow pale blue, barcode tattoo on skin, data port at back of neck. Style: Cyberpunk 2077 aesthetic, high contrast, neon lighting effects, hard sci-fi feel. Quality: 8K ultra detailed, realistic metal textures, natural glow effects, perfectly consistent mechanical structure across all views.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a cyberpunk cyborg character design sheet showing the same woman from three angles — front, side, and back view. She is a futuristic cyborg with half her face replaced by machinery, a glowing red optical eye, and a full mechanical left arm with visible hydraulics. She has short silver hair with one side shaved and wears a black leather top with ripped jeans. The mechanical parts glow with cool blue light. Use a gritty, high-contrast cyberpunk aesthetic with neon accents. Make sure all the cybernetic parts match perfectly across the three different views.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>赛博朋克三视图关键是机械结构的一致性。发光部件建议指定颜色（红/蓝）。机械义肢的管线和接口在各角度都要对应。</div>
+  </div>
+
+  <div class="pl-card" data-id="tcard_6" onclick="openPromptModal(this)">
+   <div class="pl-card-h">👤 表情包九宫格 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">同一角色九种表情的表情参考图，喜怒哀乐惊讶害羞等，确保角色面部一致性。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫角色表情九宫格，同一个少女的九种不同表情，3x3网格排列，白色背景。角色：16岁少女，粉色中长发，绿色大眼睛，圆脸。九种表情分别是：1.开心大笑（眼睛弯成月牙，张嘴露齿笑）2.害羞脸红（脸颊通红，眼神躲闪，嘴角微扬）3.惊讶（眼睛圆睁，嘴巴张成O形，眉毛上扬）4.生气（眉毛倒竖，眼睛怒视，嘴角下撇）5.悲伤流泪（眼角含泪，嘴角下垂，眼神黯淡）6.困惑（眉头微皱，歪头，一只眼睛眨）7.得意自信（挑眉，嘴角上扬露出自信微笑，双手抱胸）8.困倦打哈欠（眼睛半闭，打哈欠，眼角有泪水）9.呆萌（眼睛变成点状，嘴巴小o形，脑袋上问号）。风格：日系动漫，色彩明亮，线条干净。所有表情同一角色同一服装，只有表情变化。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime character expression sheet, nine different expressions of the same girl arranged in a 3x3 grid on white background. Character: 16-year-old girl, medium-length pink hair, big green eyes, round face. Nine expressions: 1. Joyful laugh (eyes curved like crescents, open mouth showing teeth) 2. Shy blush (red cheeks, averted gaze, slight smile) 3. Surprised (wide round eyes, O-shaped mouth, raised eyebrows) 4. Angry (furrowed brows, glaring eyes, downturned mouth) 5. Sad crying (tears at corners of eyes, downturned mouth, dim gaze) 6. Confused (slightly furrowed brow, head tilted, one eye winking) 7. Confident smirk (raised eyebrow, confident smile, arms crossed) 8. Sleepy yawning (half-closed eyes, yawning, tear at eye corner) 9. Dumbfounded (dot-shaped eyes, small o mouth, question mark above head). Style: Japanese anime, bright colors, clean lines. Same character, same clothes in all nine, only expressions change.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a character expression reference sheet showing nine different facial expressions of the same anime girl, arranged in a neat 3-by-3 grid on a white background. She has pink medium-length hair and green eyes. The nine expressions should be: happy laughing, shy blushing, surprised, angry, sad with tears, confused, confident smirk, sleepy yawning, and dumbfounded. Make absolutely sure it's the same girl in every panel — same hair, same face shape, same clothes — only her expression changes. Use a clean Japanese anime art style with bright colors. This is a reference sheet for character consistency in animation.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>表情九宫格是漫剧制作必备。关键是"同一角色只有表情变化"，必须强调一致性。建议9种表情覆盖：喜/怒/哀/惊/羞/困/惑/傲/呆。</div>
+  </div>
+
+ </div>
+ <div id="plCat-character" class="pl-content" style="display:none">
+
+  <div class="pl-card" data-id="ccard_1" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎭 主角设定全身立绘 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">动漫主角全身立绘，带标志性pose和道具，展现角色性格和身份，适合主视觉图和角色介绍。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫主角全身立绘，17岁少年剑士，自信站立pose，右手持剑斜指地面，左手插在裤袋里。外貌：金色刺猬头，蓝色炯炯有神的眼睛，爽朗笑容，脸上有一道细小伤疤在左眉上。服装：深蓝色高领外套内搭白色T恤，黑色长裤配多条皮带，棕色长靴，腰间挂着剑鞘和几个小袋子。武器：单手直剑，银色剑刃，蓝色剑柄缠带，剑格是十字形。背景：纯白色背景便于提取。风格：少年Jump风格，热血少年漫感觉，线条有力，色彩鲜明。细节：头发随风微飘，衣摆有动感，剑反射着光。画质：8K高清，角色全身完整展示从头顶到脚底，比例正确，细节丰富。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime protagonist full body character illustration, 17-year-old swordsman boy in confident standing pose, right hand holding sword pointed diagonally down, left hand in pocket. Appearance: spiky golden hair, bright blue determined eyes, confident grin, small scar above left eyebrow. Outfit: dark blue high-collared jacket over white T-shirt, black pants with multiple belts, brown boots, sword sheath and small pouches at waist. Weapon: single-handed straight sword, silver blade, blue wrapped hilt, cross-shaped guard. Background: pure white for extraction. Style: shonen Jump style, hot-blooded shonen manga feel, bold lines, vivid colors. Details: hair blowing slightly, jacket hem with dynamic feel, sword reflecting light. Quality: 8K, full body from head to toe, correct proportions, rich details.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a full-body character illustration of a young anime swordsman protagonist standing confidently against a plain white background. He is 17 years old with spiky blonde hair, bright blue eyes, and a cocky confident grin, with a small scar on his left eyebrow. He wears a dark blue jacket over a white shirt and black pants, and holds a silver sword casually pointed toward the ground. The art style should be classic shonen anime — bold lines, vibrant colors, dynamic energy. Show the entire character from head to toe in correct proportions. This is a main character design sheet for a fantasy adventure series.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>主角立绘pose要体现性格——热血角色用大开大合的pose，冷酷角色用抱胸或插兜。道具（武器/饰品）必须画清楚。</div>
+  </div>
+
+  <div class="pl-card" data-id="ccard_2" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎭 反派角色设定 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+   <div class="pl-desc">神秘反派角色全身立绘，暗黑美学，压迫感强，适合最终BOSS或重要反派角色设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫反派角色全身立绘，神秘黑袍魔法师，双手交叉在胸前，微微抬头俯视镜头，眼神轻蔑。外貌：面容被兜帽阴影部分遮挡，只能看到苍白的下巴和冷笑的嘴唇，一只眼睛在阴影中发出紫色微光。服装：拖地黑色长袍，高立领，暗紫色镶边，袖子宽大飘逸，胸前有复杂的银色符文刺绣。周围环绕着几颗漂浮的紫色魔法能量球。背景：深灰色渐变背景。风格：暗黑奇幻风格，神秘感十足，压迫感强，精致的服饰细节。光线：低光氛围，只有紫色魔法发光和面部微弱高光，大部分在阴影中。画质：8K，黑袍褶皱层次丰富，符文刺绣精细，整体氛围神秘危险。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime villain full body character illustration, mysterious dark-robed sorcerer with arms crossed, slightly tilting head up to gaze down at camera with contemptuous expression. Appearance: face partially obscured by hood shadow, only pale chin and cold smirk visible, one eye glowing faint purple in shadow. Outfit: floor-length black robe, high standing collar, dark purple trim, wide flowing sleeves, intricate silver rune embroidery on chest. Several floating purple magical energy orbs surrounding him. Background: dark gray gradient. Style: dark fantasy aesthetic, full of mystery, strong sense of oppression, exquisite costume details. Lighting: low-key mood lighting, only purple magic glow and faint highlights on face, mostly in shadow. Quality: 8K, rich robe fold layers, fine rune embroidery, overall mysterious dangerous atmosphere.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a menacing villain character design — a dark sorcerer in a long black hooded robe, standing with arms crossed and looking down with an arrogant smirk. His face is mostly hidden in shadow under the hood, with only his pale mouth and one glowing purple eye visible. The robe has intricate silver rune embroidery and purple trim. Dark magical energy orbits around him. Use a low-key lighting scheme with most of the figure in shadow, only highlighted by the purple magical glow. The overall feeling should be mysterious, powerful, and dangerous. This is a final boss character design for a dark fantasy story.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>反派立绘的核心是"压迫感"——用低角度、阴影、发光眼睛来营造。黑袍+符文是经典法师反派配置。建议指定"低光氛围"。</div>
+  </div>
+
+  <div class="pl-card" data-id="ccard_3" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎭 女主角立绘 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">动漫女主角全身立绘，优雅灵动，标志性动作，展现角色魅力，适合女主角视觉设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫女主角全身立绘，16岁魔法少女，优雅站立，右手轻轻托着一朵发光的魔法花，左手提着裙摆微微行屈膝礼，温柔微笑。外貌：银白色长直发如瀑布般披散，紫色水晶般的眼眸，精致五官，白皙肌肤，头戴小王冠发饰。服装：淡紫色洛丽塔风格连衣裙，蕾丝镶边，蓬蓬裙，白色长筒袜，紫色小皮鞋，颈戴蓝宝石项链。背景：纯白色背景。风格：少女漫画风格，柔美线条，梦幻色彩，精致华丽。细节：发丝闪耀微光，魔法花发出柔和光芒，裙撑撑起的裙摆有自然褶皱。画质：8K超高清，全身完整展示，服饰细节精致，角色气质温柔高贵。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime heroine full body character illustration, 16-year-old magical girl standing gracefully, right hand gently holding a glowing magical flower, left hand lifting skirt slightly in a small curtsy, gentle smile. Appearance: silvery white long straight hair cascading like waterfall, purple crystal eyes, delicate features, fair skin, small tiara hair accessory. Outfit: pale purple Lolita-style dress with lace trim, full skirt, white stockings, purple mary jane shoes, sapphire necklace. Background: pure white. Style: shoujo manga style, soft lines, dreamy colors, exquisite and ornate. Details: hair shimmering with faint light, magical flower glowing softly, natural folds in full skirt. Quality: 8K ultra HD, full body complete, exquisite costume details, gentle noble character aura.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a beautiful anime magical girl character design showing her full body on a white background. She is 16 years old with long flowing silver-white hair and purple eyes that look like gemstones. She wears an elegant pale purple Lolita dress with lace details and a full skirt. She holds up the hem of her dress slightly in a gentle curtsy with one hand, and with the other hand she holds a small glowing magical flower. The art style should be classic shoujo manga — soft, beautiful, and detailed with a dreamy quality. Show her from head to toe with perfect proportions.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>女主角立绘要体现"柔美感"——用屈膝礼、托花等优雅pose。洛丽塔/公主裙是经典女主配置。发丝光效增加梦幻感。</div>
+  </div>
+
+  <div class="pl-card" data-id="ccard_4" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎭 配角设定双人立绘 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">两个性格互补的搭档角色双人立绘，展示角色关系和性格对比，适合配角组合设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫双人角色立绘，一对搭档，左边是热血冲动的红发少年，右边是冷静睿智的蓝发少年，两人背靠背站立，展示对比关系。左少年：火红刺猬头，金色眼睛，咧嘴大笑，穿着红色外套和牛仔裤，双拳紧握充满活力。右少年：深蓝色齐耳短发，冷静的灰蓝色眼睛，推了推眼镜，穿着白色衬衫和黑色背心，手里拿着一本打开的书。两人背靠背，形成鲜明对比。背景：白色背景。风格：少年动漫风格，色彩对比强烈，角色个性鲜明。细节：左边是暖色调右边是冷色调，一动一静形成对比。画质：8K高清，双人全身完整，互动关系自然，角色设计各具特色。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime duo character illustration, a pair of partners standing back to back showing contrast — hot-blooded red-haired boy on left, calm intelligent blue-haired boy on right. Left boy: fiery red spiky hair, golden eyes, wide grin, wearing red jacket and jeans, fists clenched full of energy. Right boy: dark blue ear-length short hair, calm gray-blue eyes, pushing up glasses, wearing white shirt with black vest, holding an open book. Two standing back to back, creating stark contrast. Background: white background. Style: shonen anime style, strong color contrast, distinct personalities. Details: warm color tone on left, cool tone on right, contrast of action and stillness. Quality: 8K, both full bodies complete, natural interaction, distinct character designs.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a dynamic character design sheet featuring two anime boys standing back-to-back as partners and foils to each other. On the left is a hot-headed, energetic boy with spiky red hair and golden eyes, grinning confidently with his fists clenched, wearing a red jacket. On the right is a calm, intellectual boy with short dark blue hair and glasses, holding an open book, wearing a white shirt with a dark vest. The contrast between them — hot vs cool, action vs thought — should be visually clear through their poses, expressions, and color schemes. Use a classic shonen anime art style. White background.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>双人立绘要突出"对比与互补"——热vs冷、动vs静、暖vs冷色。背靠背是经典搭档pose，既展示双方又暗示关系。</div>
+  </div>
+
+  <div class="pl-card" data-id="ccard_5" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎭 萌宠/吉祥物设定 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">可爱吉祥物/宠物角色设定，多种姿态展示，增加作品的萌点和辨识度。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫吉祥物角色设计，一只圆滚滚的小狐狸精灵，多个姿态展示：正面站立、坐姿、跑步、开心跳跃、睡觉、吃东西。角色：身体像一团棉花糖，毛茸茸的白色为主，耳朵和尾巴尖是粉色，大大的金色圆眼睛，小三角鼻子，九条蓬松的小尾巴。细节：爪子是粉色肉垫，耳朵内侧也是粉色，尾巴有九条。表情：开心、好奇、满足、困倦。风格：超萌Q版风格，圆润线条，毛茸茸质感，治愈系。背景：白色背景，多个姿态分散排列。画质：高清，毛绒纹理真实，每个姿态都是同一只小狐狸，造型一致，可爱度爆表。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime mascot character design sheet, a round little fox spirit shown in multiple poses: standing front, sitting, running, happily jumping, sleeping, eating. Character: body like a cotton ball, fluffy white main color, pink ear tips and tail tips, huge golden round eyes, small triangle nose, nine fluffy little tails. Details: pink paw pads, pink inside ears, nine tails. Expressions: happy, curious, content, sleepy. Style: ultra-cute chibi style, rounded lines, fluffy texture, healing aesthetic. Background: white background, poses scattered around. Quality: high definition, realistic fur texture, same little fox in every pose, consistent design, maximum cuteness.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create an adorable little nine-tailed fox mascot character design sheet, showing the same cute creature in several different poses — standing, sitting, jumping excitedly, curled up sleeping, and munching on a snack. The fox is round and fluffy like a cotton ball, mostly white with pink-tipped ears and tails, huge golden eyes, and nine soft fluffy tails. The art style should be super-deformed chibi — very round, very cute, with soft fluffy fur texture. Make sure it looks like the same character in every pose. White background. This is a mascot/companion character for a fantasy anime.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>吉祥物设计核心是"识别度+萌度"——独特的特征（九尾、特殊颜色）+圆润造型+大眼睛。多个姿态展示增加实用性。</div>
+  </div>
+
+  <div class="pl-card" data-id="ccard_6" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎭 武器/道具设定 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+   <div class="pl-desc">主角专属武器/道具设计图，多角度展示细节，是角色设定的重要组成部分。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">幻想武器设定图，一把圣剑，三个视角展示：正面全貌、剑柄特写、剑身符文细节。剑名：曙光之剑。整体设计：银色剑身中央有金色符文凹槽，剑身两侧有蓝色能量纹路，剑柄是深蓝色皮革缠绕，剑格是一对展开的翅膀造型，剑首镶嵌一颗发光的蓝宝石。剑鞘：深蓝色皮革包裹，金色装饰件，上面刻着同样的符文。背景：深灰色展示背景，聚光灯照亮武器。风格：奇幻游戏武器设计，精致华丽，金属质感强烈，宝石闪耀。细节：符文发出微光，金属表面有使用痕迹，皮革有磨损纹理。画质：8K超精细，多角度展示完整设计，材质真实，是一把充满故事感的传说武器。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Fantasy weapon design sheet, a holy sword shown in three views: full front view, hilt close-up, blade rune detail. Sword name: Dawnbreaker. Overall design: silver blade with golden rune groove down center, blue energy veins along both sides of blade, deep blue leather-wrapped hilt, crossguard shaped like spread wings, pommel set with a glowing sapphire. Scabbard: deep blue leather wrapped with gold fittings, engraved with same runes. Background: dark gray display background, spotlight illuminating weapon. Style: fantasy game weapon design, exquisite and ornate, strong metallic texture, gemstone sparkle. Details: runes glowing faintly, metal surface with wear marks, leather with worn texture. Quality: 8K ultra detailed, multiple angles showing complete design, realistic materials, a legendary weapon full of story.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a detailed fantasy weapon design for a legendary holy sword called Dawnbreaker, shown from multiple angles on a dark gray spotlight background. The sword has a silver blade with glowing golden runes down the center, a wing-shaped crossguard, a dark blue leather-wrapped handle, and a large glowing sapphire in the pommel. Show also its matching scabbard — dark blue leather with gold fittings. Make it look ornate and powerful, like a weapon from a high fantasy RPG. Include a close-up view of the hilt details and a view showing the rune details on the blade. The metal should look like polished steel, the gems should sparkle.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>武器设定要讲"故事感"——使用痕迹、符文含义、材质对比。建议至少展示：全貌+剑柄特写+关键细节三个视角。</div>
+  </div>
+
+ </div>
+ <div id="plCat-storyboard" class="pl-content" style="display:none">
+
+  <div class="pl-card" data-id="scard_1" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎬 九宫格分镜故事板 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">3x3九宫格分镜故事板，一个场景的九个关键镜头，展示完整叙事节奏，适合快速预览整集效果。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫分镜故事板，3x3九宫格布局，九个连续镜头讲述一个相遇场景，白线条分隔每格。镜头1远景：雨天黄昏的城市街道，霓虹灯牌闪烁，撑伞的少女独自走着。镜头2中景：少女停下脚步，看向巷口。镜头3特写：少女惊讶的眼神，雨滴从睫毛滑落。镜头4过肩：从少女身后看过去，巷子里蹲着一个受伤的银发少年。镜头5中景：少年抬起头，嘴角带血，眼神警惕。镜头6特写：两人对视，时间仿佛静止，周围是雨声。镜头7中景：少女收伞，慢慢走向少年。镜头8低角度：少女蹲下来，把伞举在少年头顶，自己半边身体淋雨。镜头9远景：两人共撑一把伞，坐在屋檐下，雨还在下，城市灯光温暖。风格：日系动漫电影风格，统一的蓝紫色雨夜色调，电影感光影，每格构图专业。画质：高清，九格布局整齐，叙事流畅，情绪连贯。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime storyboard sheet, 3x3 nine-panel grid layout, nine consecutive shots telling a meeting scene, white lines separating each panel. Shot 1 wide shot: rainy dusk city street, neon signs flickering, girl with umbrella walking alone. Shot 2 medium shot: girl stops, looking toward alley. Shot 3 close-up: girl's surprised eyes, raindrop sliding off eyelash. Shot 4 over-shoulder: from behind girl, seeing injured silver-haired boy crouching in alley. Shot 5 medium: boy lifts head, blood at corner of mouth, wary gaze. Shot 6 close-up: two people lock eyes, time seems frozen, sound of rain around. Shot 7 medium: girl closes umbrella, slowly walks toward boy. Shot 8 low angle: girl crouches down, holding umbrella over boy's head, half her body getting wet. Shot 9 wide shot: two people sharing one umbrella, sitting under eaves, rain still falling, warm city lights. Style: Japanese anime film style, unified blue-purple rainy night color palette, cinematic lighting, professional composition in each panel. Quality: high definition, neat nine-grid layout, smooth narrative, consistent emotion.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a nine-panel anime storyboard in a 3-by-3 grid with thin white dividers between panels. It should tell a complete short scene: a girl meets an injured boy in a rainy city at dusk. Panel 1: wide shot of the girl walking with an umbrella down a neon-lit rainy street. Panel 2: she stops and looks toward an alley. Panel 3: close-up of her surprised eyes with a raindrop on her lashes. Panel 4: over-the-shoulder view of the injured boy in the alley. Panel 5: the boy looks up warily with blood on his lip. Panel 6: close-up of their eyes meeting. Panel 7: she walks toward him, closing her umbrella. Panel 8: low angle of her crouching to hold the umbrella over him, getting wet herself. Panel 9: wide shot of them sharing the umbrella under an eave. Use a cinematic anime style with a moody blue-purple rainy night color palette throughout.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>九宫格分镜是漫剧快速规划的利器。经典节奏：建立场景→发现冲突→特写反应→揭示对象→对峙→情感转折→行动→高潮→余韵。统一色调很重要。</div>
+  </div>
+
+  <div class="pl-card" data-id="scard_2" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎬 打斗戏分镜四格 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">四格连续动作分镜，展示一个完整的武打招式，从起手到命中，适合战斗场景分镜参考。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫打斗分镜四格，横向排列，展示完整的一击必杀招式，白线分隔。第一格准备：黑衣剑士侧身蓄力，手握剑柄，身体压低，背景是速度线，眼神锐利锁定目标。第二格出招：剑出鞘的瞬间，剑身带起残影和火花，速度线密集，人物几乎成模糊状，动态感极强。第三格交错：剑士与敌人擦身而过，剑已经划过敌人身体，时间凝固，敌人眼睛瞪大不敢置信，一滴血珠飞溅。第四格收招：剑士背对镜头收剑入鞘，身后敌人缓缓倒下，尘埃落定，月光从云层洒下。风格：热血少年漫风格，高对比度，速度线效果，动态模糊，冲击力强。色调：深蓝夜景背景，剑光银白，血红色点缀。画质：高清，四格连续动作流畅，打击感十足，每一帧都是经典漫画分镜。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime fight scene four-panel storyboard, horizontal arrangement, showing a complete finishing move, white lines separating panels. Panel 1 ready: black-clad swordsman charging sideways, hand on hilt, body low, speed lines in background, sharp gaze locked on target. Panel 2 strike: moment of sword drawing, blade trailing afterimages and sparks, dense speed lines, figure almost blurred, extreme dynamic feel. Panel 3 cross: swordsman passing by enemy, sword already slashed through enemy body, time frozen, enemy's eyes wide with disbelief, single drop of blood splattering. Panel 4 resolve: swordsman sheathing sword with back to camera, enemy slowly falling behind, dust settling, moonlight breaking through clouds. Style: hot-blooded shonen manga style, high contrast, speed line effects, motion blur, strong impact. Color tone: deep blue night scene background, silver sword glow, red blood accents. Quality: high def, smooth four-panel continuous action, solid impact feel, each frame classic manga composition.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a four-panel horizontal manga-style fight storyboard showing a complete sword strike sequence. Panel 1: the swordsman in a low ready stance, hand on his sword hilt, intense focus — with dynamic speed lines. Panel 2: the sword is drawn with blinding speed, motion blur and spark trails, the figure almost a blur. Panel 3: the moment after the strike connects as the swordsman passes through — the enemy's eyes widen in shock, a single drop of blood flies, everything frozen in that instant. Panel 4: the swordsman sheathes his sword with his back to us, the enemy falling behind him, moonlight breaking through clouds. Use a dynamic shonen manga art style with speed lines and high contrast. Cool blue night palette with silver blade highlights.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>打斗分镜四要素：蓄力→出招→交错/命中→收招/余韵。速度线、动态模糊、残影是增加动感的三大利器。"擦身而过"是经典武士对决构图。</div>
+  </div>
+
+  <div class="pl-card" data-id="scard_3" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎬 情感对话分镜 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">双人对话情感分镜，正反打镜头，展示角色情绪变化，适合文戏对话场景参考。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫对话分镜六格，展示告白场景的情绪变化，2x3网格布局。镜头1双人中景：夕阳下的天台，男生和女生并排站着，男生欲言又止，女生疑惑地看他。镜头2男生特写：男生紧张地攥着衣角，脸涨红，眼神躲闪，深吸一口气准备开口。镜头3女生过肩：从女生肩膀看男生，男生低着头，声音很小地说着什么。镜头4女生特写：女生眼睛慢慢睁大，脸颊变红，嘴唇微微颤抖，不敢相信。镜头5双人远景：两人之间仿佛有电流，夕阳把两人影子拉得很长，风吹起头发。镜头6双人近景：男生终于抬起头直视女生，眼神认真而灼热，女生害羞但回应般点了点头，眼泪在眼眶里。风格：少女漫风格，温暖的夕阳橙色调，柔和光影，细腻的情绪表达。画质：高清，六格分镜节奏流畅，情绪层层递进，画面唯美。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime dialogue storyboard six-panel, 2x3 grid, showing confession scene emotion progression. Shot 1 two-shot medium: rooftop at sunset, boy and girl standing side by side, boy hesitating to speak, girl looking at him confused. Shot 2 boy close-up: boy nervously clutching his shirt, face flushed, gaze darting, taking deep breath to speak. Shot 3 over-girl shoulder: from girl's shoulder looking at boy, boy head down, saying something very quietly. Shot 4 girl close-up: girl's eyes slowly widening, cheeks turning red, lips trembling slightly, can't believe it. Shot 5 two-shot wide: electricity between them, sunset casting long shadows, wind blowing hair. Shot 6 two-shot close: boy finally lifts head to look girl directly in eye, gaze serious and burning, girl shyly nods in response, tears in her eyes. Style: shoujo manga style, warm sunset orange tones, soft lighting, delicate emotional expression. Quality: high def, smooth six-panel rhythm, emotion building layer by layer, beautiful imagery.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a six-panel shoujo manga-style storyboard of a romantic confession scene on a rooftop at sunset. Panel 1: wide shot of boy and girl standing side by side, the boy looking nervous. Panel 2: close-up of the boy blushing and fidgeting with his shirt, about to speak. Panel 3: over-the-shoulder from the girl's side, showing the boy with his head down, confessing quietly. Panel 4: close-up of the girl's face — eyes widening, cheeks flushing, trembling lips, completely surprised. Panel 5: wide shot with both silhouettes against the orange sunset, long shadows, wind in their hair. Panel 6: closer two-shot as the boy looks up with sincere determined eyes, and the girl nods shyly with happy tears. Warm golden sunset colors throughout, soft dreamy shoujo art style.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>文戏分镜节奏：建立关系→一方情绪→另一方反应→情感碰撞→双向确认。正反打（过肩镜头）是对话场景基础。暖色调增加浪漫感。</div>
+  </div>
+
+  <div class="pl-card" data-id="scard_4" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎬 转场分镜三连 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">三种经典转场方式的分镜展示：匹配剪辑、相似形转场、空镜转场，适合场景切换参考。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫转场分镜三组，每组两格展示一个转场技巧，共6格，横向排列。第一组匹配剪辑：左格是角色伸手去开门的特写，手的形状和门框形成矩形；右格是下一个场景，角色推开教室门，同样的矩形构图，动作无缝衔接。第二组相似形转场：左格是特写角色眼睛中倒映的月亮，圆形；右格是圆形的时钟指针移动，从月亮形状自然过渡到时钟，表示时间流逝。第三组空镜转场：左格是樱花飘落的空镜头，粉色花瓣纷飞；右格是下一场景，同样有樱花，但角色已经站在樱花树下，暗示地点转换。风格：日系动漫电影风格，每一组转场都有巧妙的视觉联系，流畅自然。画质：高清，构图精准，转场逻辑清晰，视觉语言丰富。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime transition storyboard, three groups of two panels each showing a transition technique, total 6 panels horizontal arrangement. First group match cut: left panel close-up of character reaching to open door, hand shape and door frame forming rectangle; right panel next scene, character pushing classroom door open, same rectangular composition, seamless action continuation. Second group graphic match: left panel close-up of moon reflected in character's eye, circular shape; right panel round clock hands moving, natural transition from moon shape to clock, suggesting time passing. Third group cutaway transition: left panel empty shot of cherry blossoms falling, pink petals floating; right panel next scene, also has cherry blossoms but character now standing under cherry tree, suggesting location change. Style: Japanese anime film style, each transition group has clever visual connection, smooth and natural. Quality: high def, precise composition, clear transition logic, rich visual language.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a six-panel anime storyboard demonstrating three classic film transition techniques, two panels per technique. First transition — match cut: left panel shows a hand reaching for a door handle forming a rectangle shape; right panel shows the same hand pushing open a door in the next location with the exact same rectangular composition. Second transition — graphic match: left panel shows a close-up of the moon reflected in a character's eye (a circle); right panel shows a clock face with hands moving, the circle shape linking them to show time passing. Third transition — scenery transition: left panel is an empty shot of cherry blossoms falling; right panel shows the character now standing under cherry blossoms in the new location. Use a cinematic anime style. Each transition should feel smooth and visually clever.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>三种经典转场：匹配剪辑(动作匹配)、相似形转场(形状匹配)、空镜转场(情绪/地点过渡)。好的转场让观众感觉不到剪辑，却能传递大量信息。</div>
+  </div>
+
+  <div class="pl-card" data-id="scard_5" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎬 悬疑惊悚分镜 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">悬疑恐怖氛围的五分镜连续镜头，逐步递进的紧张感，适合悬疑/惊悚类型漫剧参考。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫悬疑分镜五格，纵向排列，逐步升级的恐怖感，每格比上一格更令人不安。镜头1远景：深夜空无一人的走廊，尽头的电梯门缓缓打开，里面一片黑暗，只有红色的楼层数字在闪。镜头2中景：主角小心翼翼走向电梯，手伸向按钮，影子被灯光拉得很长。镜头3低角度特写：主角按下按钮的手，手指在颤抖，按钮冰冷发光。镜头4第一人称：从电梯内黑暗中看向外面，主角的身影在门口越来越近，仿佛观众就是电梯里的东西。镜头5特写：电梯门完全打开，里面是空的，什么都没有，但地板上有一滩正在扩散的红色液体。风格：恐怖悬疑风格，高对比度明暗，低光照明，大量阴影，压迫感强。色调：冷绿色走廊灯光，红色危险信号，黑色阴影。画质：高清，五格节奏层层递进，悬念感拉满，每一格都让人更紧张。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime horror suspense five-panel storyboard, vertical arrangement, progressively building dread, each panel more unsettling than last. Shot 1 wide: late night empty hallway, elevator door at end slowly opening, pitch black inside, only red floor number flickering. Shot 2 medium: protagonist cautiously walking toward elevator, hand reaching for button, shadow stretched long by light. Shot 3 low angle close-up: protagonist's hand pressing button, fingers trembling, button glowing coldly. Shot 4 first person: from darkness inside elevator looking out, protagonist's silhouette getting closer at doorway, as if viewer is the thing inside. Shot 5 close-up: elevator door fully open, empty inside, nothing there, but a pool of red liquid spreading across the floor. Style: horror suspense aesthetic, high contrast chiaroscuro, low key lighting, lots of shadow, strong oppression. Color tone: cold green hallway light, red danger signals, black shadows. Quality: high def, five-panel rhythm building layer by layer, maximum suspense, each panel more tense.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a five-panel horror suspense anime storyboard that builds tension panel by panel. Panel 1: wide shot of an empty dark hallway at night with an elevator at the end, doors slowly opening to reveal darkness, only a flickering red floor number visible. Panel 2: medium shot of the protagonist cautiously approaching the elevator, hand outstretched toward the button, long menacing shadow behind them. Panel 3: low-angle close-up of a trembling finger about to press the glowing elevator button. Panel 4: first-person POV from inside the dark elevator looking out at the protagonist approaching — making the viewer feel like they are the thing inside. Panel 5: the elevator doors open fully to reveal nothing inside... except a spreading pool of red liquid on the floor. Use heavy shadows, high contrast, cold green and red lighting. Build dread with each panel.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>悬疑分镜核心是"预期"——让观众知道有危险但不知道是什么。手法：远景建立空间→中景展示角色反应→特写放大细节→POV切换视角→反转/揭示。</div>
+  </div>
+
+  <div class="pl-card" data-id="scard_6" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🎬 蒙太奇分镜 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">训练/成长蒙太奇分镜，多个碎片镜头组合展现时间流逝和角色成长，适合主角升级/训练场景。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">动漫训练蒙太奇分镜，八格不规则拼贴布局，展示主角数月的艰苦训练，画面叠加体现时间流逝。画面1：晨曦中主角在山巅练剑，剪影效果，太阳从身后升起。画面2：特写握剑的手，起了水泡，缠着绷带，汗水滴落。画面3：雨中训练，全身湿透，表情坚毅，挥剑带起水花。画面4：深夜在油灯下研读兵法，眼神专注，旁边堆着书。画面5：夕阳下做俯卧撑，肌肉紧绷，地面被汗水打湿。画面6：雪地中打坐，头发上结了霜，呼吸成白雾。画面7：终于挥出完美的一剑，剑气划破空气，树叶纷飞。画面8：主角站在山巅，背对朝阳，影子拉长，已脱胎换骨。风格：热血少年漫风格，画面之间有半透明叠加效果，体现时间流逝，整体色调从暗到明象征成长。画质：高清，八格蒙太奇富有节奏感，成长轨迹清晰，燃向励志。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Anime training montage storyboard, eight-panel irregular collage layout, showing protagonist's months of harsh training, image overlays showing passage of time. Panel 1: protagonist training with sword on mountain peak at dawn, silhouette effect, sun rising behind. Panel 2: close-up of sword-holding hand, blisters, wrapped in bandages, sweat dripping. Panel 3: training in rain, soaked through, determined expression, sword swing creating water splash. Panel 4: late night studying military strategy by oil lamp, focused gaze, stack of books beside. Panel 5: doing push-ups at sunset, muscles taut, ground wet with sweat. Panel 6: meditating in snow, frost on hair, breath forming white mist. Panel 7: finally executing perfect sword strike, sword qi cutting through air, leaves scattering. Panel 8: protagonist standing on mountain peak, back to rising sun, long shadow, completely transformed. Style: hot-blooded shonen manga style, semi-transparent overlay effects between panels, showing time passage, overall color from dark to bright symbolizing growth. Quality: high def, eight-panel montage with rhythm, clear growth trajectory, inspiring and fiery.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create an eight-panel anime training montage collage showing a protagonist's months of grueling training, with overlapping images to convey the passage of time. Panels show: 1) silhouette training with a sword on a mountain at sunrise, 2) close-up of calloused bleeding hands wrapped in bandages with sweat dripping, 3) training in heavy rain soaked through, 4) studying late at night by oil lamp light, 5) push-ups at sunset with sweat on the ground, 6) meditating in snow with frost in hair, 7) finally unleashing a perfect sword strike that cuts through the air with leaves flying, 8) standing triumphant on the peak at dawn, completely transformed. Use a dynamic shonen anime style. The color palette should evolve from dark to bright across the montage, symbolizing growth and improvement.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>蒙太奇核心是"用碎片拼出时间"——不同时段(晨/午/夜/冬)、不同训练内容、身体变化(伤口/肌肉)。画面叠加效果增强流逝感。色调从暗到明=角色成长。</div>
+  </div>
+
+ </div>
+ <div id="plCat-scenedesign" class="pl-content" style="display:none">
+
+  <div class="pl-card" data-id="scene_1" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🏙️ 赛博朋克都市 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">赛博朋克风格未来都市全景，霓虹灯光，摩天大楼，雨夜氛围，适合科幻场景设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">赛博朋克未来都市全景，雨夜，密集的摩天大楼直插云霄，建筑外立面上布满了全息广告投影和霓虹灯牌，各种语言的文字闪烁着彩色光芒。街道上飞行器穿梭，飞行汽车留下光轨。地面层是湿漉漉的街道，雨水反射着霓虹光芒形成五彩斑斓的倒影，行人撑着透明雨伞，穿着高科技服装。巨型全息人像在楼宇间漂浮。垂直的城市结构：上层是豪华区域明亮干净，下层是贫民窟阴暗潮湿。空中有连接大楼的空中步道和管道。远景是巨大的公司总部塔楼，顶部探照灯扫过夜空。色调：深蓝紫为主，点缀霓虹粉、青色、橙黄。风格：赛博朋克2077风格，电影级光影，细节丰富，雨夜氛围感拉满。画质：8K超高清，广角全景，远景近景层次分明，未来科技感强烈。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Cyberpunk futuristic cityscape panorama, rainy night, dense skyscrapers piercing the clouds, building facades covered in holographic advertisement projections and neon signs, multi-language text glowing with colored light. Flying vehicles穿梭 in streets, flying cars leaving light trails. Ground level wet streets, rain reflecting neon lights creating colorful reflections, pedestrians with transparent umbrellas wearing high-tech fashion. Giant holographic human figures floating between buildings. Vertical city structure: upper levels luxury areas bright and clean, lower levels slums dark and damp. Skybridges and pipes connecting buildings in mid-air. Distance shows giant corporate headquarters tower, searchlights sweeping night sky from top. Color palette: deep blue-purple dominant, accented with neon pink, cyan, orange-yellow. Style: Cyberpunk 2077 aesthetic, cinematic lighting, rich details, maximum rainy night atmosphere. Quality: 8K ultra HD, wide angle panorama, clear foreground-background layering, strong futuristic tech feel.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a breathtaking cyberpunk cityscape at night in the rain. Towering skyscrapers disappear into the foggy clouds, their surfaces covered with glowing neon signs and flickering holographic billboards in multiple languages. Flying vehicles leave light trails between buildings. The rain-slicked streets below reflect all the neon in shimmering puddles. A giant holographic advertisement figure floats between towers. The city is vertically layered — bright wealthy districts high up, dark crowded slums down below. In the distance, a massive corporate ziggurat pierces the sky with searchlights. Use a moody blue-violet color scheme with hot pink, cyan, and orange neon accents. Make it look like cinematic concept art for a cyberpunk film, incredibly detailed and atmospheric.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>赛博朋克场景三要素：垂直分层城市(上富下贫)、霓虹+雨夜+反射、巨型全息广告。广角全景+前景人物增加代入感。深蓝紫底色+粉青橙点缀是经典配色。</div>
+  </div>
+
+  <div class="pl-card" data-id="scene_2" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🏙️ 仙侠仙山宗门 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">国风仙侠风格的仙山宗门场景，云海之上，仙气飘渺，适合古装修仙漫剧场景设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">国风仙侠场景，云海之上的仙山宗门，数座陡峭山峰从云海中伸出，每座山顶都建有古色古香的宫殿建筑，飞檐翘角，琉璃瓦在阳光下闪耀。山间有瀑布飞流直下，落入云海激起水雾。石拱桥连接着各座山峰，桥上有穿着古装的弟子走过。几只仙鹤在云海间飞翔。天空中漂浮着几座浮空小岛，岛上也有亭台楼阁。阳光穿过云层形成丁达尔效应，光束照亮部分山峰。远景是连绵的群山在云海中若隐若现。色调：以青绿、赭石、白色为主，金色阳光点缀，淡雅仙气。风格：国风工笔山水画风格，意境深远，仙气飘渺，大气磅礴。画质：8K超高清，全景构图，层次丰富，云雾缭绕，如仙境一般。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Chinese xianxia immortal mountain sect scene, immortal mountain sect above a sea of clouds, several steep mountain peaks rising from cloud sea, each peak crowned with ancient Chinese palace buildings, upturned eaves, glazed tiles shimmering in sunlight. Waterfalls cascading between mountains, falling into cloud sea creating mist. Stone arch bridges connecting peaks, disciples in ancient robes walking across. Several cranes flying through clouds. A few floating islands in sky, also with pavilions and towers. Sunlight breaking through clouds creating crepuscular rays, beams illuminating certain peaks. Distance shows continuous mountain ranges faintly visible through clouds. Color palette: primarily cyan-green, ochre, white, accented with golden sunlight, ethereal and immortal. Style: Chinese traditional landscape painting style, profound意境, ethereal mist, grand and majestic. Quality: 8K ultra HD, panoramic composition, rich layers, swirling clouds and mist, like a fairyland.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a majestic Chinese xianxia immortal mountain sect scene high above a sea of clouds. Sharp mountain peaks pierce through the clouds, each crowned with beautiful ancient Chinese temples and palaces with curved, ornate roofs. Waterfalls cascade down the cliffs into the cloud sea below, creating ethereal mist. Stone arch bridges connect the peaks, with figures in flowing robes crossing them. White cranes soar gracefully through the mist. Several floating islands with pavilions drift in the sky. Sunbeams break through the clouds illuminating certain peaks with golden light. The art style should evoke traditional Chinese landscape painting — elegant, misty, and otherworldly. Use a palette of jade greens, ink blues, and warm gold highlights. The overall feeling should be peaceful, grand, and deeply magical — like a heavenly realm.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>仙侠场景核心是"仙气"——云海、瀑布、仙鹤、浮空岛、丁达尔光都是加分元素。青绿+赭石+金色是经典国色。山顶宫殿+山间瀑布+云海三分构图最稳定。</div>
+  </div>
+
+  <div class="pl-card" data-id="scene_3" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🏙️ 末世废土城市 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+   <div class="pl-desc">末日废土风格的城市废墟，破败荒芜，杂草丛生，适合末世题材漫剧场景设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">末日废土城市全景，曾经繁华的都市如今已成废墟。倒塌的摩天大楼倾斜着，钢筋外露，破碎的玻璃幕墙散落一地。街道被沙土和杂草覆盖，废弃的汽车锈迹斑斑。藤蔓和树木从建筑裂缝中生长出来，大自然正在 reclaim 城市。远处的市政厅大楼穹顶已经塌陷，上面建了一个鸟巢。灰蒙蒙的天空中，一架无人机飞过。前景是一个生锈的路牌，上面的字已经模糊不清。一些废弃的广告牌上还能辨认出昔日的广告。色调：以土黄、灰褐、铁锈红为主，点缀少量枯绿。风格：末日废土风格，破败荒芜，但有自然复苏的痕迹，苍凉中带着生机。光线：黄昏时分，温暖的侧光照在废墟上，拉长了影子。画质：8K超高清，细节丰富，每一处都有故事感，整体氛围苍凉而震撼。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Post-apocalyptic wasteland city panorama, once bustling metropolis now in ruins. Collapsed skyscrapers leaning, exposed rebar, shattered glass curtain walls scattered everywhere. Streets covered in sand and weeds, abandoned cars heavily rusted. Vines and trees growing through cracks in buildings, nature reclaiming the city. Distant city hall building dome collapsed, bird nest built on top. In gray hazy sky, a drone flies past. Foreground has a rusted street sign, writing no longer legible. Some abandoned billboards still faintly showing old advertisements. Color palette: primarily earth yellow, gray-brown, rust red, accented with sparse withered green. Style: post-apocalyptic wasteland aesthetic, desolate and ruined, but with traces of natural revival, desolation mixed with life. Lighting: dusk hour, warm side light hitting ruins, long shadows. Quality: 8K ultra HD, rich details, every corner has story feel, overall atmosphere desolate and stunning.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a sweeping post-apocalyptic cityscape where nature has begun to reclaim the ruins of a once-great metropolis. Crumbling skyscrapers lean precariously with exposed steel rebar, shattered glass litters the streets, and rusted cars are half-buried in dust and overgrown with weeds and small trees. Vines climb up broken facades. The dome of a grand old city hall has collapsed with a huge bird nest built into its wreckage. A lone drone flies through the hazy orange-gray sky. In the foreground, a rusted unreadable street sign tilts. Use a dusty earth-tone palette — ochres, rust reds, weathered grays — with touches of stubborn green from plants growing through the concrete. The time is golden hour, with long dramatic shadows stretching across the ruins. The feeling should be bleak and haunting but also show nature's resilience.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>废土场景关键是"细节的故事感"——每一处破损都暗示着曾经发生过什么。锈迹、藤蔓、沙土是三大元素。黄昏侧光最能表现废墟的苍凉美感。</div>
+  </div>
+
+  <div class="pl-card" data-id="scene_4" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🏙️ 日式学园 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">日式高中校园场景，教室、走廊、天台、樱花树，是校园漫剧最经典的场景设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">日式高中校园场景，春天樱花盛开的季节。主体是一栋三层的白色教学楼，深灰色的日式瓦屋顶，木质窗框，走廊边排列着整齐的鞋柜。教学楼前是操场，棕色的跑道和绿色的足球场。校园入口处有一扇黑色的铁门，门两旁种着几棵巨大的樱花树，粉色的樱花纷纷飘落。几名穿着水手服校服的学生正走进校门。教学楼走廊里，午后的阳光斜照进来，在木质地板上投下窗框的影子，空气中飘浮着粉笔灰和樱花花瓣。天台的铁丝网上晾晒着白布，远处能看到城市的屋顶。色调：以白色、木色、樱花粉、天空蓝为主，明亮温暖。风格：日系校园动漫风格，清新治愈，阳光明媚，充满青春气息。画质：8K高清，细节丰富，光影柔和，是典型的日本动画中校园的样子。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Japanese high school campus scene, spring cherry blossom season. Main building is a three-story white school building, dark gray Japanese tile roof, wooden window frames, orderly shoe lockers lining hallway. In front of building is schoolyard, brown running track and green soccer field. School entrance has a black iron gate, several giant cherry blossom trees planted on both sides, pink cherry blossoms falling gently. Several students in sailor uniform school outfits walking through gate. Inside school hallway, afternoon sunlight slanting in, casting window frame shadows on wooden floor, chalk dust and cherry blossom petals floating in air. White cloth drying on rooftop chain-link fence, distant city rooftops visible. Color palette: primarily white, wood tones, cherry pink, sky blue, bright and warm. Style: Japanese school anime aesthetic, fresh and healing, bright sunshine, full of youthful feeling. Quality: 8K high def, rich details, soft lighting, the classic Japanese animation school look.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a beautiful Japanese high school campus in spring with cherry blossoms in full bloom. A three-story white school building with a dark gray tiled roof and wooden windows stands at the center. Students in sailor-style uniforms walk through the black iron entrance gate past huge pink cherry blossom trees with petals drifting through the air. The schoolyard has a brown running track around a green sports field. Inside, afternoon sunlight streams down the hallway casting sharp window shadows on the polished wooden floor, with a few cherry petals floating in the sunbeams. On the rooftop, white laundry hangs drying on a fence with a view of the city. Use a clean, bright palette of whites, natural wood tones, soft pink, and sky blue. The style should be warm, nostalgic, and classic anime school setting — full of youth and springtime feeling.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>校园场景必备元素：教学楼(白墙+瓦顶)、樱花树、鞋柜走廊、操场、天台、制服学生。侧光+窗框投影是日系校园标志性光影。春天樱花/夏天青叶/秋天落叶/冬天雪景可变换季节。</div>
+  </div>
+
+  <div class="pl-card" data-id="scene_5" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🏙️ 奇幻地下城 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-sd">SDXL</span></div>
+   <div class="pl-desc">奇幻风格的地下城市，洞穴中建造的文明，发光水晶照亮，适合奇幻冒险漫剧场景设定。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">奇幻地下城全景，巨大的天然溶洞中建造了一整座城市，洞顶钟乳石闪闪发光如同星空。城市建筑依岩壁而建，多层石制房屋和拱桥连接各个平台，街道上有矮人和精灵等奇幻种族居民行走。巨大的发光蓝色水晶柱从地面直洞顶，是城市的主要光源，散发出柔和的蓝光。地下河流穿城而过，水面上有发光的睡莲，倒映着城市的光芒。一些悬浮的石头平台上建有塔和神庙。远处有一个巨大的地下瀑布，水雾中折射出彩虹。洞穴壁上有开凿的窗户和阳台，里面透出温暖的黄色灯光。色调：以深蓝、青色、水晶蓝为主，点缀暖黄灯光和彩虹色。风格：奇幻RPG游戏场景风格，神秘壮观，细节丰富，异世界的感觉。画质：8K超高清，发光效果自然，空间纵深感强，是一个完整而生动的地下世界。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Fantasy underground city panorama, an entire city built inside a giant natural cave, stalactites on ceiling glimmering like starry sky. City buildings built against rock walls, multi-level stone houses and arch bridges connecting various platforms, fantasy race residents like dwarves and elves walking on streets. Giant glowing blue crystal pillars rising from floor to cave ceiling, main light source of city, emitting soft blue glow. Underground river flowing through city, glowing water lilies on surface, reflecting city lights. Towers and temples built on some floating stone platforms. In distance a huge underground waterfall, rainbow refracting in mist. Cave walls have carved windows and balconies, warm yellow light glowing from inside. Color palette: primarily deep blue, cyan, crystal blue, accented with warm yellow lights and rainbow colors. Style: fantasy RPG game scene aesthetic, mysterious and magnificent, rich details, otherworldly feel. Quality: 8K ultra HD, natural glow effects, strong spatial depth, a complete and vivid underground world.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a breathtaking fantasy underground city built inside an enormous cavern. Stalactites glisten like stars on the high ceiling. Multi-level stone houses and arched bridges cling to the cave walls, connected by winding staircases and platforms. Dwarves and elves walk the stone streets. The city is illuminated by huge glowing blue crystal pillars that rise from the cavern floor all the way to the ceiling, casting a cool magical blue light everywhere. An underground river flows through the city with glowing lily pads on its surface, reflecting all the lights. In the distance, a massive subterranean waterfall creates mist with a rainbow in it. Warm yellow light spills from windows carved into the rock walls. Use a deep blue and cyan palette with warm golden accents. The feeling should be magical, ancient, and vast — like an entire civilization hidden underground.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>地下城场景关键是"光源"——水晶、发光蘑菇、地火、魔法灯都是光源选项。多层次建筑(岩壁分层)增加空间感。地下河/瀑布增加生气。发光效果是营造氛围的关键。</div>
+  </div>
+
+  <div class="pl-card" data-id="scene_6" onclick="openPromptModal(this)">
+   <div class="pl-card-h">🏙️ 蒸汽朋克城市 <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>
+   <div class="pl-desc">蒸汽朋克风格的维多利亚时代城市，齿轮与铜管，飞艇与烟囱，适合蒸汽朋克题材漫剧场景。</div>
+   <div class="pl-prompt-box">
+    <div class="pl-prompt-title">💡 完整提示词</div>
+    <div class="pl-lang-label">🇨🇳 中文版：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">蒸汽朋克城市全景，维多利亚时代风格的大都市，建筑布满了裸露的铜管和巨大齿轮，烟囱冒出滚滚白烟。空中有多艘巨大的蒸汽飞艇缓缓飞过，艇身是黄铜和皮革材质，巨大的螺旋桨在转动。街道上跑着蒸汽车，车身是抛光的黄铜和木头，有复杂的压力表和齿轮。巨大的钟楼矗立在城市中心，钟面有齿轮装饰。街道两旁的建筑是红砖和铜色装饰，每个街角都有蒸汽管道和阀门。一些建筑物顶部有机械天桥连接。黄昏时分，温暖的街灯和飞艇的探照灯照亮了城市，空气中弥漫着薄雾和蒸汽。色调：以黄铜色、红棕色、深木色为主，点缀白色蒸汽和暖黄灯光。风格：维多利亚蒸汽朋克风格，精密复杂的机械美学，复古与科幻的完美结合。画质：8K超高清，机械细节丰富，铜管和齿轮闪闪发光，蒸汽效果真实，工业浪漫主义美学。</div>
+    <div class="pl-lang-label">🇺🇸 English：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Steampunk city panorama, Victorian-era style metropolis, buildings covered in exposed copper pipes and giant gears, chimneys billowing white smoke. Multiple huge steam airships slowly flying in sky, hulls made of brass and leather, giant propellers turning. Steam cars running on streets, polished brass and wood bodies, complex pressure gauges and gears. Giant clock tower standing at city center, clock face decorated with gears. Buildings along streets are red brick with copper accents, every street corner has steam pipes and valves. Some building tops connected by mechanical skybridges. Dusk hour, warm street lamps and airship searchlights illuminating city, air filled with mist and steam. Color palette: primarily brass gold, reddish-brown, dark wood tones, accented with white steam and warm yellow light. Style: Victorian steampunk aesthetic, intricate mechanical aesthetics, perfect blend of retro and sci-fi. Quality: 8K ultra HD, rich mechanical details, brass and gears shimmering, realistic steam effects, industrial romanticism aesthetic.</div>
+    <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>
+    <div class="pl-prompt-text" onclick="copyPrompt(this)">Create a stunning steampunk Victorian cityscape. Ornate brick buildings are crisscrossed with exposed copper pipes, brass gears, and pressure valves. Tall smokestacks belch plumes of white steam. Giant brass airships with propellers drift majestically through the hazy sky. Steam-powered automobiles with polished brass fittings rumble down cobblestone streets. A massive clock tower with exposed gear mechanisms dominates the skyline. Mechanical walkways and pipe bridges connect buildings at multiple levels. The time is golden hour, with warm gas lamp light and airship spotlights cutting through the misty steam-filled air. Use a rich palette of brass gold, weathered copper, deep red brick, and dark wood with white steam accents. The style should be richly detailed, romantic, and fully realize that industrial Victorian science fiction aesthetic.</div>
+   </div>
+   <div class="pl-tips"><b>技巧：</b>蒸汽朋克三元素：铜管+齿轮+蒸汽。飞艇是标志性元素。维多利亚式建筑+机械改造是核心美学。黄铜色vs红棕色的色调搭配最经典。薄雾中的灯光增加氛围感。</div>
+  </div>
+
+ </div>
+
+<div class="card tint-amber" style="margin-top:14px">
  <div class="card-h">📖 提示词编写心法</div>
  <div class="txt" style="line-height:1.8">
  <b>1. 结构化思维：</b>主体 + 环境 + 光线 + 色彩 + 构图 + 风格 + 画质，七维度缺一不可<br>
