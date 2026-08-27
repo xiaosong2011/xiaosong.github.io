@@ -117,6 +117,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .pl-tips{font-size:11px;color:var(--ink-3);margin-top:8px;padding:8px 10px;background:var(--bg);border-radius:8px;line-height:1.6}
 .pl-tips b{color:var(--ink-2)}
 .pl-update-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#ff9800;font-weight:600;margin-left:6px}
+/* AI漫剧工具库 */
+.ag-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.ag-cat{padding:8px 16px;border:1px solid var(--line);border-radius:20px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2);transition:all .2s}
+.ag-cat:hover{border-color:var(--accent);color:var(--accent)}
+.ag-cat.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ag-card{background:var(--surface);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);border-left:4px solid var(--accent);transition:transform .2s,box-shadow .2s}
+.ag-card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(46,134,222,.12)}
+.ag-card-h{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;flex-wrap:wrap}
+.ag-card-h .badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
+.ag-badge-core{background:#fff3e0;color:#ff9800}
+.ag-badge-script{background:#e8f0ff;color:#2e86de}
+.ag-badge-image{background:#f0e8ff;color:#7c3aed}
+.ag-badge-director{background:#e8f9f0;color:#059669}
+.ag-badge-tool{background:#fce4ec;color:#e91e63}
+.ag-badge-star{background:#fff8e1;color:#f57f17;border:1px solid #ffe082}
+.ag-desc{font-size:13px;color:var(--ink-2);line-height:1.6;margin-bottom:10px}
+.ag-features{margin:10px 0;padding:12px 14px;background:var(--bg);border-radius:10px}
+.ag-feature{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:12px;color:var(--ink-2);line-height:1.6}
+.ag-feature::before{content:'✦';color:var(--accent);font-size:11px;flex-shrink:0;margin-top:2px}
+.ag-specs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.ag-spec{font-size:11px;padding:4px 10px;border-radius:12px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line);font-weight:500}
+.ag-spec.hot{background:#fff3e0;color:#ff9800;border-color:#ffe0b2}
+.ag-spec.new{background:#e8f5e9;color:#4caf50;border-color:#c8e6c9}
+.ag-spec.rec{background:#e3f2fd;color:#2196f3;border-color:#bbdefb}
+.ag-cta{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.ag-cta-primary{background:var(--accent);color:#fff}
+.ag-cta-primary:hover{background:var(--accent-2);transform:translateY(-1px)}
+.ag-cta-ghost{background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+.ag-cta-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.ag-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:10px 0;padding:10px 14px;background:linear-gradient(135deg,#f0f4ff,#fff);border-radius:10px;font-size:12px;color:var(--ink-2)}
+.ag-flow-step{padding:4px 10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;font-weight:600;color:var(--ink)}
+.ag-flow-arrow{color:var(--accent);font-weight:bold}
+.ag-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:10px 0}
+.ag-info-item{padding:8px 10px;background:var(--bg);border-radius:8px;font-size:11px}
+.ag-info-item .label{color:var(--ink-3);font-weight:500;display:block;margin-bottom:2px}
+.ag-info-item .value{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body>
@@ -137,6 +173,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  </div>
  <div class="nav-item" data-section="prompts" onclick="switchSection('prompts')">
  <span class="ico">📚</span><span class="lbl">提示词库</span>
+ </div>
+ <div class="nav-item" data-section="agents" onclick="switchSection('agents')">
+ <span class="ico">🎬</span><span class="lbl">AI漫剧工具</span>
  </div>
  </nav>
  <div class="sync-badge-wrap">
@@ -2479,6 +2518,411 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  </div>
 </div>
 
+<!-- ========== AI漫剧工具库 ========== -->
+<div class="section" id="sec-agents">
+ <div class="page-head"><span class="bow">🎬</span><h1>AI漫剧工具库</h1><span class="sub">· 全流程 · 剧本 · 生图 · 导演 · 自动化</span></div>
+
+ <!-- 分类筛选 -->
+ <div class="ag-cats" id="agCats">
+   <button class="ag-cat active" onclick="switchAgCat('all')">📂 全部工具</button>
+   <button class="ag-cat" onclick="switchAgCat('core')">⭐ 核心全流程</button>
+   <button class="ag-cat" onclick="switchAgCat('script')">📝 剧本创作</button>
+   <button class="ag-cat" onclick="switchAgCat('image')">🎨 生图美学</button>
+   <button class="ag-cat" onclick="switchAgCat('director')">🎬 导演/视频</button>
+   <button class="ag-cat" onclick="switchAgCat('tool')">🔧 自动化工具</button>
+ </div>
+
+ <!-- ===== 全部工具 ===== -->
+ <div class="ag-content" id="agCat-all" style="display:block">
+
+  <!-- 1. AI漫剧全流程整合 Skill -->
+  <div class="ag-card" style="border-left-color:#ff9800">
+   <div class="ag-card-h">
+    🎭 AI漫剧全流程整合 Skill（老李自研）
+    <span class="badge ag-badge-star">⭐ 核心推荐</span>
+    <span class="badge ag-badge-core">全流程</span>
+    <span class="badge ag-badge-core">老李自研</span>
+   </div>
+   <div class="ag-desc">老李自研的漫剧全流程整合技能，一站式覆盖漫剧制作各环节。从剧本大纲到分集分镜、人物资产JSON、三视图、表情十二宫格，再到每集分镜提示词（五段式/六段式），三步流水线+衔接层完成全流程。V5.0.2版本新增武打体系三件套（武打PREVIS动作体系 + 二次元打戏提示词体系 + 武学招式库）。</div>
+   <div class="ag-flow">
+    <span class="ag-flow-step">剧本大纲</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">①详细剧本</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">②分集分镜</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">衔接层（资产/三视图/表情格）</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">③段式提示词</span>
+   </div>
+   <div class="ag-features">
+    <div class="ag-feature"><b>三步流水线：</b>剧本创作 → 分集分镜 → 段式提示词生成，贯穿三大考核标准（分镜衔接+时长合理 / 剧情逻辑 / 宏大场景景别+焦段）</div>
+    <div class="ag-feature"><b>武打体系三件套（V5.0）：</b>武打PREVIS动作体系（动力链11环/15格节奏骨架/攻防博弈）、二次元打戏提示词体系（完播率公式/15秒骨架/近景对招/燃向铁律）、武学招式库（12套经典武学+太刀/轻功/修仙剑招）</div>
+    <div class="ag-feature"><b>人物资产细化（V5.0.1）：</b>三视图提示词新增五官细节十项必写 + 服装材质细节六项必写，防五官漂移与材质塑料感</div>
+    <div class="ag-feature"><b>段间衔接系统：</b>三手法六式（换机位/切景别/跨段反应 + 动作连续/反应镜头/景别跳切/声音先入/道具衔接/空镜过渡）</div>
+    <div class="ag-feature"><b>五道质量门禁（A~E）：</b>从剧本到提示词全链路质量把控</div>
+    <div class="ag-feature"><b>空间导演转换器V3：</b>把普通分镜转换成视频模型易理解的「连续空间」参考系统，先空间后镜头</div>
+   </div>
+   <div class="ag-info-grid">
+    <div class="ag-info-item"><span class="label">版本</span><span class="value">V5.0.2</span></div>
+    <div class="ag-info-item"><span class="label">作者</span><span class="value">漫剧老李</span></div>
+    <div class="ag-info-item"><span class="label">更新</span><span class="value">2026-08-20</span></div>
+    <div class="ag-info-item"><span class="label">许可证</span><span class="value">测试版</span></div>
+    <div class="ag-info-item"><span class="label">核心模块</span><span class="value">2个</span></div>
+    <div class="ag-info-item"><span class="label">整合来源</span><span class="value">10+开源</span></div>
+   </div>
+   <div class="ag-specs">
+    <span class="ag-spec hot">🔥 最核心推荐</span>
+    <span class="ag-spec rec">全流程覆盖</span>
+    <span class="ag-spec">剧本→分镜→提示词</span>
+    <span class="ag-spec">武打体系</span>
+    <span class="ag-spec">空间导演V3</span>
+    <span class="ag-spec">五段式/六段式</span>
+   </div>
+   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://github.com/lixiaoxiao9888-create/manju-laoli-skill" target="_blank" class="ag-cta ag-cta-primary">🔗 访问GitHub仓库</a>
+    <button class="ag-cta ag-cta-ghost" onclick="copyAgInfo(this, 'AI漫剧全流程整合Skill - 老李自研V5.0.2。三步流水线（剧本→分镜→段式提示词）+武打体系三件套+空间导演V3。GitHub: https://github.com/lixiaoxiao9888-create/manju-laoli-skill')">📋 复制工具信息</button>
+   </div>
+   <div class="pl-tips" style="margin-top:10px"><b>使用建议：</b>作为漫剧制作的核心技能，建议首先安装此Skill。它整合了小逻AI短剧链、山音编剧/导演大师、HELL GRIND、CINEDANCE导演系统等10+开源方法论，是全流程一站式解决方案。顺手在GitHub点颗星⭐支持作者。</div>
+  </div>
+
+  <!-- 2. 爆款剧本 Skill 2.0 -->
+  <div class="ag-card" style="border-left-color:#2e86de">
+   <div class="ag-card-h">
+    📝 爆款剧本 Skill 2.0（老李自研）
+    <span class="badge ag-badge-script">剧本创作</span>
+    <span class="badge ag-badge-core">老李自研</span>
+    <span class="badge ag-badge-star">v2.0</span>
+   </div>
+   <div class="ag-desc">专精红果短剧生态的商业编剧引擎，把「一句创意/一部网文/一个脑洞」稳定转化为符合红果付费生态的爆款短剧剧本。核心差异化：聚焦纯剧本定位，只产出编剧层内容，不含制作衔接。v2.0覆盖升级为红果专精商业编剧引擎。</div>
+   <div class="ag-features">
+    <div class="ag-feature"><b>六交互模式：</b>/立项大纲、/全剧大纲、/分集规划、/写剧本、/剧本医生、/极速短剧、/合规审核</div>
+    <div class="ag-feature"><b>红果80集付费墙排布：</b>第10-15/28-32/55-58三级卡点 + 付费墙三法则（前置蓄水/断在反击前0.5秒/付费后即时兑现）</div>
+    <div class="ag-feature"><b>黄金前3秒五大母型×20变体钩子库：</b>生死绝境/极端羞辱/身份暴涨/物证背叛/规则悬念</div>
+    <div class="ag-feature"><b>四大断章公式：</b>掉马前一秒/物理悬停/反差金句/绝境二选一 + 标准断章格式</div>
+    <div class="ag-feature"><b>剧本医生台词七维诊断：</b>语言指纹/反向灌输死刑法/攻防对白回合制/单句≤15字 + 实战改写案例库</div>
+    <div class="ag-feature"><b>单集硬性体量控制：</b>90-120秒/净字数350-500/语速3.5-4.5字秒/场景≤2个</div>
+    <div class="ag-feature"><b>平台合规体系：</b>敏感词替换库 + 平台一票否决红线</div>
+   </div>
+   <div class="ag-info-grid">
+    <div class="ag-info-item"><span class="label">版本</span><span class="value">v2.0</span></div>
+    <div class="ag-info-item"><span class="label">作者</span><span class="value">漫剧老李</span></div>
+    <div class="ag-info-item"><span class="label">更新</span><span class="value">2026-08-26</span></div>
+    <div class="ag-info-item"><span class="label">许可证</span><span class="value">MIT</span></div>
+    <div class="ag-info-item"><span class="label">交互模式</span><span class="value">6种</span></div>
+    <div class="ag-info-item"><span class="label">钩子库</span><span class="value">20变体</span></div>
+   </div>
+   <div class="ag-specs">
+    <span class="ag-spec new">🆕 v2.0最新</span>
+    <span class="ag-spec rec">红果专精</span>
+    <span class="ag-spec">付费墙设计</span>
+    <span class="ag-spec">断章公式</span>
+    <span class="ag-spec">台词七维诊断</span>
+    <span class="ag-spec">合规审核</span>
+   </div>
+   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://github.com/lixiaoxiao9888-create/short-drama-factory" target="_blank" class="ag-cta ag-cta-primary">🔗 访问GitHub仓库</a>
+    <button class="ag-cta ag-cta-ghost" onclick="copyAgInfo(this, '爆款剧本Skill 2.0 - 老李自研。红果专精商业编剧引擎，六交互模式+80集付费墙排布+黄金3秒钩子库+四大断章公式+台词七维诊断。GitHub: https://github.com/lixiaoxiao9888-create/short-drama-factory')">📋 复制工具信息</button>
+   </div>
+   <div class="pl-tips" style="margin-top:10px"><b>使用建议：</b>剧本创作首选工具。安装方式：cp -r short-drama-factory ~/.openclaw/workspace/skills/，然后直接对话触发"写短剧"/"短剧大纲"/"立项大纲"/"写第1集"/"剧本医生"/"极速短剧"。</div>
+  </div>
+
+  <!-- 3. 巨物美学老李优化版 -->
+  <div class="ag-card" style="border-left-color:#7c3aed">
+   <div class="ag-card-h">
+    🐋 巨物美学老李优化版
+    <span class="badge ag-badge-image">生图美学</span>
+    <span class="badge ag-badge-core">老李自研</span>
+   </div>
+   <div class="ag-desc">巨物场景自动导演系统（Giant Scale Scene Director System），让AI真正画出"大到超出认知"的巨物。核心任务不是"生成一个很大的怪物"，而是通过人物、环境、空间、镜头和局部展示，让观众真正感受到"这个东西巨大到超出正常认知"。推荐配合GPT生图使用。</div>
+   <div class="ag-features">
+    <div class="ag-feature"><b>巨物类型识别：</b>生物型/人形/自然融合型/遗迹文明型/不可测型，自动匹配最佳表现方式</div>
+    <div class="ag-feature"><b>尺度等级系统S1-S7：</b>从大型到不可测级，拒绝只依赖"万米、百万米"数字，改用视觉尺度+环境关系</div>
+    <div class="ag-feature"><b>尺度锁定系统：</b>强制人物/建筑/山峰参照，防止AI把巨物画小</div>
+    <div class="ag-feature"><b>巨物展示完整度控制：</b>完整→部分超出画面→环境遮挡→局部展示，渐进式展示策略</div>
+    <div class="ag-feature"><b>镜头导演系统：</b>建立尺度→人物仰望→巨物局部→环境反应→最终大全景，五步递进</div>
+    <div class="ag-feature"><b>5种构图模式：</b>脚下仰视/天空横跨/山岳融合/巨大局部/环境经过</div>
+    <div class="ag-feature"><b>6大风格自动决策：</b>唯美/神秘/史诗/恐怖/神圣/东方神话</div>
+    <div class="ag-feature"><b>环境互动系统：</b>空气/地面/水面/生物，至少2项互动</div>
+   </div>
+   <div class="ag-flow">
+    <span class="ag-flow-step">用户输入"巨大的鲸鱼"</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">巨物类型</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">尺度等级</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">风格决策</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">人物/环境参照</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">构图+镜头</span>
+    <span class="ag-flow-arrow">→</span>
+    <span class="ag-flow-step">完整提示词</span>
+   </div>
+   <div class="ag-info-grid">
+    <div class="ag-info-item"><span class="label">版本</span><span class="value">V2.0</span></div>
+    <div class="ag-info-item"><span class="label">作者</span><span class="value">漫剧老李</span></div>
+    <div class="ag-info-item"><span class="label">更新</span><span class="value">2026-08-19</span></div>
+    <div class="ag-info-item"><span class="label">尺度等级</span><span class="value">S1-S7</span></div>
+    <div class="ag-info-item"><span class="label">构图模式</span><span class="value">5种</span></div>
+    <div class="ag-info-item"><span class="label">风格</span><span class="value">6大自动</span></div>
+   </div>
+   <div class="ag-specs">
+    <span class="ag-spec rec">配合GPT生图</span>
+    <span class="ag-spec">尺度锁定</span>
+    <span class="ag-spec">S1-S7等级</span>
+    <span class="ag-spec">5种构图</span>
+    <span class="ag-spec">6大风格</span>
+    <span class="ag-spec">附带案例</span>
+   </div>
+   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://github.com/lixiaoxiao9888-create/giant-scale-scene-skill" target="_blank" class="ag-cta ag-cta-primary">🔗 访问GitHub仓库</a>
+    <button class="ag-cta ag-cta-ghost" onclick="copyAgInfo(this, '巨物美学老李优化版V2.0 - 巨物场景自动导演系统。尺度等级S1-S7+尺度锁定系统+5种构图+6大风格自动决策。推荐配合GPT生图。GitHub: https://github.com/lixiaoxiao9888-create/giant-scale-scene-skill')">📋 复制工具信息</button>
+   </div>
+   <div class="pl-tips" style="margin-top:10px"><b>核心理念：</b>"巨物做得再精致，如果观众不知道它到底有多大，那么巨物场景就是失败的。"——漫剧老李。用户只需输入简单描述（如"巨大的鲸鱼"），SKILL自动补全完整提示词。</div>
+  </div>
+
+  <!-- 4. 小罗导演 Skill -->
+  <div class="ag-card" style="border-left-color:#059669">
+   <div class="ag-card-h">
+    🎬 小罗导演 Skill（最新推荐）
+    <span class="badge ag-badge-director">导演/视频</span>
+    <span class="badge ag-badge-star">推荐</span>
+   </div>
+   <div class="ag-desc">最新推荐的AI导演技能，适合短剧/漫剧视频生成。包含完整的影视剧本分析、原创改编、编剧创作、分镜脚本、角色设定（三视图/动作/服装/表情/道具）、场景布局设计、VR场景图、视觉分镜九宫格生成、视频拉片拆解等全链路模块。268 Stars，45 Forks。</div>
+   <div class="ag-features">
+    <div class="ag-feature"><b>影视剧本三件套：</b>影视剧本分析 + 影视剧本原创改编 + 影视编剧创作，从拆解到创作全链路</div>
+    <div class="ag-feature"><b>剧本分镜脚本：</b>将剧本转化为可执行的详细分镜脚本</div>
+    <div class="ag-feature"><b>角色资产全套：</b>角色设定图/三视图/动作设定/服装设定/表情设定/道具设定，六维角色资产</div>
+    <div class="ag-feature"><b>场景布局系统：</b>AI短剧场景布局设计 + 场景俯视布局 + 场景四视图，多维度场景构建</div>
+    <div class="ag-feature"><b>视觉分镜九宫格：</b>自动生成视觉分镜九宫格，一图概览全集分镜</div>
+    <div class="ag-feature"><b>VR场景图：</b>生成VR场景参考图，辅助空间理解</div>
+    <div class="ag-feature"><b>视频拉片拆解：</b>拆解已有视频的镜头语言和节奏，学习参考</div>
+    <div class="ag-feature"><b>90秒剧本转视频：</b>从剧本直接到90秒短视频的全流程转换</div>
+    <div class="ag-feature"><b>故事面板：</b>可视化故事面板生成，辅助剧情规划</div>
+   </div>
+   <div class="ag-info-grid">
+    <div class="ag-info-item"><span class="label">Stars</span><span class="value">⭐ 268</span></div>
+    <div class="ag-info-item"><span class="label">Forks</span><span class="value">45</span></div>
+    <div class="ag-info-item"><span class="label">作者</span><span class="value">zhurui0523</span></div>
+    <div class="ag-info-item"><span class="label">文件数</span><span class="value">18+</span></div>
+    <div class="ag-info-item"><span class="label">更新</span><span class="value">2026-07</span></div>
+    <div class="ag-info-item"><span class="label">平台</span><span class="value">AI Studio</span></div>
+   </div>
+   <div class="ag-specs">
+    <span class="ag-spec hot">🔥 268 Stars</span>
+    <span class="ag-spec rec">最新推荐</span>
+    <span class="ag-spec">角色六维设定</span>
+    <span class="ag-spec">九宫格分镜</span>
+    <span class="ag-spec">VR场景</span>
+    <span class="ag-spec">视频拉片</span>
+    <span class="ag-spec">90秒转视频</span>
+   </div>
+   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://github.com/zhurui0523/XiaoLuo-AI-Drama-Skill" target="_blank" class="ag-cta ag-cta-primary">🔗 访问GitHub仓库</a>
+    <button class="ag-cta ag-cta-ghost" onclick="copyAgInfo(this, '小罗导演Skill - 最新推荐AI导演技能。含影视剧本三件套+角色六维设定+场景布局+九宫格分镜+VR场景+视频拉片+90秒转视频。268 Stars。GitHub: https://github.com/zhurui0523/XiaoLuo-AI-Drama-Skill')">📋 复制工具信息</button>
+   </div>
+   <div class="pl-tips" style="margin-top:10px"><b>使用建议：</b>适合短剧/漫剧视频生成全流程。角色资产模块（三视图+动作+服装+表情+道具）特别适合需要角色一致性的漫剧项目。可配合老李漫剧全流程Skill使用，互补剧本和导演环节。</div>
+  </div>
+
+  <!-- 5. Seedance 导演技能 -->
+  <div class="ag-card" style="border-left-color:#059669">
+   <div class="ag-card-h">
+    🎥 Seedance 导演技能
+    <span class="badge ag-badge-director">导演/视频</span>
+    <span class="badge ag-badge-star">v5.5.2</span>
+   </div>
+   <div class="ag-desc">Seedance 2.0 Skill OS —— 面向Seedance 2.0电影制作的Agent操作系统。核心理念："Direct the model. Don't micro-manage the frame."（导演模型，不要微管理画面）。支持T2V/I2V/V2V/R2V/FLF2V/编辑/扩展/音频感知/首尾帧等全工作流，六语言电影词汇库，原生音频+IP安全重写+来源标注平台事实。</div>
+   <div class="ag-features">
+    <div class="ag-feature"><b>核心管线14个Skill：</b>seedance-interview（创意访谈）/ seedance-prompt（完整提示词）/ seedance-prompt-short（压缩提示词）/ seedance-camera（镜头）/ seedance-motion（运动）/ seedance-lighting（光线）/ seedance-characters（角色）/ seedance-style（风格）/ seedance-vfx（特效）/ seedance-audio（音频）/ seedance-pipeline（管线）/ seedance-recipes（配方）/ seedance-troubleshoot（故障排查）/ seedance-copyright（版权安全）</div>
+    <div class="ag-feature"><b>专业电影制作工作流：</b>导演（treatment/场景节拍/表演意图）、摄影指导（镜头合同/镜头尺寸/运镜）、制片人（客户简报/权利图/审批门）、剪辑师（选择计划/连续性交接）、调色师（ACES感知交接）、声音团队（对白图/环境/SFX/音乐层）、本地化团队（字幕/配音指南/市场文案）、交付QC（帧率/宽高比/色彩/响度）</div>
+    <div class="ag-feature"><b>参考资产管理：</b>按角色分离每个参考资产：身份/环境/运动/镜头节奏/音频节拍/风格/端点</div>
+    <div class="ag-feature"><b>六语言电影词汇：</b>英语/中文/日语/韩语/西班牙语/俄语，含角色绑定/首尾帧措辞/编辑扩展措辞/安全措辞/音频提示</div>
+    <div class="ag-feature"><b>IP安全重写：</b>不安全的名人/受保护IP/私人/品牌/标志/歌曲/声音请求自动重写为更安全的创意等价物</div>
+    <div class="ag-feature"><b>故障诊断系统：</b>五判决take分诊 + 单变量重拍 + 尝试预算 + 成本感知起草</div>
+    <div class="ag-feature"><b>模型机制参考：</b>解释每条规则背后的机制，诊断失败输出的具体修复杠杆</div>
+   </div>
+   <div class="ag-info-grid">
+    <div class="ag-info-item"><span class="label">版本</span><span class="value">v5.5.2</span></div>
+    <div class="ag-info-item"><span class="label">作者</span><span class="value">@iamemily2050</span></div>
+    <div class="ag-info-item"><span class="label">更新</span><span class="value">2026-06-13</span></div>
+    <div class="ag-info-item"><span class="label">许可证</span><span class="value">MIT</span></div>
+    <div class="ag-info-item"><span class="label">Skill数</span><span class="value">14+核心</span></div>
+    <div class="ag-info-item"><span class="label">语言</span><span class="value">6种</span></div>
+   </div>
+   <div class="ag-specs">
+    <span class="ag-spec hot">🔥 v5.5.2深度校对</span>
+    <span class="ag-spec rec">专业级</span>
+    <span class="ag-spec">T2V/I2V/V2V/R2V</span>
+    <span class="ag-spec">首尾帧</span>
+    <span class="ag-spec">原生音频</span>
+    <span class="ag-spec">IP安全重写</span>
+    <span class="ag-spec">六语言</span>
+    <span class="ag-spec">ACES色彩</span>
+   </div>
+   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://github.com/Emily2040/seedance-2.0" target="_blank" class="ag-cta ag-cta-primary">🔗 访问GitHub仓库</a>
+    <button class="ag-cta ag-cta-ghost" onclick="copyAgInfo(this, 'Seedance 2.0 Skill OS v5.5.2 - 面向Seedance 2.0电影制作的Agent操作系统。14+核心Skill+专业电影制作工作流+六语言词汇+IP安全重写+故障诊断。MIT许可。GitHub: https://github.com/Emily2040/seedance-2.0')">📋 复制工具信息</button>
+   </div>
+   <div class="pl-tips" style="margin-top:10px"><b>核心理念：</b>"Direct the model, don't micro-manage the frame." 适用于ByteDance Seedance 2.0/Dreamina/即梦/豆包/Volcengine Ark/Runway Seedance 2/fal等平台。支持从模糊创意到专业交付的完整电影制作流程。</div>
+  </div>
+
+  <!-- 6. MiniMax H3 Skill -->
+  <div class="ag-card" style="border-left-color:#e91e63">
+   <div class="ag-card-h">
+    🤖 MiniMax H3 Skill
+    <span class="badge ag-badge-director">导演/视频</span>
+    <span class="badge ag-badge-tool">官方</span>
+   </div>
+   <div class="ag-desc">MiniMax官方H3模型技能集，视频生成备选方案。由MiniMax-AI官方维护，提供H3模型的专业视频生成能力。适合作为主力视频生成工具的备选方案，或在特定场景下使用MiniMax H3的专长优势。</div>
+   <div class="ag-features">
+    <div class="ag-feature"><b>官方维护：</b>MiniMax-AI官方仓库，模型更新及时</div>
+    <div class="ag-feature"><b>H3模型技能集：</b>针对MiniMax H3模型特性优化的生成技能</div>
+    <div class="ag-feature"><b>视频生成：</b>支持文本到视频、图片到视频等多种生成模式</div>
+    <div class="ag-feature"><b>备选方案：</b>可作为Seedance/其他视频生成工具的备选</div>
+   </div>
+   <div class="ag-info-grid">
+    <div class="ag-info-item"><span class="label">作者</span><span class="value">MiniMax-AI</span></div>
+    <div class="ag-info-item"><span class="label">类型</span><span class="value">官方</span></div>
+    <div class="ag-info-item"><span class="label">模型</span><span class="value">H3</span></div>
+    <div class="ag-info-item"><span class="label">定位</span><span class="value">备选方案</span></div>
+   </div>
+   <div class="ag-specs">
+    <span class="ag-spec">官方维护</span>
+    <span class="ag-spec">H3模型</span>
+    <span class="ag-spec">视频生成</span>
+    <span class="ag-spec">备选方案</span>
+   </div>
+   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills" target="_blank" class="ag-cta ag-cta-primary">🔗 访问GitHub仓库</a>
+    <button class="ag-cta ag-cta-ghost" onclick="copyAgInfo(this, 'MiniMax H3 Skill - MiniMax官方H3模型技能集，视频生成备选方案。GitHub: https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills')">📋 复制工具信息</button>
+   </div>
+   <div class="pl-tips" style="margin-top:10px"><b>使用建议：</b>作为视频生成的备选方案。当主力工具（如Seedance）在特定场景下效果不佳时，可切换到MiniMax H3尝试。官方维护保证了模型的及时更新和稳定性。</div>
+  </div>
+
+  <!-- 7. ComfyUI 自动控制 Skill -->
+  <div class="ag-card" style="border-left-color:#e91e63">
+   <div class="ag-card-h">
+    🔧 ComfyUI 自动控制 Skill
+    <span class="badge ag-badge-tool">自动化工具</span>
+    <span class="badge ag-badge-tool">进阶</span>
+   </div>
+   <div class="ag-desc">comfyui-mcp —— 本地优先、Agent原生的ComfyUI控制平面。通过MCP协议自动控制ComfyUI工作流，支持图像/视频/音频生成、工作流编写与执行、模型和自定义节点管理，并可用自然语言编辑实时ComfyUI图。支持Claude/ChatGPT/Gemini/Ollama等任意LLM驱动。37个MCP工具 + 37个AI技能 + 55个安装包 + 11个斜杠命令 + 4个自主Agent。</div>
+   <div class="ag-features">
+    <div class="ag-feature"><b>37个MCP工具：</b>覆盖工作流格式/节点类型/数据流模式/管线架构/MCP工具使用全指南</div>
+    <div class="ag-feature"><b>37个AI技能：</b>Flux/WAN/LTX 2.3视频/Qwen/Z-Image/Ideogram 4/ERNIE/ANIMA + 模型注册表 + Civitai配对 + 节点创作 + 启动/性能标志矩阵</div>
+    <div class="ag-feature"><b>4个自主Agent：</b>comfy-explorer（研究自定义节点包）/ comfy-debugger（自动诊断工作流失败）/ comfy-optimizer（分析工作流性能优化）</div>
+    <div class="ag-feature"><b>11个斜杠命令：</b>/comfy:gen（生成图片）/ /comfy:viz（可视化工作流）/ /comfy:debug（诊断失败）/ /comfy:batch（参数扫描）/ /comfy:convert（格式转换）/ /comfy:install（安装节点包）/ /comfy:gallery（浏览输出）/ /comfy:compare（对比工作流）/ /comfy:recipe（多步配方）等</div>
+    <div class="ag-feature"><b>55个安装包：</b>ANIMA/Ideogram 4/LTX-2.3/ERNIE/WAN/Qwen/Z-Image等一键安装</div>
+    <div class="ag-feature"><b>多LLM支持：</b>Claude/ChatGPT/Gemini/Ollama（完全离线）/ DeepSeek/GLM/Kimi/任何OpenAI兼容端点</div>
+    <div class="ag-feature"><b>Agent面板：</b>ComfyUI侧边栏自主Agent，驱动实时画布：编辑/空间布局/一键加载工作流/回滚/消息托盘/活动卡片</div>
+    <div class="ag-feature"><b>跨平台：</b>macOS/Linux/Windows全支持，自动检测ComfyUI安装和端口</div>
+    <div class="ag-feature"><b>3个Hooks：</b>VRAM看门狗（执行前检查GPU内存）/ 保存警告（停止前提示保存）/ 任务完成通知</div>
+   </div>
+   <div class="ag-info-grid">
+    <div class="ag-info-item"><span class="label">MCP工具</span><span class="value">37个</span></div>
+    <div class="ag-info-item"><span class="label">AI技能</span><span class="value">37个</span></div>
+    <div class="ag-info-item"><span class="label">安装包</span><span class="value">55个</span></div>
+    <div class="ag-info-item"><span class="label">Agent</span><span class="value">4个</span></div>
+    <div class="ag-info-item"><span class="label">提交数</span><span class="value">1,342+</span></div>
+    <div class="ag-info-item"><span class="label">许可证</span><span class="value">MIT</span></div>
+   </div>
+   <div class="ag-specs">
+    <span class="ag-spec hot">🔥 1342+提交</span>
+    <span class="ag-spec rec">进阶推荐</span>
+    <span class="ag-spec">37 MCP工具</span>
+    <span class="ag-spec">37 AI技能</span>
+    <span class="ag-spec">任意LLM</span>
+    <span class="ag-spec">Agent面板</span>
+    <span class="ag-spec">跨平台</span>
+    <span class="ag-spec">离线可用</span>
+   </div>
+   <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://github.com/artokun/comfyui-mcp" target="_blank" class="ag-cta ag-cta-primary">🔗 访问GitHub仓库</a>
+    <button class="ag-cta ag-cta-ghost" onclick="copyAgInfo(this, 'ComfyUI自动控制Skill (comfyui-mcp) - 本地优先Agent原生ComfyUI控制平面。37个MCP工具+37个AI技能+4个自主Agent+11个斜杠命令+55个安装包。支持任意LLM。GitHub: https://github.com/artokun/comfyui-mcp')">📋 复制工具信息</button>
+   </div>
+   <div class="pl-tips" style="margin-top:10px"><b>安装方式：</b>在Claude Code配置中添加MCP服务器即可（npx -y comfyui-mcp）。也支持作为Claude Code插件安装：/plugin install comfy。适合需要自动化出图、批量生成、工作流管理的进阶用户。</div>
+  </div>
+
+ </div>
+
+ <!-- ===== 核心全流程 ===== -->
+ <div class="ag-content" id="agCat-core" style="display:none">
+  <div class="ag-card" style="border-left-color:#ff9800">
+   <div class="ag-card-h">🎭 AI漫剧全流程整合 Skill（老李自研）<span class="badge ag-badge-star">⭐ 核心推荐</span></div>
+   <div class="ag-desc">老李自研的漫剧全流程整合技能，一站式覆盖漫剧制作各环节。V5.0.2版本含武打体系三件套+空间导演V3。</div>
+   <div class="ag-specs"><span class="ag-spec hot">🔥 最核心推荐</span><span class="ag-spec">全流程</span><span class="ag-spec">V5.0.2</span></div>
+   <a href="https://github.com/lixiaoxiao9888-create/manju-laoli-skill" target="_blank" class="ag-cta ag-cta-primary" style="margin-top:10px">🔗 访问GitHub仓库</a>
+  </div>
+ </div>
+
+ <!-- ===== 剧本创作 ===== -->
+ <div class="ag-content" id="agCat-script" style="display:none">
+  <div class="ag-card" style="border-left-color:#2e86de">
+   <div class="ag-card-h">📝 爆款剧本 Skill 2.0（老李自研）<span class="badge ag-badge-star">v2.0</span></div>
+   <div class="ag-desc">专精红果短剧生态的商业编剧引擎。六交互模式+80集付费墙排布+黄金3秒钩子库+四大断章公式+台词七维诊断。</div>
+   <div class="ag-specs"><span class="ag-spec new">🆕 v2.0</span><span class="ag-spec">红果专精</span><span class="ag-spec">MIT</span></div>
+   <a href="https://github.com/lixiaoxiao9888-create/short-drama-factory" target="_blank" class="ag-cta ag-cta-primary" style="margin-top:10px">🔗 访问GitHub仓库</a>
+  </div>
+ </div>
+
+ <!-- ===== 生图美学 ===== -->
+ <div class="ag-content" id="agCat-image" style="display:none">
+  <div class="ag-card" style="border-left-color:#7c3aed">
+   <div class="ag-card-h">🐋 巨物美学老李优化版<span class="badge ag-badge-image">生图美学</span></div>
+   <div class="ag-desc">巨物场景自动导演系统V2.0。尺度等级S1-S7+尺度锁定系统+5种构图+6大风格自动决策。推荐配合GPT生图。</div>
+   <div class="ag-specs"><span class="ag-spec rec">配合GPT生图</span><span class="ag-spec">S1-S7</span><span class="ag-spec">V2.0</span></div>
+   <a href="https://github.com/lixiaoxiao9888-create/giant-scale-scene-skill" target="_blank" class="ag-cta ag-cta-primary" style="margin-top:10px">🔗 访问GitHub仓库</a>
+  </div>
+ </div>
+
+ <!-- ===== 导演/视频 ===== -->
+ <div class="ag-content" id="agCat-director" style="display:none">
+  <div class="ag-card" style="border-left-color:#059669">
+   <div class="ag-card-h">🎬 小罗导演 Skill<span class="badge ag-badge-director">导演/视频</span><span class="badge ag-badge-star">推荐</span></div>
+   <div class="ag-desc">最新推荐AI导演技能。角色六维设定+九宫格分镜+VR场景+视频拉片+90秒转视频。268 Stars。</div>
+   <a href="https://github.com/zhurui0523/XiaoLuo-AI-Drama-Skill" target="_blank" class="ag-cta ag-cta-primary" style="margin-top:10px">🔗 访问GitHub仓库</a>
+  </div>
+  <div class="ag-card" style="border-left-color:#059669">
+   <div class="ag-card-h">🎥 Seedance 导演技能<span class="badge ag-badge-director">导演/视频</span><span class="badge ag-badge-star">v5.5.2</span></div>
+   <div class="ag-desc">Seedance 2.0 Skill OS。14+核心Skill+专业电影制作工作流+六语言词汇+IP安全重写。MIT许可。</div>
+   <a href="https://github.com/Emily2040/seedance-2.0" target="_blank" class="ag-cta ag-cta-primary" style="margin-top:10px">🔗 访问GitHub仓库</a>
+  </div>
+  <div class="ag-card" style="border-left-color:#e91e63">
+   <div class="ag-card-h">🤖 MiniMax H3 Skill<span class="badge ag-badge-director">导演/视频</span><span class="badge ag-badge-tool">官方</span></div>
+   <div class="ag-desc">MiniMax官方H3模型技能集，视频生成备选方案。</div>
+   <a href="https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills" target="_blank" class="ag-cta ag-cta-primary" style="margin-top:10px">🔗 访问GitHub仓库</a>
+  </div>
+ </div>
+
+ <!-- ===== 自动化工具 ===== -->
+ <div class="ag-content" id="agCat-tool" style="display:none">
+  <div class="ag-card" style="border-left-color:#e91e63">
+   <div class="ag-card-h">🔧 ComfyUI 自动控制 Skill<span class="badge ag-badge-tool">自动化</span><span class="badge ag-badge-tool">进阶</span></div>
+   <div class="ag-desc">comfyui-mcp —— 本地优先Agent原生ComfyUI控制平面。37个MCP工具+37个AI技能+4个自主Agent。支持任意LLM。</div>
+   <a href="https://github.com/artokun/comfyui-mcp" target="_blank" class="ag-cta ag-cta-primary" style="margin-top:10px">🔗 访问GitHub仓库</a>
+  </div>
+ </div>
+
+ <!-- 使用指南 -->
+ <div class="card tint-amber" style="margin-top:20px">
+  <div class="card-h">📖 工具组合使用指南</div>
+  <div class="txt" style="line-height:2">
+   <b>推荐工作流：</b><br>
+   <b>1. 剧本阶段：</b>使用「爆款剧本Skill 2.0」生成符合红果付费生态的爆款短剧剧本<br>
+   <b>2. 全流程整合：</b>使用「AI漫剧全流程整合Skill」将剧本转化为分镜+资产+段式提示词<br>
+   <b>3. 场景生成：</b>使用「巨物美学」生成震撼大场景，配合GPT Image 2出图<br>
+   <b>4. 视频导演：</b>使用「小罗导演」或「Seedance导演」将分镜转化为视频<br>
+   <b>5. 自动化出图：</b>使用「ComfyUI自动控制」实现批量自动化生成<br>
+   <b>6. 备选方案：</b>「MiniMax H3」作为视频生成备选<br>
+   <br>
+   <b>工具关系图：</b><br>
+   爆款剧本 → 漫剧全流程（剧本→分镜→提示词） → 巨物美学（大场景） + 小罗/Seedance（视频导演） → ComfyUI（自动化批量）
+  </div>
+ </div>
+</div>
+
 <!-- ========== 系统设置 ========== -->
 <div class="section" id="sec-settings">
  <div class="page-head"><span class="bow">⚙️</span><h1>系统设置</h1><span class="sub">· AI模型 · 云同步 · 数据备份</span></div>
@@ -3102,6 +3546,35 @@ function switchPlCat(cat){
  badge.textContent=y+'.'+m+'.'+d+' 精选更新';
  }
 })();
+
+/* ========== AI漫剧工具库分类切换 ========== */
+function switchAgCat(cat){
+ document.querySelectorAll('.ag-cat').forEach(function(el){
+ el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+ });
+ document.querySelectorAll('.ag-content').forEach(function(el){
+ el.style.display='none';
+ });
+ var target=document.getElementById('agCat-'+cat);
+ if(target) target.style.display='block';
+}
+
+/* ========== 复制工具信息 ========== */
+function copyAgInfo(btn,text){
+ if(navigator.clipboard){
+ navigator.clipboard.writeText(text).then(function(){
+ showToast('已复制工具信息','success');
+ });
+ }else{
+ var ta=document.createElement('textarea');
+ ta.value=text;
+ document.body.appendChild(ta);
+ ta.select();
+ document.execCommand('copy');
+ document.body.removeChild(ta);
+ showToast('已复制工具信息','success');
+ }
+}
 
 /* ========== 侧边栏切换 ========== */
 function toggleSidebar(state){
