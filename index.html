@@ -33,8 +33,9 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
 .nav-item.expanded .submenu-arrow{transform:rotate(180deg)}
 .submenu{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 10px 0 38px;position:relative;z-index:2}
 .submenu.open{max-height:500px}
-.submenu-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.5);font-size:12px;font-weight:500;transition:all .2s;margin-bottom:2px}
+.submenu-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.5);font-size:12px;font-weight:500;transition:all .15s;margin-bottom:2px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .submenu-item:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.9)}
+.submenu-item:active{background:rgba(46,134,222,.3);color:#fff;transform:scale(.97)}
 .submenu-item.active{background:rgba(46,134,222,.25);color:#fff}
 .submenu-item .sm-ico{font-size:14px}
 .sync-badge-wrap{padding:8px 14px;display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5)}
@@ -453,17 +454,17 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <span class="ico">🎨</span><span class="lbl">风格图鉴</span>
  <span class="submenu-arrow">▼</span>
  </div>
- <div class="submenu open" id="submenu-styleguide" onclick="event.stopPropagation()">
-  <div class="submenu-item active" onclick="event.stopPropagation();navTo('styleguide')">
+ <div class="submenu open" id="submenu-styleguide">
+  <div class="submenu-item active" data-sec="styleguide">
    <span class="sm-ico">🌸</span>动漫插画风格
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('styleguide')">
+  <div class="submenu-item" data-sec="styleguide">
    <span class="sm-ico">📸</span>真人摄影风格
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('styleguide')">
+  <div class="submenu-item" data-sec="styleguide">
    <span class="sm-ico">🎥</span>运镜与构图
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('styleguide')">
+  <div class="submenu-item" data-sec="styleguide">
    <span class="sm-ico">🤖</span>AI工具推荐
   </div>
  </div>
@@ -472,23 +473,23 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <span class="ico">📚</span><span class="lbl">提示词素材库</span>
  <span class="submenu-arrow">▼</span>
  </div>
- <div class="submenu" id="submenu-prompts" onclick="event.stopPropagation()">
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('framework')">
+ <div class="submenu" id="submenu-prompts">
+  <div class="submenu-item" data-sec="framework">
    <span class="sm-ico">📐</span>提示词框架
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('prompts')">
+  <div class="submenu-item" data-sec="prompts">
    <span class="sm-ico">🎭</span>提示词大全
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('expression')">
+  <div class="submenu-item" data-sec="expression">
    <span class="sm-ico">😊</span>人物表情库
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('weapon')">
+  <div class="submenu-item" data-sec="weapon">
    <span class="sm-ico">⚔️</span>武器库提示词
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('effect')">
+  <div class="submenu-item" data-sec="effect">
    <span class="sm-ico">✨</span>特效提示词
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navTo('music')">
+  <div class="submenu-item" data-sec="music">
    <span class="sm-ico">🎵</span>无版权音乐库
   </div>
  </div>
@@ -497,26 +498,26 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <span class="ico">🎬</span><span class="lbl">AI漫剧制作</span>
  <span class="submenu-arrow">▼</span>
  </div>
- <div class="submenu" id="submenu-agents" onclick="event.stopPropagation()">
-  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('manju')">
+ <div class="submenu" id="submenu-agents">
+  <div class="submenu-item" data-sec="agents" data-agent="manju">
    <span class="sm-ico">🎭</span>漫剧全流程
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('script')">
+  <div class="submenu-item" data-sec="agents" data-agent="script">
    <span class="sm-ico">📝</span>爆款剧本
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('giant')">
+  <div class="submenu-item" data-sec="agents" data-agent="giant">
    <span class="sm-ico">🐋</span>巨物美学
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('director')">
+  <div class="submenu-item" data-sec="agents" data-agent="director">
    <span class="sm-ico">🎬</span>小罗导演
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('seedance')">
+  <div class="submenu-item" data-sec="agents" data-agent="seedance">
    <span class="sm-ico">🎥</span>Seedance视频
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('minimax')">
+  <div class="submenu-item" data-sec="agents" data-agent="minimax">
    <span class="sm-ico">🤖</span>MiniMax视频
   </div>
-  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('comfy')">
+  <div class="submenu-item" data-sec="agents" data-agent="comfy">
    <span class="sm-ico">🔧</span>ComfyUI工作流
   </div>
  </div>
@@ -7216,21 +7217,59 @@ function switchSection(id){
  if(window.innerWidth<=768) toggleSidebar(false);
 }
 
-// 子菜单点击事件委托
+// 子菜单点击事件委托（桌面端）
 document.addEventListener('click',function(e){
+  if(window.innerWidth>768) return; // 移动端走触摸事件
   var subItem=e.target.closest('.submenu-item');
   if(subItem){
     e.stopPropagation();
-    var sec=subItem.getAttribute('data-sec');
-    var agent=subItem.getAttribute('data-agent');
-    if(sec){
-      switchSection(sec);
-    }
-    if(agent && typeof switchAgent==='function'){
-      setTimeout(function(){ switchAgent(agent); },50);
-    }
+    handleSubmenuTap(subItem);
   }
 });
+
+// 移动端子菜单触摸点击（更可靠）
+(function(){
+  var touchStartY=0;
+  var touchStartX=0;
+  var touchTarget=null;
+
+  document.addEventListener('touchstart',function(e){
+    if(window.innerWidth>768)return;
+    var subItem=e.target.closest('.submenu-item');
+    if(subItem){
+      touchTarget=subItem;
+      touchStartX=e.touches[0].clientX;
+      touchStartY=e.touches[0].clientY;
+    }else{
+      touchTarget=null;
+    }
+  },{passive:true});
+
+  document.addEventListener('touchend',function(e){
+    if(window.innerWidth>768)return;
+    if(!touchTarget)return;
+    var dx=Math.abs(e.changedTouches[0].clientX-touchStartX);
+    var dy=Math.abs(e.changedTouches[0].clientY-touchStartY);
+    // 移动距离小于10px才算点击
+    if(dx<10 && dy<10){
+      e.preventDefault();
+      handleSubmenuTap(touchTarget);
+    }
+    touchTarget=null;
+  },{passive:false});
+})();
+
+// 统一的子菜单点击处理函数
+function handleSubmenuTap(el){
+  var sec=el.getAttribute('data-sec');
+  var agent=el.getAttribute('data-agent');
+  if(sec){
+    switchSection(sec);
+  }
+  if(agent && typeof switchAgent==='function'){
+    setTimeout(function(){ switchAgent(agent); },100);
+  }
+}
 
 /* ========== 设置表单更新 ========== */
 function updateSettingsForm(){
