@@ -252,6 +252,71 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .expr-action-btn.secondary{background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
 .expr-action-btn.secondary:hover{color:#e91e63;border-color:#e91e63}
 
+/* 武器库 & 特效库 - 复用表情库样式体系，用不同主色调 */
+.weapon-page,.effect-page{padding:16px}
+.weapon-head,.effect-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.weapon-head h2,.effect-head h2{font-size:18px;font-weight:800;color:var(--ink);margin:0}
+.weapon-head .sub,.effect-head .sub{font-size:12px;color:var(--ink-3)}
+.weapon-stat,.effect-stat{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap}
+.weapon-stat-item,.effect-stat-item{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg);color:var(--ink-2)}
+.weapon-stat-item b{color:#ff6b35}
+.effect-stat-item b{color:#9b59b6}
+.weapon-cats,.effect-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.weapon-cat,.effect-cat{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:all .2s;white-space:nowrap}
+.weapon-cat:hover{border-color:#ff6b35;color:#ff6b35}
+.weapon-cat.active{background:#ff6b35;color:#fff;border-color:#ff6b35}
+.effect-cat:hover{border-color:#9b59b6;color:#9b59b6}
+.effect-cat.active{background:#9b59b6;color:#fff;border-color:#9b59b6}
+.weapon-list,.effect-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.weapon-card,.effect-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;transition:all .2s;cursor:pointer}
+.weapon-card:hover{box-shadow:0 6px 20px rgba(255,107,53,.1);border-color:#ff6b35;transform:translateY(-2px)}
+.effect-card:hover{box-shadow:0 6px 20px rgba(155,89,182,.1);border-color:#9b59b6;transform:translateY(-2px)}
+.weapon-card-top,.effect-card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.weapon-emoji,.effect-emoji{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.weapon-emoji{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+.effect-emoji{background:linear-gradient(135deg,#f3e5f5,#e1bee7)}
+.weapon-info,.effect-info{flex:1;min-width:0}
+.weapon-title,.effect-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.weapon-en,.effect-en{font-size:11px;color:var(--ink-3);font-style:italic}
+.weapon-tags,.effect-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.weapon-tag,.effect-tag{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--bg);color:var(--ink-2)}
+.weapon-tag.type{background:#fff3e0;color:#ff6b35}
+.weapon-tag.era{background:#e8f5e9;color:#4caf50}
+.weapon-tag.origin{background:#e8f0ff;color:#2e86de}
+.effect-tag.type{background:#f3e5f5;color:#9b59b6}
+.effect-tag.scene{background:#fff3e0;color:#ff9800}
+.effect-tag.intensity{background:#e8f5e9;color:#4caf50}
+.weapon-card-detail,.effect-card-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.weapon-card.expanded .weapon-card-detail,.effect-card.expanded .effect-card-detail{display:block}
+.weapon-detail-grid,.effect-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px}
+.weapon-detail-item,.effect-detail-item{font-size:11px;padding:6px 8px;background:var(--bg);border-radius:6px}
+.weapon-detail-item{border-left:2px solid #ff6b35}
+.effect-detail-item{border-left:2px solid #9b59b6}
+.weapon-detail-item b,.effect-detail-item b{display:block;color:var(--ink);font-size:11px;margin-bottom:2px}
+.weapon-detail-item span,.effect-detail-item span{color:var(--ink-2);line-height:1.4}
+.weapon-prompt-box,.effect-prompt-box{margin-top:10px}
+.weapon-prompt-title{font-size:12px;font-weight:700;color:#ff6b35;margin-bottom:6px}
+.effect-prompt-title{font-size:12px;font-weight:700;color:#9b59b6;margin-bottom:6px}
+.weapon-lang-label,.effect-lang-label{font-size:11px;font-weight:600;color:var(--ink-2);margin:8px 0 3px}
+.weapon-prompt-text,.effect-prompt-text{font-size:12px;line-height:1.6;color:var(--ink);padding:8px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--line);cursor:pointer;transition:all .2s;white-space:pre-wrap;word-break:break-word}
+.weapon-prompt-text:hover{border-color:#ff6b35;background:rgba(255,107,53,.03)}
+.effect-prompt-text:hover{border-color:#9b59b6;background:rgba(155,89,182,.03)}
+.weapon-tips,.effect-tips{font-size:11px;color:var(--ink-2);line-height:1.6;margin-top:10px;padding:8px 10px;border-radius:6px;border-left:3px solid}
+.weapon-tips{background:#fff3e020;border-color:#ff6b35}
+.effect-tips{background:#f3e5f520;border-color:#9b59b6}
+.weapon-tips b{color:#ff6b35}
+.effect-tips b{color:#9b59b6}
+.weapon-actions,.effect-actions{display:flex;gap:6px;margin-top:10px}
+.weapon-action-btn,.effect-action-btn{flex:1;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
+.weapon-action-btn.primary{background:#ff6b35;color:#fff}
+.weapon-action-btn.primary:hover{opacity:.9}
+.effect-action-btn.primary{background:#9b59b6;color:#fff}
+.effect-action-btn.primary:hover{opacity:.9}
+.weapon-action-btn.secondary,.effect-action-btn.secondary{background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+.weapon-action-btn.secondary:hover{color:#ff6b35;border-color:#ff6b35}
+.effect-action-btn.secondary:hover{color:#9b59b6;border-color:#9b59b6}
+
+
 
 /* AI智能体工作台 */
 .agent-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
@@ -327,6 +392,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  </div>
  <div class="nav-item" data-section="prompts" onclick="switchSection('prompts')">
  <span class="ico">📚</span><span class="lbl">提示词库</span>
+ </div>
+ <div class="nav-item" data-section="weapon" onclick="switchSection('weapon')">
+ <span class="ico">⚔️</span><span class="lbl">武器库提示词</span>
+ </div>
+ <div class="nav-item" data-section="effect" onclick="switchSection('effect')">
+ <span class="ico">✨</span><span class="lbl">特效提示词</span>
  </div>
  <div class="nav-item" data-section="agents" onclick="switchSection('agents')">
  <span class="ico">🎬</span><span class="lbl">AI漫剧工具</span>
@@ -3055,6 +3126,67 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 
 
 
+
+<!-- ========== 武器库提示词 ========== -->
+<div class="section" id="sec-weapon">
+ <div class="weapon-page">
+  <div class="weapon-head">
+   <span class="bow">⚔️</span>
+   <div>
+    <h2>武器库提示词</h2>
+    <span class="sub">精选武器设定 · 中英双语 · GPT Image 2 专业版</span>
+   </div>
+   <div class="weapon-stat">
+    <div class="weapon-stat-item">共 <b id="weaponTotalCount">24</b> 款</div>
+    <div class="weapon-stat-item"><b>2</b> 个分类</div>
+   </div>
+  </div>
+
+  <div class="weapon-cats" id="weaponCats">
+   <button class="weapon-cat active" onclick="switchWeaponCat('all')">🏆 全部</button>
+   <button class="weapon-cat" onclick="switchWeaponCat('ancient')">🗡️ 古代武器</button>
+   <button class="weapon-cat" onclick="switchWeaponCat('modern')">🔫 现代武器</button>
+  </div>
+
+  <div class="weapon-list" id="weaponList">
+   <!-- 武器卡片将通过JS生成 -->
+  </div>
+ </div>
+</div>
+
+<!-- ========== 特效提示词 ========== -->
+<div class="section" id="sec-effect">
+ <div class="effect-page">
+  <div class="effect-head">
+   <span class="bow">✨</span>
+   <div>
+    <h2>特效提示词</h2>
+    <span class="sub">特效素材大全 · 中英双语 · 含使用场景参数</span>
+   </div>
+   <div class="effect-stat">
+    <div class="effect-stat-item">共 <b id="effectTotalCount">20</b> 款</div>
+    <div class="effect-stat-item"><b>8</b> 个分类</div>
+   </div>
+  </div>
+
+  <div class="effect-cats" id="effectCats">
+   <button class="effect-cat active" onclick="switchEffectCat('all')">🌟 全部</button>
+   <button class="effect-cat" onclick="switchEffectCat('magic')">🔮 魔法特效</button>
+   <button class="effect-cat" onclick="switchEffectCat('energy')">⚡ 能量特效</button>
+   <button class="effect-cat" onclick="switchEffectCat('particle')">✨ 粒子特效</button>
+   <button class="effect-cat" onclick="switchEffectCat('light')">💡 光影特效</button>
+   <button class="effect-cat" onclick="switchEffectCat('explosion')">💥 爆炸破坏</button>
+   <button class="effect-cat" onclick="switchEffectCat('nature')">🌿 自然元素</button>
+   <button class="effect-cat" onclick="switchEffectCat('weather')">🌧️ 天气特效</button>
+   <button class="effect-cat" onclick="switchEffectCat('space')">🌌 宇宙星空</button>
+  </div>
+
+  <div class="effect-list" id="effectList">
+   <!-- 特效卡片将通过JS生成 -->
+  </div>
+ </div>
+</div>
+
 <div class="section" id="sec-music">
  <div class="music-page">
   <div class="music-head">
@@ -4290,6 +4422,549 @@ function switchPlCat(cat){
  var target=document.getElementById('plCat-'+cat);
  if(target) target.style.display='block';
 }
+
+/* ========== 武器库提示词 ========== */
+var WEAPON_DATA=[
+ // ========== 古代武器 ==========
+ {id:1,cat:'ancient',emoji:'🗡️',title:'汉剑',en:'Han Dynasty Sword',
+  type:'单手剑',era:'古代',origin:'中国',
+  desc:'中国汉代风格铁剑，八面剑身，雕漆剑鞘，威严正气，是中国剑文化的代表。',
+  cn:'中国汉代铁剑，八面剑身（剑身横截面呈八角形），剑脊高耸挺拔，剑锋尖锐犀利，剑刃寒光闪闪。剑柄为木质缠绕黑色丝线，剑首（柄头）是圆盘形云纹造型。剑格（护手）是精致的饕餮纹铜饰，鎏金工艺泛着金光。剑鞘为黑色大漆，上面镶嵌红色宝石和金色云纹图案，剑鞘口和鞘尾都有铜质包边装饰。剑身表面有锻造产生的自然花纹（折叠锻打花纹钢）。整体风格威严大气，不怒自威，是中国古代名剑的标准造型。',
+  en:'Chinese Han Dynasty iron sword, octagonal blade (blade cross-section octagonal), prominent central ridge, sharply pointed tip, blade edge gleaming coldly. Hilt is wood wrapped with black silk thread, pommel is disc-shaped with cloud pattern design. Guard (handguard) is exquisite taotie pattern bronze ornament, gilded with gold sheen. Scabbard is black lacquer, inlaid with red gemstones and gold cloud pattern designs, both scabbard mouth and tip have bronze trim decorations. Blade surface has natural patterns from forging (folded pattern steel). Overall style majestic and grand, imposing without anger — standard design of famous ancient Chinese swords.',
+  gpt:'Create a detailed product shot of a traditional Chinese Han Dynasty sword on a dark velvet background. The blade is octagonal in cross-section with a prominent central ridge and a needle-sharp tip. It is made of pattern-welded steel with visible flowing grain lines on the surface. The hilt is wrapped in black silk cord with a round cloud-patterned pommel. The handguard features an ornate taotie beast mask design in gilded bronze. The black lacquer scabbard is inlaid with red gemstones and gold cloud motifs, with bronze fittings at both ends. Light should catch the edge of the blade creating a bright gleam. The overall feeling should be noble, ancient, and powerful — the sword of a great general or emperor.',
+  tips:'中国汉剑关键词：八面剑身、剑脊、饕餮纹、大漆、花纹钢/折叠锻打。注意剑鞘的装饰等级越高宝石越多。汉剑的特点是"直"——剑身挺直，线条刚正。'},
+ {id:2,cat:'ancient',emoji:'⚔️',title:'唐刀',en:'Tang Dynasty Dao',
+  type:'单手刀',era:'古代',origin:'中国',
+  desc:'中国唐代横刀，切刃造，单手挥舞，是中国冷兵器巅峰之作，影响了日本刀的发展。',
+  cn:'中国唐代横刀，切刃造（刀背直，刀尖是斜切的），刀身狭长挺直，刀背厚实，刀刃锋利泛着寒光。刀身为折叠锻打的花纹钢，表面有行云流水般的锻纹。刀柄（柄）是白色鲛鱼皮包裹，两端有金色的金属箍（缘头和柄头），柄头是精美的宝珠形。刀镡（护手）是椭圆形的，雕刻着缠枝莲花纹，鎏金工艺。刀鞘是黑色鲨鱼皮包裹，上面有金色的装具（栗形、鐺等），鞘口有金色的金具，鞘尾有金色的刀鎺。整体刀型优美，线条流畅，杀气内敛但锋芒毕露，是中国冷兵器的巅峰之作。',
+  en:'Chinese Tang Dynasty horizontal saber (hengdao), sloped tip design (straight spine, angled tip), long and straight blade, thick spine, sharp edge gleaming coldly. Blade is folded pattern-welded steel, surface has flowing cloud-like forge patterns. Handle (tsuka) wrapped in white ray skin, with gold metal bands at both ends (fuchi and kashira), pommel is exquisite jewel shape. Guard (tsuba) is oval-shaped, carved with entwined lotus pattern, gilded gold. Scabbard (saya) wrapped in black sharkskin, with gold fittings (koiguchi, kojiri etc.), gold fitting at scabbard mouth, gold tip at end. Overall blade shape elegant, lines flowing, killing intent restrained but edge fully revealed — pinnacle of Chinese cold weaponry.',
+  gpt:'Create a stunning product photograph of a Tang Dynasty Chinese saber displayed on a dark silk cloth. The blade is long, straight, and narrow with a distinctive sloped tip (not curved like later swords). The steel has beautiful flowing pattern lines from folded forging that shimmer in the light. The handle is wrapped in white ray skin with ornate gold metal fittings. The oval guard features intricate lotus carvings in gilded gold. The scabbard is covered in black sharkskin with matching gold decorative fittings along its length. The lighting should be dramatic, highlighting the sharp edge and the beautiful patterns in the steel. The overall impression should be elegant, deadly, and refined — the finest sword craftsmanship of ancient China.',
+  tips:'唐刀和日本刀的区别：唐刀是切刃造（刀尖斜切/直），日本刀是弯的。刀柄装饰：鲛鱼皮+金具。刀鞘装具名称：栗形、鐺、鎺等。花纹钢是必备元素。'},
+ {id:3,cat:'ancient',emoji:'🏹',title:'角弓',en:'Composite Horn Bow',
+  type:'远程武器',era:'古代',origin:'多种文明',
+  desc:'传统复合角弓，筋角木复合结构，精美雕刻，是古代最强大的远程武器。',
+  cn:'传统复合角弓，整体呈优美的反曲形状（上弦后呈C形/反C形），弓身由木材、牛角、牛筋、鱼胶等多层复合而成。弓臂表面包裹着精美的桦树皮或者刷着大漆，上面有手绘的金色云纹和兽纹图案。弓梢（弓的两端）是角质或骨质的，雕刻着精美的花纹，末端有挂弦的弦槽。弓弦是多股蚕丝拧成的，中间有缠线的弦垫（射箭时靠在脸上的位置）。弓的整体造型流畅优雅，充满力量感，既是武器也是艺术品。旁边可以放几支雕翎箭，箭杆是木质的，箭头是铁制三棱形，箭尾有彩色的羽毛（雕翎）。',
+  en:'Traditional composite horn bow, overall graceful recurve shape (C-shape/reverse C when strung), bow body composed of multiple layers — wood, horn, sinew, fish glue etc. Bow limb surface wrapped in exquisite birch bark or coated with lacquer, with hand-painted gold cloud and beast patterns. Bow tips (nocks) are horn or bone material, carved with exquisite patterns, string notches at ends. Bowstring is twisted from multiple silk strands, with wrapped string pad in middle (the part that rests on face when shooting). Overall bow shape smooth and elegant, full of sense of power — both weapon and artwork. Beside it can place a few fletched arrows, wooden shafts, iron three-bladed arrowheads, colorful feathers at tail (eagle feathers).',
+  gpt:'Create a beautiful still life photograph of a traditional composite recurve bow laid out on dark aged leather. The bow has a graceful recurve shape, constructed from layers of wood, horn, and sinew in the ancient style. The outer surface is decorated with hand-painted gold cloud patterns on a dark lacquered background. The tips of the bow are carved horn with notches for the string. The silk bowstring is strung tight, with a wrapped serving in the center. Next to the bow lie three arrows with wooden shafts, iron three-bladed heads, and colorful fletching feathers. The lighting should be warm and dramatic, catching the curves of the bow and the details of the decoration. It should look both powerful and beautiful — a masterpiece of ancient weapon craftsmanship.',
+  tips:'复合弓关键词：反曲、角弓、筋角复合、桦树皮/大漆、雕翎箭。注意弓的形状——未上弦是反C形，上弦后是C形。弓梢的造型是鉴别文化的关键。'},
+ {id:4,cat:'ancient',emoji:'🔱',title:'方天画戟',en:'Fangtian Huaji Halberd',
+  type:'长柄武器',era:'古代',origin:'中国',
+  desc:'中国古代方天画戟，月牙形双刃，红缨装饰，是三国吕布的标志性武器。',
+  cn:'中国古代方天画戟，长杆兵器，枪头是尖锐的菱形枪尖，枪尖两侧各有一个月牙形的刀刃（双耳/双月牙），月牙刃向外弯曲，刃口锋利。整个金属部分都是精钢打造，寒光闪闪，表面有精美的雕刻花纹。戟杆是坚硬的白蜡杆，刷着大红色的大漆，上面有金色的缠枝纹。枪头下方系着一束红色的缨穗（红缨），随风飘动。戟的末端有一个金属的鐏（平底金属套），可以立在地上。整体造型华丽而威武，既有刺击功能也有劈砍和钩割功能，是中国古代最华丽也最难用的长兵器，三国第一猛将吕布的标志性武器。',
+  en:'Chinese ancient Fangtian Huaji halberd, long pole weapon, spearhead is sharp diamond-shaped point, on each side of spearhead is a crescent moon-shaped blade (double ears/double crescents), crescent blades curving outward, edges sharp. Entire metal part is forged from fine steel, gleaming coldly, surface has exquisite carved patterns. Halberd shaft is hard white wax wood, coated with bright red lacquer, with gold interlocking branch patterns. Below spearhead is tied a bundle of red tassels (red ying), fluttering in wind. End of halberd has metal butt cap (flat-bottomed metal sleeve), can stand on ground. Overall shape magnificent and powerful, has both thrusting function and chopping and hooking functions — most ornate and hardest to master long pole weapon of ancient China, iconic weapon of Lü Bu, the mightiest general of Three Kingdoms.',
+  gpt:'Create a dramatic full shot of a legendary Chinese Fangtian Huaji halberd standing upright against a dark moody background with smoke. The long red lacquered wooden shaft has gold decorative patterns. At the top is a complex steel head — a central diamond-shaped spear point with two crescent moon blades extending out to either side. The steel is polished and gleaming, with intricate engraved patterns visible on the blades. A cluster of red silk tassels hangs below the blade head, flowing as if caught in wind. The metal parts catch the light creating bright highlights against the dark background. The weapon should look both ornate and extremely deadly — beautiful but terrifying. The signature weapon of the greatest warrior of the Three Kingdoms era.',
+  tips:'方天画戟核心识别点：双月牙刃+红缨+长杆。单月牙的叫"青龙戟"，双月牙才是"方天画戟"。红缨不仅是装饰，实战中可以挡血顺着杆流下来。'},
+ {id:5,cat:'ancient',emoji:'🪓',title:'宣花斧',en:'Xuanhua Battle Axe',
+  type:'长柄武器',era:'古代',origin:'中国',
+  desc:'中国古代宣花斧，巨大斧刃，精美花纹，猛将专用的重兵器。',
+  cn:'中国古代宣花斧，长柄大斧，斧刃巨大而厚重，呈扇形展开，刃口锋利闪着寒光。斧面上雕刻着精美的缠枝花卉和云纹图案（宣花就是指装饰花纹），图案是鎏金的，在钢铁底色上格外醒目。斧背（斧刃对面的一侧）有一个尖锐的斧钉或者是一个小的斧尖，可以用来砸击。斧柄是粗壮的硬木杆，刷着深棕色的大漆，上面有金色的箍和装饰。斧头和斧柄连接的地方有结实的金属加固。整体造型威猛厚重，一看就是力量型猛将使用的重兵器，一斧下去威力无穷，是中国古典小说中猛将（如程咬金、李逵）的标志性武器。',
+  en:'Chinese ancient Xuanhua battle axe, long-handled great axe, huge and thick axe blade, fan-shaped spread, sharp edge gleaming coldly. Axe face carved with exquisite interlocking flower and cloud patterns (xuanhua means decorative flower patterns), patterns are gilded, especially striking against steel background. Axe back (side opposite blade) has a sharp axe spike or small axe point, can be used for smashing. Axe handle is thick hardwood pole, coated with dark brown lacquer, with gold bands and decorations. Connection between axe head and handle has solid metal reinforcement. Overall shape powerful and heavy, clearly a heavy weapon for strength-type fierce generals, one strike carries immense power — iconic weapon of fierce generals in Chinese classical novels (such as Cheng Yaojin, Li Kui).',
+  gpt:'Create a dramatic product shot of an ancient Chinese Xuanhua battle axe resting on a dark stone surface. The axe head is massive and heavy with a broad, fan-shaped sharp blade. The steel blade face is decorated with intricate gilded flower and cloud patterns — the "xuanhua" decoration that gives the axe its name. On the back side of the axe head is a sharp spike for piercing and smashing. The thick wooden handle is dark brown lacquered wood with gold metal bands. The lighting should be low-key and dramatic, highlighting the gleam of the sharp edge and the gold patterns against the dark steel. The whole weapon should look incredibly heavy, powerful, and imposing — the kind of weapon only a legendary warrior could wield effectively.',
+  tips:'宣花斧关键词：扇形斧刃、花纹装饰（宣花）、斧背尖刺、长柄、厚重感。"宣花"=装饰有花纹的意思。注意斧刃的厚度——越厚越有力量感。'},
+ {id:6,cat:'ancient',emoji:'🗡️',title:'武士刀',en:'Katana',
+  type:'单手刀',era:'古代',origin:'日本',
+  desc:'日本武士刀，太刀造型，刀纹精美，是日本武士道精神的象征。',
+  cn:'日本武士刀（太刀），刀身优美地弯曲，刀身狭长，刀背（峰）厚实，刀刃（刃）极其锋利，泛着清冷的光。刀身是玉钢锻造的，表面有细腻的地肌（锻打纹理），刀刃和刀身之间有一条波浪形的刃纹（烧刃纹/hamon），是淬火形成的，每一把刀的刃纹都独一无二。刀柄（柄）是白色鲛鱼皮包裹，外面用深蓝色的柄卷（丝带）编织成菱形图案。刀镡（镡/护手）是圆形的铁制，上面有镂空的樱花图案，镶嵌着金和银。刀鞘（鞘）是黑色漆面，上面有金色的家纹（家族徽章）和金色的装具。整体造型优雅而致命，是日本武士魂的象征。',
+  en:'Japanese katana (tachi style), blade gracefully curved, long and narrow blade, thick spine (mune), extremely sharp edge (ha), gleaming with cold light. Blade forged from tamahagane steel, surface has fine jihada (forging texture), between edge and blade body is a wavy hamon (temper line), formed by quenching — each sword\'s hamon is unique. Handle (tsuka) is white ray skin wrap, outer deep blue tsuka-ito (silk cord) woven in diamond pattern. Guard (tsuba) is round iron, with openwork cherry blossom pattern, inlaid with gold and silver. Scabbard (saya) is black lacquer, with gold kamon (family crest) and gold fittings. Overall shape elegant and deadly, symbol of Japanese samurai spirit.',
+  gpt:'Create a stunning photograph of a Japanese katana displayed on a black silk cloth. The blade has a gentle, graceful curve with a mirror-polished surface showing the fine grain of the steel (jihada). A beautiful wavy temper line (hamon) runs along the cutting edge — unique to this blade. The handle is wrapped in white ray skin under dark blue silk cord woven in a diamond pattern. The round iron guard (tsuba) features an intricate openwork cherry blossom design with gold and silver inlays. The black lacquer scabbard has a gold family crest (kamon) and matching gold fittings. Light should glint along the sharp edge and highlight the hamon line. The sword should look both beautiful and deadly — a work of art that is also a perfect weapon. The soul of the samurai.',
+  tips:'武士刀关键词：弯曲刀身、地肌（jihada）、刃纹（hamon）、鲛皮柄、镡（tsuba）、家纹（kamon）。刃纹是武士刀的灵魂——每把刀的刃纹都不一样，是鉴定刀工的重要依据。'},
+ {id:7,cat:'ancient',emoji:'⚒️',title:'雷神锤',en:'Mjolnir War Hammer',
+  type:'钝器',era:'古代',origin:'北欧神话',
+  desc:'北欧神话雷神之锤，短柄大锤，符文雕刻，充满神话力量感。',
+  cn:'北欧神话雷神之锤妙尔尼尔（Mjolnir），短柄大锤，锤头是巨大的立方体形状，由神奇的金属乌鲁（Uru）打造，表面泛着银色的光芒，上面雕刻着复杂的北欧符文和雷神之印，符文发出微弱的蓝色电光。锤头的一侧是平的打击面，另一侧是尖锐的锥子（十字镐形状的尖）。锤柄是深色的木头或者是皮革包裹的，柄上缠绕着皮革便于握持。柄的末端有一个圆形的金属配重球，还有一条皮腕绳。整个锤子散发着雷电的能量，周围有微弱的电弧跳动。锤子造型粗犷、厚重、充满原始力量感，是北欧神话中最强的武器，只有雷神托尔才能挥动。',
+  en:'Norse mythological war hammer Mjolnir, short-handled great hammer, hammerhead is huge cube shape, forged from mystical Uru metal, surface glowing with silver light, carved with complex Norse runes and thunder god seal, runes emitting faint blue electric light. One side of hammerhead is flat striking face, other side is sharp spike (pickaxe-like point). Hammer handle is dark wood or leather wrapped, handle wrapped with leather for grip. End of handle has round metal counterweight ball, plus a leather wrist strap. Entire hammer radiating thunder and lightning energy, faint electric arcs jumping around. Hammer shape rugged, heavy, full of primal power — strongest weapon in Norse mythology, only Thor the thunder god can wield it.',
+  gpt:'Create a dramatic shot of Mjolnir, the legendary hammer of Thor from Norse mythology, resting on a rocky surface during a storm. The hammerhead is a massive block of mystical Uru metal with a silvery sheen, covered in glowing Norse runes that pulse with blue electric light. One side is a flat striking face, the other has a sharp pick-like spike. The short handle is wrapped in dark worn leather with a leather wrist strap and a round metal counterweight at the end. Small arcs of lightning crackle around the hammer and the air around it seems charged with energy. Raindrops hit the metal and sizzle. The lighting should be dark and stormy, lit mainly by the glow of the runes and occasional lightning flashes in the background. It should look ancient, incredibly heavy, and imbued with godly power.',
+  tips:'雷神锤关键词：短柄、方锤头、北欧符文、乌鲁金属、电光效果。注意比例——真实的雷神锤应该是柄短头重，因为是单手武器。符文发光增加魔法感。'},
+ {id:8,cat:'ancient',emoji:'🏺',title:'法老权杖',en:'Pharaoh Scepter',
+  type:'权杖',era:'古代',origin:'古埃及',
+  desc:'古埃及法老权杖，黄金打造，圣甲虫装饰，象征王权和神权。',
+  cn:'古埃及法老权杖，通体黄金打造，在阳光下闪耀着耀眼的金光。杖身是圆柱形的黄金杆，上面雕刻着精美的象形文字和圣甲虫图案，有些地方镶嵌着青金石和红宝石。杖的顶部是一个展开翅膀的鹰神荷鲁斯的黄金雕像，眼睛镶嵌着蓝宝石，栩栩如生。荷鲁斯的头顶有一个太阳圆盘（拉神的象征）。杖的中部有一个圣甲虫（凯布利）的黄金浮雕，圣甲虫的翅膀是青金石做的。杖的底部是一个莲花形状的金属底座。整个权杖华美无比，充满了古埃及的神秘和神圣感，既是王权的象征，也是连接神明的法器。周围仿佛有金色的光芒在流动。',
+  en:'Ancient Egyptian pharaoh scepter, entirely forged from gold, shining with dazzling golden light in sunlight. Shaft is cylindrical gold rod, carved with exquisite hieroglyphs and scarab patterns, some areas inlaid with lapis lazuli and rubies. Top of scepter is a gold statue of falcon god Horus with spread wings, eyes inlaid with sapphires, lifelike. Above Horus\'s head is a sun disk (symbol of Ra). Middle of scepter has a gold relief of scarab beetle (Khepri), scarab wings made of lapis lazuli. Bottom of scepter is a lotus-shaped metal base. Entire scepter incomparably magnificent, full of ancient Egyptian mystery and sacredness — both symbol of royal power and divine artifact connecting to gods. Golden light seems to flow around it.',
+  gpt:'Create a stunning photograph of an ancient Egyptian pharaoh\'s ceremonial scepter displayed against a dark background with dramatic lighting. The entire scepter is crafted from solid gold that gleams warmly. The cylindrical shaft is covered in finely carved hieroglyphs and scarab patterns, with inlays of lapis lazuli and deep red carnelian. At the top, a golden statue of Horus the falcon god stands with wings spread, his eyes inlaid with brilliant sapphires, and a sun disk of Ra above his head. In the middle of the shaft, a carved scarab beetle (Khepri) has lapis lazuli wings. The base is shaped like a lotus flower. The lighting should create bright highlights on the gold and make the gemstones sparkle. The overall feeling should be opulent, sacred, and deeply mysterious — the symbol of absolute divine royal power in ancient Egypt.',
+  tips:'埃及权杖元素：黄金、象形文字、圣甲虫、荷鲁斯之眼/鹰、太阳圆盘、青金石+红宝石。注意金色的质感——不是亮闪闪的塑料金，是厚重的、有历史感的黄金。'},
+ {id:9,cat:'ancient',emoji:'🗡️',title:'匕首',en:'Ritual Dagger',
+  type:'短兵器',era:'古代',origin:'多种文明',
+  desc:'华丽的礼仪匕首，宝石镶嵌，雕刻精美，既是武器也是艺术品。',
+  cn:'华丽的礼仪匕首，短小精致，刀身是大马士革钢的，表面有美丽的波浪形花纹，刀刃锋利。刀柄是象牙或者骨质的，上面雕刻着精美的花纹（卷草纹/动物纹），柄头镶嵌着一颗大大的红宝石或者蓝宝石，周围环绕着小颗的珍珠和钻石。护手（格）是黄金做的，造型是两只对称的兽头（比如狮子头/鹰头）。刀鞘是皮革的，上面有金色的压花和宝石镶嵌，鞘口和鞘尾都有黄金包边。整体尺寸不大，适合藏在袖子里或者靴子里，但装饰极其华丽，是贵族和刺客都喜爱的武器——既是身份的象征，也是致命的暗器。',
+  en:'Ornate ritual dagger, small and exquisite, blade is Damascus steel, surface has beautiful wavy patterns, edge sharp. Handle is ivory or bone, carved with exquisite patterns (scrollwork/animal patterns), pommel inlaid with a large ruby or sapphire, surrounded by small pearls and diamonds. Guard is gold, shaped as two symmetrical beast heads (like lion heads/eagle heads). Scabbard is leather, with gold embossing and gemstone inlays, both mouth and tip of sheath have gold trim. Overall size not large, suitable for hiding in sleeve or boot, but decoration extremely magnificent — weapon loved by both nobles and assassins — both symbol of status and deadly hidden weapon.',
+  gpt:'Create a beautiful macro photograph of an ornate ceremonial dagger resting on dark purple velvet. The short blade is made of Damascus steel with mesmerizing wavy patterns flowing along its length and a razor-sharp edge. The handle is carved ivory with intricate scrollwork, topped with a large faceted ruby surrounded by tiny diamonds and pearls. The gold guard features two symmetrical lion head designs. The leather scabbard has gold tooling and gemstone inlays with gold fittings at both ends. The lighting should be soft and luxurious, highlighting the sparkle of the gems and the beautiful patterns in the steel. It should look both exquisitely beautiful and secretly deadly — a weapon fit for a prince or a master assassin.',
+  tips:'匕首/短剑关键词：大马士革花纹、宝石柄头、兽头护手、象牙/骨质柄、华丽刀鞘。匕首是"小而华丽"的代表——尺寸不大但装饰密度极高。'},
+ {id:10,cat:'ancient',emoji:'🛡️',title:'圆盾',en:'Aspis Round Shield',
+  type:'防御武器',era:'古代',origin:'古希腊',
+  desc:'古希腊青铜圆盾，华丽的盾徽，是古希腊重装步兵的标志性装备。',
+  cn:'古希腊青铜圆盾（阿斯庇斯），圆形的大盾，直径约一米，盾面是抛光的青铜，泛着金色的光泽。盾的中央有一个凸起的盾脐（umbo），是青铜铸造的美杜莎头像或者戈尔贡面具，造型狰狞，可以用来撞击敌人。盾面上有精美的彩绘或者镶嵌的图案——比如特洛伊战争场景、神话故事、或者城邦的徽章（比如雅典的猫头鹰、斯巴达的lambda符号）。盾的边缘有青铜包边，上面有装饰性的花纹。盾的内侧有皮革的臂带和手把，可以牢固地持握。整体造型厚重坚固，既是防御利器也是艺术品，是古希腊重装步兵（hoplite）的标志性装备。',
+  en:'Ancient Greek bronze round shield (aspis), large circular shield, about one meter diameter, shield face is polished bronze, glowing with golden sheen. Center of shield has a raised shield boss (umbo), bronze-cast Medusa head or Gorgon mask, ferocious design, can be used to bash enemies. Shield face has exquisite painted or inlaid patterns — such as Trojan War scenes, mythological stories, or city-state emblems (like Athenian owl, Spartan lambda symbol). Edge of shield has bronze rim, with decorative patterns. Inside of shield has leather arm straps and handle, can be held firmly. Overall shape heavy and sturdy — both defensive weapon and artwork, iconic equipment of ancient Greek hoplites.',
+  gpt:'Create a dramatic photograph of an ancient Greek bronze aspis shield standing upright against a marble wall with dramatic side lighting. The large round shield is made of polished bronze that glows with warm golden light. At the center, a raised bronze boss is sculpted into the terrifying face of Medusa with snakes for hair — fierce enough to paralyze enemies with fear. The bronze face of the shield is decorated with inlaid silver and copper patterns depicting a scene from the Trojan War. The rim is reinforced bronze with decorative engravings. The lighting should catch the curve of the shield and make the Medusa boss cast deep shadows. It should look both beautiful and battle-worn — a masterpiece of ancient Greek warfare that has seen many fights.',
+  tips:'古希腊盾关键词：圆形、青铜、盾脐（umbo）、美杜莎/戈尔贡面具、城邦徽章、hoplite重装步兵。注意盾牌要有"使用感"——划痕、凹痕、铜绿，这样更真实。'},
+ {id:11,cat:'ancient',emoji:'🎐',title:'拂尘',en:'Taoist Whisk',
+  type:'法器',era:'古代',origin:'中国道教',
+  desc:'道教仙人的拂尘，马尾拂尘，桃木手柄，既是法器也是武器。',
+  cn:'道教仙人的拂尘，一根长长的桃木手柄，手柄是浅棕色的桃木，上面雕刻着太极八卦和云纹图案，手柄的两端有银色的金属箍。手柄上端是一大束洁白的马尾毛（或者白色的牦牛尾毛），毛发蓬松而柔顺，像一朵白色的云。拂尘整体看起来轻盈飘逸，仿佛不沾一丝尘埃。拂尘是道教神仙的标志性法器，象征着扫除烦恼、一尘不染。虽然看起来温柔，但在仙人手中是威力无穷的法宝——可以拂去山岳、倒转乾坤。毛发中隐约散发着柔和的仙气光芒。',
+  en:'Taoist immortal\'s whisk, a long peach wood handle, handle is light brown peach wood, carved with Taiji bagua and cloud patterns, both ends of handle have silver metal bands. Upper end of handle is a large bundle of pure white horse tail hair (or white yak tail hair), hair fluffy and supple, like a white cloud. Whisk overall looks light and flowing, as if not touching a speck of dust. Whisk is iconic magical tool of Taoist immortals, symbolizing sweeping away worries, being spotless. Although looks gentle, in immortal\'s hands it is a treasure weapon of infinite power — can sweep away mountains, reverse heaven and earth. Faint immortal aura glow emanating from the hair.',
+  gpt:'Create an elegant photograph of a Taoist immortal\'s fly whisk displayed against a dark misty background with soft ethereal lighting. The handle is carved from light brown peach wood with intricate Taiji bagua symbols and cloud patterns, with silver metal bands at both ends. At the top, a large, flowing bundle of pure white horsehair fans out like a soft white cloud — the individual hairs are visible and catch the light. The whisk looks weightless and graceful, as if floating. A faint mystical white glow emanates from the white hairs. The overall feeling should be serene, otherworldly, and deeply spiritual. It is the signature tool of Taoist immortals — gentle in appearance but capable of incredible magical power. It represents purity, transcendence, and sweeping away all worldly concerns.',
+  tips:'拂尘关键词：桃木柄、太极八卦、马尾毛、白色、飘逸感。拂尘是"柔中带刚"的武器——看起来最无害其实最强。毛发的蓬松感和流动感是重点。'},
+ {id:12,cat:'ancient',emoji:'🏹',title:'连弩',en:'Repeating Crossbow',
+  type:'远程武器',era:'古代',origin:'中国',
+  desc:'中国古代诸葛连弩，可以连续发射的机械弩，是古代的"机关枪"。',
+  cn:'中国古代诸葛连弩，木质的弩身，深棕色的木材，上面有精密的青铜机械结构——扳机、弩机、连杆、还有顶部的箭盒（箭舱）可以装十支箭。弩臂是弯曲的，由多层复合材料制成，弓弦是牛筋的，紧绷着。弩身前面有一个长长的金属弩头，上面有准星。整体结构精巧复杂，充满了古代黑科技的感觉。旁边放着几支短小的弩箭，铁制的三棱箭头，木杆，没有尾羽（连弩箭通常比较短）。箭盒的盖子上有雕刻的花纹和"诸葛连弩"的字样。整体造型是木质+金属的结合，充满了机械美感，是中国古代最著名的连发武器，诸葛亮发明的，可以一次装十支箭连续发射。',
+  en:'Ancient Chinese Zhuge repeating crossbow (liannu), wooden crossbow body, dark brown wood, with precision bronze mechanism — trigger, nut, connecting rod, plus top-mounted arrow magazine (arrow chamber) can hold ten arrows. Bow limbs are curved, made of multi-layer composite material, bowstring is bovine sinew, taut. Front of crossbow body has a long metal bolt head, with sight on top. Overall structure ingenious and complex, full of ancient black tech feeling. Beside it lie several short crossbow bolts, iron three-bladed heads, wooden shafts, no fletching (repeating crossbow bolts usually shorter). Cover of arrow magazine has carved patterns and "Zhuge Liannu" characters. Overall shape is combination of wood + metal, full of mechanical beauty — most famous repeating weapon of ancient China, invented by Zhuge Liang, can load ten arrows at once and fire continuously.',
+  gpt:'Create a detailed product photograph of an ancient Chinese Zhuge repeating crossbow resting on a wooden workbench with tools around it. The crossbow has a dark brown wooden stock with intricate bronze mechanical parts — the trigger mechanism, the lever-action system, and a magazine on top that holds ten short bolts. The curved bow limbs are made of layered composite material with a taut sinew string. A metal sight sits on top. The craftsmanship looks intricate and clever — ancient precision engineering. Next to the crossbow lies a handful of short, stout crossbow bolts with iron three-bladed tips. The lighting should be warm, highlighting the wood grain and the patina of the bronze parts. It should look like a sophisticated weapon from ancient times — the "machine gun" of its era, a testament to Chinese ingenuity.',
+  tips:'连弩关键词：木质弩身、青铜机械结构、箭舱/箭盒、连发设计、三棱短箭。核心识别点：顶部的箭盒（弹匣）+ 杠杆式扳机结构。诸葛连弩是"一弩十矢俱发"——一次装十支箭连续发射。'},
+
+ // ========== 现代武器 ==========
+ {id:13,cat:'modern',emoji:'🔫',title:'沙漠之鹰手枪',en:'Desert Eagle Pistol',
+  type:'手枪',era:'现代',origin:'以色列/美国',
+  desc:'大口径半自动手枪，银色镀铬，威猛霸气，是最著名的大威力手枪。',
+  cn:'以色列IMI沙漠之鹰大口径半自动手枪，.50AE口径，银色镀铬的枪身在灯光下闪闪发光，金属质感强烈。枪身线条硬朗，棱角分明，套筒（slide）上有精致的雕花或者拉丝纹理，前端有枪口制退器的两道开槽。握把是黑色的橡胶或者胡桃木，上面有格子状的防滑纹。扳机是金色的扳机。准星和照门是银色的。弹匣从握把底部突出。整体造型厚重、威猛、充满力量感，是手枪中的"大炮"，也是好莱坞电影中最常出现的标志性手枪之一，一看到就知道是大威力武器。',
+  en:'Israeli IMI Desert Eagle large caliber semi-automatic pistol, .50 Action Express caliber, silver chrome-plated gun body gleaming under lights, strong metallic texture. Gun body lines tough, sharp angles, slide has exquisite engraving or brushed texture, front end has two slots of muzzle brake. Grip is black rubber or walnut, with checkered anti-slip pattern. Trigger is gold-colored trigger. Front sight and rear sight are silver. Magazine protrudes from bottom of grip. Overall shape heavy, powerful, full of sense of strength — the "cannon" among pistols, also one of most iconic pistols appearing most often in Hollywood movies, you know it is high-power weapon at first glance.',
+  gpt:'Create a dramatic product photograph of a Desert Eagle pistol displayed on a dark reflective surface with dramatic lighting. The pistol is finished in brilliant polished silver chrome that catches the light with sharp highlights. The large slide has fine brushed details and two ports near the muzzle for the muzzle brake. The grip is dark checkered walnut or rubber with a textured pattern. The trigger is polished gold. The large .50 caliber barrel and massive slide make it look incredibly powerful — like no other pistol. The lighting should create strong highlights and deep shadows emphasizing the sharp angles and heavy build. It should look tough, luxurious, and intimidating — the most famous big-bore pistol in the world, an icon of action movies.',
+  tips:'沙漠之鹰识别点：大尺寸（比普通手枪大一圈）、银色镀铬、棱角分明的外形、枪口制退器开槽、金色扳机。关键词"大"——所有比例都比普通手枪大。'},
+ {id:14,cat:'modern',emoji:'🔫',title:'AK-47突击步枪',en:'AK-47 Assault Rifle',
+  type:'突击步枪',era:'现代',origin:'苏联',
+  desc:'卡拉什尼科夫AK-47突击步枪，木制枪托，钢铁机身，世界上最著名的步枪。',
+  cn:'苏联卡拉什尼科夫AK-47突击步枪，世界上产量最高、最著名的突击步枪。机匣是深色的冲压钢板，表面有铆钉和冲压的加强筋，充满了粗犷的工业美感。枪管是深色的，前端有柱状的准星，枪口有一个简单的斜切形制退器。前护木和枪托是深棕色的木头，有清晰的木纹，被岁月打磨得光滑发亮。弯曲的弹匣是金属的，有标志性的"香蕉形"弧度。照门是表尺式的，在机匣后上方。枪的整体线条简单、可靠、粗犷，没有多余的装饰，一切都是为了实战。枪身上可能有轻微的使用痕迹——划痕、磨损，增加了真实感和故事感。是20世纪最有影响力的武器之一。',
+  en:'Soviet Kalashnikov AK-47 assault rifle, highest production, most famous assault rifle in the world. Receiver is dark stamped steel, surface has rivets and stamped reinforcing ribs, full of rugged industrial beauty. Barrel is dark, front has post front sight, muzzle has simple slanted muzzle brake. Handguard and stock are dark brown wood, with clear wood grain, polished smooth and shiny by years. Curved magazine is metal, with iconic "banana-shaped" curve. Rear sight is ladder-type, on upper rear of receiver. Overall lines of gun simple, reliable, rugged, no unnecessary decoration — everything is for combat. Gun body maybe has slight wear marks — scratches, scuffs, adding realism and sense of story. One of most influential weapons of 20th century.',
+  gpt:'Create a moody photograph of a classic AK-47 assault rifle resting on a weathered wooden crate in low dramatic light. The rifle has a dark stamped steel receiver with visible rivets and reinforcing ribs — tough, utilitarian, and rugged. The dark barrel has a simple slanted muzzle brake and a front sight post. The handguard and fixed stock are made of dark brown wood with visible grain, worn smooth from years of use. The iconic curved banana-shaped metal magazine seats in the receiver. There are faint signs of use — minor scratches, worn edges — that give it character and history. The lighting should be low-key and dramatic, highlighting the rugged industrial beauty of this legendary rifle. It should look tough, reliable, and undeniably iconic — the most influential firearm ever made.',
+  tips:'AK-47识别点：香蕉形弯弹匣、木制枪托+护木、冲压机匣+铆钉、柱状准星、斜切枪口。关键词"粗"——粗犷、粗壮、粗糙，这正是它的魅力，可靠性的象征。'},
+ {id:15,cat:'modern',emoji:'🎯',title:'狙击步枪',en:'Sniper Rifle',
+  type:'狙击枪',era:'现代',origin:'多国',
+  desc:'高精度狙击步枪，长枪管+瞄准镜，一击必杀的精确武器。',
+  cn:'一支高精度狙击步枪，深色的枪身，长枪管前端有一个大的枪口制退器（多室形，有多个开孔），用来减少后坐力。枪身上方安装着一个大型的光学瞄准镜，瞄准镜筒是黑色的金属，有调节旋钮，镜片反射着光（镜头反光），可以看到瞄准镜内部的刻度（分划板）。枪托是可调节的战术枪托，有贴腮板和抵肩垫。护木上有皮卡汀尼导轨，可以安装各种附件。枪身是模块化的，充满了现代战术风格。旁边放着几发大口径狙击弹，黄铜弹壳+尖头铜被甲弹头。整体造型修长、专业、充满致命的精准感，是远距离一击必杀的武器，是狙击手的第二生命。',
+  en:'A high-precision sniper rifle, dark gun body, long barrel front end has a large muzzle brake (multi-chamber, with multiple openings), used to reduce recoil. Large optical scope mounted on top of gun body, scope tube is black metal, has adjustment knobs, lens reflecting light (lens reflection), can see reticle inside scope. Stock is adjustable tactical stock, with cheek piece and buttpad. Handguard has Picatinny rails, can install various accessories. Gun body is modular, full of modern tactical style. Beside it lie several large caliber sniper rounds, brass cartridge cases + spitzer copper-jacketed bullets. Overall shape slender, professional, full of deadly precision — long-range one-shot-one-kill weapon, second life of a sniper.',
+  gpt:'Create a dramatic shot of a modern precision sniper rifle laid out on a dark tactical mat with moody side lighting. The rifle has a long fluted barrel ending in a large multi-port muzzle brake. A large tactical scope sits on top — black metal with adjustment turrets, the lens glinting with light. The stock is an adjustable precision stock with a cheek riser and rubber buttpad. The handguard has Picatinny rails along the sides. A few large-caliber sniper rounds with brass casings and pointed boat-tail bullets lie next to the rifle. The lighting should be low-key, highlighting the long clean lines of the rifle and the reflections on the scope lens. It should look professional, deadly accurate, and purpose-built — a weapon designed for one perfect shot from a mile away.',
+  tips:'狙击枪关键：长枪管+大型枪口制退器、大倍率瞄准镜（一定要画镜片反光）、战术枪托、皮卡汀尼导轨、高精度子弹。瞄准镜是识别点——有瞄准镜=狙击，没瞄准镜=步枪。'},
+ {id:16,cat:'modern',emoji:'💣',title:'手榴弹',en:'Hand Grenade',
+  type:'爆炸物',era:'现代',origin:'多国',
+  desc:'破片手榴弹，卵形铁壳+保险销，是士兵最基本的爆炸武器。',
+  cn:'一枚MK-2菠萝形手榴弹（或者现代卵形手榴弹），铸铁的弹体，深橄榄绿色的涂装，表面有预制的破片槽（刻痕），爆炸时会沿着槽碎裂成致命的破片。弹体顶部是引信部分，有一个金属的保险杆（簧片/安全杆），弯曲的杠杆形状，被保险销固定住。保险销是一个L形的金属销子，末端有一个圆形的拉环。引信顶部有一个小小的击针帽。手榴弹整体造型紧凑、简单、致命。旁边可以放一枚已经拔出保险销的、保险杆已经弹开的，展示不同状态。手榴弹放在粗糙的帆布或者泥土上，增加实战感。是步兵最经典的武器之一，简单但致命。',
+  en:'An MK-2 pineapple-shaped hand grenade (or modern oval grenade), cast iron body, dark olive green paint, surface has pre-scored fragmentation grooves (notches), when exploding will shatter along grooves into lethal fragments. Top of grenade body is fuse part, has a metal safety lever (spring clip/safety lever), curved lever shape, held in place by safety pin. Safety pin is an L-shaped metal pin, end has a round pull ring. Top of fuse has a small striker cap. Grenade overall shape compact, simple, deadly. Beside it can place one with pin already pulled, safety lever already flipped up, showing different states. Grenade placed on rough canvas or dirt, adding combat feel. One of most classic infantry weapons, simple but deadly.',
+  gpt:'Create a gritty close-up photograph of a military hand grenade resting on rough canvas fabric in harsh side lighting. The grenade is dark olive drab with a cast iron body scored with fragmentation notches that will break into deadly shrapnel when it detonates. At the top, the fuse assembly features a curved metal safety lever held down by a pull-ring safety pin — the classic spoon-and-pin design. The pin is L-shaped with a ring at the end for pulling. The metal has a worn, used look with paint chipped in places showing the metal underneath. The lighting should be rugged and dramatic, emphasizing the rough texture and deadly simplicity. It should look like a tool of war — plain, unadorned, and lethally effective. The most iconic infantry weapon, simple but devastating.',
+  tips:'手榴弹识别点：卵形/菠萝形、破片槽刻痕、保险杆（spoon）+拉环保险销。关键词"简单致命"——没有花里胡哨的东西，就是一个铁壳加炸药加引信。'},
+ {id:17,cat:'modern',emoji:'🚀',title:'火箭筒',en:'RPG Rocket Launcher',
+  type:'反装甲',era:'现代',origin:'苏联',
+  desc:'RPG-7火箭助推榴弹发射器，反坦克神器，游击战标志性武器。',
+  cn:'苏联RPG-7火箭筒，一根长长的钢制发射筒，深橄榄绿色或者黑色，筒身有加强筋和防滑纹。发射筒前端伸出的是火箭弹的弹头——尖尖的聚能装药破甲弹头，弹头后面有稳定翼（尾翼），折叠在弹体上。发射筒中部有后握把和扳机组件，还有一个木质或者塑料的隔热护木（防止发射时烫伤手）。发射筒后部是喇叭口形状的喷管（后喷焰用）。瞄准具是一个简单的机械瞄准镜，安装在筒身左侧。整体造型粗犷、简单、威力巨大，是世界上最著名的反坦克武器之一，也是游击队和非正规军的标志性武器，被称为"步兵的大炮"。',
+  en:'Soviet RPG-7 rocket-propelled grenade launcher, a long steel launch tube, dark olive green or black, tube body has reinforcing ribs and anti-slip patterns. Front end of launch tube protrudes rocket warhead — pointed shaped charge HEAT warhead, behind warhead are stabilizer fins (tail fins), folded on projectile body. Middle of launch tube has rear pistol grip and trigger assembly, plus a wooden or plastic thermal handguard (prevents burns when firing). Rear of launch tube is flared-shaped nozzle (for rear blast). Sight is a simple mechanical sight, mounted on left side of tube. Overall shape rugged, simple, enormously powerful — one of most famous anti-tank weapons in world, also iconic weapon of guerrillas and irregular forces, called "infantry\'s cannon".',
+  gpt:'Create a dramatic photograph of an RPG-7 rocket launcher propped up against a rough dirt wall in low side lighting. The long steel launch tube is dark olive green with reinforcing ribs. Sticking out the front is the rocket with its pointed conical HEAT warhead and folded fins behind it. In the middle, a pistol grip and trigger assembly sit below a wooden heat shield handguard that protects the user from the heat of firing. The rear of the tube flares out into a bell-shaped backblast nozzle. A simple iron sight is mounted on the left side. The weapon looks rugged, simple, and incredibly effective. The lighting should be harsh and gritty, emphasizing the raw, utilitarian design. It should look like the iconic weapon it is — the guerrilla\'s artillery, the poor man\'s anti-tank solution.',
+  tips:'RPG识别点：长筒身、前伸的尖头火箭弹+尾翼、隔热护木、喇叭形后喷口、左侧瞄准具。和普通火箭筒区别：RPG是从前面装弹的，弹头露在外面。'},
+ {id:18,cat:'modern',emoji:'🛡️',title:'防弹盾牌',en:'Ballistic Shield',
+  type:'防御装备',era:'现代',origin:'多国',
+  desc:'战术防弹盾牌，透明观察窗+攻击端口，SWAT和特种部队标配。',
+  cn:'一块现代战术防弹盾牌，弧形的长方形，主体是黑色的高强度复合装甲材料（凯夫拉+陶瓷），表面是哑光黑色，有战术纹理。盾牌上部有一个长方形的透明观察窗，是防弹玻璃做的，可以清晰看到外面。观察窗旁边或者下方有一个小的射击孔（攻击端口），可以从盾牌后面伸出手枪射击。盾牌边缘有黑色的橡胶包边。盾牌背面（手持的一侧）有两个臂带和一个握把，还有一个可调节的缓冲垫。盾牌左下角或者某个角上有警徽或者部队徽章的贴纸。整体造型坚固、专业、充满战术感，是SWAT、反恐部队、要员保护的标准装备，能在枪林弹雨中为持有者提供移动的掩护。',
+  en:'A modern tactical ballistic shield, curved rectangular shape, main body is black high-strength composite armor material (Kevlar + ceramic), surface is matte black, has tactical texture. Upper part of shield has a rectangular transparent viewing window, made of ballistic glass, can see outside clearly. Beside or below viewing window is a small firing port (assault port), can extend pistol from behind shield to shoot. Shield edge has black rubber trim. Back of shield (side held) has two arm straps and a handle, plus an adjustable cushion. Lower left corner or some corner has police badge or unit emblem sticker. Overall shape sturdy, professional, full of tactical feeling — standard equipment of SWAT, counter-terrorism units, VIP protection, can provide mobile cover for holder in hail of bullets.',
+  gpt:'Create a dramatic shot of a tactical ballistic shield standing upright in a dark smoky corridor with police lights reflecting off its surface. The shield is a large rectangular shape with a slight curve, made of matte black advanced composite armor. Near the top is a rectangular bulletproof glass viewing window that looks out clearly. Below the window is a small firing port for shooting a pistol from behind cover. The edges are trimmed with black rubber. The lighting catches the matte texture of the armor and the reflections on the glass viewport. Red and blue police light reflections dance across the black surface. It should look tough, professional, and reassuring — a mobile fortress for the operator behind it. Standard equipment for SWAT teams entering dangerous situations — the first thing you see when they breach a room.',
+  tips:'防弹盾牌要素：黑色弧形主体、上部透明观察窗、射击孔/攻击端口、橡胶包边、臂带+握把（背面）。注意盾牌是"有弧度的"——不是平板，弧形能增加防弹效能。'},
+ {id:19,cat:'modern',emoji:'🕶️',title:'夜视仪',en:'Night Vision Goggles',
+  type:'战术装备',era:'现代',origin:'美国',
+  desc:'头戴式夜视仪，绿色荧光视野，特种部队标志性装备。',
+  cn:'一副军用头戴式夜视仪，安装在战术头盔的前面。夜视仪有两个圆形的或者单筒的物镜筒，朝前伸出，镜头是深色的玻璃，反射着微光。夜视仪的外壳是黑色的工程塑料，有模块化的设计和调节旋钮。头盔是黑色的战术头盔，上面有导轨和魔术贴，可以安装各种附件。从夜视仪目镜的方向看过去，可以看到内部发出的淡淡的绿色荧光（夜视仪的典型绿色）。夜视仪的线缆向下连接到电池盒。整体造型非常有科技感和战术感，是特种部队、夜战、潜入行动的标志性装备。戴上它，就能在完全黑暗中看到一切。旁边可以有一个小图展示夜视仪看到的画面——绿色的、颗粒感的夜视画面。',
+  en:'A pair of military helmet-mounted night vision goggles, mounted on front of tactical helmet. Night vision device has two circular or single-tube objective lens tubes, protruding forward, lenses are dark glass, reflecting faint light. Housing of NVG is black engineering plastic, has modular design and adjustment knobs. Helmet is black tactical helmet, with rails and Velcro on it, can install various accessories. Looking from eyepiece side of NVG, you can see faint green fluorescence emitted inside (typical green of night vision). Cables from NVG connect down to battery pack. Overall shape very sci-fi and tactical — iconic equipment of special forces, night combat, infiltration operations. Wear it, and you can see everything in complete darkness. Beside it can have a small inset showing view through NVG — green, grainy night vision picture.',
+  gpt:'Create a cool, tactical shot of night vision goggles mounted on a black combat helmet against a dark background. The NVG has two forward-facing objective lens tubes with dark reflective glass. The housing is matte black plastic with adjustment knobs and a modular design. The helmet below has Velcro patches and accessory rails. From the eyepiece side, a faint characteristic green glow emanates — the signature green of image intensifier tubes. Thin power cables run down to a battery pack. The lighting should be dim and moody, with the green glow from the goggles being the main light source. It should look high-tech, tactical, and a little eerie — the equipment that lets you own the night. Iconic gear of special forces operating in darkness.',
+  tips:'夜视仪关键：黑色头盔+前置双筒/单筒物镜、目镜发出绿色荧光、线缆+电池。"绿色"是夜视仪的标志性颜色——一提夜视仪就想到绿色画面。注意夜视仪是装在"头盔前面"的，不是戴在眼睛上的眼镜。'},
+ {id:20,cat:'modern',emoji:'💉',title:'战术匕首',en:'Tactical Knife',
+  type:'近战武器',era:'现代',origin:'多国',
+  desc:'现代战术折刀/直刀，黑色涂层，锯齿刃，特种部队必备。',
+  cn:'一把现代战术直刀，黑色的全钢刀身，表面是黑色的涂层（石洗或者特氟龙涂层），减少反光。刀刃一部分是平刃，一部分是锯齿刃（半齿刃），可以锯断绳子和木头。刀尖是锋利的刨削型刀尖（clip point），穿刺力强。刀柄是黑色的G10或者米卡塔材料，有纹理防滑，符合人体工学的形状。柄头（pommel）是金属的，可以当破窗器或者打击工具。刀鞘是黑色的Kydex热塑材料，有夹子可以夹在腰带上。旁边可以有一个展开的多功能工具钳。整体造型黑色、低调、致命，是现代特种部队和战术爱好者的标配，也是最后的防线武器。',
+  en:'A modern tactical fixed-blade knife, black all-steel blade, surface is black coating (stone wash or Teflon coating), reduces reflection. Part of blade is plain edge, part is serrated edge (half-serrated), can saw through rope and wood. Blade tip is sharp clip point, strong piercing power. Handle is black G10 or Micarta material, textured anti-slip, ergonomic shape. Pommel is metal, can be used as window breaker or striking tool. Sheath is black Kydex thermoplastic material, has clip that can clip onto belt. Beside it can have an opened multi-tool pliers. Overall shape black, low-profile, deadly — standard gear of modern special forces and tactical enthusiasts, also last line of defense weapon.',
+  gpt:'Create a dramatic close-up of a modern tactical combat knife resting on a dark weathered surface with side lighting. The blade is black-coated steel with a non-reflective matte finish. The cutting edge is partially plain and partially serrated — the saw teeth for cutting rope and fibrous materials. The tip is a sharp clip point designed for piercing. The handle is made of textured black G10 composite with an ergonomic shape for a secure grip. The metal pommel at the end is exposed for use as a window breaker or impact tool. Next to it sits a black Kydex sheath with a belt clip. The lighting should be low and dramatic, highlighting the edge of the blade and the texture of the handle. It should look tough, purposeful, and quietly deadly — the last-resort weapon every operator carries.',
+  tips:'现代战术刀关键：黑色涂层（不反光）、半齿刃（一半平刃一半锯齿）、G10/米卡塔柄、Kydex刀鞘。关键词"战术"——黑色、功能性、无多余装饰。'},
+ {id:21,cat:'modern',emoji:'🎖️',title:'战术头盔',en:'Tactical Helmet',
+  type:'防护装备',era:'现代',origin:'美国',
+  desc:'现代战术头盔，FAST头盔，附件齐全，特种部队标准装备。',
+  cn:'一顶现代FAST（Future Assault Shell Technology）战术头盔，黑色的高强度碳纤维/聚乙烯复合材料，重量轻但防护等级高。头盔形状是现代设计——头顶比较平，两侧有导轨（ARC导轨）可以安装手电和摄像头。头盔正面有魔术贴面板，可以粘贴士气章（比如美国国旗、部队徽章、血型章等）。头盔前上方有一个夜视仪安装座（NVG shroud），是黑色的金属底座，上面有安装卡扣。头盔两侧的导轨上各安装了一个小小的战术手电。头盔的悬挂系统（里面的带子）是可调节的。下颌带是黑色的织带，有快速释放扣。整体造型现代、战术、充满科技感，是现代特种部队的标志性装备之一。',
+  en:'A modern FAST (Future Assault Shell Technology) tactical helmet, black high-strength carbon fiber/polyethylene composite material, light weight but high protection level. Helmet shape is modern design — top of head relatively flat, both sides have rails (ARC rails) can install flashlights and cameras. Front of helmet has Velcro panel, can attach morale patches (like US flag, unit insignia, blood type patch etc.). Front top of helmet has a night vision mount (NVG shroud), is black metal base, has mounting clips on it. Rails on both sides of helmet each have a small tactical flashlight installed. Helmet suspension system (straps inside) is adjustable. Chin strap is black webbing, has quick-release buckle. Overall shape modern, tactical, full of tech feel — one of iconic equipment of modern special forces.',
+  gpt:'Create a professional shot of a modern FAST tactical helmet displayed on a dark mannequin head with dramatic lighting. The helmet is matte black, made of advanced composite material with a smooth but tough finish. The shape is modern and streamlined. On the front, there is a Velcro panel with a couple of morale patches and an NVG mount shroud for night vision goggles. Along both sides run ARC rails with small tactical flashlights attached. The chin strap is black webbing with a quick-release buckle. The lighting should highlight the contours of the helmet and the details of the attachments. It should look like the real deal — high-speed, low-drag, state-of-the-art special forces gear. The kind of helmet that tells you whoever wears it means business.',
+  tips:'FAST头盔识别点：平顶+两侧导轨（ARC导轨）、正面魔术贴+NVG安装座、轻量化设计（比传统头盔小）。导轨上的附件越多越战术——手电、摄像机、信号弹等。'},
+ {id:22,cat:'modern',emoji:'📻',title:'战术对讲机',en:'Tactical Radio',
+  type:'通讯装备',era:'现代',origin:'多国',
+  desc:'军用战术对讲机，坚固耐用，天线长长，特种部队通讯利器。',
+  cn:'一台军用战术对讲机（电台/手台），橄榄绿色或者黑色的坚固机身，外壳是橡胶包边的军用级塑料，有防水防尘的设计（IP67等级）。对讲机顶部有一根长长的橡胶天线，弯曲着指向天空。旁边有一个旋钮式的信道选择器和一个音量旋钮。正面是一个小小的液晶屏（或者是没有屏幕的纯按键式），屏幕发着绿光，显示信道号和信号强度。屏幕下方是一排橡胶按键，有PTT（发射）键、数字键、功能键等。机身侧面有一个大的PTT按钮，方便戴手套按。机身背面有一个腰带夹。对讲机顶部还有一个扬声器格栅。整体造型坚固、厚重、专业，一看就是军用级别的装备，是战术行动中不可或缺的通讯工具。',
+  en:'A military tactical walkie-talkie (radio/handheld transceiver), olive green or black rugged body, housing is rubber-edged military-grade plastic, has waterproof and dustproof design (IP67 rating). Top of radio has a long rubber antenna, curved pointing to sky. Beside it are a rotary channel selector and a volume knob. Front has a small LCD screen (or pure keypad type without screen), screen glowing green, showing channel number and signal strength. Below screen are一排 rubber buttons, there are PTT (push-to-talk) button, number keys, function keys etc. Side of body has a large PTT button, easy to press with gloves on. Back of body has a belt clip. Top of radio also has a speaker grille. Overall shape rugged, heavy-duty, professional — clearly military-grade equipment, indispensable communication tool in tactical operations.',
+  gpt:'Create a rugged product shot of a military tactical radio resting on camouflage fabric in harsh side lighting. The radio is olive drab with a tough rubberized outer casing built to military specs — waterproof, dustproof, drop-proof. A long flexible rubber antenna extends up from the top, slightly curved. Next to the antenna are a rotary channel dial and a volume knob. The front has a small green-backlit LCD screen showing channel and signal strength, with rubberized buttons below including a large PTT (push-to-talk) button. A prominent side PTT button is easy to find with gloves on. A belt clip is visible on the back. A speaker grille sits at the top. The lighting should be harsh and dramatic, emphasizing the rugged, no-nonsense design. It should look like it could survive being dropped, rained on, and used in the worst conditions — the lifeline of any tactical operation.',
+  tips:'战术对讲机关键：坚固外壳+橡胶包边、长天线、PTT按键（侧键+正面）、绿色背光屏幕、腰带夹。关键词"坚固"——看起来就能摔、能防水、能在恶劣环境用。'},
+ {id:23,cat:'modern',emoji:'🪖',title:'无人机',en:'Combat Drone',
+  type:'空中装备',era:'现代',origin:'多国',
+  desc:'军用察打一体无人机，机翼下挂导弹，现代战争的标志性武器。',
+  cn:'一架军用察打一体无人机，正在高空飞行，机身是细长的流线型，浅灰色的隐身涂装（或者沙漠迷彩）。机翼非常长，是平直的大展弦比机翼，适合长时间滞空飞行。机翼下各有一个挂架，挂着精确制导导弹（地狱火导弹之类的），导弹是白色的，有红色的弹头标记。机头下方有一个球形的光电转塔（传感器球），里面有红外摄像头和激光指示器。尾部是V形尾翼或者常规尾翼。螺旋桨发动机在尾部。整体造型冷酷、高效、致命，没有飞行员但拥有强大的打击能力。背景是高空的云层和地面的沙漠或者城市。是现代战争中最具代表性的新型武器，改变了战争的形态。',
+  en:'A military ISR (intelligence, surveillance, reconnaissance) and strike drone, flying at high altitude, fuselage is long streamlined shape, light gray stealth paint (or desert camouflage). Wings very long, are straight high-aspect-ratio wings, suitable for long endurance flight. Under each wing is a pylon, carrying a precision-guided missile (Hellfire missile or similar), missile is white, has red warhead marking. Below nose is a spherical electro-optical turret (sensor ball), inside are infrared camera and laser designator. Tail is V-tail or conventional tail. Propeller engine at rear. Overall shape cold, efficient, deadly — no pilot but has powerful strike capability. Background is high-altitude clouds and desert or city on ground. Most representative new weapon of modern warfare, changed form of war.',
+  gpt:'Create a cinematic aerial shot of a large military combat drone flying high above desert terrain in hazy sunlight. The drone has a long slender fuselage painted in matte gray and extremely long, straight wings built for endurance. Under each wing, a precision-guided missile is mounted on a pylon — white with a red-tipped warhead. Beneath the nose, a spherical sensor turret swivels, housing cameras and targeting systems. The rear has a pusher propeller engine and V-shaped tail fins. The drone flies serenely, almost lazily, but carries deadly capability. Below, the ground is a vast arid landscape fading into heat haze. The feeling should be quiet, clinical, and slightly unsettling — the unmanned face of modern warfare, watching and striking from above.',
+  tips:'军用无人机关键：大展弦比长机翼（长航时特征）、机头下的光电球、翼下挂导弹、推进式螺旋桨（尾部）、V尾。关键词"无人"——没有驾驶舱就是最大的识别特征。'},
+ {id:24,cat:'modern',emoji:'💥',title:'战术手电',en:'Tactical Flashlight',
+  type:'战术配件',era:'现代',origin:'多国',
+  desc:'强光战术手电，攻击头+尾按开关，CQB必备工具。',
+  cn:'一把高强度战术手电，黑色的航空铝合金机身，表面是硬质阳极氧化处理，有防滑的滚花纹理（菱形格子）。手电头部有锯齿状的攻击头（打击头/攻击齿），可以用来破窗或者近身防御。手电前端的灯杯是光滑的反光杯，中心是一颗明亮的LED灯珠。尾部是橡胶的尾按开关（可以半按点射，全按常亮）。手电尾部还有一个穿手绳的孔。整体造型紧凑、坚固、功能性强，是现代战术行动和日常携带的必备工具。黑暗中按下开关，瞬间迸发出耀眼的光柱，照亮黑暗，也可能暂时致盲敌人。是低调但不可或缺的战术工具。',
+  en:'A high-intensity tactical flashlight, black aerospace aluminum body, surface is hard anodized, has anti-slip knurling texture (diamond pattern). Head of flashlight has serrated strike bezel (attack head/attack teeth), can be used for window breaking or close-quarters defense. Front bezel of flashlight is smooth reflector, center is a bright LED emitter. Tail is rubber tail-cap switch (can half-press for momentary, full press for constant on). End of flashlight also has a hole for lanyard. Overall shape compact, sturdy, highly functional — essential tool for modern tactical operations and everyday carry. Press switch in darkness, instantly bursts out dazzling beam of light, illuminating darkness, may also temporarily blind enemies. Understated but indispensable tactical tool.',
+  gpt:'Create a dynamic shot of a tactical flashlight cutting through complete darkness with a brilliant white beam. The flashlight is made of black anodized aluminum with a knurled diamond pattern texture for grip. The head of the light has a crenellated strike bezel — sharp teeth around the lens for breaking glass or self-defense. In the center of the reflector, a powerful LED emits a concentrated beam of white light that cuts through the darkness and illuminates swirling dust particles in the air. The tail cap has a rubber clicky switch. The beam should be visible as a solid column of light with visible floating dust motes inside it. The feeling should be functional, tough, and dramatic — that single beam cutting through darkness is one of the most satisfying tactical visuals.',
+  tips:'战术手电关键：攻击头（锯齿状）、滚花防滑纹、尾按开关、可见光束。攻击头是和普通手电最直观的区别——前面有齿的就是战术手电。光束一定要"看得见"——丁达尔效果。'}
+];
+
+function renderWeaponList(cat){
+  var list=document.getElementById('weaponList');
+  if(!list)return;
+  var filtered=cat==='all'?WEAPON_DATA:WEAPON_DATA.filter(function(w){return w.cat===cat});
+  var totalEl=document.getElementById('weaponTotalCount');
+  if(totalEl)totalEl.textContent=filtered.length;
+
+  var html='';
+  filtered.forEach(function(w){
+    html+='<div class="weapon-card" data-id="'+w.id+'" onclick="toggleWeaponCard('+w.id+')">';
+    html+='<div class="weapon-card-top">';
+    html+='<div class="weapon-emoji">'+w.emoji+'</div>';
+    html+='<div class="weapon-info">';
+    html+='<div class="weapon-title">'+w.title+'</div>';
+    html+='<div class="weapon-en">'+w.en+'</div>';
+    html+='</div></div>';
+    html+='<div class="weapon-tags">';
+    html+='<span class="weapon-tag type">⚔️ '+w.type+'</span>';
+    html+='<span class="weapon-tag era">📜 '+w.era+'</span>';
+    html+='<span class="weapon-tag origin">🌍 '+w.origin+'</span>';
+    html+='</div>';
+    html+='<div class="weapon-card-detail">';
+    html+='<div class="weapon-detail-grid">';
+    html+='<div class="weapon-detail-item"><b>武器类型</b><span>'+w.type+'</span></div>';
+    html+='<div class="weapon-detail-item"><b>时代</b><span>'+w.era+'</span></div>';
+    html+='<div class="weapon-detail-item"><b>起源</b><span>'+w.origin+'</span></div>';
+    html+='<div class="weapon-detail-item"><b>说明</b><span>'+w.desc.substring(0,30)+'...</span></div>';
+    html+='</div>';
+    html+='<div class="weapon-prompt-box">';
+    html+='<div class="weapon-prompt-title">💡 武器详细描述提示词</div>';
+    html+='<div class="weapon-lang-label">🇨🇳 中文版：</div>';
+    html+='<div class="weapon-prompt-text" onclick="event.stopPropagation();copyWeaponPrompt(this)">'+w.cn+'</div>';
+    html+='<div class="weapon-lang-label">🇺🇸 English：</div>';
+    html+='<div class="weapon-prompt-text" onclick="event.stopPropagation();copyWeaponPrompt(this)">'+w.en+'</div>';
+    html+='<div class="weapon-lang-label">🤖 GPT Image 2 版本：</div>';
+    html+='<div class="weapon-prompt-text" onclick="event.stopPropagation();copyWeaponPrompt(this)">'+w.gpt+'</div>';
+    html+='</div>';
+    html+='<div class="weapon-tips"><b>💡 绘画技巧：</b>'+w.tips+'</div>';
+    html+='<div class="weapon-actions">';
+    html+='<button class="weapon-action-btn primary" onclick="event.stopPropagation();copyFullWeapon('+w.id+')">📋 复制全部</button>';
+    html+='<button class="weapon-action-btn secondary" onclick="event.stopPropagation();toggleWeaponCard('+w.id+')">收起</button>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+  });
+  list.innerHTML=html;
+}
+
+function switchWeaponCat(cat){
+  document.querySelectorAll('.weapon-cat').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+  });
+  renderWeaponList(cat);
+}
+
+function toggleWeaponCard(id){
+  var card=document.querySelector('.weapon-card[data-id="'+id+'"]');
+  if(card)card.classList.toggle('expanded');
+}
+
+function copyWeaponPrompt(el){
+  var text=el.textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('提示词已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('提示词已复制','success');
+  }
+}
+
+function copyFullWeapon(id){
+  var w=WEAPON_DATA.find(function(x){return x.id===id});
+  if(!w)return;
+  var text='【武器】'+w.title+' ('+w.en+')\n'+
+    '类型：'+w.type+'\n'+
+    '时代：'+w.era+'\n'+
+    '起源：'+w.origin+'\n'+
+    '描述：'+w.desc+'\n\n'+
+    '【中文提示词】\n'+w.cn+'\n\n'+
+    '【English Prompt】\n'+w.en+'\n\n'+
+    '【GPT Image 2 Prompt】\n'+w.gpt+'\n\n'+
+    '【绘画技巧】\n'+w.tips;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('完整武器信息已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('完整武器信息已复制','success');
+  }
+}
+
+// 初始化武器列表
+document.addEventListener('DOMContentLoaded',function(){
+  renderWeaponList('all');
+});
+
+/* ========== 特效提示词库 ========== */
+var EFFECT_DATA=[
+ // ========== 魔法特效 ==========
+ {id:1,cat:'magic',emoji:'🔮',title:'魔法阵',en:'Magic Circle',
+  type:'阵法',scene:'施法/召唤',intensity:'中等',
+  desc:'发光的魔法阵，符文旋转，充满神秘魔力，是奇幻作品最经典的特效。',
+  cn:'一个发光的魔法阵悬浮在半空中，圆形的阵图，由多层同心圆组成，每一圈都刻满了神秘的符文（如尼文/恶魔文字/魔法符文），符文发出明亮的蓝紫色光芒。阵图中心是一个复杂的六芒星或者五芒星图案，星形的每个顶点都有一颗发光的宝石。魔法阵正在缓慢地旋转，符文跟着一起转动，周围空气中漂浮着许多微小的光点（魔力粒子）。魔法阵的光芒照亮了周围的环境，在地面和周围的物体上投下蓝紫色的光影。阵图边缘有几道能量光束向上射入天空。整体效果神秘而华丽，充满了魔力的感觉。',
+  en:'A glowing magic circle hovering in mid-air, circular array diagram, composed of multiple concentric circles, each ring engraved with mysterious runes (Elder Futhark/demonic text/magical runes), runes emitting bright blue-purple light. Center of array is a complex hexagram or pentagram pattern, each vertex of star has a glowing gemstone. Magic circle slowly rotating, runes turning along with it, many tiny light points (mana particles) floating in surrounding air. Glow of magic circle illuminates surrounding environment, casting blue-purple light and shadow on ground and surrounding objects. Several energy beams at edge of array shoot upward into sky. Overall effect mysterious and magnificent, full of magical feeling.',
+  gpt:'Create a stunning visual of a glowing magical rune circle floating in mid-air in a dark ancient chamber. The circle has multiple concentric rings, each filled with glowing mysterious runes that pulse with blue-violet light. At the center is an intricate hexagram pattern with glowing gemstones at each point. The entire circle is slowly rotating, and magical particles of light drift and swirl around it. The glow from the circle illuminates the stone walls of the chamber with purple light. Beams of energy shoot upward from the edges of the circle into the darkness above. The overall feeling should be mystical, powerful, and beautiful — like a spell that is about to be cast, full of arcane energy.',
+  tips:'魔法阵三要素：同心圆+符文+中心星形。关键是"发光"——符文本身要是光源，照亮周围。旋转感+漂浮粒子增加动态。颜色可以根据属性改：火=红，水=蓝，光=金，暗=紫。'},
+ {id:2,cat:'magic',emoji:'📖',title:'魔导书翻页',en:'Grimoire Levitation',
+  type:'物品魔法',scene:'施法/学习/回忆',intensity:'温和',
+  desc:'悬浮的古老魔法书，自动翻页，书页发光，是魔法师的标志性场景。',
+  cn:'一本厚重的古老魔法书悬浮在半空中，封面是深棕色的皮革，上面有金色的五芒星压花和金属包角，封面微微磨损带着历史感。魔法书自己漂浮着，不需要任何支撑，书页正在自动翻动，一页一页地翻过，仿佛有一只无形的手在翻书。每一页都发着柔和的金色光芒，书页上写满了古老的魔法文字和手绘的魔法阵图案、草药插图、星空图等。书页翻动时，有金色的光粒从书页中飘散出来，像萤火虫一样在空中飞舞。魔法书周围环绕着几圈淡淡的金色光环。整体效果温暖、神秘、充满知识的力量感，是魔法师书房中最经典的画面。',
+  en:'A thick ancient magic book hovering in mid-air, cover is dark brown leather, with golden pentagram embossing and metal corner guards, cover slightly worn with sense of history. Magic book floating by itself, no support needed, pages turning automatically, turning page by page, as if invisible hand flipping book. Each page glows with soft golden light, pages filled with ancient magical writing and hand-drawn magic circle patterns, herbal illustrations, star charts etc. When pages turn, golden light particles drift out from pages, dancing in air like fireflies. Several faint golden halos环绕 around magic book. Overall effect warm, mysterious, full of power of knowledge — most classic scene in a wizard study.',
+  gpt:'Create a warm, magical scene of an ancient grimoire floating in mid-air in a dark wizard study. The book is thick with a worn dark leather cover featuring a gold embossed pentagram and metal corner pieces. The pages turn by themselves, one after another, as if flipped by invisible fingers. Each page glows with a warm golden light, covered in ancient script, diagrams of magic circles, herbal drawings, and astronomical charts. Golden particles of light drift out from between the pages and float around the book like fireflies. Soft golden halos of light circle the floating book. The background is dark with shelves of old books barely visible. The feeling should be warm, scholarly, and deeply magical — like knowledge itself has come alive.',
+  tips:'漂浮魔法书关键：自动翻页+书页发光+金色光粒。书的"年代感"很重要——磨损的皮革、金属包角、泛黄的书页。光粒是增加魔法感的点睛之笔。'},
+ {id:3,cat:'magic',emoji:'🌀',title:'传送门',en:'Portal Gate',
+  type:'空间魔法',scene:'传送/异界',intensity:'强烈',
+  desc:'竖立的椭圆形魔法传送门，能量漩涡，连接两个世界的通道。',
+  cn:'一个巨大的椭圆形魔法传送门竖立在地面上，像一个竖立的紫色能量漩涡，内部是旋转的星云状能量流，紫色和蓝色的光带在内部螺旋旋转，中心是最亮的白色光芒，仿佛通往另一个世界。传送门的边缘有流动的电弧和能量粒子向外溅射，然后又被吸回门内。传送门周围的空气因为高温或者能量而扭曲（热浪扭曲效果）。地面被传送门的光芒照亮，呈现紫色的光影。传送门发出低沉的嗡鸣声（虽然画面是静态的但能让人感觉到声音）。传送门两侧可以有古代的石柱或者符文基座，是启动传送门的装置。整体效果壮观而神秘，充满未知和冒险的感觉。',
+  en:'A huge oval magical portal standing on the ground, like a vertical purple energy vortex, inside is rotating nebula-like energy flow, purple and blue light bands spiraling inside, center is brightest white light, as if leading to another world. Edge of portal has flowing electric arcs and energy particles splashing outward, then sucked back into gate. Air around portal is distorted from high temperature or energy (heat shimmer distortion effect). Ground illuminated by portal glow, showing purple light and shadow. Portal emits low humming sound (although image is static you can feel the sound). On both sides of portal there can be ancient stone pillars or rune pedestals, devices activating portal. Overall effect spectacular and mysterious, full of unknown and adventurous feeling.',
+  gpt:'Create a breathtaking scene of a magical portal standing in an ancient stone courtyard at night. The portal is a tall oval shape filled with swirling purple and blue energy that spirals inward toward a brilliant white center — like looking into another dimension. Electric arcs and energy particles flicker around the edge, sometimes splashing outward before being pulled back in. The air around the portal shimmers with heat distortion. The purple glow from the portal illuminates the surrounding stone pillars and ruins. On either side of the portal stand ancient carved rune pillars that seem to power it. The overall feeling should be epic, mysterious, and full of possibility — a gateway to another world that you could step through into adventure.',
+  tips:'传送门关键：椭圆形/圆形、内部漩涡、中心亮光、边缘电弧+粒子、热浪扭曲。核心是"通往未知"的感觉——内部一定要亮到看不清对面，因为对面是未知的。'},
+
+ // ========== 能量特效 ==========
+ {id:4,cat:'energy',emoji:'⚡',title:'雷电',en:'Lightning Bolt',
+  type:'能量',scene:'攻击/觉醒',intensity:'强烈',
+  desc:'分叉的闪电，蓝白色电光，划破黑暗，是最有冲击力的能量特效。',
+  cn:'一道明亮的闪电划破黑暗的天空，主闪电是粗壮的蓝白色电光，从天空直劈地面，闪电不是直线，而是有很多分叉的锯齿状，主干闪电周围有无数细小的分支闪电向外扩散，像树根一样。闪电发出刺眼的光芒，照亮了周围的云层和环境，在云层的边缘勾勒出明亮的轮廓（边缘光效果）。闪电周围的空气被电离，产生淡淡的紫色光晕（电辉光）。地面被闪电击中的地方有火花和碎石飞溅。闪电的形态既有力量感又有随机性，非常自然——真实的闪电就是不规则分叉的。整体效果震撼、狂暴、充满力量，是最强能量的象征。',
+  en:'A bright lightning bolt tearing through dark sky, main lightning bolt is thick blue-white electric light, striking straight from sky to ground, lightning not straight line but has many forked zigzag shapes, countless small branch lightnings spreading outward around main bolt, like tree roots. Lightning emits blinding light, illuminating surrounding clouds and environment, outlining bright edges on cloud rims (rim light effect). Air around lightning ionized, producing faint purple halo (electrical glow). Where lightning strikes ground there are sparks and碎石 flying. Lightning form has both sense of power and randomness, very natural — real lightning is irregularly branched. Overall effect shocking, violent, full of power, symbol of strongest energy.',
+  gpt:'Create a dramatic shot of a massive lightning bolt striking down from a stormy night sky. The main bolt is thick, brilliant blue-white light that zigzags from the clouds all the way to the ground, with countless smaller forked branches spreading out like roots from the main channel. The lightning is so bright it illuminates the entire storm cloud from within, creating glowing edges on every cloud formation. A faint purple electrical glow surrounds the bolt. Where it strikes the ground, dirt and rocks explode outward in a shower of sparks. The lightning path should look natural — irregular, jagged, and randomly branched. The overall feeling should be raw, powerful, and awe-inspiring — the pure power of nature unleashed.',
+  tips:'闪电关键：锯齿状分叉（不是直线！）、蓝白色主光+紫色辉光、照亮周围环境（边缘光）、地面溅射效果。闪电一定要"不规则"——完全对称的闪电看起来很假。主粗细分。'},
+ {id:5,cat:'energy',emoji:'💎',title:'能量护盾',en:'Energy Shield',
+  type:'防御',scene:'防御/保护',intensity:'中等',
+  desc:'半球形的能量防护罩，半透明发光，抵挡攻击的防御特效。',
+  cn:'一个巨大的半球形能量防护罩笼罩在目标上方，像一个倒扣的碗，保护着里面的人和物。护盾是半透明的，发出淡淡的蓝色（或金色/紫色）光芒，可以看到护盾里面的东西但有一层波光粼粼的质感。护盾表面有流动的能量波纹，像水面的涟漪一样一圈一圈地扩散。护盾上有六边形或者符文的网格线，发出更亮的光芒，构成护盾的结构。此刻护盾正在抵挡攻击——被击中的地方产生强烈的光波扩散，涟漪比其他地方更亮更大，撞击点有白色的冲击能量向外扩散。护盾边缘有微弱的电弧跳动。整体效果既有防御力的坚实感，又有能量的流动感，是奇幻和科幻作品中最经典的防御特效。',
+  en:'A huge hemispherical energy shield罩 over target, like an upside-down bowl, protecting people and objects inside. Shield is semi-transparent, emitting faint blue (or gold/purple) light, can see things inside shield but with a shimmering watery texture. Shield surface has flowing energy ripples, spreading circle by circle like ripples on water surface. Shield has hexagonal or rune grid lines on it, glowing brighter, constituting shield structure. At this moment shield is resisting attack — where hit produces strong light wave diffusion, ripples brighter and larger than other places, impact point has white shock energy spreading outward. Faint electric arcs beating at shield edge. Overall effect has both sturdiness of defensive power and flowing sense of energy — most classic defense special effect in fantasy and sci-fi works.',
+  gpt:'Create a dynamic scene of a glowing energy shield protecting a group of people from an incoming attack. The shield is a large hemispherical dome of semi-transparent cyan-blue light — you can see the figures inside through it, but the surface shimmers like water. A hexagonal energy grid pattern covers the shield surface, glowing brighter along the lines. Where the attack just struck the shield, bright concentric waves of energy ripple outward from the impact point, brighter than the rest of the shield. Small electric sparks flicker at the impact zone. The shield glows steadily, casting blue light on everything around it. The feeling should be both protective and dynamic — strong enough to hold, but you can feel the impact of what it\'s blocking.',
+  tips:'能量护盾要素：半球形/球形、半透明、表面波纹/网格、撞击处涟漪增强、发光。半透明是关键——不能完全挡住里面的东西也不能完全透明。六边形网格增加"科技感"，符文增加"魔法感"。'},
+ {id:6,cat:'energy',emoji:'💥',title:'能量炮',en:'Energy Blast',
+  type:'攻击',scene:'远程攻击/大招',intensity:'强烈',
+  desc:'从手中/武器发射的能量光束，粒子拖尾，大招级别的攻击特效。',
+  cn:'一道粗壮的能量光束从画面一侧（或者从一只手中/一把武器中）发射出来，能量束是明亮的蓝白色核心，外面包裹着一层蓝色的能量光晕，光晕边缘有跳动的电弧。能量束不是完全实心的，而是有流动的能量粒子和漩涡在内部旋转。能量束飞行的轨迹后面拖着长长的粒子尾迹（拖尾效果），尾迹逐渐扩散变淡。能量束周围的空气被照亮，产生强烈的镜头光晕（lens flare）效果。能量束的前端（弹头部分）更亮，有螺旋状的能量缠绕。周围有被冲击波吹飞的碎片和尘埃。整体效果非常有冲击力，是终极技能/大招级别的攻击，充满了破坏力和能量感。',
+  en:'A thick energy beam firing from one side of frame (or from a hand/weapon), energy beam has bright blue-white core, wrapped in a layer of blue energy glow, electric arcs beating at edge of glow. Energy beam not completely solid, but has flowing energy particles and vortices spinning inside. Trajectory of energy beam leaves long particle trail behind (trailing effect), trail gradually dispersing and fading. Air around energy beam illuminated, producing strong lens flare effect. Front end of energy beam (warhead part) is brighter, with spiral-shaped energy winding around. Surrounding has debris and dust blown away by shockwave. Overall effect very impactful, ultimate skill/final attack level strike, full of destructive power and energy feeling.',
+  gpt:'Create a dynamic action shot of a powerful energy blast being fired. A thick beam of brilliant blue-white energy bursts forward from off-screen (or from a character\'s hand/weapon). The core of the beam is blinding white surrounded by a glowing blue aura with crackling electric arcs along the edges. The beam isn\'t solid — swirling patterns of energy and particles flow inside it. A long glowing particle trail streams behind the main beam, gradually fading and dispersing. Intense lens flare blooms around the beam from its brightness. The leading edge of the blast is brightest, with spiral energy patterns winding around it. Debris and dust are blown outward by the shock wave. The whole thing should feel devastatingly powerful — like an ultimate attack that can destroy anything in its path.',
+  tips:'能量炮要素：核心白光+外层彩色光晕+电弧边缘+粒子拖尾+镜头光晕。"螺旋"结构增加动感和复杂度。拖尾要"前实后虚"——前面亮后面逐渐变淡散开。'},
+
+ // ========== 粒子特效 ==========
+ {id:7,cat:'particle',emoji:'✨',title:'金色粒子',en:'Golden Sparkles',
+  type:'粒子',scene:'治愈/升级/神圣',intensity:'温和',
+  desc:'飞舞的金色光粒，温暖神圣，常用于治愈、升级、神圣场景。',
+  cn:'无数金色的发光粒子在空中优雅地飞舞上升，像萤火虫一样，每个粒子都是小小的金黄色光点，发出温暖的光芒。粒子大小不一，有的大而明亮，有的小而微弱，错落有致。粒子的运动轨迹是缓慢上升的，带着轻微的左右摆动，像被微风托起的金色尘埃。一些粒子在飞行中会短暂地变亮然后变暗（闪烁效果）。空气中有淡淡的金色雾气或者丁达尔光束，光束中能看到更多的金色尘埃在浮动。整体效果温暖、神圣、治愈，仿佛置身于一个充满神圣力量的空间，是升级、治愈、祝福、觉醒等场景中最经典的粒子特效。',
+  en:'Countless golden glowing particles dancing and rising gracefully in air, like fireflies, each particle is a tiny golden light point, emitting warm glow. Particles vary in size, some large and bright, some small and faint, well-proportioned. Movement trajectory of particles is slow rising, with slight side-to-side sway, like golden dust lifted by breeze. Some particles briefly brighten then dim during flight (twinkling effect). Faint golden mist or Tyndall light beams in air, more golden dust floating can be seen in light beams. Overall effect warm, sacred, healing — as if in a space full of divine power, most classic particle special effect in leveling up, healing, blessing, awakening and other scenes.',
+  gpt:'Create a dreamy scene of countless golden sparkles floating and rising through shafts of warm light. Each sparkle is a tiny point of warm gold light, varying in size and brightness — some are bright distinct specks, others are fainter softer glows. They drift slowly upward with gentle swaying motions, like golden dust caught in a warm updraft. Some twinkle — briefly flaring brighter then dimming. Soft golden light beams cut diagonally through the space, and within the beams you can see even more tiny golden motes drifting. A faint golden haze fills the air. The overall feeling should be warm, magical, and deeply peaceful — like being in a sacred space filled with gentle healing energy. Pure, beautiful, and uplifting.',
+  tips:'金色粒子三要素：大小不一（层次感）、缓慢上升+摆动（自然感）、闪烁效果（生命力）。配合丁达尔光束效果翻倍。金色粒子=治愈/升级/神圣/祝福的万能公式。'},
+ {id:8,cat:'particle',emoji:'🌸',title:'花瓣飘落',en:'Falling Petals',
+  type:'粒子',scene:'唯美/离别/回忆',intensity:'温和',
+  desc:'漫天飘落的花瓣，樱花/桃花，浪漫唯美，是文艺场景必备特效。',
+  cn:'漫天飘落的樱花花瓣，粉红色的花瓣从空中缓缓落下，像一场花瓣雨。花瓣大小不一，形态各异——有的完全展开，有的微微卷曲，有的侧面对着镜头。花瓣的运动轨迹是缓慢下落的，同时带着旋转和左右飘动，仿佛被微风吹着摇曳生姿。前景有几片大而清晰的花瓣（景深效果/前景虚化），中景有更多的花瓣，远景是密密麻麻的粉色花雨，一直延伸到画面深处。背景是柔和的、模糊的粉白色（焦外成像/散景bokeh）。空气中弥漫着淡淡的粉色雾气。整体效果浪漫、唯美、梦幻，是恋爱、离别、回忆、死亡等场景的经典浪漫特效。',
+  en:'Cherry blossom petals falling everywhere, pink petals slowly descending from sky, like a petal rain. Petals vary in size, different shapes — some fully spread, some slightly curled, some facing camera sideways. Movement trajectory of petals is slow falling, accompanied by rotation and side-to-side fluttering, as if swaying gracefully in breeze. Foreground has several large clear petals (depth of field effect/foreground bokeh), midground has more petals, background is dense pink flower rain, extending deep into picture. Background is soft, blurred pink-white (bokeh). Faint pink mist fills the air. Overall effect romantic, aesthetic, dreamy — classic romantic special effect for love, parting, memories, death and other scenes.',
+  gpt:'Create a beautiful, dreamy scene of pink cherry blossom petals falling through soft light. Petals drift down everywhere in a gentle rain. They vary in shape and orientation — some fully open, some curled at the edges, some seen from the side. They fall slowly, spinning and swaying side to side as if caught in a soft breeze. A few petals in the foreground are large and slightly out of focus, creating depth. Midground has more petals, and the background is filled with countless drifting pink specks fading into a soft blurred bokeh. The whole scene is bathed in soft pinkish light with a hazy atmosphere. The feeling should be romantic, bittersweet, and ethereal — beautiful but with a hint of sadness. The classic visual for love, farewell, or cherished memories.',
+  tips:'花瓣雨关键：数量多（从前景到远景都有）、大小不一（景深）、旋转+飘动（不是直直下落）、前景虚化增加层次。樱花花瓣是粉色五瓣形，不要画成圆形。'},
+ {id:9,cat:'particle',emoji:'🔥',title:'火星飞溅',en:'Sparks Flying',
+  type:'粒子',scene:'战斗/打铁/爆炸',intensity:'中等',
+  desc:'四溅的火花/火星，橙红色发光粒子，战斗和工业场景必备。',
+  cn:'无数橙红色的火星从画面下方（或者一个撞击点）向四周飞溅，像烟花一样炸开。每一颗火星都是一个小小的光点，核心是亮白色，外层是橙红色的火焰色，拖着一条短短的尾迹（拖尾效果）。火星大小不一，飞行轨迹是抛物线——向上飞然后由于重力下落。一些火星在飞行中会分裂成更小的火星，或者逐渐变暗熄灭。前景的火星大而清晰，有运动模糊效果（速度线），远景的火星小而模糊。撞击点有更亮的核心光和烟雾。空气中弥漫着淡淡的烟尘。整体效果热烈、有力量感，是战斗、打铁、焊接、爆炸等场景中最经典的粒子特效。',
+  en:'Countless orange-red sparks flying in all directions from bottom of frame (or an impact point), exploding like fireworks. Each spark is a tiny light point, core is bright white, outer layer is orange-red flame color, trailing a short tail (trailing effect). Sparks vary in size, flight trajectory is parabolic — flying upward then falling due to gravity. Some sparks split into smaller sparks during flight, or gradually dim and go out. Foreground sparks are large and clear, with motion blur effect (speed lines), background sparks are small and blurred. Impact point has brighter core light and smoke. Faint soot fills the air. Overall effect fiery, with sense of power — most classic particle special effect in combat, blacksmithing, welding, explosion and other scenes.',
+  tips:'火星飞溅要素：白心+橙红外层+短拖尾、抛物线轨迹（重力）、大小远近不同、运动模糊。火星一定要"上抛然后下落"——完全直线的火星不真实。前景加运动模糊增加速度感。'},
+
+ // ========== 光影特效 ==========
+ {id:10,cat:'light',emoji:'☀️',title:'丁达尔光',en:'Tyndall Light Beams',
+  type:'光影',scene:'神圣/唯美/氛围',intensity:'温和',
+  desc:'穿透云层/树叶的光束，丁达尔效应，是增加画面氛围感的神器。',
+  cn:'几道明亮的光束从云层的缝隙中（或者树叶的间隙中）斜射下来，照射到地面或者雾气中，形成清晰可见的光路（丁达尔效应）。光束是明亮的金黄色或者暖白色，边缘柔和，光束内部可以看到漂浮的尘埃/粒子在光中闪闪发亮。光束的数量有3-5道，宽窄不一，角度略有不同，从画面上方斜射下来。光束照到的地方（地面/水面/人物身上）有明亮的光斑。周围环境相对较暗，和光束形成对比，让光束更加突出。空气中有雾气或者尘埃，才能让光束显形。整体效果神圣、唯美、宁静，瞬间提升画面的氛围感和高级感。',
+  en:'Several bright light beams slanting down through gaps in clouds (or between tree leaves), shining onto ground or mist, forming clearly visible light paths (Tyndall effect). Light beams are bright golden or warm white, soft edges, inside beams you can see floating dust/particles glittering in light. 3-5 light beams in total, varying in width, slightly different angles, shooting diagonally down from top of frame. Where beams hit (ground/water surface/on character) there are bright light spots. Surrounding environment relatively dark, contrasting with light beams, making beams stand out more. Mist or dust in air is what makes light beams visible. Overall effect sacred, aesthetic, peaceful — instantly提升 atmosphere and premium feel of image.',
+  gpt:'Create a breathtaking scene of Tyndall effect light beams streaming down through a break in dark storm clouds. Three or four distinct shafts of warm golden light cut diagonally through the air, their edges soft and glowing. Within each beam, countless tiny dust motes and particles are visible, shimmering in the light. The beams strike the ground below, creating bright pools of golden light. The surrounding area is darker and moody, making the light beams stand out dramatically. There\'s a slight haze in the air that makes the beams visible. The overall feeling should be serene, sacred, and hopeful — like light breaking through darkness. It\'s that perfect "heavenly light" moment that makes any scene feel instantly more epic and beautiful.',
+  tips:'丁达尔光关键：光束要有体积感（不是线是柱）、内部有尘埃粒子、环境要暗（对比才显）、斜射角度比垂直更自然。光束数量3-5道最好，太多太乱。颜色暖色（金/橙）比冷色更有"神圣感"。'},
+ {id:11,cat:'light',emoji:'🌑',title:'边缘光/轮廓光',en:'Rim Lighting',
+  type:'光影',scene:'人物突出/氛围感',intensity:'温和',
+  desc:'从背后照射的轮廓光，勾勒出人物的金边，让人物从背景中跳出来。',
+  cn:'一个人物站在画面中，背后有强烈的光源（太阳/灯光），在人物的轮廓上形成了一圈明亮的金色轮廓光（边缘光/rim light）。光线从人物的头发边缘、肩膀轮廓、身体两侧勾勒出来，形成一条明亮的光边，把人物和深色的背景分离开来。头发的发丝在逆光下根根分明，泛着金色的光芒（头发光/hair light）。人物的正面相对较暗，主要靠轮廓光来塑造形状。背景是深色的、虚化的，突出了人物的剪影轮廓。整体效果立体、有层次、充满氛围感，是人物摄影和插画中最经典的布光方式之一，能瞬间提升画面的专业感。',
+  en:'A character standing in frame, strong light source behind them (sun/light), forming a bright golden outline light on character\'s silhouette (rim light). Light勾勒 out from character\'s hair edges, shoulder contours, both sides of body, forming a bright light edge, separating character from dark background. Individual hair strands clearly visible against backlight, glowing with golden light (hair light). Front of character relatively dim, mainly relying on rim light to shape form. Background is dark, blurred, highlighting character\'s silhouette. Overall effect three-dimensional, layered, full of atmosphere — one of the most classic lighting methods in portrait photography and illustration, instantly提升 professional feel of image.',
+  gpt:'Create a striking silhouette portrait of a figure standing against a bright light source behind them. Strong backlighting creates a brilliant glowing rim of gold light all around the person\'s outline — tracing their shoulders, the curve of their body, and especially their hair, where individual strands catch the light and glow like golden threads. The front of the person is in shadow, so you see their form mostly defined by that bright edge of light. The background is dark and out of focus, making the glowing outline pop dramatically. The overall effect should be moody, dramatic, and cinematic. It\'s the classic rim lighting technique that adds instant depth, professionalism, and atmosphere to any character shot.',
+  tips:'轮廓光（rim light）关键：光源在正后方、轮廓有一圈明亮的边、正面较暗、背景暗。头发是轮廓光最出彩的地方——发丝光（hair light）一定要画清楚。颜色可以是金色（太阳光）、蓝色（月光）、紫色（魔法光）等。'},
+ {id:12,cat:'light',emoji:'💫',title:'镜头光晕',en:'Lens Flare',
+  type:'光影',scene:'电影感/科幻/阳光',intensity:'中等',
+  desc:'镜头眩光效果，彩色光斑和光线，增加电影感和科幻感。',
+  cn:'画面中有强烈的镜头眩光效果，一个明亮的光源（太阳/灯光）在画面边缘，产生了放射状的光线和多个彩色的光斑（鬼影/ghost）。主光线是从光源发出的放射状光束，有不同的长度和亮度。光斑是圆形或者多边形的（光圈形状），有不同的大小，沿着光源和画面中心的对角线排列，颜色是淡紫色、淡蓝色、橙红色等彩色半透明的。眩光让画面产生了轻微的雾化和泛白效果，尤其是在光源周围。整体效果非常有电影感和科技感，是科幻片、大片预告片、产品广告中最常用的特效之一，能瞬间提升画面的质感和冲击力。',
+  en:'Frame has strong lens flare effect, a bright light source (sun/light) at edge of frame, producing radial light rays and multiple colored light spots (ghosts). Main light is radial light beams emitted from light source, varying in length and brightness. Light spots are round or polygonal (aperture shape), different sizes, arranged along diagonal between light source and center of frame, colors are pale purple, pale blue, orange-red and other colored semi-transparent ones. Flare causes slight雾化 and overexposure effect in image, especially around light source. Overall effect very cinematic and sci-fi — one of most commonly used special effects in sci-fi films, blockbuster trailers, product advertising, can instantly提升 texture and impact of image.',
+  gpt:'Create a cinematic scene with a prominent lens flare effect. A bright light source sits near the edge of the frame — the sun or a brilliant artificial light — sending out radiating streaks of light and multiple semi-transparent colored "ghost" spots across the image. The ghost spots are hexagonal (aperture-shaped) and circular, in shades of pale purple, cyan, and warm orange, arranged diagonally across the frame from the light source. The flare creates a slight haze and washed-out brightness around the light source. The overall effect should feel cinematic, dramatic, and slightly futuristic. It\'s that classic big-budget movie look — the lens flare that tells you something epic is happening. Adds instant production value and visual impact.',
+  tips:'镜头光晕要素：主光源在画面边缘、放射状光线、沿着对角线排列的光斑（鬼影）、雾化/泛白效果。光斑形状：圆形/六边形（取决于光圈叶片数）。颜色多色混杂比单色更真实。注意不要过度——适当的光晕提升质感，太多就俗了。'},
+
+ // ========== 爆炸破坏 ==========
+ {id:13,cat:'explosion',emoji:'💣',title:'大爆炸',en:'Massive Explosion',
+  type:'破坏',scene:'战斗/毁灭',intensity:'强烈',
+  desc:'巨大的爆炸，蘑菇云/火球，碎片飞溅，最强的破坏特效。',
+  cn:'一个巨大的爆炸正在发生，中心是极亮的白色光球，外面是橙红色的火球，火球不断向外膨胀，形状是典型的蘑菇云形状——下面有较细的"茎"，上面是巨大的"蘑菇伞盖"。火球的边缘是翻滚的火焰和浓烟，颜色从内到外依次是白→黄→橙→红→暗红→黑烟。爆炸的冲击波正在向外扩散，地面被冲击波掀起，无数的碎片、石块、尘土被抛向四面八方。前景有一些大的碎片带着火焰飞过（增加层次感）。爆炸产生的强光照亮了周围的一切。整体效果震撼、狂暴、充满毁灭的力量，是大场面战斗和灾难场景的必备特效。',
+  en:'A huge explosion happening, center is extremely bright white light ball, outside is orange-red fireball, fireball continuously expanding outward, shape is classic mushroom cloud shape — thinner "stem" below, huge "mushroom cap" above. Edge of fireball is rolling flames and thick smoke, colors from inside to outside sequentially white → yellow → orange → red → dark red → black smoke. Shockwave of explosion spreading outward, ground lifted by shockwave, countless debris, rocks, dust thrown in all directions. Foreground has some large debris flying past with flames (adding depth). Intense light from explosion illuminates everything around. Overall effect shocking, violent, full of destructive power — essential special effect for large-scale battle and disaster scenes.',
+  gpt:'Create a cataclysmic explosion scene with a massive mushroom cloud fireball. The center of the blast is brilliant white-hot, surrounded by roiling orange and red flames forming the classic mushroom cloud shape — a narrower stem below and a vast expanding cap above. The edges of the fireball mix with dark billowing smoke, colors transitioning from white core through yellow, orange, deep red, and finally into black smoke. A powerful shock wave spreads outward, tearing up the ground and sending debris, rocks, and dust blasting in every direction. A few large burning pieces of debris fly through the foreground for depth. The intense light from the explosion illuminates everything. The overall feeling should be apocalyptic, powerful, and devastating — the raw destructive force of a massive detonation.',
+  tips:'爆炸关键：中心白亮→向外颜色渐变（黄→橙→红→黑烟）、蘑菇云形状、冲击波+碎片飞溅。爆炸一定要"有层次"——不是一团火球，而是有明确的颜色和结构层次。碎片大小远近不同增加空间感。'},
+ {id:14,cat:'explosion',emoji:'💔',title:'玻璃碎裂',en:'Shattered Glass',
+  type:'破坏',scene:'冲击/转折',intensity:'中等',
+  desc:'碎裂的玻璃，裂纹放射状，碎片飞溅，常用于冲击和转折场景。',
+  cn:'一面玻璃正在碎裂，从一个撞击点开始，无数裂纹呈放射状向外扩散，形成蜘蛛网一样的裂纹图案。裂纹不是简单的直线，而是有很多分叉的，像树枝一样。玻璃已经碎了但还没有完全掉下来——很多碎片挂在裂纹上摇摇欲坠。有几片碎片已经从玻璃上脱落，向前飞溅，前景有几片大的碎片带着运动模糊效果（速度线）。碎片的边缘反射着光线，闪闪发光。透过碎裂的玻璃看过去，后面的景物是扭曲的、支离破碎的（折射效果）。整体效果锋利、有冲击力、充满张力，是冲击、背叛、真相揭露等场景的经典视觉隐喻。',
+  en:'A pane of glass shattering, starting from one impact point, countless cracks spreading outward radially, forming spider web-like crack pattern. Cracks not simple straight lines, but have many forks, like tree branches. Glass is broken but hasn\'t completely fallen yet — many shards hanging on cracks about to fall. Several shards already detached from glass, flying forward, foreground has several large shards with motion blur effect (speed lines). Edges of shards reflecting light, sparkling. Looking through shattered glass, scene behind is distorted, fragmented (refraction effect). Overall effect sharp, impactful, full of tension — classic visual metaphor for impact, betrayal, truth revelation and other scenes.',
+  gpt:'Create a dynamic close-up of glass shattering from a single impact point. Radiating cracks spread outward in a spiderweb pattern — not straight lines but branching, tree-like fractures that split again and again. The glass is broken but still mostly holding together, with many individual shards just barely attached. Several pieces have already broken free and are flying toward the viewer, some in the foreground with motion blur showing their speed. The sharp edges of the glass catch the light and glitter. Through the cracked glass, the scene beyond is distorted and fragmented by the refraction. The overall feeling should be sharp, sudden, and full of tension — the visual metaphor for something breaking, a shocking reveal, or a moment of impact that changes everything.',
+  tips:'玻璃碎裂关键：放射状裂纹（从撞击点出发）、裂纹分叉树枝状、碎片半掉不掉、前景碎片+运动模糊、折射扭曲后面景物。裂纹越细越多越真实，大粗裂纹看起来假。'},
+
+ // ========== 自然元素 ==========
+ {id:15,cat:'nature',emoji:'🔥',title:'火焰',en:'Dancing Flames',
+  type:'元素',scene:'战斗/氛围/温暖',intensity:'中等',
+  desc:'跳动的火焰，橙红色火舌，是最有温度的特效。',
+  cn:'一团正在燃烧的火焰，火舌向上跳动、扭曲、翻卷，形状不断变化，没有一刻是相同的。火焰的底部是蓝色的（温度最高的部分），中部是明亮的橙黄色，顶部是红色的，最顶端逐渐变成黑色的烟雾。火焰边缘有清晰的火焰形状——舌尖、火羽、卷曲的火舌。火焰照亮了周围的环境，在附近的物体上投下跳动的橙色光影。火焰周围有上升的热空气扭曲效果（热浪）。一些火星从火焰中向上飘出，然后逐渐熄灭。整体效果温暖、有生命力、充满动感，是篝火、火把、爆炸、魔法火等场景的必备元素。',
+  en:'A burning flame, tongues of fire dancing upward, twisting, curling, shape constantly changing, never the same for a moment. Bottom of flame is blue (hottest part), middle is bright orange-yellow, top is red, very top gradually turns into black smoke. Edge of flame has clear flame shapes — flame tips, flame plumes, curled tongues of fire. Flame illuminates surrounding environment, casting dancing orange light and shadow on nearby objects. Heat distortion effect around flame (heat haze). Some sparks drifting upward from flame, then gradually going out. Overall effect warm, full of life, full of dynamism — essential element for campfire, torch, explosion, magic fire and other scenes.',
+  gpt:'Create a dynamic close-up of dancing flames from a campfire or burning torch. The fire twists and curls upward in constantly changing shapes — no two moments look alike. The base of the flames is blue (hottest), rising through bright yellow and orange, to deep red at the tips where they turn into wispy dark smoke. The flame edges have distinct organic shapes — pointed tips, feathery plumes, curling scrolls. The fire casts a warm orange glow on everything around it. Rising heat haze distorts the air just above the flames. A few glowing embers drift upward from the fire, dimming as they rise. The overall feeling should be warm, alive, and hypnotic — there\'s something endlessly fascinating about watching fire dance.',
+  tips:'火焰关键：颜色渐变（底蓝→中黄橙→顶红→黑烟）、有机形状（不断变化的曲线，不是对称的）、热浪扭曲、火星上升。火焰的"生命感"来自不规则性——完全对称的火焰看起来像假的。'},
+ {id:16,cat:'nature',emoji:'💧',title:'水滴飞溅',en:'Water Splash',
+  type:'元素',scene:'清新/慢动作/清凉',intensity:'中等',
+  desc:'水滴溅起的皇冠形状，水珠晶莹剔透，是清新感和慢镜头的代表。',
+  cn:'一滴水落入水面，溅起一个完美的皇冠形状的水花（水花 crown splash）。水花的边缘是一圈弧形的水墙，顶部有多个水滴正向上向外飞出，像皇冠的尖齿一样。水滴是晶莹剔透的，光线可以穿透，在水滴的底部和边缘有明亮的高光，在水滴内部有折射的光影。水花的中心是凹下去的，然后水面会反弹形成一个向上的水柱（中央水柱/中央喷流）。周围水面有一圈圈向外扩散的涟漪。水滴大小不一，有大的也有细小的水雾。整体效果清澈、纯净、有动感，是护肤品、饮料、清新场景中最经典的特效，也是慢镜头最爱的主题。',
+  en:'A drop of water falling into water surface, splashing up a perfect crown-shaped splash (crown splash). Edge of splash is a circle of curved water wall, top has multiple water droplets flying upward and outward, like尖齿 of crown. Water droplets are crystal clear, light can penetrate through, bright highlights at bottom and edges of droplets, refracted light and shadow inside droplets. Center of splash is concave, then water surface rebounds forming an upward water column (central jet). Surrounding water surface has circles of ripples spreading outward. Water droplets vary in size, there are large ones and also fine water mist. Overall effect clear, pure, dynamic — most classic special effect in skincare, beverages, fresh scenes, also favorite subject of slow motion.',
+  gpt:'Create a stunning macro shot of a single water drop splashing into a calm water surface, forming the classic "crown splash" shape. A circular wall of water rises up with pointed droplet tips around the edge — like a crown of liquid water. The droplets are crystal clear and transparent — light passes through them, creating bright highlights on the bottom edges and refracted patterns inside. The center of the splash is depressed, and a central column of water is rebounding upward. Concentric ripples spread outward across the water surface. Droplets of all sizes fly through the air — some large distinct ones, plus a fine mist. The whole thing should look crisp, clean, and frozen in time — a perfect moment of liquid motion captured in high-speed detail. Pure, fresh, and beautiful.',
+  tips:'水滴飞溅关键：皇冠形状、透明+折射+高光、中央水柱、涟漪。水珠一定要"透"——能看到后面的东西，有明显的高光点。皇冠的"尖齿"数量不要太多也不要太少，8-12个最自然。'},
+
+ // ========== 天气特效 ==========
+ {id:17,cat:'weather',emoji:'🌧️',title:'雨天',en:'Rainfall',
+  type:'天气',scene:'氛围/悲伤/悬疑',intensity:'温和',
+  desc:'下雨的场景，雨丝+地面积水+倒影，氛围感拉满。',
+  cn:'下雨的场景，细密的雨丝从天空落下，雨丝是倾斜的（因为有风），不是垂直的。前景的雨丝粗而清晰（运动模糊的线条），中景的雨丝较细，远景的雨变成了一片雾气（大气透视）。地面是湿的，有积水，水面倒映着周围的灯光和建筑（倒影效果），雨滴落在积水上溅起小小的涟漪。路灯或者霓虹灯的光芒在雨水中扩散，形成朦胧的光晕（焦外成像/bokeh）。空气中弥漫着雨雾，远处的景物变得模糊。行人撑着伞，伞面上有雨水滑落。整体效果有氛围感、故事感，是悲伤、孤独、悬疑、浪漫等场景的最佳背景。',
+  en:'Rainy scene, fine rain threads falling from sky, rain threads are slanted (because of wind), not vertical. Foreground rain threads thick and clear (motion blur lines), midground rain threads thinner, background rain turns into a layer of mist (atmospheric perspective). Ground is wet, has puddles, water surface reflects surrounding lights and buildings (reflection effect), raindrops falling into puddles splash up tiny ripples. Street lamp or neon light lights扩散 in rain, forming hazy glow (bokeh). Rain mist fills air, distant scenery becomes blurred. Pedestrians holding umbrellas, rainwater sliding off umbrella surfaces. Overall effect full of atmosphere, sense of story — best background for sadness, loneliness, suspense, romance and other scenes.',
+  gpt:'Create an atmospheric rainy night city street scene. Fine diagonal lines of rain fall everywhere — thicker and more distinct in the foreground, finer in the middle distance, turning into soft mist far away. The ground is wet with puddles that reflect neon signs and streetlights in shimmering distorted reflections. Each raindrop hitting a puddle creates tiny expanding ripples. The lights of the city glow and spread in the rain, creating beautiful soft bokeh orbs. The air is hazy with rain, making distant buildings blur into the darkness. A few figures with umbrellas walk through the scene. The overall mood should be moody, atmospheric, and a little lonely — the classic rainy night aesthetic that\'s equal parts sad, romantic, and cinematic.',
+  tips:'雨天三要素：倾斜的雨丝（前景实远景虚）、地面积水+倒影、灯光的雨雾光晕。雨丝一定要"斜"——垂直下雨不自然。倒影是雨天氛围感的灵魂，一定要画。霓虹灯+雨水=赛博朋克氛围。'},
+ {id:18,cat:'weather',emoji:'❄️',title:'飘雪',en:'Falling Snow',
+  type:'天气',scene:'浪漫/宁静/寒冷',intensity:'温和',
+  desc:'漫天飞雪，雪花纷纷扬扬，宁静浪漫的天气特效。',
+  cn:'漫天飘雪的场景，无数雪花从天空缓缓落下，像白色的羽毛一样轻盈飞舞。雪花大小不一，形状各异——有的是完美的六角形，有的是小的雪团，有的是片状。前景的雪花大而清晰（景深效果），可以看到雪花的晶体结构细节；中景的雪花中等大小；远景的雪花变成了白茫茫的雾气。雪花的下落轨迹是缓慢的、飘动的，带着左右摇摆，不是直直下落。地面已经积了一层厚厚的白雪，所有的物体都被雪覆盖成白色的轮廓。远处的景物在雪中变得模糊，朦朦胧胧的。整体效果宁静、纯洁、浪漫，是冬天、回忆、浪漫相遇等场景的最佳背景。',
+  en:'Scene of snow falling everywhere, countless snowflakes slowly falling from sky, dancing lightly like white feathers. Snowflakes vary in size, different shapes — some are perfect hexagons, some are small snow clumps, some are flaky. Foreground snowflakes large and clear (depth of field effect), can see crystal structure details of snowflakes; midground snowflakes medium size; background snowflakes turn into vast white mist. Falling trajectory of snowflakes is slow, drifting, with side-to-side sway, not falling straight down. Ground already has a thick layer of white snow, all objects covered by snow into white outlines. Distant scenery becomes blurred in snow, hazy and indistinct. Overall effect peaceful, pure, romantic — best background for winter, memories, romantic encounters and other scenes.',
+  gpt:'Create a serene, beautiful scene of gently falling snow. Countless snowflakes drift down slowly and softly, like white feathers dancing in the air. They vary in size and shape — some are delicate six-sided crystals, others are soft fluffy clumps. Foreground snowflakes are larger and sharper, with visible crystal detail; middle distance ones are medium; and far in the distance the snow becomes a soft white haze. The snow falls slowly with a gentle swaying side-to-side motion, not straight down. The ground is covered in a thick smooth blanket of white snow, rounding all the shapes of things beneath it. Distant trees and buildings fade into the snowy haze. The overall feeling should be quiet, pure, and magical — that hushed stillness that only comes with a heavy snowfall. Peaceful, beautiful, and timeless.',
+  tips:'飘雪关键：大小不一+深浅不一（景深）、缓慢飘落+左右摆动（不是直落）、地面积雪+白色轮廓、远景雾气。雪花不要画成一个个圆圈——要画出晶体形状或者不规则的片状才有质感。'},
+
+ // ========== 宇宙星空 ==========
+ {id:19,cat:'space',emoji:'🌌',title:'星云',en:'Cosmic Nebula',
+  type:'宇宙',scene:'科幻/宏大/神秘',intensity:'强烈',
+  desc:'绚丽的宇宙星云，气体尘埃云，是宇宙中最壮观的景象。',
+  cn:'一片绚丽的宇宙星云，巨大的气体尘埃云在太空中蔓延，呈现出丰富的色彩和形状。星云的主要颜色是紫色、蓝色、粉红色和橙红色，不同颜色的气体交织在一起，形成了像山脉、峡谷、柱子一样的结构（创生之柱那种感觉）。星云内部有无数新生的恒星正在形成，发出明亮的光芒，穿透云雾。前景和周围散布着无数的星星——有明亮的大星星，也有暗淡的小星星，密密麻麻铺满整个画面。一些星星有十字形的光芒（衍射尖峰/diffraction spike）。星云的边缘比较稀薄，逐渐融入黑暗的太空。整体效果壮观、神秘、宏伟，让人感受到宇宙的浩瀚和美丽，是科幻、宇宙、神性等场景的最佳背景。',
+  en:'A magnificent cosmic nebula, huge gas and dust cloud spreading through space, showing rich colors and shapes. Main colors of nebula are purple, blue, pink and orange-red, different colored gases intertwined, forming structures like mountains, canyons, pillars (Pillars of Creation kind of feeling). Inside nebula countless newborn stars are forming, emitting bright light, penetrating gas and dust. Foreground and surrounding scattered with countless stars — there are bright large stars, also faint small stars, densely covering entire frame. Some stars have cross-shaped light rays (diffraction spikes). Edge of nebula thinner, gradually merging into dark space. Overall effect spectacular, mysterious, magnificent — makes people feel vastness and beauty of universe, best background for sci-fi, cosmic, divine and other scenes.',
+  gpt:'Create a breathtaking view of a vast cosmic nebula deep in space. An enormous cloud of gas and dust spreads across the void in swirling, organic shapes — like cosmic mountains and pillars. The nebula glows with rich colors: deep blues, vibrant purples, glowing pinks, and warm orange-reds, all blending together in flowing patterns. Within the nebula, bright young stars are being born, their light piercing through the gas. Thousands of stars are scattered across the entire view — some bright and prominent with cross-shaped diffraction spikes, others tiny and faint. The outer edges of the nebula are wispy and diffuse, fading into the blackness of space. The overall feeling should be awe-inspiring, vast, and deeply beautiful — the grandeur and mystery of the universe itself.',
+  tips:'星云关键：多种颜色交织（蓝+紫+粉+橙是经典组合）、山峦/柱状结构、内部发光的新生恒星、前景无数星星+十字光芒。星云的"结构感"很重要——不是一团彩色的雾，而是有明确的形状、有亮部暗部、有体积感。'},
+ {id:20,cat:'space',emoji:'🕳️',title:'黑洞',en:'Black Hole',
+  type:'宇宙',scene:'科幻/终极/恐怖',intensity:'强烈',
+  desc:'黑洞吸积盘，事件视界，宇宙中最神秘的天体。',
+  cn:'一个巨大的黑洞悬浮在宇宙中，中心是完全漆黑的事件视界——没有任何光可以逃脱，是纯黑色的圆形。围绕着黑洞的是一个明亮的吸积盘，气体和物质正在螺旋坠入黑洞，吸积盘因为多普勒效应而呈现出一侧更亮更蓝（朝向我们旋转），另一侧更暗更红（远离我们旋转）。吸积盘的温度极高，发出明亮的蓝白色光芒，从内到外颜色从白→蓝→紫→红逐渐变化。黑洞的引力透镜效应非常明显——背景的星光被黑洞的引力弯曲，在黑洞上方形成一个明亮的光环（爱因斯坦环）。吸积盘上下方有等离子体喷流向外喷射。周围是无数的星星。整体效果神秘、壮观、令人敬畏，是宇宙中最极端的存在。',
+  en:'A huge black hole floating in space, center is completely black event horizon — no light can escape, it\'s a pure black circle. Surrounding black hole is a bright accretion disk, gas and matter spiraling into black hole, accretion disk shows Doppler effect — one side brighter and bluer (rotating toward us), other side darker and redder (rotating away from us). Temperature of accretion disk extremely high, emitting bright blue-white light, colors from inside to outside gradually changing white → blue → purple → red. Gravitational lensing effect of black hole very obvious — starlight from background bent by gravity of black hole, forming a bright ring above black hole (Einstein ring). Above and below accretion disk there are plasma jets ejecting outward. Surrounding are countless stars. Overall effect mysterious, spectacular, awe-inspiring — most extreme existence in universe.',
+  gpt:'Create an astounding depiction of a supermassive black hole in deep space. At the center is the event horizon — a perfect circle of absolute, pure blackness, where not even light can escape. Surrounding it spins a brilliant accretion disk of superheated gas spiraling inward. Due to Doppler shift, the side rotating toward us is brighter and bluer, while the side rotating away is dimmer and redder. The disk glows white-hot near the center, transitioning through blue to orange-red at the edges. Gravitational lensing bends light from stars behind the black hole, creating a glowing ring of distorted starlight around it (an Einstein ring). Two powerful plasma jets blast outward from the poles perpendicular to the disk. Thousands of stars fill the background. The feeling should be immense, mysterious, and humbling — the most extreme and mysterious object in the universe.',
+  tips:'黑洞关键：中心纯黑（事件视界）、周围明亮吸积盘、多普勒亮度差（一侧亮一侧暗）、引力透镜光环、两极喷流。吸积盘是"扁的"但因为引力透镜看起来包围了黑洞。一定要有一边亮一边暗的多普勒效应才真实。'}
+];
+
+function renderEffectList(cat){
+  var list=document.getElementById('effectList');
+  if(!list)return;
+  var filtered=cat==='all'?EFFECT_DATA:EFFECT_DATA.filter(function(e){return e.cat===cat});
+  var totalEl=document.getElementById('effectTotalCount');
+  if(totalEl)totalEl.textContent=filtered.length;
+
+  var html='';
+  filtered.forEach(function(ef){
+    html+='<div class="effect-card" data-id="'+ef.id+'" onclick="toggleEffectCard('+ef.id+')">';
+    html+='<div class="effect-card-top">';
+    html+='<div class="effect-emoji">'+ef.emoji+'</div>';
+    html+='<div class="effect-info">';
+    html+='<div class="effect-title">'+ef.title+'</div>';
+    html+='<div class="effect-en">'+ef.en+'</div>';
+    html+='</div></div>';
+    html+='<div class="effect-tags">';
+    html+='<span class="effect-tag type">✨ '+ef.type+'</span>';
+    html+='<span class="effect-tag scene">🎬 '+ef.scene+'</span>';
+    html+='<span class="effect-tag intensity">💫 '+ef.intensity+'</span>';
+    html+='</div>';
+    html+='<div class="effect-card-detail">';
+    html+='<div class="effect-detail-grid">';
+    html+='<div class="effect-detail-item"><b>特效类型</b><span>'+ef.type+'</span></div>';
+    html+='<div class="effect-detail-item"><b>适用场景</b><span>'+ef.scene+'</span></div>';
+    html+='<div class="effect-detail-item"><b>强度</b><span>'+ef.intensity+'</span></div>';
+    html+='<div class="effect-detail-item"><b>说明</b><span>'+ef.desc.substring(0,30)+'...</span></div>';
+    html+='</div>';
+    html+='<div class="effect-prompt-box">';
+    html+='<div class="effect-prompt-title">💡 特效详细描述提示词</div>';
+    html+='<div class="effect-lang-label">🇨🇳 中文版：</div>';
+    html+='<div class="effect-prompt-text" onclick="event.stopPropagation();copyEffectPrompt(this)">'+ef.cn+'</div>';
+    html+='<div class="effect-lang-label">🇺🇸 English：</div>';
+    html+='<div class="effect-prompt-text" onclick="event.stopPropagation();copyEffectPrompt(this)">'+ef.en+'</div>';
+    html+='<div class="effect-lang-label">🤖 GPT Image 2 版本：</div>';
+    html+='<div class="effect-prompt-text" onclick="event.stopPropagation();copyEffectPrompt(this)">'+ef.gpt+'</div>';
+    html+='</div>';
+    html+='<div class="effect-tips"><b>💡 绘画技巧：</b>'+ef.tips+'</div>';
+    html+='<div class="effect-actions">';
+    html+='<button class="effect-action-btn primary" onclick="event.stopPropagation();copyFullEffect('+ef.id+')">📋 复制全部</button>';
+    html+='<button class="effect-action-btn secondary" onclick="event.stopPropagation();toggleEffectCard('+ef.id+')">收起</button>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+  });
+  list.innerHTML=html;
+}
+
+function switchEffectCat(cat){
+  document.querySelectorAll('.effect-cat').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+  });
+  renderEffectList(cat);
+}
+
+function toggleEffectCard(id){
+  var card=document.querySelector('.effect-card[data-id="'+id+'"]');
+  if(card)card.classList.toggle('expanded');
+}
+
+function copyEffectPrompt(el){
+  var text=el.textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('提示词已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('提示词已复制','success');
+  }
+}
+
+function copyFullEffect(id){
+  var ef=EFFECT_DATA.find(function(x){return x.id===id});
+  if(!ef)return;
+  var text='【特效】'+ef.title+' ('+ef.en+')\n'+
+    '类型：'+ef.type+'\n'+
+    '适用场景：'+ef.scene+'\n'+
+    '强度：'+ef.intensity+'\n'+
+    '描述：'+ef.desc+'\n\n'+
+    '【中文提示词】\n'+ef.cn+'\n\n'+
+    '【English Prompt】\n'+ef.en+'\n\n'+
+    '【GPT Image 2 Prompt】\n'+ef.gpt+'\n\n'+
+    '【绘画技巧】\n'+ef.tips;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('完整特效信息已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('完整特效信息已复制','success');
+  }
+}
+
+// 初始化特效列表
+document.addEventListener('DOMContentLoaded',function(){
+  renderEffectList('all');
+});
 
 /* ========== 人物表情库 ========== */
 var EXPR_DATA=[
