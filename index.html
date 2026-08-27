@@ -7211,7 +7211,7 @@ function switchSection(id){
 
 // 子菜单点击事件委托（桌面端）
 document.addEventListener('click',function(e){
-  if(window.innerWidth>768) return; // 移动端走触摸事件
+  if(window.innerWidth<=768) return; // 移动端走触摸事件，桌面端走click
   var subItem=e.target.closest('.submenu-item');
   if(subItem){
     e.stopPropagation();
