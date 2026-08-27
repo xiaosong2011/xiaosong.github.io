@@ -31,7 +31,7 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
 .nav-item.has-submenu{position:relative}
 .nav-item .submenu-arrow{margin-left:auto;font-size:10px;transition:transform .3s ease;opacity:.6}
 .nav-item.expanded .submenu-arrow{transform:rotate(180deg)}
-.submenu{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 10px 0 38px}
+.submenu{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 10px 0 38px;position:relative;z-index:2}
 .submenu.open{max-height:500px}
 .submenu-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.5);font-size:12px;font-weight:500;transition:all .2s;margin-bottom:2px}
 .submenu-item:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.9)}
@@ -453,17 +453,17 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <span class="ico">🎨</span><span class="lbl">风格图鉴</span>
  <span class="submenu-arrow">▼</span>
  </div>
- <div class="submenu open" id="submenu-styleguide">
-  <div class="submenu-item active" data-sec="styleguide" data-tab="anime">
+ <div class="submenu open" id="submenu-styleguide" onclick="event.stopPropagation()">
+  <div class="submenu-item active" onclick="event.stopPropagation();navTo('styleguide')">
    <span class="sm-ico">🌸</span>动漫插画风格
   </div>
-  <div class="submenu-item" data-sec="styleguide" data-tab="photo">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('styleguide')">
    <span class="sm-ico">📸</span>真人摄影风格
   </div>
-  <div class="submenu-item" data-sec="styleguide" data-tab="camera">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('styleguide')">
    <span class="sm-ico">🎥</span>运镜与构图
   </div>
-  <div class="submenu-item" data-sec="styleguide" data-tab="tools">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('styleguide')">
    <span class="sm-ico">🤖</span>AI工具推荐
   </div>
  </div>
@@ -472,23 +472,23 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <span class="ico">📚</span><span class="lbl">提示词素材库</span>
  <span class="submenu-arrow">▼</span>
  </div>
- <div class="submenu" id="submenu-prompts">
-  <div class="submenu-item" data-sec="framework">
+ <div class="submenu" id="submenu-prompts" onclick="event.stopPropagation()">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('framework')">
    <span class="sm-ico">📐</span>提示词框架
   </div>
-  <div class="submenu-item" data-sec="prompts">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('prompts')">
    <span class="sm-ico">🎭</span>提示词大全
   </div>
-  <div class="submenu-item" data-sec="expression">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('expression')">
    <span class="sm-ico">😊</span>人物表情库
   </div>
-  <div class="submenu-item" data-sec="weapon">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('weapon')">
    <span class="sm-ico">⚔️</span>武器库提示词
   </div>
-  <div class="submenu-item" data-sec="effect">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('effect')">
    <span class="sm-ico">✨</span>特效提示词
   </div>
-  <div class="submenu-item" data-sec="music">
+  <div class="submenu-item" onclick="event.stopPropagation();navTo('music')">
    <span class="sm-ico">🎵</span>无版权音乐库
   </div>
  </div>
@@ -497,26 +497,26 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <span class="ico">🎬</span><span class="lbl">AI漫剧制作</span>
  <span class="submenu-arrow">▼</span>
  </div>
- <div class="submenu" id="submenu-agents">
-  <div class="submenu-item" data-sec="agents" data-agent="manju">
+ <div class="submenu" id="submenu-agents" onclick="event.stopPropagation()">
+  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('manju')">
    <span class="sm-ico">🎭</span>漫剧全流程
   </div>
-  <div class="submenu-item" data-sec="agents" data-agent="script">
+  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('script')">
    <span class="sm-ico">📝</span>爆款剧本
   </div>
-  <div class="submenu-item" data-sec="agents" data-agent="giant">
+  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('giant')">
    <span class="sm-ico">🐋</span>巨物美学
   </div>
-  <div class="submenu-item" data-sec="agents" data-agent="director">
+  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('director')">
    <span class="sm-ico">🎬</span>小罗导演
   </div>
-  <div class="submenu-item" data-sec="agents" data-agent="seedance">
+  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('seedance')">
    <span class="sm-ico">🎥</span>Seedance视频
   </div>
-  <div class="submenu-item" data-sec="agents" data-agent="minimax">
+  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('minimax')">
    <span class="sm-ico">🤖</span>MiniMax视频
   </div>
-  <div class="submenu-item" data-sec="agents" data-agent="comfy">
+  <div class="submenu-item" onclick="event.stopPropagation();navToAgent('comfy')">
    <span class="sm-ico">🔧</span>ComfyUI工作流
   </div>
  </div>
@@ -7145,6 +7145,25 @@ function toggleSidebar(state){
 })();
 
 /* ========== 板块切换 ========== */
+// 子菜单导航函数 - 最可靠的内联调用方式
+function navTo(id){
+  try {
+    switchSection(id);
+  } catch(e) {
+    console.error('navTo error:', e);
+  }
+}
+function navToAgent(agentId){
+  try {
+    switchSection('agents');
+    if(typeof switchAgent==='function'){
+      setTimeout(function(){ switchAgent(agentId); },100);
+    }
+  } catch(e) {
+    console.error('navToAgent error:', e);
+  }
+}
+
 function toggleSubmenu(key){
   var submenu=document.getElementById('submenu-'+key);
   var navItem=document.querySelector('.nav-item.has-submenu[data-section="'+key+'"]');
