@@ -27,6 +27,16 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
 .nav-item .ico{font-size:18px}.nav-item .lbl{flex:1}
 .sidebar-footer{padding:12px 16px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:rgba(255,255,255,.3);text-align:center}
 .sidebar-footer a{color:rgba(255,255,255,.5);text-decoration:none}.sidebar-footer a:hover{color:#fff}
+/* 子菜单 */
+.nav-item.has-submenu{position:relative}
+.nav-item .submenu-arrow{margin-left:auto;font-size:10px;transition:transform .3s ease;opacity:.6}
+.nav-item.expanded .submenu-arrow{transform:rotate(180deg)}
+.submenu{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 10px 0 38px}
+.submenu.open{max-height:500px}
+.submenu-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.5);font-size:12px;font-weight:500;transition:all .2s;margin-bottom:2px}
+.submenu-item:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.9)}
+.submenu-item.active{background:rgba(46,134,222,.25);color:#fff}
+.submenu-item .sm-ico{font-size:14px}
 .sync-badge-wrap{padding:8px 14px;display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5)}
 .sync-badge{width:8px;height:8px;border-radius:50%;background:#666}
 .sync-badge.online{background:#4caf50;box-shadow:0 0 6px #4caf50}
@@ -439,32 +449,80 @@ body .glass-blob-3{position:fixed;top:40%;left:30%;width:400px;height:400px;back
  <div class="sub">风格 · 运镜 · AI工具</div>
  </div>
  <nav class="nav">
- <div class="nav-item active" data-section="styleguide" onclick="switchSection('styleguide')">
+ <div class="nav-item has-submenu active" data-section="styleguide" onclick="toggleSubmenu(this,'styleguide')">
  <span class="ico">🎨</span><span class="lbl">风格图鉴</span>
+ <span class="submenu-arrow">▼</span>
  </div>
+ <div class="submenu open" id="submenu-styleguide">
+  <div class="submenu-item active" onclick="event.stopPropagation();switchSection('styleguide')">
+   <span class="sm-ico">🌸</span>动漫插画风格
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('styleguide')">
+   <span class="sm-ico">📸</span>真人摄影风格
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('styleguide')">
+   <span class="sm-ico">🎥</span>运镜与构图
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('styleguide')">
+   <span class="sm-ico">🤖</span>AI工具推荐
+  </div>
+ </div>
+
+ <div class="nav-item has-submenu" data-section="prompts" onclick="toggleSubmenu(this,'prompts')">
+ <span class="ico">📚</span><span class="lbl">提示词素材库</span>
+ <span class="submenu-arrow">▼</span>
+ </div>
+ <div class="submenu" id="submenu-prompts">
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('framework')">
+   <span class="sm-ico">📐</span>提示词框架
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('prompts')">
+   <span class="sm-ico">🎭</span>提示词大全
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('expression')">
+   <span class="sm-ico">😊</span>人物表情库
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('weapon')">
+   <span class="sm-ico">⚔️</span>武器库提示词
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('effect')">
+   <span class="sm-ico">✨</span>特效提示词
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('music')">
+   <span class="sm-ico">🎵</span>无版权音乐库
+  </div>
+ </div>
+
+ <div class="nav-item has-submenu" data-section="agents" onclick="toggleSubmenu(this,'agents')">
+ <span class="ico">🎬</span><span class="lbl">AI漫剧制作</span>
+ <span class="submenu-arrow">▼</span>
+ </div>
+ <div class="submenu" id="submenu-agents">
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('manju')">
+   <span class="sm-ico">🎭</span>漫剧全流程
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('script')">
+   <span class="sm-ico">📝</span>爆款剧本
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('giant')">
+   <span class="sm-ico">🐋</span>巨物美学
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('director')">
+   <span class="sm-ico">🎬</span>小罗导演
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('seedance')">
+   <span class="sm-ico">🎥</span>Seedance视频
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('minimax')">
+   <span class="sm-ico">🤖</span>MiniMax视频
+  </div>
+  <div class="submenu-item" onclick="event.stopPropagation();switchSection('agents');switchAgent('comfy')">
+   <span class="sm-ico">🔧</span>ComfyUI工作流
+  </div>
+ </div>
+
  <div class="nav-item" data-section="settings" onclick="switchSection('settings')">
  <span class="ico">⚙️</span><span class="lbl">系统设置</span>
- </div>
- <div class="nav-item" data-section="prompts" onclick="switchSection('prompts')">
- <span class="ico">📚</span><span class="lbl">提示词库</span>
- </div>
- <div class="nav-item" data-section="framework" onclick="switchSection('framework')">
- <span class="ico">📐</span><span class="lbl">提示词框架库</span>
- </div>
- <div class="nav-item" data-section="expression" onclick="switchSection('expression')">
- <span class="ico">😊</span><span class="lbl">人物表情库</span>
- </div>
- <div class="nav-item" data-section="music" onclick="switchSection('music')">
- <span class="ico">🎵</span><span class="lbl">无版权音乐库</span>
- </div>
- <div class="nav-item" data-section="weapon" onclick="switchSection('weapon')">
- <span class="ico">⚔️</span><span class="lbl">武器库提示词</span>
- </div>
- <div class="nav-item" data-section="effect" onclick="switchSection('effect')">
- <span class="ico">✨</span><span class="lbl">特效提示词</span>
- </div>
- <div class="nav-item" data-section="agents" onclick="switchSection('agents')">
- <span class="ico">🎬</span><span class="lbl">AI漫剧工具</span>
  </div>
  </nav>
  <div class="sync-badge-wrap">
@@ -7087,9 +7145,42 @@ function toggleSidebar(state){
 })();
 
 /* ========== 板块切换 ========== */
+function toggleSubmenu(el,key){
+  var submenu=document.getElementById('submenu-'+key);
+  var navItem=el;
+  
+  if(submenu.classList.contains('open')){
+    // 关闭
+    submenu.classList.remove('open');
+    navItem.classList.remove('expanded');
+  }else{
+    // 打开 - 先关闭所有其他子菜单
+    document.querySelectorAll('.submenu').forEach(function(s){
+      s.classList.remove('open');
+    });
+    document.querySelectorAll('.nav-item.has-submenu').forEach(function(n){
+      n.classList.remove('expanded');
+    });
+    submenu.classList.add('open');
+    navItem.classList.add('expanded');
+  }
+}
+
 function switchSection(id){
- document.querySelectorAll('.nav-item').forEach(function(el){
- el.classList.toggle('active',el.dataset.section===id);
+ document.querySelectorAll('.nav-item.has-submenu').forEach(function(el){
+ var key=el.dataset.section;
+ var isActive=id===key || (key==='prompts' && ['framework','expression','weapon','effect','music','prompts'].indexOf(id)>-1) || (key==='styleguide' && id==='styleguide') || (key==='agents' && id==='agents');
+ el.classList.toggle('active',isActive);
+ // Auto-expand the parent submenu
+ if(isActive && key!==id){
+   var submenu=document.getElementById('submenu-'+key);
+   if(submenu)submenu.classList.add('open');
+   if(el)el.classList.add('expanded');
+ }
+ });
+ // Highlight submenu items
+ document.querySelectorAll('.submenu-item').forEach(function(el){
+   el.classList.remove('active');
  });
  document.querySelectorAll('.section').forEach(function(el){
  el.classList.toggle('active',el.id==='sec-'+id);
