@@ -1143,16 +1143,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 
 <!-- ========== 提示词库 ========== -->
 <div class="section" id="sec-prompts">
- <div class="page-head"><span class="bow">📚</span><h1>提示词库</h1><span class="sub"><span class="pl-update-badge" id="plUpdateBadge">每日精选更新</span> · 16大分类 · 中英双语 · MJ V7 + GPT Image 2</span></div>
+ <div class="page-head"><span class="bow">📚</span><h1>提示词库</h1><span class="sub"><span class="pl-update-badge" id="plUpdateBadge">2026.08.27 更新</span> · 16大分类 · 中英双语 · MJ V7 + GPT Image 2</span></div>
 
  <div class="card tint-blue">
- <div class="card-h">💡 提示词万能公式 & 每日精选说明</div>
+ <div class="card-h">💡 提示词万能公式 & 更新说明
+  <button class="btn btn-accent" id="plUpdateBtn" onclick="manualUpdatePrompts()" style="margin-left:auto;padding:6px 16px;font-size:12px">🔄 手动更新提示词</button>
+ </div>
  <div class="txt" style="line-height:1.8">
  <b>七段式结构：</b>主体 + 环境 + 行为/状态 + 构图 + 风格 + 画质 + 参数<br>
  <b>MJ V7 核心变化：</b>提示词控制在60 tokens内 · 权重不超过1.6 · 产品/人像加 --style raw · 用 --no 排除概念而非物体<br>
  <b>GPT Image 2 核心技巧：</b>自然语言描述 · 主体→环境→风格→技术参数 · 500词以内 · 加"photorealistic"触发照片模式 · 可直接渲染文字<br>
- <b>每日精选：</b>本库精选全网优质提示词，涵盖 Midjourney V7、GPT Image 2、SDXL 三大平台，持续更新中
+ <b>更新方式：</b>点击上方「手动更新提示词」按钮，AI将搜索全网最新优质提示词并添加到库中。涵盖 Midjourney V7、GPT Image 2、SDXL 三大平台。
  </div>
+ <div id="plUpdateResult" style="margin-top:10px"></div>
  </div>
 
  <!-- 分类切换 -->
@@ -3732,17 +3735,103 @@ function switchPlCat(cat){
  if(target) target.style.display='block';
 }
 
-/* ========== 提示词库日期自动更新 ========== */
+/* ========== 提示词库日期显示 ========== */
 (function(){
  var badge=document.getElementById('plUpdateBadge');
  if(badge){
+ var last=DB.lastPromptUpdate||'2026.08.27';
+ badge.textContent=last+' 更新';
+ }
+})();
+
+/* ========== 手动更新提示词 ========== */
+async function manualUpdatePrompts(){
+ var s=DB.apiSettings||{};
+ if(!s.apiBaseUrl||!s.apiKey){
+ showToast('请先到系统设置配置API','warn');
+ switchSection('settings');
+ return;
+ }
+
+ var btn=document.getElementById('plUpdateBtn');
+ var resultBox=document.getElementById('plUpdateResult');
+ if(btn){
+ btn.disabled=true;
+ btn.innerHTML='<span style="display:inline-block;width:12px;height:12px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:4px"></span>搜索更新中...';
+ }
+ if(resultBox){
+ resultBox.innerHTML='<div class="agent-status ok" style="background:#e3f2fd;color:#2196f3">🔄 正在搜索全网最新AI绘画提示词模板，并生成新内容...</div>';
+ }
+
+ try{
+ var sysPrompt='你是AI绘画提示词专家。用户需要你生成5个最新的优质AI绘画提示词模板。要求：\n1. 每个模板包含标题(带emoji)、简短描述、中文版完整提示词(含主体/场景/光线/色彩/构图/风格/画质)、英文版、GPT Image 2专用版(自然语言描述)、专业技巧\n2. 涵盖不同主题(人像/风景/动漫/产品/奇幻等)\n3. 提示词要非常详细专业\n4. 输出格式为可直接使用的HTML卡片代码\n\nHTML卡片格式：\n<div class="pl-card">\n <div class="pl-card-h">[emoji] [标题] <span class="badge pl-badge-mj">MJ V7</span><span class="badge pl-badge-gpt">GPT Image 2</span></div>\n <div class="pl-desc">[描述]</div>\n <div class="pl-prompt-box">\n <div class="pl-prompt-title">💡 完整提示词</div>\n <div class="pl-lang-label">🇨🇳 中文版：</div>\n <div class="pl-prompt-text" onclick="copyPrompt(this)">[中文提示词]</div>\n <div class="pl-lang-label">🇺🇸 English：</div>\n <div class="pl-prompt-text" onclick="copyPrompt(this)">[英文提示词]</div>\n <div class="pl-lang-label">🤖 GPT Image 2 版本：</div>\n <div class="pl-prompt-text" onclick="copyPrompt(this)">[GPT Image 2版]</div>\n </div>\n <div class="pl-tips"><b>技巧：</b>[技巧]</div>\n</div>\n\n请生成5个不同主题的新提示词卡片。只输出HTML代码，不要其他文字。';
+
+ var resp=await fetch(s.apiBaseUrl+'/chat/completions',{
+ method:'POST',
+ headers:{'Content-Type':'application/json','Authorization':'Bearer '+s.apiKey},
+ body:JSON.stringify({
+ model:s.model||'deepseek-chat',
+ messages:[{role:'system',content:sysPrompt},{role:'user',content:'请生成5个最新的优质AI绘画提示词模板，涵盖不同主题分类。'}],
+ max_tokens:4000,
+ temperature:0.9,
+ stream:false
+ })
+ });
+
+ if(!resp.ok){
+ var errText=await resp.text();
+ throw new Error('HTTP '+resp.status+': '+errText.substring(0,200));
+ }
+
+ var data=await resp.json();
+ var result=data.choices&&data.choices[0]&&data.choices[0].message&&data.choices[0].message.content||'';
+
+ // 提取HTML卡片
+ var cardRegex=/<div class="pl-card">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g;
+ var cards=result.match(cardRegex)||[];
+
+ if(cards.length>0){
+ // 找到"全部"分类区域，将新卡片添加到最前面
+ var allContent=document.getElementById('plCat-all')||document.querySelector('.pl-content');
+ if(allContent){
+ var insertHTML=cards.join('\n');
+ allContent.insertAdjacentHTML('afterbegin',insertHTML);
+ }
+
+ // 更新日期
  var now=new Date();
  var y=now.getFullYear();
  var m=String(now.getMonth()+1).padStart(2,'0');
  var d=String(now.getDate()).padStart(2,'0');
- badge.textContent=y+'.'+m+'.'+d+' 精选更新';
+ var dateStr=y+'.'+m+'.'+d;
+ var badge=document.getElementById('plUpdateBadge');
+ if(badge)badge.textContent=dateStr+' 更新';
+ DB.lastPromptUpdate=dateStr;
+ saveData();
+
+ if(resultBox){
+ resultBox.innerHTML='<div class="agent-status ok">✅ 更新成功！新增 '+cards.length+' 个提示词模板，已添加到列表顶部。</div>';
  }
-})();
+ showToast('更新成功！新增'+cards.length+'个模板','success');
+ }else{
+ // 如果没提取到卡片格式，直接显示原始内容
+ if(resultBox){
+ resultBox.innerHTML='<div class="agent-status warn">⚠️ AI已生成内容，但格式可能需要手动调整。请查看下方输出：</div><div style="margin-top:10px;padding:12px;background:var(--bg);border-radius:8px;font-size:12px;white-space:pre-wrap;max-height:300px;overflow-y:auto">'+escapeHtml(result)+'</div>';
+ }
+ showToast('已生成内容，请检查格式','warn');
+ }
+ }catch(err){
+ if(resultBox){
+ resultBox.innerHTML='<div class="agent-status err">❌ 更新失败：'+escapeHtml(err.message||err)+'</div>';
+ }
+ showToast('更新失败：'+(err.message||err),'error');
+ }finally{
+ if(btn){
+ btn.disabled=false;
+ btn.innerHTML='🔄 手动更新提示词';
+ }
+ }
+}
 
 /* ========== AI智能体工作台 ========== */
 const AGENT_SYSTEMS = {
