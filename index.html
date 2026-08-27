@@ -4282,7 +4282,7 @@ function checkAgentApi(){
   var box=document.getElementById('agentApiCheck');
   if(!box)return;
   if(!s.apiBaseUrl||!s.apiKey){
-    box.innerHTML='<div class="agent-status warn">⚠️ 未配置AI模型API，请先到「系统设置」配置API后才能使用智能体。<button class="btn btn-accent" style="margin-left:10px;padding:4px 12px;font-size:11px" onclick="switchSection('settings')">去配置</button></div>';
+    box.innerHTML='<div class="agent-status warn">⚠️ 未配置AI模型API，请先到「系统设置」配置API后才能使用智能体。<button class="btn btn-accent" style="margin-left:10px;padding:4px 12px;font-size:11px" onclick="switchSection(\'settings\')">去配置</button></div>';
   }else{
     box.innerHTML='<div class="agent-status ok">✅ API已连接：'+escapeHtml(s.model||s.apiBaseUrl)+'</div>';
   }
@@ -4313,8 +4313,7 @@ function buildUserPrompt(agent){
     parts.push('【集数/篇幅】'+eps+'集');
     if(style)parts.push('【画风偏好】'+style);
     if(action&&action!=='none')parts.push('【武打等级】'+({light:'轻度动作',medium:'中度武打',heavy:'重度武打(PREVIS+燃向)'}[action]));
-    parts.push('
-请按照漫剧全流程系统标准输出，包含完整的结构化内容。');
+    parts.push('\n请按照漫剧全流程系统标准输出，包含完整的结构化内容。');
   }
   else if(agent==='script'){
     var input=document.getElementById('script_input').value.trim();
@@ -4326,8 +4325,7 @@ function buildUserPrompt(agent){
     parts.push('【输入内容】'+input);
     parts.push('【目标集数】'+eps);
     if(genre)parts.push('【题材赛道】'+genre);
-    parts.push('
-请按照红果爆款短剧标准输出。单集控制在90-120秒，净字数350-500，注意黄金前3秒钩子和断章设计。');
+    parts.push('\n请按照红果爆款短剧标准输出。单集控制在90-120秒，净字数350-500，注意黄金前3秒钩子和断章设计。');
   }
   else if(agent==='giant'){
     var input=document.getElementById('giant_input').value.trim();
@@ -4341,8 +4339,7 @@ function buildUserPrompt(agent){
     if(style!=='auto')parts.push('【风格偏好】'+style);
     if(comp!=='auto')parts.push('【构图模式】'+comp);
     parts.push('【输出格式】'+({both:'中文版+英文版+GPT Image 2版',cn:'仅中文版',en:'仅英文版',gpt:'仅GPT Image 2版'}[platform]));
-    parts.push('
-请输出完整的巨物场景提示词，包含：巨物类型分析、尺度等级、风格决策、人物参照、环境参照、空间关系、展示完整度、姿态、环境互动、镜头设计、尺度锁定。');
+    parts.push('\n请输出完整的巨物场景提示词，包含：巨物类型分析、尺度等级、风格决策、人物参照、环境参照、空间关系、展示完整度、姿态、环境互动、镜头设计、尺度锁定。');
   }
   else if(agent==='director'){
     var input=document.getElementById('director_input').value.trim();
@@ -4354,8 +4351,7 @@ function buildUserPrompt(agent){
     parts.push('【输入内容】'+input);
     if(style)parts.push('【画面风格】'+style);
     parts.push('【输出语言】'+({both:'中文+英文',cn:'仅中文',en:'仅英文'}[lang]));
-    parts.push('
-请输出专业、结构化的导演内容。');
+    parts.push('\n请输出专业、结构化的导演内容。');
   }
   else if(agent==='seedance'){
     var input=document.getElementById('seedance_input').value.trim();
@@ -4371,8 +4367,7 @@ function buildUserPrompt(agent){
     parts.push('【宽高比】'+ratio);
     parts.push('【输出语言】'+({cn:'中文',en:'English',both:'中文+英文'}[lang]));
     parts.push('【场景描述】'+input);
-    parts.push('
-请输出可直接使用的Seedance提示词。记住：direct the model, don\'t micro-manage the frame.');
+    parts.push('\n请输出可直接使用的Seedance提示词。记住：direct the model, don\'t micro-manage the frame.');
   }
   else if(agent==='minimax'){
     var input=document.getElementById('minimax_input').value.trim();
@@ -4384,8 +4379,7 @@ function buildUserPrompt(agent){
     parts.push('【宽高比】'+ratio);
     parts.push('【时长】'+dur+'秒');
     parts.push('【场景描述】'+input);
-    parts.push('
-请输出适配MiniMax H3模型的视频提示词。');
+    parts.push('\n请输出适配MiniMax H3模型的视频提示词。');
   }
   else if(agent==='comfy'){
     var input=document.getElementById('comfy_input').value.trim();
@@ -4397,11 +4391,9 @@ function buildUserPrompt(agent){
     parts.push('【模型家族】'+(model==='auto'?'自动推荐':model));
     parts.push('【GPU显存】'+vram+'GB');
     parts.push('【任务描述】'+input);
-    parts.push('
-请输出详细的ComfyUI工作流方案，包括：推荐模型、节点连接建议、关键参数设置、VRAM优化建议。');
+    parts.push('\n请输出详细的ComfyUI工作流方案，包括：推荐模型、节点连接建议、关键参数设置、VRAM优化建议。');
   }
-  return parts.join('
-');
+  return parts.join('\n');
 }
 
 /* 运行智能体 */
@@ -4454,8 +4446,7 @@ async function runAgent(agent){
     var result=data.choices&&data.choices[0]&&data.choices[0].message&&data.choices[0].message.content||'生成完成，但未返回内容。';
 
     body.className='agent-output-body';
-    body.innerHTML=escapeHtml(result).replace(/
-/g,'<br>');
+    body.innerHTML=escapeHtml(result).replace(/\n/g,'<br>');
     showToast('生成完成！','success');
   }catch(err){
     body.className='agent-output-body';
