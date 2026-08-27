@@ -318,6 +318,54 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 
 
 
+/* 提示词框架库 */
+.frame-page{padding:16px}
+.frame-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.frame-head h2{font-size:18px;font-weight:800;color:var(--ink);margin:0}
+.frame-head .sub{font-size:12px;color:var(--ink-3)}
+.frame-stat{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap}
+.frame-stat-item{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg);color:var(--ink-2)}
+.frame-stat-item b{color:#2e86de}
+.frame-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.frame-cat{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:all .2s;white-space:nowrap}
+.frame-cat:hover{border-color:#2e86de;color:#2e86de}
+.frame-cat.active{background:#2e86de;color:#fff;border-color:#2e86de}
+.frame-list{display:flex;flex-direction:column;gap:14px}
+.frame-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;transition:all .2s;cursor:pointer}
+.frame-card:hover{box-shadow:0 6px 20px rgba(46,134,222,.1);border-color:#2e86de;transform:translateY(-2px)}
+.frame-card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.frame-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#e8f0ff,#bbdefb);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.frame-info{flex:1;min-width:0}
+.frame-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.frame-en{font-size:11px;color:var(--ink-3);font-style:italic}
+.frame-desc{font-size:12px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+.frame-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.frame-tag{font-size:10px;padding:2px 6px;border-radius:4px;background:#e8f0ff;color:#2e86de;font-weight:500}
+.frame-card-detail{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.frame-card.expanded .frame-card-detail{display:block}
+.frame-section{margin-bottom:14px}
+.frame-section:last-child{margin-bottom:0}
+.frame-section-title{font-size:12px;font-weight:700;color:#2e86de;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.frame-formula{background:linear-gradient(135deg,#e8f0ff,#f0f7ff);border:1px solid #bbdefb;border-radius:8px;padding:10px 12px;font-size:12px;color:var(--ink);line-height:1.8;font-weight:500}
+.frame-formula span{display:inline-block;padding:2px 8px;background:#fff;border-radius:4px;margin:2px 4px 2px 0;border:1px solid #bbdefb;font-size:11px}
+.frame-parts{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px}
+.frame-part{font-size:11px;padding:8px 10px;background:var(--bg);border-radius:6px;border-left:2px solid #2e86de}
+.frame-part b{display:block;color:var(--ink);font-size:11px;margin-bottom:3px}
+.frame-part span{color:var(--ink-2);line-height:1.4;font-size:11px}
+.frame-example{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.frame-example-label{font-size:11px;font-weight:600;color:var(--ink-3);margin-bottom:6px}
+.frame-example-text{font-size:12px;color:var(--ink-2);line-height:1.6;background:var(--bg);padding:8px 10px;border-radius:6px;cursor:pointer;transition:all .2s}
+.frame-example-text:hover{border-color:#2e86de;background:rgba(46,134,222,.03)}
+.frame-tips{font-size:11px;color:var(--ink-2);line-height:1.6;padding:8px 10px;background:#e8f0ff30;border-radius:6px;border-left:3px solid #2e86de}
+.frame-tips b{color:#2e86de}
+.frame-actions{display:flex;gap:6px;margin-top:12px}
+.frame-action-btn{flex:1;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
+.frame-action-btn.primary{background:#2e86de;color:#fff}
+.frame-action-btn.primary:hover{opacity:.9}
+.frame-action-btn.secondary{background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+.frame-action-btn.secondary:hover{color:#2e86de;border-color:#2e86de}
+
+
 /* AI智能体工作台 */
 .agent-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .agent-tab{display:flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2);transition:all .2s;white-space:nowrap}
@@ -392,6 +440,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  </div>
  <div class="nav-item" data-section="prompts" onclick="switchSection('prompts')">
  <span class="ico">📚</span><span class="lbl">提示词库</span>
+ </div>
+ <div class="nav-item" data-section="framework" onclick="switchSection('framework')">
+ <span class="ico">📐</span><span class="lbl">提示词框架库</span>
  </div>
  <div class="nav-item" data-section="expression" onclick="switchSection('expression')">
  <span class="ico">😊</span><span class="lbl">人物表情库</span>
@@ -3136,6 +3187,41 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <!-- ========== 武器库提示词 ========== -->
 
 <!-- ========== 人物表情库 ========== -->
+
+<!-- ========== 提示词框架库 ========== -->
+<div class="section" id="sec-framework">
+ <div class="frame-page">
+  <div class="frame-head">
+   <span class="bow">📐</span>
+   <div>
+    <h2>提示词框架库</h2>
+    <span class="sub">结构化提示词模板 · 各类型全覆盖 · 附完整案例</span>
+   </div>
+   <div class="frame-stat">
+    <div class="frame-stat-item">共 <b id="frameTotalCount">10</b> 套</div>
+    <div class="frame-stat-item"><b>5</b> 大分类</div>
+   </div>
+  </div>
+
+  <div class="frame-cats" id="frameCats">
+   <button class="frame-cat active" onclick="switchFrameCat('all')">📚 全部</button>
+   <button class="frame-cat" onclick="switchFrameCat('universal')">🎯 通用框架</button>
+   <button class="frame-cat" onclick="switchFrameCat('portrait')">📸 人像类</button>
+   <button class="frame-cat" onclick="switchFrameCat('landscape')">🏔️ 风景类</button>
+   <button class="frame-cat" onclick="switchFrameCat('product')">📦 产品类</button>
+   <button class="frame-cat" onclick="switchFrameCat('character')">🎭 角色设计</button>
+   <button class="frame-cat" onclick="switchFrameCat('scene')">🏙️ 场景概念</button>
+   <button class="frame-cat" onclick="switchFrameCat('anime')">🎌 动漫插画</button>
+   <button class="frame-cat" onclick="switchFrameCat('architecture')">🏛️ 建筑设计</button>
+   <button class="frame-cat" onclick="switchFrameCat('food')">🍜 美食摄影</button>
+  </div>
+
+  <div class="frame-list" id="frameList">
+   <!-- 框架卡片将通过JS生成 -->
+  </div>
+ </div>
+</div>
+
 <div class="section" id="sec-expression">
  <div class="expr-page">
   <div class="expr-head">
@@ -5004,6 +5090,303 @@ function copyFullEffect(id){
 // 初始化特效列表
 document.addEventListener('DOMContentLoaded',function(){
   renderEffectList('all');
+});
+
+
+/* ========== 提示词框架库 ========== */
+var FRAME_DATA=[
+ // ========== 通用框架 ==========
+ {id:1,cat:'universal',emoji:'📐',title:'七段式万能公式',en:'7-Segment Universal Formula',
+  desc:'最经典的AI绘画提示词结构，适用于绝大多数场景，是所有提示词的基础框架。',
+  parts:[
+   {name:'主体',desc:'画面核心：人物/物品/场景，越具体越好'},
+   {name:'环境',desc:'背景/地点/时间/天气，营造氛围'},
+   {name:'行为状态',desc:'动作/表情/姿势/互动，增加故事感'},
+   {name:'构图',desc:'镜头/景别/角度/焦距，决定视觉语言'},
+   {name:'风格',desc:'艺术风格/时代/流派，定义美学方向'},
+   {name:'画质',desc:'分辨率/细节/质感，提升画面质量'},
+   {name:'参数',desc:'AI平台专属参数，精细控制'}
+  ],
+  formula:'主体 + 环境 + 行为/状态 + 构图 + 风格 + 画质 + 参数',
+  example_cn:'一位身穿白色连衣裙的年轻女性，站在薰衣草花田中，微风轻轻吹动她的头发和裙摆，她闭着眼睛微微仰头，脸上带着宁静的微笑。中景平视，50mm f/1.8镜头，浅景深散景背景。法式浪漫电影风格，柔和金色阳光。8K超高清，细腻皮肤纹理，电影级色彩分级。 --ar 3:4 --style raw',
+  example_en:'A young woman in a white dress standing in a lavender field, gentle breeze blowing her hair and skirt, eyes closed with head slightly tilted back, serene smile on her face. Medium shot eye-level, 50mm f/1.8 lens, shallow depth of field with bokeh background. French romantic cinema style, soft golden hour sunlight. 8K ultra HD, fine skin texture, cinematic color grading. --ar 3:4 --style raw',
+  tips:'七段式是基础框架，实际使用时可以根据需要增减。记住：越靠前的词权重越高，最重要的元素放在最前面。主体是灵魂，环境是氛围，构图是语言，风格是美学。'},
+ {id:2,cat:'universal',emoji:'🎯',title:'四要素核心法',en:'4-Element Core Method',
+  desc:'简洁高效的提示词结构，适合快速出图和新手入门，四个要素覆盖80%场景。',
+  parts:[
+   {name:'画什么',desc:'主体内容：谁/什么/多少，明确画面主角'},
+   {name:'在哪',desc:'场景环境：室内/室外/具体地点，建立空间感'},
+   {name:'啥风格',desc:'艺术风格：写实/动漫/插画/油画，定义视觉语言'},
+   {name:'怎么拍',desc:'镜头视角：特写/全景/俯视/仰拍，决定观看角度'}
+  ],
+  formula:'画什么 + 在哪 + 啥风格 + 怎么拍',
+  example_cn:'一只橘色的短腿猫咪，坐在窗台上看着外面的雨。水彩插画风格，温暖治愈。正面特写，柔和自然光。',
+  example_en:'An orange short-legged cat sitting on a windowsill watching the rain outside. Watercolor illustration style, warm and healing. Front view close-up, soft natural light.',
+  tips:'四要素法是最快速的出图公式，适合灵感闪现时快速记录。如果效果不满意，再逐步添加细节（光线、色彩、情绪、细节描述等）。简单但够用——大多数时候四个要素就能出好图。'},
+
+ // ========== 人像类框架 ==========
+ {id:3,cat:'portrait',emoji:'📸',title:'人像摄影八要素',en:'Portrait Photography 8 Elements',
+  desc:'专业人像提示词框架，覆盖人像摄影所有关键维度，拍出电影感人像。',
+  parts:[
+   {name:'人物设定',desc:'年龄/性别/外貌特征/穿着，越具体越好'},
+   {name:'表情神态',desc:'情绪/眼神/微表情，传递人物内心'},
+   {name:'姿势动作',desc:'站姿/坐姿/动态/手部姿势，增加自然感'},
+   {name:'场景环境',desc:'背景/地点/时间，营造故事氛围'},
+   {name:'光线布光',desc:'主光方向/光质/光比，是人像的灵魂'},
+   {name:'构图镜头',desc:'景别/角度/焦段/景深，决定视觉语言'},
+   {name:'色彩色调',desc:'主色调/对比色/色温，营造情绪氛围'},
+   {name:'风格质感',desc:'胶片/数码/电影感/杂志风，定义美学'}
+  ],
+  formula:'人物设定 + 表情神态 + 姿势动作 + 场景环境 + 光线布光 + 构图镜头 + 色彩色调 + 风格质感',
+  example_cn:'一位28岁的东亚女性，乌黑长发随意挽起，几缕碎发垂在脸颊旁，穿着米色针织开衫。她温柔地看着镜头，眼神清澈带一丝忧郁，嘴角微微上扬似笑非笑。侧身坐在老旧钢琴前，双手轻轻搭在琴键上。窗边侧逆光，在她头发边缘形成金色轮廓光，面部柔和补光，伦勃朗布光效果。中近景，85mm f/1.4镜头，极浅景深，钢琴和背景虚化。暖棕色调配冷色阴影，对比柔和。电影胶片质感，柯达Portra 400，细腻颗粒，自然肤色。',
+  example_en:'A 28-year-old East Asian woman with long black hair loosely tied up, a few stray strands framing her face, wearing a beige knit cardigan. She gazes gently at the camera with clear eyes tinged with melancholy, a faint almost-smile at the corners of her mouth. Sitting sideways at an old piano, hands resting lightly on the keys. Side backlight from window creating golden rim light on her hair, soft fill light on face, Rembrandt lighting effect. Medium close-up, 85mm f/1.4 lens, extremely shallow depth of field, piano and background blurred. Warm brown tones with cool shadows, soft contrast. Cinematic film quality, Kodak Portra 400, fine grain, natural skin tones.',
+  tips:'人像三要素：光线、眼神、皮肤质感。光线是人像的灵魂——指定布光方式（伦勃朗/蝴蝶光/轮廓光）比描述"美丽光线"有用10倍。眼神要有内容，不能空洞。皮肤质感要真实，不要过度磨皮。'},
+
+ // ========== 风景类框架 ==========
+ {id:4,cat:'landscape',emoji:'🏔️',title:'风光摄影七层法',en:'Landscape Photography 7 Layers',
+  desc:'专业风光摄影提示词框架，从前到后构建层次分明的壮丽风景。',
+  parts:[
+   {name:'前景',desc:'靠近镜头的元素：岩石/花草/水面，增加画面深度'},
+   {name:'中景',desc:'画面主体：山峰/建筑/湖泊，视觉焦点所在'},
+   {name:'远景',desc:'背景层次：远山/天空/云层，延伸空间感'},
+   {name:'天空',desc:'天空状态：云量/霞光/星空，决定画面氛围'},
+   {name:'光线时间',desc:'时间/光向/光质：黄金时刻/蓝调时刻/暴风雨'},
+   {name:'天气氛围',desc:'天气/季节/气氛：雾/雨/雪/晴，增加情绪感'},
+   {name:'构图视角',desc:'视角/机位/构图法：三分法/引导线/对称'}
+  ],
+  formula:'前景 + 中景 + 远景 + 天空 + 光线时间 + 天气氛围 + 构图视角',
+  example_cn:'前景是布满紫色野花的山坡和几块灰色岩石，岩石上带着露水反光。中景是镜面般平静的湖泊，倒映着远处的雪山和天空，湖边有几棵墨绿色的松树。远景是连绵的雪山山脉，山峰覆盖着皑皑白雪，山脊线清晰锐利。天空是日出时分的渐变色彩——地平线附近是温暖的橙红色，向上过渡到淡紫色和深蓝色，天空中有几缕被阳光染成金色的薄云。金色的第一缕阳光刚刚照射在雪山峰顶，形成日照金山效果，山谷中还笼罩着淡淡的晨雾。秋季清晨，空气清冷通透。宽幅全景，低角度拍摄，湖面倒影形成对称构图，前景引导线通向远方雪山。长曝光效果，水面丝滑如镜。',
+  example_en:'Foreground is a hillside covered with purple wildflowers and a few gray rocks with dewdrops glistening. Midground is a mirror-calm lake reflecting the distant snow mountains and sky, several dark green pine trees by the lakeside. Background is a range of snow-capped mountains, peaks covered with pristine white snow, ridge lines sharp and clear. Sky is sunrise gradient — warm orange-red near the horizon, transitioning upward to lavender and deep blue, with wispy clouds gilded golden by sunlight. The first golden rays of dawn just hitting the mountain peaks creating alpenglow effect, valley still shrouded in light morning mist. Autumn early morning, air crisp and clear. Wide panorama, low angle shot, lake reflection creating symmetrical composition, foreground leading lines toward distant mountains. Long exposure effect, water surface silky smooth.',
+  tips:'风光摄影的核心是"层次感"——一定要有前景、中景、远景三层空间。黄金时刻（日出后/日落前1小时）和蓝调时刻（日出前/日落后）光线最美。倒影和引导线是增强画面深度的利器。'},
+
+ // ========== 产品类框架 ==========
+ {id:5,cat:'product',emoji:'📦',title:'产品摄影六维法',en:'Product Photography 6 Dimensions',
+  desc:'商业产品摄影提示词框架，突出产品质感和品牌调性，适用于电商和广告。',
+  parts:[
+   {name:'产品主体',desc:'产品是什么/材质/颜色/设计细节，突出卖点'},
+   {name:'摆放方式',desc:'悬浮/堆叠/场景化/拆解展示，选择展示方式'},
+   {name:'背景布景',desc:'纯色/渐变/场景/道具，衬托产品调性'},
+   {name:'布光方式',desc:'主光/辅光/轮廓光/底光，塑造产品立体感'},
+   {name:'构图角度',desc:'平视/俯视/45度/特写，突出产品特点'},
+   {name:'风格调性',desc:'高端/简约/复古/科技感，匹配品牌定位'}
+  ],
+  formula:'产品主体 + 摆放方式 + 背景布景 + 布光方式 + 构图角度 + 风格调性',
+  example_cn:'一瓶高端护肤精华液，磨砂玻璃瓶身，淡蓝色液体，瓶盖是哑光银色金属质感，瓶身上有精致的烫金品牌logo。产品悬浮在半空中，周围散落着几片蓝色的花瓣和晶莹的水滴，营造轻盈水润的感觉。背景是柔和的淡蓝色到白色渐变，干净简洁。左右两侧柔光箱布光，正面有柔光板补光，底部有微微的反光，产品边缘有清晰的轮廓光，玻璃材质通透有质感。45度角俯拍，产品居中构图，周围留有充足的留白。高端简约风格，极简美学，杂志级产品摄影，干净高级的质感。',
+  example_en:'A bottle of premium skincare serum, frosted glass bottle body, pale blue liquid, matte silver metal cap, exquisite gold foil brand logo on bottle. Product floating in mid-air, surrounded by a few blue petals and glistening water droplets, creating light hydrating feeling. Background is soft pale blue to white gradient, clean and simple. Softbox lighting from both sides, diffuser fill light from front, subtle reflection at bottom, clear rim light on product edges, glass material transparent with texture. 45-degree overhead angle, product centered composition, ample negative space around. High-end minimalist style, minimalist aesthetics, magazine-level product photography, clean premium quality.',
+  tips:'产品摄影关键是"质感"——玻璃要通透、金属要锐利、布料要柔软。布光是质感的灵魂：两侧柔光+轮廓光+底部反光是标配。留白很重要，不要让画面太满。'},
+
+ // ========== 角色设计框架 ==========
+ {id:6,cat:'character',emoji:'🎭',title:'角色设计全身像',en:'Character Design Full Body',
+  desc:'游戏/动漫角色设计提示词框架，从头到脚完整设定一个角色。',
+  parts:[
+   {name:'角色身份',desc:'职业/种族/年龄/性别，角色基本设定'},
+   {name:'面部特征',desc:'脸型/五官/发型/表情，角色辨识度核心'},
+   {name:'服装装备',desc:'衣服/武器/配饰/道具，体现职业和性格'},
+   {name:'体型姿态',desc:'身高/体型/站姿/动势，传递角色气质'},
+   {name:'色彩搭配',desc:'主色调/配色方案，统一视觉风格'},
+   {name:'风格画种',desc:'二次元/写实/美漫/国风，确定画风'},
+   {name:'背景氛围',desc:'简单背景/场景背景，衬托角色设定'}
+  ],
+  formula:'角色身份 + 面部特征 + 服装装备 + 体型姿态 + 色彩搭配 + 风格画种 + 背景氛围',
+  example_cn:'一位年轻的女性魔法师，精灵族，看起来约20岁。银白色的长卷发，发梢微微泛着淡蓝色的光芒，尖尖的精灵耳朵，冰蓝色的眼眸，精致的五官，清冷又温柔的表情。身穿深蓝色星空图案的长袍，长袍边缘有银色的月光刺绣，腰间系着银色的细腰带，挂着一个水晶瓶和一本小咒语书。手持一根镶嵌着月光石的木质法杖，法杖顶端有一个发光的魔法阵。身材纤细高挑，站姿优雅，一只手轻轻抬起，指尖漂浮着几颗发光的魔法粒子。主色调是深蓝+银白+月光紫，配色清冷高贵。日系动漫风格，精美插画，细节丰富，光影细腻。纯色渐变背景，底部有淡淡的魔法阵光晕。全身站立立绘，角色设计三视图风格。',
+  example_en:'A young female mage, elf race, appearing around 20 years old. Long wavy silver-white hair with tips faintly glowing pale blue, pointed elf ears, ice-blue eyes, delicate features, expression both cool and gentle. Wearing a deep blue starry-patterned robe with silver moonlight embroidery on edges, slim silver belt at waist, hanging a crystal vial and small spellbook. Holding a wooden staff inlaid with moonstone, a glowing magic circle at the top of the staff. Slender and tall figure, elegant standing pose, one hand gently raised with glowing magic particles floating at fingertips. Main color scheme deep blue + silver white + moonlight purple, cool and noble color palette. Japanese anime style, exquisite illustration, rich details, delicate lighting and shadow. Solid gradient background, faint magic circle glow at bottom. Full body standing illustration, character design turnaround sheet style.',
+  tips:'角色设计的核心是"辨识度"——发型、服装、武器三大要素要有记忆点。配色要统一，全身像要能看清从头到脚的设计。站立姿势比动态姿势更适合展示设计细节。'},
+
+ // ========== 场景概念框架 ==========
+ {id:7,cat:'scene',emoji:'🏙️',title:'场景概念设计法',en:'Scene Concept Design Method',
+  desc:'游戏/影视场景概念图框架，构建完整的世界观空间和氛围。',
+  parts:[
+   {name:'场景类型',desc:'室内/室外/自然/建筑/科幻/奇幻，定义空间属性'},
+   {name:'空间层次',desc:'前景/中景/远景/天花板/地面，构建三维空间'},
+   {name:'建筑风格',desc:'建筑类型/材质/年代/文化，确定视觉风格'},
+   {name:'光线氛围',desc:'光源/色温/明暗对比，决定场景情绪'},
+   {name:'细节元素',desc:'道具/装饰/植被/人物，增加生活感和故事性'},
+   {name:'天气时间',desc:'时间/天气/季节，营造真实感'},
+   {name:'视角构图',desc:'视角/焦距/构图，决定观看方式'}
+  ],
+  formula:'场景类型 + 空间层次 + 建筑风格 + 光线氛围 + 细节元素 + 天气时间 + 视角构图',
+  example_cn:'一个赛博朋克风格的香港后巷夜景，狭窄的街道两侧是高耸的旧楼。前景是湿漉漉的鹅卵石路面，反射着霓虹灯的光芒，路边有一个翻倒的垃圾桶和散落的报纸。中景两侧是密密麻麻的老旧居民楼，楼外挂着空调外机、晾晒的衣服、各种管道，无数中文霓虹灯招牌——红色、蓝色、粉色的光芒照亮了街道，一个小吃摊冒着热气。远景是更高的摩天大楼，楼顶有全息广告投影，电子屏幕闪烁着。街道上方有密密麻麻的架空线缆穿过。空气中弥漫着淡淡的雾气和蒸汽，雨水刚刚停下，地面湿漉漉的反光。夜晚，霓虹灯光是主要光源，冷暖对比强烈——红色和青色互补。广角镜头，低角度仰视，一点透视构图，街道向远处延伸消失在光影中。赛博朋克概念艺术，电影级场景设计，细节丰富，氛围浓厚。',
+  example_en:'A cyberpunk style Hong Kong back alley night scene, narrow street flanked by towering old buildings. Foreground is wet cobblestone pavement reflecting neon lights, an overturned trash can and scattered newspapers by the roadside. Midground both sides are densely packed old residential buildings, AC units outside, hanging laundry, various pipes, countless Chinese neon signs — red, blue, pink glow illuminating the street, a food stall steaming. Background is taller skyscrapers with holographic ad projections on rooftops, electronic screens flickering. Dense overhead cables crisscross above the street. Air filled with faint mist and steam, rain just stopped, ground wet and reflective. Night time, neon lights are main light source, strong warm-cool contrast — red and teal complementary colors. Wide angle lens, low angle looking up, one-point perspective composition, street receding into distance disappearing in light and shadow. Cyberpunk concept art, cinematic scene design, rich details, rich atmosphere.',
+  tips:'场景概念的核心是"氛围"和"故事感"。细节是场景的灵魂——生活痕迹（晾晒的衣服、垃圾桶、小吃摊）让场景"活"起来。光线是氛围的主要塑造者——冷色还是暖色，明亮还是昏暗，直接决定场景的情绪。'},
+
+ // ========== 动漫插画框架 ==========
+ {id:8,cat:'anime',emoji:'🎌',title:'动漫插画构成法',en:'Anime Illustration Composition',
+  desc:'日系动漫插画提示词框架，画出精美二次元插画的完整公式。',
+  parts:[
+   {name:'角色主体',desc:'人物/数量/关系，画面核心内容'},
+   {name:'服装造型',desc:'服装风格/颜色/细节，角色设计的重点'},
+   {name:'表情动作',desc:'表情/姿势/互动，传递情绪和故事'},
+   {name:'场景背景',desc:'地点/环境/季节，建立世界观'},
+   {name:'色彩色调',desc:'主色调/配色/饱和度，定义整体氛围'},
+   {name:'光影效果',desc:'光源/明暗/特效，增加画面层次'},
+   {name:'画风质感',desc:'动画风格/插画师/质感，确定画面语言'}
+  ],
+  formula:'角色主体 + 服装造型 + 表情动作 + 场景背景 + 色彩色调 + 光影效果 + 画风质感',
+  example_cn:'一位身穿JK制服的高中女生，深蓝色的水手服，白色衬衫领，红色领结，灰色百褶裙，黑色中筒袜，棕色皮鞋。她站在樱花树下，春风吹起她的栗色长发和裙摆，几片樱花瓣飘落在她的头发和肩膀上。她微微侧过头，看着镜头，脸上带着温柔的微笑，眼睛亮晶晶的。背景是满开的樱花树，粉色的花海，远处是蓝天白云，阳光透过树叶洒下斑驳的光影。主色调是粉色+白色+天蓝色，清新明亮，高饱和度但不刺眼。柔和的春日阳光，侧逆光在她头发边缘形成粉色的轮廓光，面部光线均匀柔和，地面有樱花花瓣的影子。新海诚风格，精美日系动漫插画，电影级画面，细节精致，色彩绚丽，光影唯美，通透感强。',
+  example_en:'A high school girl wearing JK uniform, deep blue sailor uniform, white collar, red bow tie, gray pleated skirt, black mid-calf socks, brown leather shoes. She stands under a cherry blossom tree, spring breeze blowing her chestnut hair and skirt, a few cherry blossom petals resting on her hair and shoulders. She turns her head slightly toward the camera with a gentle smile, sparkling eyes. Background is fully blooming cherry blossom trees, pink sea of flowers, distant blue sky with white clouds, sunlight filtering through leaves casting dappled shadows. Main color scheme pink + white + sky blue, fresh and bright, high saturation but not harsh. Soft spring sunlight, side backlight creating pink rim light on her hair edges, even soft light on face, shadows of cherry petals on ground. Makoto Shinkai style, exquisite Japanese anime illustration, cinematic quality, delicate details, brilliant colors, aesthetic lighting, strong sense of transparency.',
+  tips:'动漫插画的精髓是"唯美"和"通透"。头发一定要有"发丝光"——边缘光让头发有空气感。眼睛是重点——要大而亮，有高光有倒影。新海诚风格关键词：高饱和度、强光影、通透感、蓝天白云、樱花。'},
+
+ // ========== 建筑设计框架 ==========
+ {id:9,cat:'architecture',emoji:'🏛️',title:'建筑可视化框架',en:'Architectural Visualization Framework',
+  desc:'建筑设计效果图提示词框架，专业建筑表现图的完整公式。',
+  parts:[
+   {name:'建筑类型',desc:'住宅/商业/公共/文化，建筑功能定位'},
+   {name:'风格流派',desc:'现代/古典/中式/日式/北欧，建筑风格定位'},
+   {name:'材质色彩',desc:'外墙材料/颜色/质感，建筑视觉特征'},
+   {name:'形体结构',desc:'体量/层高/开窗/屋顶，建筑形体逻辑'},
+   {name:'环境景观',desc:'场地/绿化/道路/周边，建筑与环境关系'},
+   {name:'光线时间',desc:'时间/光向/天气，烘托建筑氛围'},
+   {name:'视角渲染',desc:'视角/焦距/渲染风格，出图效果控制'}
+  ],
+  formula:'建筑类型 + 风格流派 + 材质色彩 + 形体结构 + 环境景观 + 光线时间 + 视角渲染',
+  example_cn:'一栋现代极简风格的独立别墅，两层楼。建筑风格是极简主义，干净的几何形体，白色的清水混凝土外墙搭配大面积的落地玻璃窗，窗框是深灰色金属，屋顶是平屋顶，线条简洁利落。建筑主体是一个白色的长方体，侧面有一个挑出的二层空间，形成灰空间。建筑周围有精心设计的景观——前院是灰色石板铺地，几棵造型松树，白色碎石枯山水，一侧有一个长方形的镜面水池，倒映着建筑。傍晚时分，夕阳的暖金色光线斜照在建筑立面上，建筑内部亮起温暖的灯光，从落地窗透出，室内隐约可见现代风格的家具。人视角度，略微仰视，35mm镜头，两点透视构图，建筑占据画面主体，周围留有适当的天空和地面。建筑效果图风格，照片级写实，V-Ray渲染质感，光影细腻，材质真实。',
+  example_en:'A modern minimalist style detached villa, two stories. Architectural style is minimalism, clean geometric forms, white fair-faced concrete exterior walls paired with large floor-to-ceiling glass windows, dark gray metal window frames, flat roof, simple and clean lines. Main building is a white rectangular volume, with a cantilevered second floor space on one side creating a covered area. Around the building are carefully designed landscapes — front yard is gray stone paving, several sculpted pine trees, white gravel dry landscape, one side has a rectangular mirror pool reflecting the building. Late afternoon, warm golden sunset light slanting on the building facade, warm lights turned on inside the building shining through floor-to-ceiling windows, modern furniture faintly visible indoors. Eye-level view, slightly looking up, 35mm lens, two-point perspective composition, building occupies main subject of frame, appropriate sky and ground around. Architectural visualization style, photorealistic, V-Ray render quality, fine lighting and shadow, realistic materials.',
+  tips:'建筑效果图关键是"真实感"和"设计感"。材质要真实——混凝土的颗粒感、玻璃的反射、金属的光泽。光线要有时间感——黄昏是最出效果的时间（内部灯光+外部自然光）。人视角度比鸟瞰更有代入感。'},
+
+ // ========== 美食摄影框架 ==========
+ {id:10,cat:'food',emoji:'🍜',title:'美食摄影七要素',en:'Food Photography 7 Elements',
+  desc:'美食摄影提示词框架，拍出令人垂涎欲滴的美食照片。',
+  parts:[
+   {name:'食物主体',desc:'菜品/食材/摆盘，美食本身是主角'},
+   {name:'餐具容器',desc:'盘子/碗/餐具/材质，衬托食物质感'},
+   {name:'配料装饰',desc:'酱料/香草/配料/装饰，增加层次和食欲感'},
+   {name:'场景布置',desc:'桌面/背景/道具/环境，营造用餐氛围'},
+   {name:'光线质感',desc:'自然光/人造光/柔光/硬光，是美食的灵魂'},
+   {name:'构图角度',desc:'俯视/45度/平视/特写，选择最佳角度'},
+   {name:'风格调性',desc:'杂志风/复古/日式/法式，定义整体风格'}
+  ],
+  formula:'食物主体 + 餐具容器 + 配料装饰 + 场景布置 + 光线质感 + 构图角度 + 风格调性',
+  example_cn:'一碗日式豚骨拉面，浓郁的乳白色豚骨汤底，上面铺着几片粉嫩的叉烧肉，中间是一个溏心蛋，蛋黄微微流心，旁边有几棵翠绿的青菜、金黄色的笋干、切碎的葱花，还有几片海苔。面条是细直面，浸泡在汤中，汤面上泛着油花和热气。装在深棕色的陶瓷拉面碗里，碗边有手绘的蓝色波浪纹样，旁边放着一双黑色的筷子和一个白色的汤勺。桌面是深色的木纹桌子，旁边放着一小碟红姜、一杯冰凉水，还有几瓣散落的葱花和一滴汤汁。柔和的窗边自然光，从左侧45度角照过来，在汤面上形成明亮的高光，蒸汽在光线中清晰可见，叉烧肉的油脂泛着诱人的光泽。45度俯拍，略偏一侧，碗在画面中心偏左下，右上角留白。日式美食杂志风格，温暖色调，食欲感满满，细节精致，浅景深。',
+  example_en:'A bowl of Japanese tonkotsu ramen, rich creamy white pork bone broth, topped with several slices of pink chashu pork, a soft-boiled egg in the center with slightly runny yolk, beside it several green bok choy, golden bamboo shoots, chopped green onions, and a few slices of nori. Noodles are thin straight noodles submerged in soup, oil droplets and steam rising from soup surface. Served in a dark brown ceramic ramen bowl with hand-painted blue wave pattern on rim, a pair of black chopsticks and a white soup spoon placed beside. Tabletop is dark wood grain, beside the bowl is a small dish of red pickled ginger, a glass of ice water, plus a few scattered green onion pieces and a drop of broth. Soft natural window light, coming from left 45-degree angle, creating bright highlights on soup surface, steam clearly visible in the light, chashu pork fat glistening appetizingly. 45-degree overhead shot, slightly offset to one side, bowl in center lower left of frame, negative space at upper right. Japanese food magazine style, warm tones, full of appetite appeal, fine details, shallow depth of field.',
+  tips:'美食摄影的灵魂是"食欲感"——热气、光泽、新鲜度是三大法宝。蒸汽一定要有，它让食物看起来"刚出锅"。食物表面的油光/高光让人觉得好吃。自然光（尤其是窗边柔光）比人造光更自然更有食欲感。'}
+];
+
+function renderFrameList(cat){
+  var list=document.getElementById('frameList');
+  if(!list)return;
+  var filtered=cat==='all'?FRAME_DATA:FRAME_DATA.filter(function(f){return f.cat===cat});
+  var totalEl=document.getElementById('frameTotalCount');
+  if(totalEl)totalEl.textContent=filtered.length;
+
+  var html='';
+  filtered.forEach(function(f){
+    html+='<div class="frame-card" data-id="'+f.id+'" onclick="toggleFrameCard('+f.id+')">';
+    html+='<div class="frame-card-top">';
+    html+='<div class="frame-icon">'+f.emoji+'</div>';
+    html+='<div class="frame-info">';
+    html+='<div class="frame-title">'+f.title+'</div>';
+    html+='<div class="frame-en">'+f.en+'</div>';
+    html+='<div class="frame-desc">'+f.desc+'</div>';
+    html+='</div></div>';
+    html+='<div class="frame-tags">';
+    html+='<span class="frame-tag">'+f.parts.length+'要素</span>';
+    html+='</div>';
+    html+='<div class="frame-card-detail">';
+    
+    // Formula section
+    html+='<div class="frame-section">';
+    html+='<div class="frame-section-title">📐 框架公式</div>';
+    html+='<div class="frame-formula">';
+    var parts=f.formula.split('+');
+    parts.forEach(function(p,i){
+      html+='<span>'+p.trim()+'</span>';
+      if(i<parts.length-1)html+='+';
+    });
+    html+='</div></div>';
+    
+    // Parts section
+    html+='<div class="frame-section">';
+    html+='<div class="frame-section-title">🧩 各要素详解</div>';
+    html+='<div class="frame-parts">';
+    f.parts.forEach(function(p){
+      html+='<div class="frame-part"><b>'+p.name+'</b><span>'+p.desc+'</span></div>';
+    });
+    html+='</div></div>';
+    
+    // Example section
+    html+='<div class="frame-section">';
+    html+='<div class="frame-section-title">💡 完整案例演示</div>';
+    html+='<div class="frame-example">';
+    html+='<div class="frame-example-label">🇨🇳 中文案例：</div>';
+    html+='<div class="frame-example-text" onclick="event.stopPropagation();copyFramePrompt(this)">'+f.example_cn+'</div>';
+    html+='<div class="frame-example-label" style="margin-top:8px">🇺🇸 English Example：</div>';
+    html+='<div class="frame-example-text" onclick="event.stopPropagation();copyFramePrompt(this)">'+f.example_en+'</div>';
+    html+='</div></div>';
+    
+    // Tips section
+    html+='<div class="frame-section">';
+    html+='<div class="frame-tips"><b>💡 使用技巧：</b>'+f.tips+'</div>';
+    html+='</div>';
+    
+    // Actions
+    html+='<div class="frame-actions">';
+    html+='<button class="frame-action-btn primary" onclick="event.stopPropagation();copyFullFrame('+f.id+')">📋 复制完整案例</button>';
+    html+='<button class="frame-action-btn secondary" onclick="event.stopPropagation();toggleFrameCard('+f.id+')">收起</button>';
+    html+='</div>';
+    
+    html+='</div>';
+    html+='</div>';
+  });
+  list.innerHTML=html;
+}
+
+function switchFrameCat(cat){
+  document.querySelectorAll('.frame-cat').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+  });
+  renderFrameList(cat);
+}
+
+function toggleFrameCard(id){
+  var card=document.querySelector('.frame-card[data-id="'+id+'"]');
+  if(card)card.classList.toggle('expanded');
+}
+
+function copyFramePrompt(el){
+  var text=el.textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('提示词已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('提示词已复制','success');
+  }
+}
+
+function copyFullFrame(id){
+  var f=FRAME_DATA.find(function(x){return x.id===id});
+  if(!f)return;
+  var partsStr='';
+  f.parts.forEach(function(p,i){
+    partsStr+=(i+1)+'. '+p.name+'：'+p.desc+'\n';
+  });
+  var text='【框架】'+f.title+' ('+f.en+')\n'+
+    '说明：'+f.desc+'\n\n'+
+    '【框架公式】\n'+f.formula+'\n\n'+
+    '【各要素详解】\n'+partsStr+'\n'+
+    '【中文完整案例】\n'+f.example_cn+'\n\n'+
+    '【English Full Example】\n'+f.example_en+'\n\n'+
+    '【使用技巧】\n'+f.tips;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('完整框架已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('完整框架已复制','success');
+  }
+}
+
+// 初始化框架列表
+document.addEventListener('DOMContentLoaded',function(){
+  renderFrameList('all');
 });
 
 /* ========== 人物表情库 ========== */
