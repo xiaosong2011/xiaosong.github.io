@@ -207,6 +207,52 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .music-source-uppbeat{background:#e0f7fa;color:#00838f}
 .music-duration{font-size:11px;color:var(--ink-3);margin-left:auto;flex-shrink:0}
 
+/* 人物表情库 */
+.expr-page{padding:16px}
+.expr-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.expr-head h2{font-size:18px;font-weight:800;color:var(--ink);margin:0}
+.expr-head .sub{font-size:12px;color:var(--ink-3)}
+.expr-stat{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap}
+.expr-stat-item{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg);color:var(--ink-2)}
+.expr-stat-item b{color:#e91e63}
+.expr-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.expr-cat{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:all .2s;white-space:nowrap}
+.expr-cat:hover{border-color:#e91e63;color:#e91e63}
+.expr-cat.active{background:#e91e63;color:#fff;border-color:#e91e63}
+.expr-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.expr-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;transition:all .2s;cursor:pointer}
+.expr-card:hover{box-shadow:0 6px 20px rgba(233,30,99,.1);border-color:#e91e63;transform:translateY(-2px)}
+.expr-card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.expr-emoji{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#fce4ec,#f8bbd9);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.expr-info{flex:1;min-width:0}
+.expr-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.expr-en{font-size:11px;color:var(--ink-3);font-style:italic}
+.expr-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.expr-tag{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--bg);color:var(--ink-2)}
+.expr-tag.intensity{background:#fce4ec;color:#e91e63}
+.expr-tag.part{background:#e8f5e9;color:#4caf50}
+.expr-tag.type{background:#e8f0ff;color:#2e86de}
+.expr-card-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.expr-card.expanded .expr-card-detail{display:block}
+.expr-part-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px}
+.expr-part-item{font-size:11px;padding:6px 8px;background:var(--bg);border-radius:6px;border-left:2px solid #e91e63}
+.expr-part-item b{display:block;color:var(--ink);font-size:11px;margin-bottom:2px}
+.expr-part-item span{color:var(--ink-2);line-height:1.4}
+.expr-prompt-box{margin-top:10px}
+.expr-prompt-title{font-size:12px;font-weight:700;color:#e91e63;margin-bottom:6px}
+.expr-lang-label{font-size:11px;font-weight:600;color:var(--ink-2);margin:8px 0 3px}
+.expr-prompt-text{font-size:12px;line-height:1.6;color:var(--ink);padding:8px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--line);cursor:pointer;transition:all .2s;white-space:pre-wrap;word-break:break-word}
+.expr-prompt-text:hover{border-color:#e91e63;background:rgba(233,30,99,.03)}
+.expr-tips{font-size:11px;color:var(--ink-2);line-height:1.6;margin-top:10px;padding:8px 10px;background:#fce4ec20;border-radius:6px;border-left:3px solid #e91e63}
+.expr-tips b{color:#e91e63}
+.expr-actions{display:flex;gap:6px;margin-top:10px}
+.expr-action-btn{flex:1;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
+.expr-action-btn.primary{background:#e91e63;color:#fff}
+.expr-action-btn.primary:hover{opacity:.9}
+.expr-action-btn.secondary{background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+.expr-action-btn.secondary:hover{color:#e91e63;border-color:#e91e63}
+
+
 /* AI智能体工作台 */
 .agent-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .agent-tab{display:flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2);transition:all .2s;white-space:nowrap}
@@ -4244,6 +4290,462 @@ function switchPlCat(cat){
  var target=document.getElementById('plCat-'+cat);
  if(target) target.style.display='block';
 }
+
+/* ========== 人物表情库 ========== */
+var EXPR_DATA=[
+ // ========== 基础表情 ==========
+ {id:1,cat:'basic',emoji:'😄',title:'开心大笑',en:'Joyful Laughter',
+  intensity:'强烈',parts:['眉毛','眼睛','嘴巴','脸颊'],
+  desc:'发自内心的开怀大笑，眼睛弯成月牙，嘴巴张开露齿，脸颊上扬起苹果肌，眼角有笑纹。',
+  cn:'开心大笑的脸部特写，眉毛弯弯向上挑起，眼睛完全弯成月牙形，眼尾有明显的鱼尾纹，瞳孔放大。嘴巴大大张开，上下两排洁白的牙齿清晰可见，嘴角用力向上拉伸，嘴唇变薄。脸颊饱满地向上鼓起形成苹果肌，鼻唇沟（法令纹）明显加深。下巴微微向下向后。整体面部肌肉向上提拉，充满喜悦的感染力。',
+  en:'Close-up of a face laughing heartily. Eyebrows curved and arched upward. Eyes completely crescent-shaped, with obvious crow\'s feet at outer corners, pupils dilated. Mouth wide open, upper and lower rows of white teeth clearly visible, corners of mouth pulled strongly upward, lips thinned. Cheeks puffed up fully forming apple cheeks, nasolabial folds (smile lines) significantly deepened. Chin slightly downward and back. Entire facial muscles pulling upward, full of joyful infectiousness.',
+  gpt:'A close-up shot of a person laughing with genuine joy. Their eyes are crinkled into crescents with visible laugh lines at the corners. The mouth is open wide in a big smile showing teeth, with the corners pulled way up. The cheeks are rounded and lifted into apple cheeks, and smile lines are visible from the nose to the corners of the mouth. The eyebrows are raised and curved. The whole face looks warm, happy, and genuinely full of laughter. Make it look like a natural, unposed moment of pure happiness.',
+  tips:'大笑的关键是"眼睛也要笑"——假笑只有嘴巴动，真笑眼睛会弯成月牙并出现鱼尾纹（杜乡微笑Duchenne smile）。脸颊一定要向上鼓起。'},
+ {id:2,cat:'basic',emoji:'😢',title:'悲伤哭泣',en:'Sad Crying',
+  intensity:'强烈',parts:['眉毛','眼睛','嘴巴','额头'],
+  desc:'伤心落泪的表情，眉头紧锁，眼角含泪，嘴角向下，整个面部呈下沉趋势。',
+  cn:'悲伤哭泣的脸部特写，眉头紧锁并向内靠拢，眉心形成明显的皱纹。眼睛半闭，眼睑下垂，眼角积聚着晶莹的泪珠，下眼睑被泪水浸湿反光，睫毛上挂着泪珠。嘴角用力向下撇，下巴向上推挤下唇形成褶皱，嘴唇微微颤抖。额头有轻微的抬头纹。鼻子微红，鼻孔微微扩张。整个面部肌肉呈现向下的趋势，传递出深切的悲伤。',
+  en:'Close-up of a sad crying face. Eyebrows furrowed and drawn together, distinct glabellar lines between brows. Eyes half-closed, eyelids drooping, tears gathering at corners of eyes, lower eyelids glistening wet with tears, teardrops hanging on eyelashes. Corners of mouth pulled strongly downward, chin pushing up lower lip creating wrinkles, lips trembling slightly. Slight forehead wrinkles. Nose slightly red, nostrils slightly flared. Entire facial muscles showing downward trend, conveying deep sorrow.',
+  gpt:'A close-up of someone crying sadly. Their eyebrows are furrowed and pulled together with a clear furrow between them. Their eyes are half-lidded and glistening with tears — a tear is about to fall from one eye, and the lower lash line is wet. The corners of their mouth turn down sharply, and their chin bunches up the lower lip. The nose is slightly pink. The whole face has a downward, sorrowful quality. The expression feels genuine and deeply sad, not overacted.',
+  tips:'悲伤的核心是"下沉感"——嘴角下撇、眼睑下垂、眉毛内收（八字眉）。哭泣时下唇会被下巴推挤起皱，这是真实哭泣的特征。'},
+ {id:3,cat:'basic',emoji:'😠',title:'愤怒生气',en:'Angry Fury',
+  intensity:'强烈',parts:['眉毛','眼睛','嘴巴','下颚'],
+  desc:'勃然大怒的表情，眉毛倒竖，眼睛怒视，牙关紧咬，整个面部肌肉紧绷。',
+  cn:'愤怒生气的脸部特写，眉毛用力向下压并向内靠拢，形成倒八字眉，眉心深深皱起。眼睛瞪得很大，眼白暴露较多，瞳孔缩小，眼神锐利如刀，死死盯住前方。嘴巴紧抿成一条直线，嘴角向下，咬肌紧绷，下颚线条硬朗分明。鼻孔扩张，呼吸急促。额头和眉间有深深的皱纹。脖子上的青筋微微暴起。整个面部肌肉紧绷，充满攻击性和压迫感。',
+  en:'Close-up of an angry furious face. Eyebrows pressed hard downward and inward, forming inverted V-shape, deep frown between brows. Eyes wide open, more sclera exposed, pupils constricted, gaze sharp as a blade, staring intensely forward. Mouth pressed tight into a straight line, corners downward, masseter muscles tense, jawline sharp and defined. Nostrils flared, breathing rapid. Deep wrinkles on forehead and between brows. Veins on neck slightly bulging. Entire facial muscles tense, full of aggression and oppression.',
+  gpt:'A close-up of a person furious with anger. Their eyebrows are sharply lowered and pulled together in a deep angry frown. The eyes are wide and glaring, with more white of the eye showing than usual, and an intense piercing stare. The jaw is clenched tight and the mouth is pressed into a hard thin line with downturned corners. The nostrils are flared. There are deep furrows between the eyebrows and tension lines across the forehead. The whole face looks tight, clenched, and ready to explode with rage.',
+  tips:'愤怒的标志是"倒八字眉"+"紧咬牙关"。注意眉弓下压让眼睛看起来更窄更锐利。咬肌紧绷会让下颌角变宽变方。'},
+ {id:4,cat:'basic',emoji:'😱',title:'震惊恐惧',en:'Shocked Fear',
+  intensity:'强烈',parts:['眉毛','眼睛','嘴巴','额头'],
+  desc:'极度震惊恐惧的表情，眉毛高高扬起，眼睛瞪到最大，嘴巴张成O形。',
+  cn:'震惊恐惧的脸部特写，眉毛高高扬起几乎贴近发际线，额头布满横向的抬头纹。眼睛瞪到最大程度，上下眼睑完全拉开，眼白大面积暴露，瞳孔放大，眼神中充满恐惧。嘴巴大大张开成圆形，嘴唇变薄，露出牙齿和舌头，仿佛在尖叫。下巴向下掉落，颈部肌肉紧绷。整个面部呈现向上拉伸的状态，传递出极度的震惊和恐惧。',
+  en:'Close-up of a shocked terrified face. Eyebrows raised high almost touching hairline, forehead covered with horizontal wrinkles. Eyes wide open to maximum, upper and lower eyelids fully pulled back, large area of sclera exposed, pupils dilated, eyes filled with fear. Mouth wide open in a round shape, lips thinned, teeth and tongue visible, as if screaming. Chin dropped downward, neck muscles tense. Entire face appears stretched upward, conveying extreme shock and fear.',
+  gpt:'A close-up of someone absolutely shocked and terrified. Their eyebrows are raised all the way up their forehead, which is covered in horizontal worry lines. Their eyes are wide open — so wide you can see white all around the iris. The pupils are dilated with fear. The mouth is dropped open in a perfect O shape, with the lips stretched thin. The chin has dropped down. The whole face looks like it has been pulled upward in an instant of pure shock and terror. It\'s the expression of someone who just saw something unbelievable and frightening.',
+  tips:'恐惧的特征是"全脸向上拉伸"——眉毛上扬、眼睛睁大、嘴巴张开。和惊讶的区别是：恐惧时眉毛是"平着抬"且眉心聚拢，惊讶时眉毛是"弧形"且更放松。'},
+ {id:5,cat:'basic',emoji:'😒',title:'厌恶嫌弃',en:'Disgusted Contempt',
+  intensity:'中等',parts:['眉毛','眼睛','鼻子','嘴巴'],
+  desc:'厌恶嫌弃的表情，鼻子皱起，上嘴唇上提，眼神轻蔑，整个面部呈现排斥感。',
+  cn:'厌恶嫌弃的脸部特写，眉毛微微压低，眼神轻蔑地斜着看，上眼皮略微下垂。鼻子皱起，鼻梁上出现横向的皱纹，鼻孔收缩。上嘴唇用力向上提起，露出上排牙齿的牙龈，嘴角一边向上挑起形成不对称的冷笑（嗤笑）。脸颊向上推挤，鼻唇沟加深。下巴微微前伸。整个面部呈现出"想把东西推开"的排斥感，充满轻蔑和不屑。',
+  en:'Close-up of a disgusted contemptuous face. Eyebrows slightly lowered, eyes glancing sideways with contempt, upper eyelids slightly drooping. Nose wrinkled, horizontal wrinkles on bridge of nose, nostrils constricted. Upper lip pulled strongly upward, exposing upper gum line, one corner of mouth pulled upward forming asymmetrical sneer. Cheeks pushed upward, nasolabial folds deepened. Chin slightly protruded. Entire face presents "wanting to push something away" rejection feeling, full of disdain and contempt.',
+  gpt:'A close-up of a person looking disgusted and contemptuous. Their nose is wrinkled up with lines across the bridge and flared slightly. The upper lip is curled upward, pulling away from the teeth in a sneer. One corner of the mouth is raised higher than the other in a lopsided smirk of contempt. The eyes narrow slightly and look sideways with disdain. The eyebrows are slightly lowered. The whole expression says "this is beneath me" — a mix of disgust and arrogant disdain.',
+  tips:'厌恶的核心是"鼻子皱起"和"上唇上提"——这是人类闻到臭味时的本能反应。轻蔑时嘴角单侧上扬（嗤笑sneer），左右不对称是关键。'},
+ {id:6,cat:'basic',emoji:'😯',title:'惊讶意外',en:'Surprised Astonished',
+  intensity:'中等',parts:['眉毛','眼睛','嘴巴'],
+  desc:'惊讶意外的表情，眉毛上扬成弧形，眼睛睁大，嘴巴微微张开。',
+  cn:'惊讶意外的脸部特写，眉毛向上高高扬起，形成优美的弧形，额头出现浅浅的横向皱纹。眼睛睁得比平时大，但没有恐惧时那么极端，眼睑自然拉开，瞳孔正常，眼神中带着好奇。嘴巴微微张开成椭圆形，嘴唇放松，只有一点点缝隙，仿佛正要发出"啊"的声音。下巴轻微向下移动。整体表情是惊讶中带着好奇，没有恐惧的成分。',
+  en:'Close-up of a surprised astonished face. Eyebrows raised high upward, forming graceful arcs, faint horizontal lines on forehead. Eyes wider than usual, but not as extreme as in fear, eyelids naturally pulled back, pupils normal, gaze with curiosity. Mouth slightly open in oval shape, lips relaxed, only small gap, as if about to make "oh" sound. Chin slightly moved downward. Overall expression is surprise mixed with curiosity, without element of fear.',
+  gpt:'A close-up of someone looking genuinely surprised — the good kind of surprise, not fear. Their eyebrows are raised high in smooth arcs with faint lines across the forehead. The eyes are open wider than normal but not wide with terror — there\'s curiosity in them. The mouth is dropped open slightly in a small O shape, relaxed. The chin has dropped just a little. It\'s the expression of someone who just heard unexpected but interesting news — surprised, curious, and a little impressed.',
+  tips:'惊讶vs恐惧：惊讶时眉毛是弧形上扬、眼睛只是稍微睁大、嘴巴是小O形；恐惧时眉毛平抬且眉心聚拢、眼睛瞪到极限、嘴巴大张。惊讶持续时间很短（<1秒），持续太久就是假装的。'},
+
+ // ========== 微表情 ==========
+ {id:7,cat:'micro',emoji:'👁️',title:'微表情-撒谎眨眼',en:'Micro Lie Blink',
+  intensity:'极弱',parts:['眼睛','眼睑'],
+  desc:'撒谎时的微表情，眨眼频率突然变化，眼睑闭合时间比正常略长。',
+  cn:'人物眼部特写，捕捉到撒谎瞬间的微表情。正常眨眼频率是每分钟15-20次，但撒谎者眨眼频率会突然加快或减慢。此刻眼睑正在闭合，闭合的时间比正常眨眼稍长（正常约100-150毫秒，撒谎时可能达到300毫秒以上），仿佛不想看到对方的眼睛。睫毛微微颤动。眼周肌肉有轻微的紧张感。眉毛几乎不动，试图表现得自然。整个表情非常细微，只有仔细观察才能察觉。',
+  en:'Close-up of character\'s eyes, capturing micro-expression during lying. Normal blink rate is 15-20 times per minute, but liars\' blink rate suddenly speeds up or slows down. At this moment eyelids are closing, closure time slightly longer than normal blink (normal about 100-150ms, during lying may reach 300ms+), as if not wanting to look at other person\'s eyes. Eyelashes trembling slightly. Slight tension in periorbital muscles. Eyebrows barely moving, trying to appear natural. Entire expression very subtle, only noticeable with careful observation.',
+  gpt:'A close-up shot focusing on a person\'s eyes, capturing the subtle micro-expression of someone telling a lie. Their eyelids are in the middle of a blink that lasts just a fraction longer than a normal blink — as if they\'re briefly avoiding eye contact. The eyelashes flutter slightly. There\'s a faint tension in the muscles around the eyes. The eyebrows are held very still, almost too still, as if the person is consciously trying to look natural. It\'s a very subtle tell — you\'d miss it if you blinked yourself. The lighting is soft, highlighting the eyelid and the slight wetness on the eyeball surface.',
+  tips:'撒谎微表情经典特征：眨眼频率异常（太快或太慢）、闭眼时间延长、视线转移、瞳孔变化。但这些都只是"线索"而非"证据"，必须结合基线判断。'},
+ {id:8,cat:'micro',emoji:'😐',title:'微表情-强忍愤怒',en:'Micro Suppressed Anger',
+  intensity:'极弱',parts:['眉毛','下颚','眼睛'],
+  desc:'强忍愤怒的微表情，表面平静但细微处泄露出怒意，眉弓微压，下颚微紧。',
+  cn:'人物面部特写，表面看似平静，但细微处泄露出被压抑的愤怒。眉毛整体似乎没有动，但仔细看眉弓内侧（靠近眉心的一端）有极其轻微的下压，大约只移动了1-2毫米。眼睛看似正常，但瞳孔略微缩小，眼神比平时更"定"，仿佛在盯着什么。下颚咬肌有极其细微的紧绷，嘴角两侧有非常轻微的收紧，几乎看不出来。嘴唇比平时略薄一点点。整个表情的变化幅度非常小，只有熟悉微表情的人才能识别。持续时间可能不到0.5秒。',
+  en:'Close-up of character\'s face, seemingly calm on surface, but subtle details reveal suppressed anger. Eyebrows overall seem unmoved, but looking closely the medial end of brow ridge (near glabella) has extremely slight downward pressure, moving only 1-2mm. Eyes seem normal, but pupils slightly constricted, gaze more "fixed" than usual, as if staring at something. Masseter jaw muscle has extremely subtle tension, very slight tightening at both corners of mouth, barely noticeable. Lips slightly thinner than usual. Entire expression change amplitude very small, only recognizable by those familiar with micro-expressions. Duration may be less than 0.5 seconds.',
+  gpt:'A close-up of a face that looks calm at first glance — but if you look closely, you can see the micro-signs of anger being held in. The inner corners of the eyebrows are pressed down just barely — maybe a millimeter or two. The jaw is held slightly tighter than normal, with just a hint of tension in the masseter muscle. The eyes look steady, almost too steady, with slightly narrowed pupils. The lips are pressed just a little thinner than a relaxed mouth would be. It\'s the face of someone who is furious but forcing themselves to look calm. The tells are tiny — the expression of someone practiced at hiding their anger.',
+  tips:'强忍愤怒的微表情线索：眉弓内侧微降、咬肌微紧、嘴唇变薄、眼神固定。这些变化幅度都在1-2毫米级别，持续时间通常0.2-0.5秒。'},
+ {id:9,cat:'micro',emoji:'😏',title:'微表情-暗自得意',en:'Micro Smug Satisfaction',
+  intensity:'极弱',parts:['嘴角','眼睛','脸颊'],
+  desc:'暗自得意的微表情，嘴角一边极轻微地上扬，眼角闪过笑意，转瞬即逝。',
+  cn:'人物面部特写，捕捉到转瞬即逝的暗自得意。左边或右边嘴角有极其轻微的上扬，幅度不到2毫米，几乎看不出来。对应的一侧脸颊有极其细微的鼓起，像是笑意刚刚开始又被压下去。眼角有一瞬间的弯起，但很快恢复平直。眼神中闪过一丝得意的光芒，但马上被掩饰。眉毛完全不动，保持中性。整个表情只持续了约0.2-0.3秒，然后立刻恢复成面无表情的样子。如果不仔细观察，根本不会注意到。',
+  en:'Close-up of character\'s face, capturing fleeting smug satisfaction. Left or right corner of mouth lifts extremely slightly, amplitude less than 2mm, almost unnoticeable. Corresponding cheek has extremely subtle puffing, as if smile just started then was suppressed. Corner of eye has momentary curve, but quickly returns to flat. A flash of smug light in eyes, but immediately concealed. Eyebrows completely still, neutral. Entire expression lasts only about 0.2-0.3 seconds, then immediately returns to blank expression. If not observing carefully, would never be noticed.',
+  gpt:'A close-up capturing the briefest flicker of a smug half-smile that someone is trying to hide. One corner of their mouth twitches upward by barely a couple millimeters. The corresponding cheek tenses ever so slightly — like a smile starting to form before being suppressed. The corner of one eye crinkles for a split second then smooths out again. There\'s a flash of self-satisfaction in their eyes that they immediately try to mask. The expression lasts maybe a quarter of a second before their face returns to neutral. You have to be watching closely to catch it — it\'s the face someone makes when they\'ve just won but don\'t want you to know they think they won.',
+  tips:'暗自得意是"被抑制的微笑"——单侧嘴角微扬+一侧脸颊微鼓+眼角微弯。幅度极小且转瞬即逝（0.2秒左右），是微表情中最常见的一种。'},
+ {id:10,cat:'micro',emoji:'😶',title:'微表情-紧张焦虑',en:'Micro Anxiety Tension',
+  intensity:'极弱',parts:['嘴唇','眼睛','额头'],
+  desc:'紧张焦虑的微表情，舔嘴唇、眨眼频率变化、额头微汗，细微的不安信号。',
+  cn:'人物面部特写，展现紧张焦虑的微表情。嘴唇微微干燥，舌尖极轻微地舔了一下下唇，动作很快仿佛不想被发现。眨眼频率比正常情况略快，眼神有些飘忽，不敢完全直视。额头有极其细微的汗珠反光，只有在特定角度才能看到。眉毛有极其轻微的上抬趋势，但被刻意压制住了。鼻翼有非常轻微的翕动，呼吸变浅变快。下巴的肌肉有细微的颤抖。整体看起来还算平静，但处处都是细小的紧张信号。',
+  en:'Close-up of character\'s face, showing micro-expressions of anxiety and tension. Lips slightly dry, tip of tongue licking lower lip extremely briefly, motion quick as if not wanting to be noticed. Blink rate slightly faster than normal, gaze somewhat wandering, not daring to make full eye contact. Extremely fine sweat beads on forehead catching light, only visible at certain angle. Eyebrows have very slight upward trend, but deliberately suppressed. Nostrils have very slight flaring, breathing shallower and faster. Chin muscles have subtle trembling. Overall still looks calm, but everywhere are small tension signals.',
+  gpt:'A close-up of a person who looks calm on the surface but is clearly anxious if you read the micro-signals. Their tongue quickly darts out to moisten their lower lip — a fast nervous flick. Their blink rate is slightly elevated and their gaze drifts just a little, not quite holding eye contact. There\'s the faintest sheen of sweat on the forehead that catches the light. The nostrils flare just barely with quicker, shallower breathing. The muscle at the chin has an almost imperceptible tremor. Nothing about the expression is dramatic — it\'s the collection of tiny tells that add up to someone who is nervous and trying not to show it.',
+  tips:'紧张焦虑的微线索：舔嘴唇/咬唇、眨眼加快、眼神飘忽、额头微汗、鼻翼翕动、下巴微颤。这些都是自主神经系统的反应，很难完全控制。'},
+ {id:11,cat:'micro',emoji:'😔',title:'微表情-失落难过',en:'Micro Hidden Sadness',
+  intensity:'极弱',parts:['嘴角','眼角','眉毛'],
+  desc:'隐藏的难过微表情，嘴角极轻微地下沉，眼角一瞬间黯淡，很快被掩饰。',
+  cn:'人物面部特写，捕捉到被迅速掩饰的难过。嘴角有一瞬间的下沉，幅度非常小，可能只有1毫米，然后立刻被拉回原位。眼角有一瞬间的黯淡，瞳孔略微放大又收缩。眉毛内侧有极其轻微的上扬（悲伤的典型特征），但只持续了不到0.3秒就被压平了。眼睑有极细微的下垂趋势。整体表情看起来几乎是中性的，只有那一瞬间的变化泄露出内心的失落。如果不是慢速回放，几乎不可能捕捉到。',
+  en:'Close-up of character\'s face, capturing quickly concealed sadness. Corner of mouth has momentary droop, amplitude very small, maybe only 1mm, then immediately pulled back into place. Corner of eye has momentary dimness, pupils slightly dilated then constricted. Inner eyebrow has extremely slight upward lift (classic sadness feature), but lasts less than 0.3 seconds before being pressed flat. Eyelids have very subtle drooping trend. Overall expression looks almost neutral, only that momentary change reveals inner disappointment. If not slow-motion replay, almost impossible to catch.',
+  gpt:'A close-up of someone whose face looks almost neutral — except for a split-second flash of sadness that they immediately suppress. For just a moment, the corners of their mouth droop by a millimeter, and there\'s a slight dimness in their eyes. The inner corners of the eyebrows lift just barely — the classic tell of sadness — but it lasts less than a third of a second before they smooth their face back to neutral. It\'s the face of someone who just got bad news but is trying not to show it. You\'d miss it in real time; only a slow-motion replay would catch it.',
+  tips:'隐藏悲伤的微表情特征：嘴角瞬间下沉、眉内侧瞬间上扬、眼睑瞬间下垂。这些都是悲伤完整表情的"缩小版"，只出现一部分且持续时间极短。'},
+ {id:12,cat:'micro',emoji:'🤥',title:'微表情-轻蔑嗤笑',en:'Micro Contempt Sneer',
+  intensity:'极弱',parts:['嘴角','鼻子','眼睛'],
+  desc:'轻蔑的微表情，单侧嘴角极轻微地上提，鼻子微皱，眼神闪过不屑。',
+  cn:'人物面部特写，捕捉到一闪而过的轻蔑。一侧嘴角有极其轻微的上提，形成一个几乎看不见的单边冷笑，幅度不到2毫米。同一边的鼻翼有极其细微的皱起，仿佛闻到了什么不好的味道。眼神中有一瞬间的不屑和居高临下，但很快恢复平静。眉毛完全不动。整个表情不对称——只有一侧脸有反应，这是轻蔑的典型特征。持续时间约0.3秒，然后立刻恢复中性表情。',
+  en:'Close-up of character\'s face, capturing fleeting contempt. One corner of mouth lifts extremely slightly, forming barely visible one-sided sneer, amplitude less than 2mm. Nostril on same side has extremely subtle wrinkling, as if smelling something unpleasant. A flash of disdain and condescension in eyes, but quickly returns to calm. Eyebrows completely still. Entire expression asymmetric — only one side of face reacts, which is typical feature of contempt. Duration about 0.3 seconds, then immediately returns to neutral expression.',
+  gpt:'A close-up of a face where only one side shows emotion — the classic micro-expression of contempt. The left corner of the mouth twitches upward by just a couple millimeters in a tiny lopsided sneer. The nostril on that same side wrinkles almost imperceptibly. There\'s a brief flash of condescension in the eyes before they go neutral again. The eyebrows don\'t move at all. The whole thing lasts maybe three-tenths of a second. It\'s asymmetrical, fleeting, and carries that quiet "you are beneath me" feeling that defines contempt.',
+  tips:'轻蔑是唯一不对称的基本情绪表情——只有一侧脸有反应。单侧嘴角上提+同侧鼻翼微皱是核心特征。这种表情通常伴随优越感和不屑。'},
+
+ // ========== 恋爱心动 ==========
+ {id:13,cat:'love',emoji:'🥰',title:'心动害羞',en:'Heartflutter Shy',
+  intensity:'中等',parts:['脸颊','眼睛','嘴角'],
+  desc:'心动害羞的表情，脸颊泛红，眼神躲闪，嘴角忍不住上扬，少女心爆棚。',
+  cn:'心动害羞的脸部特写，脸颊明显泛红，从颧骨蔓延到耳根，呈现自然的红晕，皮肤看起来微微发烫。眼睛看向斜下方，不敢直视对方，睫毛低垂，眼神闪烁着娇羞的光芒。嘴角有抑制不住的微微上扬，形成一个腼腆的微笑，嘴唇轻轻抿着。眉毛微微弯起，整个面部肌肉呈现向上的柔和趋势。可能还有汗珠在额头或鬓角微微反光。整体氛围甜美又羞涩，是典型的恋爱心动表情。',
+  en:'Close-up of a shy flustered face in love. Cheeks obviously blushing, spreading from cheekbones to ear roots, showing natural rosy glow, skin looking slightly warm. Eyes looking diagonally downward, not daring to look directly at other person, eyelashes lowered, gaze shimmering with shy light. Corners of mouth have uncontrollable slight upward lift, forming shy smile, lips gently pressed together. Eyebrows slightly curved, entire facial muscles presenting gentle upward trend. Maybe sweat beads faintly reflecting light on forehead or temples. Overall atmosphere sweet and shy, classic expression of romantic heartflutter.',
+  gpt:'A close-up of someone who has just fallen for someone — shy and flustered with a racing heart. Their cheeks are flushed pink, the blush spreading from the apples of their cheeks to the tips of their ears. Their eyes are cast down and to the side, too shy to make eye contact, with long lashes lowered. Despite trying to hide it, the corners of their mouth keep tugging upward in a giddy little smile. Their eyebrows are softly arched. There\'s a sweet, embarrassed warmth to the whole expression — the face of someone who just heard something that made their heart skip a beat.',
+  tips:'心动害羞三要素：1.脸颊泛红（一定要画到耳根）2.眼神躲闪（向下+向侧面）3.抑制不住的微笑（嘴角想上扬又被压下去）。皮肤的"温度感"很重要。'},
+ {id:14,cat:'love',emoji:'😍',title:'痴迷凝视',en:'Lovestruck Gaze',
+  intensity:'强烈',parts:['眼睛','瞳孔','嘴角'],
+  desc:'痴迷凝视的表情，眼睛里仿佛有星星，瞳孔放大，嘴角带着温柔的笑，视线完全被吸引。',
+  cn:'痴迷凝视的脸部特写，眼睛睁得略大，瞳孔明显放大（比正常大20-30%），虹膜仿佛被拉宽，眼睛里有明显的高光点（星光眼/星星眼）。眼神完全聚焦在前方某个点（或某个人身上），视线黏着无法移开。嘴角带着非常温柔的微笑，不明显但充满爱意，嘴唇微微张开仿佛在轻轻呼吸。眉毛柔和地弯起。脸颊可能有淡淡的红晕。整个表情柔和又痴迷，仿佛全世界只剩下眼前的人。',
+  en:'Close-up of a lovestruck gazing face. Eyes slightly wide open, pupils obviously dilated (20-30% larger than normal), iris seemingly widened, obvious highlight points in eyes (sparkly star eyes). Gaze completely focused on something ahead (or someone), gaze stuck unable to look away. Corners of mouth carrying very gentle smile, not obvious but full of affection, lips slightly parted as if breathing gently. Eyebrows softly curved. Cheeks may have faint blush. Entire expression soft and infatuated, as if only person before them exists in the whole world.',
+  gpt:'A close-up of someone completely infatuated, gazing at the person they love. Their eyes are slightly wider than usual and their pupils are noticeably dilated — bigger than you\'d expect in this light. There are bright little catchlights in their eyes that make them look like they have stars in them. Their gaze is completely fixed, like they can\'t look away. A soft, gentle smile tugs at the corners of their mouth — not a big smile, but a warm, loving one. Their lips are slightly parted. Their eyebrows are soft and arched. The whole face looks soft, warm, and completely smitten.',
+  tips:'痴迷凝视的关键是"瞳孔放大"——这是生理反应无法伪装。眼睛要有多个高光点营造"星光感"。微笑是温柔的、不明显的，不是大笑，而是充满爱意的柔和线条。'},
+ {id:15,cat:'love',emoji:'😳',title:'意外告白反应',en:'Surprise Confession Reaction',
+  intensity:'强烈',parts:['眼睛','嘴巴','脸颊'],
+  desc:'被突然告白时的反应，震惊+害羞+喜悦混合，情绪层次丰富。',
+  cn:'意外听到告白时的脸部特写，是多种情绪的混合体。首先是惊讶：眼睛瞬间睁大，眉毛微微上扬，嘴巴微微张开。紧接着是害羞：脸颊以肉眼可见的速度变红，从颧骨蔓延到整个脸颊甚至耳根。然后是喜悦和不敢置信：嘴角抑制不住地上扬，眼睛里泛起水光，眼泪在眼眶里打转但还没掉下来。眼神从震惊变成温柔，嘴唇颤抖着想说话又说不出来。整个表情的变化在2-3秒内完成，层次非常丰富。',
+  en:'Close-up of face upon unexpectedly hearing a confession, a mixture of multiple emotions. First surprise: eyes instantly widen, eyebrows slightly raised, mouth slightly open. Then immediately shyness: cheeks visibly reddening, spreading from cheekbones to entire face even ear roots. Then joy and disbelief: corners of mouth uncontrollably lifting, water gathering in eyes, tears welling up but not yet falling. Gaze changing from shocked to gentle, lips trembling wanting to speak but unable. Entire expression change completes in 2-3 seconds, very rich in layers.',
+  gpt:'A close-up capturing the exact moment someone hears a surprise love confession — it\'s a whole cascade of emotions happening in sequence. First, shock: their eyes fly open and their mouth drops slightly. Then, a flush spreads rapidly across their cheeks and up to their ears. Then, the corners of their mouth start twitching upward despite their best efforts to stay composed. Their eyes glisten with sudden tears of happiness. The expression keeps shifting — surprise to disbelief to shyness to joy — all within a couple seconds. It\'s messy, genuine, and absolutely heartfelt.',
+  tips:'告白反应是"混合情绪"的经典案例：惊讶（睁大眼睛）+害羞（脸红）+喜悦（嘴角上扬）+感动（眼泪）。关键是"层次感"——不是同时出现，而是有先后顺序的连续变化。'},
+ {id:16,cat:'love',emoji:'😌',title:'安心满足',en:'Peaceful Contentment',
+  intensity:'温和',parts:['眼睛','嘴角','面部肌肉'],
+  desc:'恋爱中安心满足的表情，眼睛微闭，嘴角带笑，整个面部完全放松。',
+  cn:'安心满足的脸部特写，眼睛微微闭着，或者半眯着，眼神柔和而放松，仿佛在享受此刻的宁静。嘴角带着淡淡的、满足的微笑，不明显但非常自然，是那种发自内心的安宁。眉毛完全舒展，没有任何皱纹。面部肌肉全部放松，下颌线条柔和。脸颊可能因为幸福而微微泛着健康的粉色。呼吸平稳。整体表情非常平和，仿佛靠在爱人肩膀上小憩，充满安全感和满足感。',
+  en:'Close-up of peaceful contented face in love. Eyes slightly closed, or half-squinted, gaze soft and relaxed, as if enjoying the tranquility of the moment. Corners of mouth carrying faint, satisfied smile, not obvious but very natural, inner peace kind. Eyebrows completely smooth, no wrinkles whatsoever. Facial muscles all relaxed, jawline soft. Cheeks may have healthy pink glow from happiness. Breathing steady. Overall expression very peaceful, as if napping on lover\'s shoulder, full of sense of security and contentment.',
+  gpt:'A close-up of someone looking completely peaceful and content — the face of someone who feels safe and loved. Their eyes are half-closed, soft and relaxed, like they\'re basking in a quiet happy moment. A very faint, natural smile plays at the corners of their mouth — not a big grin, just quiet satisfaction. Their eyebrows are smooth with no tension at all. The jaw is relaxed. Their cheeks have a gentle healthy flush. The whole face is soft, unworried, and at peace. It\'s the expression of someone leaning their head on someone they love, feeling completely safe.',
+  tips:'安心满足的核心是"完全放松"——没有任何肌肉紧绷。微闭的眼睛、淡淡的微笑、舒展的眉毛是三大特征。这是"被爱"的表情，而不是"正在爱"的表情。'},
+ {id:17,cat:'love',emoji:'🥺',title:'撒娇恳求',en:'Cute Pleading',
+  intensity:'中等',parts:['眼睛','眉毛','嘴巴'],
+  desc:'撒娇恳求的表情，睁大眼睛像小狗一样，眉毛微蹙，让人无法拒绝。',
+  cn:'撒娇恳求的脸部特写，眼睛睁得大大的，向上看着对方，眼神水汪汪的，仿佛有泪光在闪烁，下眼睑微微向上推，让眼睛看起来更圆更大（小狗眼puppy dog eyes）。眉毛微微向中间聚拢并向上抬起，眉心有浅浅的皱纹。嘴巴微微撅起，下唇比上唇更突出一点，像是在撒娇又像是快要哭了。脸颊微微鼓起。整个表情又可爱又可怜，让人无法拒绝。是恋爱中常见的撒娇表情。',
+  en:'Close-up of cute pleading face. Eyes wide open, looking up at other person, gaze watery, as if tears shimmering, lower eyelids slightly pushed upward, making eyes look rounder and bigger (puppy dog eyes). Eyebrows slightly drawn together and lifted upward, faint wrinkles between brows. Mouth slightly pouted, lower lip protruding a bit more than upper lip, like acting cute or about to cry. Cheeks slightly puffed. Entire expression both cute and pitiful, impossible to refuse. Common cutesy pleading expression in relationships.',
+  gpt:'A close-up of someone doing the classic "puppy dog eyes" plea. Their eyes are wide and looking upward with a wet, glistening quality — like they might tear up. The lower lids are pushed up a little making the eyes look even rounder. The eyebrows are slightly raised and drawn together with a tiny furrow between them. The mouth is in a small pout with the lower lip pushed forward a little — halfway between a pout and about to cry. The cheeks are slightly rounded. It\'s simultaneously adorable and pitiful — the kind of face nobody can say no to. The expression of someone playfully begging their partner for something.',
+  tips:'撒娇"小狗眼"的画法：眼睛睁大+向上看+下眼睑上推+水汪汪的质感。眉毛微抬微蹙增加"可怜感"。嘴唇微微撅起增加可爱度。三大要素缺一不可。'},
+ {id:18,cat:'love',emoji:'😏',title:'暧昧挑逗',en:'Flirtatious Teasing',
+  intensity:'中等',parts:['眼睛','嘴角','眉毛'],
+  desc:'暧昧挑逗的表情，斜眼挑眉，单边嘴角上扬，充满诱惑力的坏笑。',
+  cn:'暧昧挑逗的脸部特写，头微微向一侧倾斜，用眼角斜睨着对方，眼神中带着戏谑和挑逗。一边眉毛微微向上挑起，形成不对称的挑眉，充满自信和魅力。同侧的嘴角也向上扬起，形成一个单边的、坏坏的微笑，露出一点点牙齿或者不露出。嘴唇微微张开，带着诱惑的意味。脸颊没有害羞的红晕，反而有一种掌控感。整体表情自信又挑逗，是主动发起暧昧信号的表情。',
+  en:'Close-up of flirtatious teasing face. Head slightly tilted to one side, glancing at other person from corner of eye, gaze with playfulness and provocation. One eyebrow slightly raised upward, forming asymmetrical eyebrow lift, full of confidence and charm. Same side corner of mouth also lifts upward, forming one-sided, mischievous smile, showing a little bit of teeth or not. Lips slightly parted, with seductive meaning. No shy blush on cheeks, instead sense of control. Overall expression confident and flirtatious, expression of actively initiating ambiguous signals.',
+  gpt:'A close-up of someone being playfully flirtatious. Their head is tilted slightly to one side and they\'re looking at the other person from the corner of their eye — a sidelong, teasing glance. One eyebrow is cocked up in a confident, knowing lift. The corner of their mouth on the same side tugs upward in a lopsided, mischievous half-smile. Their lips are slightly parted. There\'s no shyness or blush here — this is someone who knows exactly what they\'re doing and is in control. It\'s confident, teasing, and definitely flirtatious.',
+  tips:'暧昧挑逗三要素：斜眼（side glance）+挑眉（单侧）+单边坏笑。核心是"自信"和"掌控感"——和害羞正好相反。头稍微倾斜增加魅力。'},
+
+ // ========== 反派邪恶 ==========
+ {id:19,cat:'villain',emoji:'😈',title:'邪恶狞笑',en:'Evil Grin',
+  intensity:'强烈',parts:['嘴巴','眼睛','眉毛'],
+  desc:'反派邪恶的狞笑，嘴巴大大咧开露出牙齿，眼神疯狂，眉毛压低。',
+  cn:'反派邪恶狞笑的脸部特写，嘴巴大大咧开，露出整齐或不整齐的牙齿，嘴角向耳朵方向拉伸，形成一个夸张的、不怀好意的笑容。嘴唇变薄。眼睛微微眯起，但眼神锐利而疯狂，瞳孔缩小，眼白增多，充满恶意。眉毛向中间压低聚拢，眉心有皱纹。脸颊因为笑容而鼓起，但不是开心的苹果肌，而是更扭曲的形状。整体表情疯狂又邪恶，让人不寒而栗。',
+  en:'Close-up of villain\'s evil grin face. Mouth wide open in grin, showing teeth (neat or crooked), corners of mouth stretched toward ears, forming exaggerated, sinister smile. Lips thinned. Eyes slightly squinted, but gaze sharp and insane, pupils constricted, more sclera showing, full of malice. Eyebrows pressed down and drawn together, wrinkles between brows. Cheeks puffed because of smile, but not happy apple cheeks, more twisted shape. Entire expression insane and evil, sending chills down one\'s spine.',
+  gpt:'A close-up of a villain\'s evil grin. Their mouth is stretched wide in a huge, sinister smile that pulls the corners almost up to their ears, showing their teeth. The lips are thin and stretched. Their eyes are narrowed but intense — wild and cruel, with smaller pupils and more visible white of the eye. The eyebrows are lowered and pulled together with a deep furrow between them. The cheeks are bunched up by the grin, but it looks wrong — twisted and malicious rather than happy. The whole face looks deranged and genuinely menacing. It\'s the smile of someone who has just thought of something truly terrible and can\'t wait to do it.',
+  tips:'反派狞笑和正常笑的区别：1.眼睛——正常笑眼睛弯起，狞笑眼睛眯起但眼神锐利疯狂 2.眉毛——正常笑眉毛上扬，狞笑眉毛下压 3.笑容形状——正常笑向上弯，狞笑是"拉长"的横向的。'},
+ {id:20,cat:'villain',emoji:'😑',title:'冷酷无情',en:'Cold Ruthless',
+  intensity:'中等',parts:['眼睛','面部肌肉','嘴角'],
+  desc:'反派冷酷无情的表情，面无表情，眼神冰冷，没有任何情绪波动。',
+  cn:'反派冷酷无情的脸部特写，完全的面无表情，没有任何情绪流露。眼睛是冷的、平静的，像冰一样，瞳孔略微收缩，眼神锐利但平静，仿佛在看一件物品而不是一个人。眉毛平直，没有任何起伏。嘴角平直，既不上扬也不下垂，完全中性。面部肌肉完全放松但又紧绷——放松是因为没有情绪，紧绷是因为有控制力。下颌线条清晰硬朗。整体表情冷得像冰，没有愤怒也没有喜悦，只有冷漠和无情，让人感到比愤怒更可怕。',
+  en:'Close-up of villain\'s cold ruthless face. Completely blank expression, no emotional display whatsoever. Eyes cold, calm, like ice, pupils slightly constricted, gaze sharp but calm, as if looking at an object not a person. Eyebrows straight and flat, no movement whatsoever. Corners of mouth straight, neither lifted nor drooped, completely neutral. Facial muscles completely relaxed yet tense — relaxed because no emotion, tense because controlled. Jawline clear and sharp. Overall expression cold as ice, neither anger nor joy, only indifference and ruthlessness, making people feel more scared than anger.',
+  tips:'最可怕的反派不是大吼大叫的，而是"面无表情"的。因为没有情绪意味着没有弱点。关键特征：冰一样的眼神、平直的眉毛、平直的嘴、完全对称的脸。越平静越可怕。'},
+ {id:21,cat:'villain',emoji:'🤫',title:'阴谋得逞',en:'Scheming Triumph',
+  intensity:'温和',parts:['眼睛','嘴角','眉毛'],
+  desc:'阴谋得逞时的表情，眼中闪过算计，嘴角露出不易察觉的得意微笑。',
+  cn:'反派阴谋得逞的脸部特写，表面上表情几乎没有变化，但仔细看能发现细节。眼睛里闪过一丝计谋得逞的光芒，瞳孔有一瞬间的放大又迅速收缩。嘴角有极其轻微的上扬——不是大笑，而是一个满意的、深藏不露的微笑，只有非常了解他的人才能察觉。眉毛微微舒展了一下，从之前的思考状态变成了放松。整体表情非常克制，甚至可以说是平静的，但底下暗流涌动。是那种"一切都在我计划之中"的表情。',
+  en:'Close-up of villain\'s face when scheme succeeds. On surface expression barely changes, but looking closely details can be found. A flash of triumphant cunning light in eyes, pupils dilate for a moment then quickly constrict. Corners of mouth have extremely slight upward lift — not laughter, but a satisfied, deeply concealed smile, only people who know him very well could detect. Eyebrows slightly relax, from previous thinking state to relaxed. Overall expression very restrained, could even be called calm, but undercurrents flow beneath. It\'s that "everything is going according to my plan" expression.',
+  gpt:'A close-up of a villain whose plan has just worked. On the surface their face barely changes — you have to look closely to see the tells. There\'s a flicker of satisfied cunning in their eyes, with pupils briefly dilating then contracting again. The corners of their mouth tug upward by the tiniest amount — not a smile anyone would notice, just a faint, private smirk of satisfaction. Their eyebrows relax just barely from a thinking position to a self-satisfied one. The whole expression is controlled, almost calm — but you can feel the quiet triumph underneath. It\'s the face of someone thinking "everything is going exactly as I planned."',
+  tips:'阴谋得逞的表情是"被压抑的得意"——幅度很小，几乎看不出来。关键细节：眼神一闪、嘴角微动、眉毛舒展。反派越厉害，表情越不明显。顶级反派可能只有眼神变化。'},
+ {id:22,cat:'villain',emoji:'😵',title:'疯狂失控',en:'Insane Unhinged',
+  intensity:'强烈',parts:['眼睛','嘴巴','面部肌肉'],
+  desc:'反派疯狂失控的表情，眼神错乱，大笑不止，面部肌肉扭曲，完全失去理智。',
+  cn:'反派疯狂失控的脸部特写，眼神错乱而狂热，瞳孔放大，眼睛睁得很大，眼白布满血丝，仿佛完全失去了理智。嘴巴大张着疯狂地大笑，嘴角撕裂般地向两边拉开，露出牙齿和牙龈，口水可能从嘴角流下。面部肌肉扭曲，一边脸和另一边脸不对称。头发可能散乱。额头和脖子上有青筋。整体表情疯狂、混乱、歇斯底里，是完全失去控制的状态，让人感到既可怕又可悲。',
+  en:'Close-up of villain\'s insane unhinged face. Gaze deranged and frenzied, pupils dilated, eyes wide open, sclera bloodshot, as if completely lost sanity. Mouth wide open in maniacal laughter, corners of mouth torn-like pulled to both sides, showing teeth and gums, saliva possibly dripping from corners. Facial muscles twisted, one side of face asymmetrical with other side. Hair maybe disheveled. Veins on forehead and neck. Entire expression insane, chaotic, hysterical, state of complete loss of control, making people feel both terrifying and pathetic.',
+  gpt:'A close-up of a villain who has completely snapped — unhinged and maniacal. Their eyes are wide and bloodshot with dilated pupils, looking wild and deranged, like they\'ve completely lost touch with reality. Their mouth is stretched open in a hysterical cackle, pulled so wide it almost looks painful, showing teeth and gums. The facial muscles are twisted and asymmetrical. There might be a vein bulging on the temple. The whole face is chaotic, frantic, and absolutely mad. It\'s the expression of someone who has finally broken — equal parts terrifying and tragic to see.',
+  tips:'疯狂失控的特征：1.眼睛——睁大、血丝、瞳孔散大 2.笑容——撕裂般的大笑，不对称 3.整体——混乱、扭曲、歇斯底里。和狞笑的区别是：狞笑有"掌控感"，疯狂是"失去控制"。'},
+ {id:23,cat:'villain',emoji:'😒',title:'不屑嘲讽',en:'Disdainful Mockery',
+  intensity:'中等',parts:['嘴角','眼睛','头部姿态'],
+  desc:'反派不屑嘲讽的表情，嗤笑一声，微微仰头，眼神居高临下。',
+  cn:'反派不屑嘲讽的脸部特写，头微微向后仰，用鼻孔看人，眼神中充满了居高临下的不屑，仿佛在看一只蝼蚁。一侧嘴角向上挑起，形成一个嗤笑（冷笑），不露出牙齿，嘴角弧度很小但轻蔑感十足。眼睛微微眯起，上眼睑下垂，显得更加傲慢。鼻子似乎也微微皱起一点。整体表情传递出"你根本不配和我对话"的强烈优越感和蔑视感。',
+  en:'Close-up of villain\'s disdainful mocking face. Head slightly tilted back, looking down nose at others, gaze full of condescending disdain, as if looking at an ant. One corner of mouth lifted upward, forming a sneer (cold smile), no teeth showing, small curve but full of contempt. Eyes slightly narrowed, upper eyelids drooping, making it even more arrogant. Nose seems also slightly wrinkled. Entire expression conveys strong sense of superiority and contempt — "you\'re not even worthy of talking to me".',
+  gpt:'A close-up of an arrogant villain looking down their nose at someone with utter disdain. Their head is tilted back slightly, and they gaze downward with a look that says you are beneath their notice. One corner of their mouth is curled upward in a sharp, cold sneer — small in movement but huge in contempt. Their eyes are half-lidded, which only makes them look more arrogant. Their nose is slightly wrinkled, like they smell something unpleasant. The whole expression radiates superiority and condescension. It\'s the face of someone who doesn\'t even consider their opponent worth their time.',
+  tips:'不屑嘲讽的关键是"俯视感"——头后仰+眼睑下垂+单侧嗤笑。这种表情比愤怒更伤人，因为愤怒说明你重要，不屑说明你连让他生气的资格都没有。'},
+ {id:24,cat:'villain',emoji:'🔪',title:'杀意眼神',en:'Killing Intent Gaze',
+  intensity:'强烈',parts:['眼睛','眉毛','面部'],
+  desc:'充满杀意的眼神，瞳孔缩小，眼神冰冷锐利，仿佛下一秒就会动手。',
+  cn:'充满杀意的脸部特写，重点在眼睛。瞳孔收缩到很小的程度，眼神变得异常锐利和冰冷，像刀锋一样。眼睛微微眯起，形成危险的狭缝状视线。眉毛压低并向中间聚拢，眉心有深深的皱纹。面部肌肉完全紧绷，没有任何多余的表情。下颌咬紧。眼神完全锁定目标，一动不动。空气中仿佛能感受到杀气。整体表情冷得像冰，静得可怕，但蕴含着爆炸性的危险，是暴风雨前的宁静。',
+  en:'Close-up of face full of killing intent, focus on eyes. Pupils constricted to very small size, gaze abnormally sharp and cold, like a blade. Eyes slightly narrowed, forming dangerous slit-like gaze. Eyebrows lowered and drawn together, deep wrinkles between brows. Facial muscles completely tense, no unnecessary expressions. Jaw clenched. Gaze completely locked on target, not moving. Killing intent can almost be felt in the air. Entire expression cold as ice, terrifyingly quiet, but containing explosive danger — calm before the storm.',
+  tips:'杀意眼神的画法：瞳孔缩小（重点！）、眼睛眯起、眉毛下压、面部肌肉紧绷。"静"比"动"更可怕——真正想杀人的人不会大吼大叫，而是安静地盯着你。'},
+
+ // ========== 动漫夸张 ==========
+ {id:25,cat:'anime',emoji:'😤',title:'动漫生气气鼓鼓',en:'Anime Puffy Anger',
+  intensity:'夸张',parts:['脸颊','嘴巴','额头'],
+  desc:'动漫风格的生气气鼓鼓表情，脸颊像河豚一样鼓起，额头有井字青筋，夸张可爱。',
+  cn:'动漫风格生气气鼓鼓的脸部特写，脸颊像河豚一样大大地鼓起来，圆滚滚的非常夸张。嘴巴撅得高高的，形成一个小三角形。额头右上角有一个"井"字形的青筋符号，是动漫生气的标志性元素。眉毛倒竖成V字形，眼睛虽然瞪着但因为脸颊太鼓显得有点可爱。鼻子里喷出两股"怒气"的白汽。整体表情虽然是生气，但更偏向于可爱的、撒娇式的生气，是动漫中常见的Q版生气画法。',
+  en:'Close-up of anime-style puffy angry face. Cheeks puffed out hugely like a pufferfish, round and very exaggerated. Mouth pouted high, forming a small triangle. A "#"-shaped vein symbol (anger vein mark) on upper right forehead, iconic element of anime anger. Eyebrows inverted V-shape, eyes glaring but because cheeks so puffed looks kind of cute. Two streams of "anger" white steam blasting from nose. Overall expression although angry, leans more toward cute, sulky-style anger, common Q-version angry drawing style in anime.',
+  gpt:'A classic anime-style angry pout — the pufferfish face. The cheeks are blown up round and huge like balloons. The mouth is pursed into a tiny triangle pout. On the forehead there\'s a stylized "#" anger vein mark — that iconic anime symbol of suppressed rage. The eyebrows are furrowed into an inverted V and the eyes are glaring, but the puffed cheeks make it look more cute than scary. Two little puffs of steam blast out of the nostrils. It\'s exaggerated, expressive, and somehow adorable even though the character is supposed to be mad — the classic tsundere angry face.',
+  tips:'动漫生气标志元素：井字青筋（#マーク）、气鼓鼓的脸颊、鼻喷白汽、倒八字眉。这种是"可爱的生气"而非真正的愤怒，常见于傲娇角色。越鼓越可爱。'},
+ {id:26,cat:'anime',emoji:'✨',title:'动漫星星眼',en:'Anime Sparkle Eyes',
+  intensity:'夸张',parts:['眼睛','瞳孔','睫毛'],
+  desc:'动漫风格的星星眼/闪亮眼，眼睛里有星星，充满憧憬和兴奋。',
+  cn:'动漫风格星星眼的脸部特写，眼睛被极度放大，几乎占了脸部的三分之一。瞳孔非常大，里面有多个高光点，形成星星的形状，闪闪发光仿佛藏着整个星空。睫毛又长又翘，根根分明。眼睛的颜色渐变丰富，从外圈的深色到内圈的亮色，还有各种形状的光斑。眉毛高高扬起，嘴巴张开成开心的O形，可能还有惊叹号在旁边。脸颊微微泛红。整体表情充满了憧憬、兴奋和崇拜，是动漫中看到喜欢的东西时的经典表情。',
+  en:'Close-up of anime-style sparkle eyes face. Eyes extremely enlarged, taking up almost one third of face. Pupils very large, with multiple highlight points inside, forming star shapes, sparkling as if containing entire starry sky. Eyelashes long and curled, clearly defined. Eye color gradient rich, from dark outer ring to bright inner ring, plus various shapes of light spots. Eyebrows raised high, mouth open in happy O-shape, maybe exclamation mark beside. Cheeks slightly reddened. Overall expression full of admiration, excitement and worship, classic expression in anime when seeing something they love.',
+  gpt:'A classic anime sparkle eyes expression — the face someone makes when they see something they absolutely adore. The eyes are huge — massive even by anime standards — taking up a huge portion of the face. The pupils are large and filled with multiple bright highlights that form actual star shapes, like there\'s a whole galaxy in there. The eyelashes are long and perfectly curled. The irises have rich color gradients with light spots. The eyebrows are raised high and the mouth is dropped open in a delighted O. The cheeks are flushed. It\'s pure, unfiltered excitement and admiration — the anime version of heart eyes but even more dramatic.',
+  tips:'星星眼三要素：1.大眼睛（占脸1/3以上）2.瞳孔里的多角星高光（一般4-8个角）3.丰富的色彩渐变和反光。搭配：上扬的眉毛+张开的嘴+脸红=崇拜/兴奋。'},
+ {id:27,cat:'anime',emoji:'💧',title:'动漫汗颜无语',en:'Anime Sweat Drop',
+  intensity:'夸张',parts:['额头','眼睛','嘴巴'],
+  desc:'动漫风格的无语汗颜表情，额头一颗大汗珠，眼睛变成小点，尴尬到极点。',
+  cn:'动漫风格汗颜无语的脸部特写，额头左侧或右侧有一颗巨大的水滴形汗珠，是动漫无语/尴尬的标志性符号。眼睛变成了两个小圆点（点状眼/dot eyes），瞳孔缩成小点，表达"无语了""惊呆了"的情绪。嘴巴变成一条细细的波浪线或者小圆圈。眉毛耷拉下来，变成八字眉。脸颊的颜色比平时浅（苍白色）。整体表情传达出极度的尴尬、无语、不知道该说什么好的感觉，是动漫中非常经典的表情画法。',
+  en:'Close-up of anime-style speechless sweat drop face. One side of forehead has a huge teardrop-shaped sweat drop, iconic symbol of anime speechlessness/embarrassment. Eyes turned into two small dots (dot eyes), pupils shrunk to dots, expressing "speechless" "stunned" emotion. Mouth turned into thin wavy line or small circle. Eyebrows drooping down, forming八字 shape. Cheek color lighter than usual (pale). Overall expression conveys extreme embarrassment, speechlessness, feeling of not knowing what to say — very classic expression drawing style in anime.',
+  gpt:'A classic anime "sweat drop" face — the universal anime expression for awkwardness, disbelief, or "I have no words for this." On one side of the forehead there\'s a big, comically oversized teardrop-shaped sweat drop. The eyes have turned into tiny simple dots — that anime shorthand for being too stunned to process what you\'re seeing. The mouth is a small wavy line or tiny circle. The eyebrows are drooping downward. The face is slightly pale. It\'s the expression of someone who just witnessed something so awkward, so stupid, or so unbelievable that their brain short-circuited. One of the most recognizable anime expression tropes.',
+  tips:'动漫无语标志：大颗汗珠（一定要大）+点状眼（小圆点）+波浪嘴+八字眉。汗的位置一般在额头侧面。点状眼是"大脑宕机"的动漫专用画法。'},
+ {id:28,cat:'anime',emoji:'💢',title:'动漫暴怒爆发',en:'Anime Rage Explosion',
+  intensity:'夸张',parts:['整个头','火焰','青筋'],
+  desc:'动漫风格的暴怒爆发，头顶冒火，全身青筋，怒气具象化。',
+  cn:'动漫风格暴怒爆发的脸部特写，头顶冒出熊熊燃烧的红色火焰，是动漫中"怒气冲天"的具象化表现。额头、太阳穴、脖子上布满了"井"字形的青筋符号。眉毛倒竖成夸张的V字形，几乎要竖起来。眼睛瞪得圆圆的，眼白很多，瞳孔缩小，眼神燃烧着怒火。嘴巴张到最大，仿佛在怒吼，能看到小舌头。脸颊因为愤怒而涨红。周围有愤怒的效果线（放射线）。整体表情极度夸张，怒气值MAX，是动漫中愤怒到极点的经典表现。',
+  en:'Close-up of anime-style rage explosion face. Red flames billowing from top of head, visual representation of "fury ascending to heaven" in anime. Forehead, temples, neck covered with "#"-shaped vein symbols. Eyebrows inverted into exaggerated V-shape, almost standing up. Eyes wide and round, lots of sclera showing, pupils constricted, gaze burning with fury. Mouth open to maximum, as if roaring, small tongue visible. Cheeks flushed red with anger. Anger effect lines (radiating lines) around. Overall expression extremely exaggerated, anger value MAX, classic representation of peak anger in anime.',
+  gpt:'An over-the-top anime rage explosion face — maximum anger turned up to 11. Flames are literally coming out of the top of the character\'s head — that classic anime visual metaphor for unbridled fury. "#" anger vein marks pop out all over the forehead, temples, and neck. The eyebrows are furrowed into a sharp V. The eyes are wide and furious with tiny pupils and visible whites. The mouth is wide open in a shout. The face is bright red with rage. Radiating anger lines surround the head. It\'s completely cartoony and over-dramatized — the anime equivalent of "seeing red." Total, explosive, comedic fury.',
+  tips:'动漫暴怒标志：头顶冒火+N个青筋符号+放射线效果线+涨红脸。越夸张越有动漫感。这种是"搞笑式愤怒"，不是真的可怕，而是用夸张手法表现情绪。'},
+ {id:29,cat:'anime',emoji:'💕',title:'动漫爱心眼',en:'Anime Heart Eyes',
+  intensity:'夸张',parts:['眼睛','嘴巴','脸颊'],
+  desc:'动漫风格的爱心眼，瞳孔变成心形，深陷爱河或看到美食时的经典表情。',
+  cn:'动漫风格爱心眼的脸部特写，两个眼睛的瞳孔完全变成了爱心的形状，粉粉红红的，闪闪发光，充满了爱意或贪欲。眼白部分可能变成了粉色。眉毛弯成开心的弧形。嘴巴大大地咧开笑着，嘴角快到耳根了，可能还流着口水（特别是看到美食的时候）。脸颊是深深的粉红色红晕。周围可能有漂浮的小爱心符号或者粉色背景光。整体表情夸张地表达了"爱了""太喜欢了""被迷住了"的情绪，是动漫中非常经典的表情。',
+  en:'Close-up of anime-style heart eyes face. Pupils of both eyes completely turned into heart shapes, pinkish red, sparkling, full of love or desire. Sclera maybe turned pink. Eyebrows curved into happy arcs. Mouth wide open grinning, corners almost to ears, maybe drooling (especially when seeing delicious food). Cheeks deep pink blush. Maybe floating small heart symbols around or pink background glow. Overall expression exaggeratedly conveys "in love" "love it so much" "mesmerized" emotions, very classic expression in anime.',
+  gpt:'A classic anime heart eyes face — total infatuation mode. Both pupils have been replaced by bright pink sparkling hearts. The sclera (whites of the eyes) are tinted pink. The eyebrows are curved upward in pure delight. The mouth is stretched into a huge, almost ear-to-ear grin, and sometimes there\'s a little drop of drool (especially if they\'re looking at food). The cheeks are bright pink with blush. Little floating heart symbols might surround the head. It\'s the ultimate anime expression for being completely smitten — whether with a person, with food, or with something they desperately want. Over-the-top, adorable, and instantly recognizable.',
+  tips:'爱心眼标志：心形瞳孔（必须是完美心形）+粉色调+大大咧嘴笑。注意：爱心眼既可以表示"恋爱了"也可以表示"看到好吃的/想买的东西"，根据场景而定。'},
+ {id:30,cat:'anime',emoji:'😵',title:'动漫晕眩眼',en:'Anime Dizzy Swirl Eyes',
+  intensity:'夸张',parts:['眼睛','嘴巴','脸色'],
+  desc:'动漫风格的晕眩眼，瞳孔变成漩涡状，脸色发绿，晕头转向的经典表现。',
+  cn:'动漫风格晕眩眼的脸部特写，两个眼睛的瞳孔变成了螺旋漩涡的形状，表示头晕目眩、意识不清。眼睛的方向可能不一致（斜视/对眼）。嘴巴变成波浪线或者小圆圈，嘴角可能有口水。脸色是青绿色的（动漫中表示不舒服/晕眩的颜色）。头上有几圈旋转的线条或者小鸟/星星在绕圈飞。舌头可能伸出来一点点。整体表情晕头转向、神志不清，是动漫中表示被打晕、转晕、受到冲击后的经典表情。',
+  en:'Close-up of anime-style dizzy swirl eyes face. Pupils of both eyes turned into spiral swirl shapes, indicating dizziness, unclear consciousness. Eye directions maybe inconsistent (cross-eyed/wall-eyed). Mouth turned into wavy line or small circle, maybe saliva at corner of mouth. Face color bluish-green (color in anime indicating discomfort/dizziness). Several rotating lines above head or little birds/stars flying in circles around. Tongue maybe sticking out a little bit. Overall expression dizzy, disoriented, classic expression in anime showing knocked out, spun around, after receiving shock.',
+  gpt:'A classic anime dizzy face — the "I just got spun around way too many times" expression. Both eyes have spiral/swirl pupils instead of normal irises. They might even be pointing in slightly different directions — slightly crossed. The mouth is a wavy line or tiny O-shape, with a little drool at the corner. The skin tone has a greenish, sickly tint. Above the head, little stars or birds circle around (the anime shorthand for "seeing stars"). The tongue might loll out slightly. It\'s the universal anime expression for dizziness, being knocked silly, motion sickness, or just being completely stunned and confused.',
+  tips:'动漫晕眩标志：螺旋瞳孔（必须是漩涡）+脸色发青+头顶小鸟/星星转圈+波浪嘴。螺旋眼是动漫独有的夸张表现，现实中不存在，但所有看动漫的人都懂。'},
+
+ // ========== 写实细腻 ==========
+ {id:31,cat:'realistic',emoji:'🤔',title:'沉思权衡',en:'Contemplative Deliberation',
+  intensity:'细微',parts:['眉毛','眼睛','嘴巴'],
+  desc:'写实风格的沉思表情，眉头微蹙，眼神专注，嘴唇轻抿，正在思考权衡。',
+  cn:'写实风格沉思的脸部特写，眉毛微微向内聚拢，眉心有浅浅的垂直皱纹（眉间纹），眉毛内侧稍微下压。眼睛略微眯起，眼神专注地凝视着前方某个点，瞳孔略微收缩，注意力高度集中。上嘴唇轻轻咬住下嘴唇的一侧，或者嘴唇紧紧抿着，嘴角向内收。一侧脸颊的咬肌有轻微的紧张感。下颌微收。整体表情非常专注，仿佛正在思考一个复杂的问题，权衡各种可能性。',
+  en:'Close-up of realistic style contemplative face. Eyebrows slightly drawn together, faint vertical wrinkles between brows (glabellar lines), inner eyebrows slightly pressed down. Eyes slightly narrowed, gaze intently focused on a point ahead, pupils slightly constricted, highly concentrated. Upper lip gently biting one side of lower lip, or lips pressed tightly together, corners of mouth drawn inward. Masseter muscle on one cheek has slight tension. Jaw slightly retracted. Overall expression very focused, as if thinking about a complex problem, weighing various possibilities.',
+  gpt:'A realistic, nuanced close-up of someone deep in thought. Their eyebrows are slightly drawn together with a faint vertical furrow between them — just a hint, not a full frown. The inner ends of the brows are pressed slightly downward. Their eyes are slightly narrowed with an intense, focused gaze — pupils slightly constricted from concentration. Their upper lip is gently biting one side of their lower lip, or the lips are pressed together firmly with the corners pulled inward. There\'s a faint tension in the jaw muscle. The whole face looks deeply concentrated, like they\'re turning a complex problem over and over in their mind. It\'s subtle, natural, and deeply thoughtful.',
+  tips:'写实沉思的细节：眉间浅纹（不是深皱）、咬唇或抿嘴、眼神聚焦但不凶狠、轻微的咬肌紧张。关键点是"细微"——不能太夸张，真实的思考表情变化幅度很小。'},
+ {id:32,cat:'realistic',emoji:'😏',title:'自信 smirk',en:'Confident Smirk',
+  intensity:'细微',parts:['嘴角','眼睛','眉毛'],
+  desc:'写实风格的自信 smirk，单边嘴角微扬，眼神笃定，胸有成竹。',
+  cn:'写实风格自信smirk的脸部特写，一边的嘴角非常轻微地向上扬起，形成一个不对称的、自信的微笑，幅度不大但充满掌控感。不露出牙齿或者只露出一点点上排牙齿的边缘。同侧的眼睛微微眯起，眼神中带着自信和笃定，甚至有一点挑衅。眉毛保持平直或者一侧微微上扬。下颌线条清晰。整体表情冷静、自信、胸有成竹，仿佛一切都在掌握之中。不是大笑，不是开心，而是一种内敛的自信和优越感。',
+  en:'Close-up of realistic style confident smirk face. One corner of mouth lifts very slightly upward, forming an asymmetrical, confident smile, small amplitude but full of sense of control. No teeth showing or only showing edge of upper row of teeth slightly. Eye on same side slightly narrowed, gaze with confidence and certainty, even a bit provocative. Eyebrows stay flat or one side slightly raised. Jawline clear. Overall expression calm, confident, fully prepared, as if everything under control. Not laughter, not happiness, but restrained confidence and superiority.',
+  gpt:'A realistic close-up of a confident, knowing smirk. One corner of the mouth tugs upward by a subtle amount — not a big smile, just a small, self-assured lift that\'s somehow more powerful than a grin. Maybe a sliver of the upper teeth shows, maybe not. The eye on that same side narrows slightly with a look that says "I know something you don\'t." The corresponding eyebrow lifts just barely. The jaw is sharp and steady. The whole expression is calm, controlled, and quietly confident — the face of someone who is sure of themselves and sure of winning. Understated but oozing self-assurance.',
+  tips:'自信smirk和普通微笑的区别：1.不对称（单侧）2.幅度小 3.不是开心而是掌控 4.眼睛是眯起的不是弯起的。关键是"克制"——越克制越有自信感。'},
+ {id:33,cat:'realistic',emoji:'😞',title:'隐忍失落',en:'Suppressed Disappointment',
+  intensity:'细微',parts:['嘴角','眼角','眉毛'],
+  desc:'写实风格的隐忍失落，努力装作没事，但细微的肌肉变化泄露出情绪。',
+  cn:'写实风格隐忍失落的脸部特写，表面上在强装镇定，但细微处泄露出失落。嘴角有极其轻微的下沉——特别是两侧嘴角同时向下的趋势，幅度很小，仿佛在努力不让嘴角垮下去。下眼睑有一瞬间的紧绷，眼角略微下垂。眉毛内侧有极其微弱的上扬（悲伤的微表情），但很快被压平。喉结有吞咽的动作。嘴唇比平时更紧绷一些。整体表情几乎是中性的，只有非常了解微表情的人才能读出底下的失落和难过。是成年人崩溃前的表情。',
+  en:'Close-up of realistic style suppressed disappointment face. On surface putting on a brave face, but subtle details reveal disappointment. Corners of mouth have extremely slight droop — especially both corners simultaneously downward trend, very small amplitude, as if trying hard not to let corners fall. Lower eyelids have momentary tension, outer corners slightly drooping. Inner eyebrows have extremely faint upward lift (sadness micro-expression), but quickly pressed flat. Adam\'s apple has swallowing motion. Lips tighter than usual. Overall expression almost neutral, only people very familiar with micro-expressions could read disappointment and sadness underneath. It\'s the expression before an adult breaks down.',
+  gpt:'A realistic close-up of someone who is disappointed but trying hard not to show it. On the surface they look almost neutral — but the tiny tells are there if you know what to look for. Both corners of the mouth have the faintest downward tug, like they\'re fighting to keep them level. The lower lids are slightly tight and the outer corners of the eyes droop just a hair. The inner corners of the eyebrows lift microscopically — a flash of sadness — before they smooth them out. You can almost feel them swallowing hard. The lips are pressed a little thinner than normal. It\'s the face of an adult who is hurt but forcing themselves to be fine. You have to look closely to see it.',
+  tips:'隐忍失落的核心是"对抗"——面部肌肉在和向下的情绪对抗。嘴角想下沉但被强行拉住、眉毛想上扬但被压平。这种"努力维持平静"的张力才是最打动人的。'},
+ {id:34,cat:'realistic',emoji:'😑',title:'面无表情 poker face',en:'Poker Face',
+  intensity:'中性',parts:['全部面部肌肉'],
+  desc:'完全的面无表情，poker face，没有任何情绪泄露，高深莫测。',
+  cn:'写实风格poker face的脸部特写，完全的面无表情。眉毛平直，既不上扬也不下压，完全对称。眼睛睁开正常大小，眼神平静而空洞，或者说没有焦点，像一潭深水，看不出任何情绪。嘴唇自然闭合，既不紧绷也不放松，嘴角平直。面部肌肉全部处于中性状态，没有任何一块肌肉在用力。下颌自然，既不咬紧也不松弛。整张脸像一张面具，完美的对称，完美的平静。你无法从这张脸上读出任何信息，是真正的高深莫测。',
+  en:'Close-up of realistic style poker face. Completely expressionless. Eyebrows straight and flat, neither lifted nor pressed down, perfectly symmetrical. Eyes open normal size, gaze calm and empty, or rather unfocused, like deep still water, no emotion discernible. Lips naturally closed, neither tight nor loose, corners of mouth straight. All facial muscles in neutral state, no single muscle engaged. Jaw natural, neither clenched nor slack. Entire face like a mask, perfect symmetry, perfect calmness. You cannot read any information from this face, truly unfathomable.',
+  gpt:'A realistic close-up of a perfect poker face — completely unreadable. The eyebrows are perfectly flat and symmetrical, neither raised nor furrowed. The eyes are open normally with a calm, steady gaze that reveals nothing — like looking into still water, you can\'t tell what\'s underneath. The lips are closed naturally, neither pressed tight nor loose, with straight corners. Every facial muscle is at perfect neutral rest. The jaw is relaxed but defined. The whole face is like a mask — perfectly symmetrical, perfectly calm, giving absolutely nothing away. No anger, no joy, no sadness, no fear. Just... nothing. The ultimate unreadable face.',
+  tips:'真正的poker face是"完全对称+完全中性"——没有任何一块肌肉在收缩或放松。最难画的不是最夸张的表情，而是完全没有表情的脸，因为你不能用任何情绪特征。'},
+ {id:35,cat:'realistic',emoji:'🥺',title:'脆弱恳求',en:'Vulnerable Pleading',
+  intensity:'温和',parts:['眼睛','眉毛','嘴唇'],
+  desc:'写实风格的脆弱恳求，眼中含泪，眉毛微蹙，嘴唇颤抖，让人心碎。',
+  cn:'写实风格脆弱恳求的脸部特写，眼睛微微睁大，瞳孔放大，眼眶里噙着泪水，眼泪在打转但还没有掉下来，下眼睑被泪水浸湿反光。眉毛微微向中间聚拢，内侧向上抬起，眉心有浅浅的皱纹。嘴唇微微张开，嘴角向下，嘴唇在颤抖——不是剧烈的抖，而是非常细微的颤动，像在努力忍着不哭。下巴的肌肉在轻微地抖动。整体表情脆弱、无助、带着恳求，仿佛下一秒就要哭出来，但还在努力忍着，让人心碎。',
+  en:'Close-up of realistic style vulnerable pleading face. Eyes slightly wide, pupils dilated, tears brimming in eye sockets, tears swirling but not yet falling, lower eyelids wet and reflective from tears. Eyebrows slightly drawn together, inner sides lifted upward, faint wrinkles between brows. Lips slightly parted, corners downward, lips trembling — not violent shaking, but very faint tremor, like trying hard not to cry. Chin muscles trembling slightly. Overall expression vulnerable, helpless, with pleading, as if about to cry next second, but still trying hard to hold back, heart-wrenching.',
+  gpt:'A realistic close-up of someone looking vulnerable and pleading, right on the edge of tears. Their eyes are slightly wider than normal with dilated pupils. Tears are welling up in their eyes — not yet falling, but glistening on the lower lash line, making the lower lids look wet and shiny. The inner corners of their eyebrows are lifted upward and slightly drawn together, with a faint crease between them. Their mouth is slightly open with downturned corners, and the lips tremble — just barely, like they\'re fighting so hard not to cry. The chin muscle quivers faintly. The whole expression is fragile, helpless, and silently begging. Heartbreakingly beautiful in its vulnerability.',
+  tips:'脆弱恳求的细节：含泪的眼睛（下眼睑一定要画湿）、微抖的嘴唇（不是大哭的抖，是忍住的微颤）、抬起的眉内侧、下巴抖动。"忍住不哭"比"正在哭"更有感染力。'},
+ {id:36,cat:'realistic',emoji:'💪',title:'坚定决心',en:'Determined Resolve',
+  intensity:'中等',parts:['下巴','眼睛','眉毛'],
+  desc:'写实风格的坚定决心表情，下颌紧绷，眼神锐利，做出重要决定后的状态。',
+  cn:'写实风格坚定决心的脸部特写，下颌紧紧咬住，咬肌明显紧绷，下颌线更加清晰硬朗。嘴唇紧抿成一条直线，嘴角平直或者略微向下。眼睛睁大，眼神锐利而坚定，瞳孔略微收缩，视线牢牢锁定前方，毫不闪躲。眉毛略微压低并向中间聚拢，眉心有浅浅的皱纹，增加了专注和决心的感觉。整个面部肌肉处于一种"有控制的紧张"状态——不是失控的紧张，而是蓄势待发的紧绷。整体表情传达出"已经做出决定，不会动摇"的强烈意志力。',
+  en:'Close-up of realistic style determined resolve face. Jaw tightly clenched, masseter muscles obviously tense, jawline sharper and more defined. Lips pressed tight into a straight line, corners of mouth straight or slightly downward. Eyes wide open, gaze sharp and determined, pupils slightly constricted, gaze firmly locked forward, no flinching. Eyebrows slightly lowered and drawn together, faint wrinkles between brows, adding sense of focus and resolve. Entire facial muscles in a state of "controlled tension" — not out-of-control tension, but coiled readiness. Overall expression conveys strong willpower of "decision already made, will not waver".',
+  gpt:'A realistic close-up of someone with absolute, unshakable resolve. Their jaw is firmly set — you can see the tension in the masseter muscles, making the jawline sharper and more angular. The mouth is pressed into a thin, hard line with level or slightly downturned corners. Their eyes are open and steady with an intense, sharp gaze — unblinking, unwavering, locked onto their goal. The pupils are slightly constricted with focus. The eyebrows are slightly lowered and drawn together with a faint furrow between them that says concentration and determination. The whole face has controlled tension — like a coiled spring, ready to move. You can feel the iron willpower just looking at them.',
+  tips:'坚定决心的核心：咬紧的下颌+锐利锁定的眼神+紧抿的嘴唇。关键是"控制感"——所有肌肉都在用力，但都是受控的。这是"主动选择的力量感"，不是愤怒的失控感。'},
+
+ // ========== 古风含蓄 ==========
+ {id:37,cat:'guofeng',emoji:'😌',title:'温婉浅笑',en:'Gentle Demure Smile',
+  intensity:'温和',parts:['嘴角','眼睛','眉梢'],
+  desc:'古风女子温婉的浅笑，笑不露齿，眉眼弯弯，含蓄而柔美。',
+  cn:'古风女子温婉浅笑的脸部特写，嘴角微微向上弯起，形成一个温柔的微笑，嘴唇轻闭，不露出牙齿，笑不露齿是古典美的标准。眼睛微微弯起，像月牙一样，眼波流转，含情脉脉。眉梢微微上扬，远山眉弯弯如画。脸颊有淡淡的红晕，像抹了胭脂一样。头微微向一侧倾斜，增加娇羞感。整体表情含蓄、温柔、端庄，符合古代女子的审美标准——笑不露齿，言不高声，柔美而有韵味。',
+  en:'Close-up of ancient style woman\'s gentle demure smile face. Corners of mouth slightly curved upward, forming gentle smile, lips lightly closed, no teeth showing — smiling without showing teeth is standard of classical beauty. Eyes slightly curved, like crescent moons, eye expression flowing, full of tender feelings. Outer ends of eyebrows slightly raised, distant mountain eyebrows curved like painting. Cheeks have faint blush, like wearing rouge. Head slightly tilted to one side, adding shy feeling. Overall expression reserved, gentle, dignified,符合 ancient Chinese aesthetic standards for women — smile without showing teeth, speak without raising voice, soft and graceful.',
+  gpt:'A close-up of a woman from ancient China with a gentle, demure smile. The corners of her mouth curve upward softly in a quiet smile — her lips stay closed, no teeth showing, in line with classical ideals of feminine beauty where modesty was prized. Her eyes are curved like crescent moons with a soft, expressive gaze. Her elegantly shaped eyebrows arch gently. A faint rose blush colors her cheeks like applied rouge. Her head tilts very slightly to one side, adding a touch of shyness. The whole expression is subtle, graceful, and quietly warm — the traditional ideal of a refined lady whose smile is modest, never broad. Beautiful in its restraint.',
+  tips:'古风笑的标准：笑不露齿、眉眼弯弯、含蓄不张扬。关键是"韵味"而不是"力度"。眉形一定要好看（远山眉/柳叶眉），眼型要弯（月牙眼），笑容幅度要小。'},
+ {id:38,cat:'guofeng',emoji:'😢',title:'垂泪相思',en:'Tearful Longing',
+  intensity:'中等',parts:['眼睛','眉毛','嘴角'],
+  desc:'古风女子垂泪相思的表情，眼中含泪，眉头微蹙，楚楚可怜。',
+  cn:'古风女子垂泪相思的脸部特写，眼中噙着泪水，一颗晶莹的泪珠正沿着脸颊滑落，泪痕在皮肤上留下湿痕，泪光闪闪。眉头微微蹙起，眉心有浅浅的皱纹，远山眉带着愁绪。眼睛微微垂着，看向斜下方，眼神悠远，仿佛在思念远方的人。嘴角向下微微弯曲，嘴唇轻轻抿着。脸颊可能因为哭泣而微微泛红。头发可能有几缕散落在脸侧。整体表情悲伤、思念、楚楚可怜，是古典美人落泪的经典画面，美得让人心碎。',
+  en:'Close-up of ancient style woman\'s tearful longing face. Tears welling in eyes, a crystal teardrop sliding down cheek, tear trail leaving wet mark on skin, tear light shimmering. Eyebrows slightly furrowed, faint wrinkles between brows, distant mountain eyebrows carrying sorrow. Eyes slightly lowered, looking diagonally downward, gaze distant, as if missing someone far away. Corners of mouth slightly curved downward, lips gently pressed. Cheeks maybe slightly reddened from crying. Maybe a few strands of hair fallen on side of face. Overall expression sad, longing, delicate and pitiful, classic scene of classical beauty weeping, beautiful enough to break one\'s heart.',
+  gpt:'A close-up of a woman from ancient China, weeping softly with longing. Tears glisten in her eyes, and one crystalline teardrop is captured mid-fall, tracing a wet path down her cheek. Her eyebrows, shaped in the classic "distant mountain" style, are slightly furrowed with sorrow. Her gaze is cast downward and sideways, distant and faraway — like she\'s thinking of someone far from home. The corners of her mouth turn down gently, and her lips are softly pressed. A faint pink flush colors her cheeks from crying. A few stray hairs frame her face. It\'s the image of classical beauty in sorrow — delicate, graceful, and heartbreakingly lovely even in tears.',
+  tips:'古风落泪的美感：1.泪珠要晶莹（高光点出）2.泪痕要明显（湿的质感）3.表情是"愁"不是"哭"——眉头微蹙、眼神悠远。重点是"凄美"而不是"痛哭"。'},
+ {id:39,cat:'guofeng',emoji:'😤',title:'含怒隐忍',en:'Suppressed Wrath',
+  intensity:'中等',parts:['眼睛','下颌','袖子'],
+  desc:'古风人物含怒隐忍的表情，眼中怒火却强压下去，袖子里的手攥紧。',
+  cn:'古风人物含怒隐忍的脸部特写，眼神锐利如刀，瞳孔中燃烧着怒火，但面部表情却被强行压制。眉毛微微压低，眉心有浅浅的皱纹，但不是暴怒的深皱。嘴唇紧抿，嘴角平直，咬肌微微紧绷，说明牙在咬紧。下颌线紧绷。整体面部肌肉是"被控制的愤怒"——有怒意但被强行压制住了。可以暗示袖子里/背后的手攥紧了拳头，指甲嵌进掌心。眼神冰冷，是那种"记仇"的眼神，不是爆发的愤怒，而是更可怕的、记在心里的愤怒。',
+  en:'Close-up of ancient style character\'s suppressed wrath face. Gaze sharp as blade, fury burning in pupils, but facial expression forcibly suppressed. Eyebrows slightly lowered, faint wrinkles between brows, but not deep furrow of rage. Lips pressed tight, corners of mouth straight, masseter slightly tense, indicating teeth clenched. Jawline tense. Overall facial muscles show "controlled anger" — anger present but forcibly held down. Can imply hand in sleeve/behind back clenched into fist, nails digging into palm. Gaze icy, it\'s that kind of "grudge-holding" gaze, not explosive anger, but more terrifying, internalized anger.',
+  gpt:'A close-up of a character from ancient China holding in great anger. Their eyes are sharp and cold — you can see the fury burning in their pupils, but it\'s being held down with iron control. The eyebrows are slightly lowered with a faint furrow between them, not the deep furrow of full rage. The mouth is pressed into a hard, thin line and the jaw muscle is faintly tight — they are gritting their teeth behind closed lips. The whole face has the quality of "anger under restraint." You can almost feel their hand hidden in their sleeve, clenched into a fist with nails digging into the palm. It\'s not explosive yelling anger — it\'s the colder, more dangerous kind. The kind you remember and act on later.',
+  tips:'古风隐忍怒的特点：冷、静、收。不是爆发的，是内敛的。重点在眼睛——眼神要有"杀意"或"恨意"，但面部其他地方被压得很平。"笑里藏刀""面善心狠"都是这种类型。'},
+ {id:40,cat:'guofeng',emoji:'🥰',title:'娇羞垂眸',en:'Shy Downcast Gaze',
+  intensity:'温和',parts:['眼睛','脸颊','嘴角'],
+  desc:'古风女子娇羞垂眸的表情，低下头，眼睛向上看，脸颊泛红，少女含羞。',
+  cn:'古风女子娇羞垂眸的脸部特写，头微微低下，眼睛却向上看着对方，从睫毛下方看人，眼波流转带着娇羞。脸颊泛起明显的红晕，像涂上了厚厚的胭脂，从颧骨一直蔓延到耳根。嘴角带着一丝抑制不住的微笑，想压下去又压不住。眉毛弯弯的，带着温柔的弧度。可能用袖子轻轻挡着嘴的下半部分。整个表情又害羞又暗喜，是古代少女听到情话或见到心上人时的经典表情，含蓄而甜美，欲说还休。',
+  en:'Close-up of ancient style woman\'s shy downcast gaze face. Head slightly lowered, but eyes looking upward at other person, looking from under eyelashes, eye expression flowing with shyness. Cheeks with obvious blush, like wearing thick rouge, spreading from cheekbones all the way to ear roots. Corners of mouth carrying trace of uncontrollable smile, trying to suppress but can\'t. Eyebrows curved, with gentle arc. Maybe using sleeve gently covering lower half of mouth. Entire expression both shy and secretly happy, classic expression of ancient young woman hearing love words or seeing beloved, reserved yet sweet, wanting to speak but holding back.',
+  gpt:'A close-up of a young woman from ancient China, shy and flustered. Her head is bowed slightly but her eyes lift upward, stealing glances at the other person from beneath her long lashes — her gaze is demure and flirtatious at the same time. A deep rose blush blooms across her cheeks, like generously applied rouge, spreading all the way to the tips of her ears. The corners of her mouth twitch upward in a smile she can\'t quite suppress, even though she\'s trying to look modest. Her eyebrows are softly arched. She might be lifting one sleeve to partially cover her mouth. It\'s the classic expression of a young woman in love — shy, pleased, and trying not to show how pleased she is. Subtle, sweet, and full of that "butterflies in the stomach" feeling.',
+  tips:'古风娇羞三要素：垂眸（低头但眼睛向上看）+ 红晕（一定要明显）+ 欲掩还休的微笑。袖子遮嘴是经典动作。关键是"含蓄"——所有情绪都被压制了一半，但正因为被压制才更动人。'},
+ {id:41,cat:'guofeng',emoji:'😏',title:'睥睨天下',en:'Imperial Contempt',
+  intensity:'强烈',parts:['眼睛','头部姿态','嘴角'],
+  desc:'古风帝王/枭雄睥睨天下的表情，微微低头抬眼，俯视众生的傲慢。',
+  cn:'古风帝王或枭雄睥睨天下的脸部特写，头微微低下，但眼睛向上翻起看着前方（或下方的人），用眼皮下方看人，眼神中充满了居高临下的轻蔑和掌控一切的霸气。一侧嘴角极其轻微地上扬，形成一个几乎看不见的冷笑，带着不屑和嘲讽。眉毛压低，眉峰锐利。下颌线硬朗。整体表情高傲、威严、不怒自威。不需要大吼大叫，只需要一个眼神就能让人心惊胆战。是身居高位者特有的表情，看世人皆如蝼蚁。',
+  en:'Close-up of ancient emperor or warlord\'s imperial contempt face. Head slightly lowered, but eyes rolling upward looking forward (or at person below), looking from under eyelids, gaze full of condescending disdain and controlling dominance. One corner of mouth lifts extremely slightly, forming barely visible sneer, with disdain and mockery. Eyebrows lowered, brow peaks sharp. Jawline strong. Overall expression proud, majestic, awe-inspiring even without anger. No need to yell, just one glance is enough to make people tremble with fear. It\'s expression unique to those in high positions, seeing all people as ants.',
+  gpt:'A close-up of an ancient emperor or powerful warlord looking out at the world with utter disdain and absolute authority. Their head is tilted slightly downward but their eyes lift upward, gazing from under heavy lids — the look of someone looking down on inferiors. The gaze is cold, commanding, and supremely confident in their own power. One corner of the mouth tugs upward by the smallest amount — a cold, imperceptible sneer. The eyebrows are lowered with sharp peaks. The jaw is strong and angular. The whole expression is proud, regal, and intimidating without even trying. It doesn\'t take shouting — just this one look is enough to make anyone kneel. The face of someone to whom the world is just pieces on a board.',
+  tips:'睥睨天下的关键：低头抬眼（头低眼高）+ 单侧冷笑+ 锐利眉峰。核心是"俯视感"和"绝对掌控"。不是愤怒，而是"你连让我生气的资格都没有"的轻蔑。'},
+ {id:42,cat:'guofeng',emoji:'🗡️',title:'侠气凛然',en:'Heroic Righteousness',
+  intensity:'中等',parts:['眉毛','眼睛','下颌'],
+  desc:'古风侠客正气凛然的表情，剑眉星目，一身正气，光明磊落。',
+  cn:'古风侠客正气凛然的脸部特写，眉毛是英气的剑眉，浓密而有型，眉峰锐利。眼睛是明亮的星目，眼神坚定、正直、光明磊落，没有丝毫阴暗。下颌线条分明，带着坚韧感。嘴唇紧抿或者微微张开，嘴角平直。面部肌肉端正而有力，没有扭捏和阴柔。整体表情刚正不阿、光明磊落、充满正义感。仿佛一柄出鞘的宝剑，锋芒毕露但又光明正大。是武侠小说中大侠的标准长相——一身正气，让人信赖。',
+  en:'Close-up of ancient knight-errant\'s heroic righteousness face. Eyebrows are heroic sword-shaped brows, thick and well-shaped, brow peaks sharp. Eyes are bright star-like eyes, gaze firm, upright, open and aboveboard, without slightest darkness. Jawline distinct, with sense of fortitude. Lips pressed tight or slightly open, corners of mouth straight. Facial muscles upright and strong, no coyness or effeminacy. Overall expression upright and unyielding, open and aboveboard, full of sense of justice. Like a drawn sword, sharp-edged yet open and honorable. It\'s standard appearance of great hero in wuxia novels — full of righteous spirit, trustworthy.',
+  gpt:'A close-up of a heroic wandering knight from the wuxia world, the very picture of righteousness. Their eyebrows are the "sword brow" style — thick, well-defined, with sharp peaks. Their eyes are bright and clear like stars, with a gaze that is steadfast, honest, and completely aboveboard — no darkness, no hidden agendas. The jaw is defined and strong. The mouth is set in a firm line or slightly parted. The whole face looks upright, strong, and principled — no softness, no evasion. It\'s the face of someone who would never take a dishonest path. Like a freshly drawn sword — sharp and bright, but entirely honorable. The classic hero face you can trust with your life.',
+  tips:'侠客正气的标志：剑眉+星目+方正下颌。关键是"正"——所有线条都是直的、明朗的，没有弯曲和阴暗。眼神要有光，是那种"相信正义"的光。'},
+
+ // ========== Q版萌系 ==========
+ {id:43,cat:'chibi',emoji:'🥺',title:'Q版可怜巴巴',en:'Chibi Puppy Eyes',
+  intensity:'夸张',parts:['眼睛','嘴巴','整体'],
+  desc:'Q版可怜巴巴表情，超大水汪汪眼睛，小嘴撅起，让人无法拒绝。',
+  cn:'Q版可怜巴巴表情的脸部特写，头部比例超大（二头身Q版），眼睛占了脸部一半以上的面积，超大超圆，水汪汪的，像小狗的眼睛一样，里面有大大的高光点，仿佛眼泪下一秒就要掉下来。嘴巴小小的，向下弯成弧形，或者撅成小三角。眉毛弯弯的向下耷拉。整个脸圆圆的，肉乎乎的。可能还有双手合十放在胸前或者揪着衣角的动作。整体表情超级可爱又超级可怜，让人无法拒绝任何请求。是Q版角色求人的标准表情。',
+  en:'Close-up of chibi puppy eyes face. Head proportion extra large (2-head chibi), eyes taking up more than half of face area, super big and super round, watery, like puppy eyes, with huge highlight points inside, as if tears about to fall next second. Mouth tiny, curved downward in arc, or pouted into small triangle. Eyebrows curved drooping downward. Entire face round and chubby. Maybe praying hands at chest or clutching corner of clothes motion. Overall expression super cute and super pitiful, making it impossible to refuse any request. It\'s standard expression for chibi characters begging.',
+  gpt:'A chibi-style character doing the ultimate puppy dog eyes plea. The head is enormous (classic 2-head chibi proportion) and the eyes take up more than half the face. They\'re huge, round, and glistening wet — like a sad puppy — with big shiny highlights that make them look like they\'re about to burst into tears. The mouth is tiny and downturned in a little sad arc, or pouted into a small triangle. The eyebrows curve downward sadly. The whole face is round and chubby-cheeked. You can almost picture little hands clasped together in front of the chest in a begging gesture. It\'s so cute and so pitiful at the same time that nobody could say no to whatever they\'re asking for.',
+  tips:'Q版可怜三要素：1.超大眼睛（占脸一半）2.水汪汪质感（大高光点）3.小嘴巴+下弯。越圆越可爱，眼睛越大越有杀伤力。这是Q版最强的"武器表情"。'},
+ {id:44,cat:'chibi',emoji:'😊',title:'Q版开心大笑',en:'Chibi Happy Beam',
+  intensity:'夸张',parts:['嘴巴','眼睛','脸颊'],
+  desc:'Q版开心大笑表情，嘴巴大到占半张脸，眼睛弯成线，元气满满。',
+  cn:'Q版开心大笑的脸部特写，嘴巴张得超级大，几乎占了脸部的下半部分，能看到舌头和上排牙齿，嘴角快咧到耳朵根了。眼睛弯成两条细弧线（甚至变成两条线/^ ^），完全看不到瞳孔。脸颊是圆圆的苹果肌，鼓鼓的。眉毛也弯成开心的弧形。整张脸因为大笑而向上挤。可能还有"闪光"效果或者+号符号在旁边表示开心到发光。整体表情超级开心、元气满满、感染力极强。是Q版角色最经典的开心表情。',
+  en:'Close-up of chibi happy beam face. Mouth super wide open, almost taking up lower half of face, can see tongue and upper row of teeth, corners of mouth almost stretched to ears. Eyes curved into two thin arcs (even become two lines / ^ ^), completely no pupils visible. Cheeks are round apple cheeks, puffed up. Eyebrows also curved into happy arcs. Entire face squeezed upward because of big laugh. Maybe "sparkle" effects or plus symbols beside indicating happiness glowing. Overall expression super happy, full of vitality, extremely infectious. It\'s most classic happy expression of chibi characters.',
+  gpt:'A chibi character absolutely beaming with joy. The mouth is stretched so wide it takes up the entire lower half of the face — you can see the tongue and upper teeth, and the corners reach almost to the ears. The eyes are squeezed shut into two tiny curved lines (that classic ^^ shape) — no irises visible at all, just pure happiness. The cheeks are round and full, pushed up by the huge grin. The eyebrows are arched high with joy. The whole face is scrunched upward by the force of the smile. Little sparkles or plus marks might float around to show the sheer radiance of happiness. It\'s the ultimate chibi happy face — maximum joy, maximum cuteness, impossible not to smile back.',
+  tips:'Q版大笑标志：超大嘴（占脸一半）+弯月眼（看不到眼珠）+圆脸颊。记住一个字："大"——嘴巴越大越开心，眼睛越弯越开心。Q版表情就是要夸张到极致。'},
+ {id:45,cat:'chibi',emoji:'😠',title:'Q版生气鼓脸',en:'Chibi Puffy Angry',
+  intensity:'夸张',parts:['脸颊','嘴巴','额头'],
+  desc:'Q版生气鼓脸表情，脸颊鼓成气球，额头井字青筋，可爱的愤怒。',
+  cn:'Q版生气鼓脸的脸部特写，脸颊鼓得圆圆的，像河豚一样，两边都鼓起来，又大又圆。嘴巴撅得高高的，形成一个小小的三角形（嘟嘴）。额头上有一个大大的"井"字青筋符号，是Q版生气的标志性元素。眉毛倒竖成V字形。眼睛虽然在瞪，但因为脸颊太鼓了，显得非常可爱而不是可怕。鼻子里有两股"怒气"的白汽喷出来。整体表情虽然是生气，但完全没有威胁感，反而超级可爱，是"我生气了但还是很萌"的感觉。',
+  en:'Close-up of chibi puffy angry face. Cheeks puffed roundly, like pufferfish, both sides puffed out, big and round. Mouth pouted high, forming a small triangle (pouty lips). A big "#"-shaped vein symbol on forehead, iconic element of chibi anger. Eyebrows inverted V-shape. Eyes although glaring, because cheeks so puffed look very cute not scary. Two streams of "anger" white steam blasting out from nose. Overall expression although angry, completely no threat, instead super cute — it\'s that "I\'m angry but still adorable" feeling.',
+  gpt:'A chibi character huffing with cute anger — the pufferfish pout face. Both cheeks are blown up round and huge like balloons. The mouth is pursed into a tiny triangle pout. On the forehead, a big stylized "#" anger vein mark pops out — the universal chibi symbol of being mad. The eyebrows are furrowed into an inverted V. The eyes are glaring, but the puffed cheeks make the whole expression look more cute than threatening. Two little puffs of angry steam shoot out of the nostrils. It\'s anger at its most adorable — the character is clearly mad, but they look so squishy and cute that you just want to pinch their cheeks. Chibi anger = maximum cuteness, zero scariness.',
+  tips:'Q版生气三要素：鼓脸颊（越圆越大越好）+井字青筋+鼻喷白汽。Q版的生气从来不是真的可怕，而是"可爱的生气"。越鼓越萌，这是Q版独有的美学。'},
+ {id:46,cat:'chibi',emoji:'😴',title:'Q版犯困瞌睡',en:'Chibi Sleepy Drowsy',
+  intensity:'温和',parts:['眼睛','嘴巴','头部'],
+  desc:'Q版犯困瞌睡表情，眼睛变成X形或半闭，头一点一点的，超萌。',
+  cn:'Q版犯困瞌睡的脸部特写，眼睛半闭着，或者变成了X形/=形（表示困到睁不开），眼皮沉重得快要合上。嘴巴小小的张着，或者流着口水（口水是一条亮晶晶的线）。头微微向下低着，仿佛在一点一点地打瞌睡。眉毛耷拉下来。可能有"Zzz"符号在旁边，表示睡着了或者很困。脸颊肉肉的。整体表情困困的、萌萌的，像一只快要睡着的小猫。是Q版角色非常受欢迎的表情之一，困倦感和可爱度成正比。',
+  en:'Close-up of chibi sleepy drowsy face. Eyes half closed, or turned into X-shape / = shape (meaning too sleepy to keep open), eyelids heavy about to close. Mouth slightly open, or drooling (saliva is a glistening line). Head slightly tilted downward, as if nodding off little by little. Eyebrows drooping down. Maybe "Zzz" symbols beside, indicating asleep or very sleepy. Cheeks chubby. Overall expression sleepy and萌萌的, like a kitten about to fall asleep. It\'s one of most popular expressions of chibi characters, sleepiness and cuteness directly proportional.',
+  gpt:'A chibi character who is absolutely exhausted and about to fall asleep. Their eyes are half-lidded — or sometimes drawn as X shapes or equal signs to show they can barely keep them open. The lids look so heavy. Their mouth is slightly agape and a single glistening strand of drool might hang from the corner. Their head droops forward, nodding little by little as they fight to stay awake. The eyebrows are slumped downward. Little "Zzz" marks float nearby to signal sleepiness. The cheeks are soft and chubby. The whole thing looks like a sleepy kitten about to curl up and nap. In chibi style, the sleepier they are, the cuter they get.',
+  tips:'Q版瞌睡标志：半闭眼/X眼+流口水+Zzz符号+低头。"Zzz"是漫画/动漫/Q版通用的"睡着符号"。口水增加真实感和萌度。困的程度和可爱程度成正比。'},
+ {id:47,cat:'chibi',emoji:'😵',title:'Q版震惊呆掉',en:'Chibi Shocked Blank',
+  intensity:'夸张',parts:['眼睛','嘴巴','整体'],
+  desc:'Q版震惊呆掉表情，眼睛变成小圆点，嘴巴O形，整个人僵住。',
+  cn:'Q版震惊呆掉的脸部特写，眼睛变成了两个小小的圆点（点状眼），没有瞳孔和虹膜，就是两个黑点，表示大脑一片空白，完全呆住了。嘴巴张成一个完美的O形，圆圆的小小的。眉毛高高扬起。整个脸僵住了，仿佛石化了一样。旁边可能有感叹号"！"或者闪电符号表示受到了冲击。身体姿态可能是完全僵硬的，像被冻住了。整体表情震惊、无语、大脑宕机，是Q版表现"惊呆了""吓傻了"的经典方式，既夸张又可爱。',
+  en:'Close-up of chibi shocked blank face. Eyes turned into two small dots (dot eyes), no pupils or irises, just two black dots, indicating brain completely blank, totally stunned. Mouth open in perfect O-shape, round and tiny. Eyebrows raised high. Entire face frozen, as if petrified. Maybe exclamation mark "!" or lightning symbols beside indicating receiving shock. Body posture maybe completely stiff, like frozen. Overall expression shocked, speechless, brain crashed, classic way chibi style shows "stunned" "shocked silly", both exaggerated and cute.',
+  gpt:'A chibi character who has just been completely stunned — total brain short-circuit. The eyes have turned into two tiny simple dots — no pupils, no irises, just dots — the universal chibi symbol for a brain that has completely blanked out. The mouth is a small, perfect O-shape. The eyebrows are shot up high. The whole face looks frozen, like they\'ve turned to stone. An exclamation mark or lightning bolt symbol might appear beside the head to show the impact of what they just saw. The body posture is stiff, like they\'ve been frozen solid. It\'s shock, disbelief, and "what did I just witness" all rolled into one — over-the-top and absolutely adorable.',
+  tips:'Q版震惊标志：点状眼（两个小圆点）+O形嘴+感叹号。点状眼是Q版/动漫表现"大脑宕机"的专用符号。越简单越有冲击力——因为大脑真的一片空白，所以眼睛就剩两个点了。'},
+ {id:48,cat:'chibi',emoji:'😈',title:'Q版坏笑搞怪',en:'Chibi Mischievous Grin',
+  intensity:'中等',parts:['嘴巴','眼睛','眉毛'],
+  desc:'Q版坏笑搞怪表情，牙齿尖尖的坏笑，眼睛眯成缝，一肚子坏水。',
+  cn:'Q版坏笑搞怪的脸部特写，嘴巴咧开坏坏地笑着，露出一颗或两颗尖尖的小虎牙（或者是尖尖的反派牙），嘴角一边高一边低的不对称坏笑。眼睛眯成两条弯弯的缝，眼神中闪着恶作剧的光芒，看不到眼珠，但能感觉到在打鬼主意。一边的眉毛高高挑起，非常有戏。脸颊可能有小小的虎牙印。旁边可能有坏笑的效果线或者"奸笑"符号。整体表情调皮、捣蛋、一肚子坏水，但因为是Q版所以完全不邪恶，反而很可爱很有趣。',
+  en:'Close-up of chibi mischievous grin face. Mouth stretched open in evil grin, showing one or two tiny sharp fangs (or sharp villain teeth), asymmetrical bad smile with one corner higher than other. Eyes narrowed into two curved slits, gaze shimmering with mischief light, no pupils visible, but you can feel they\'re cooking up a scheme. One eyebrow raised high, very expressive. Cheeks maybe have tiny fang marks. Maybe mischief effect lines or "scheming" symbols beside. Overall expression playful, troublemaking, full of bad ideas, but because chibi style not evil at all, instead very cute and funny.',
+  gpt:'A chibi character with a mischievous scheming grin — up to no good, but in the cutest way possible. Their mouth is stretched in a lopsided evil grin with one or two tiny sharp fangs showing. The eyes are squeezed shut into two curved slits, but you can just tell there\'s mischief gleaming in there — they\'re definitely planning something. One eyebrow is cocked way up in a knowing, troublemaking arch. There might be little scheming effect lines around the head. The whole face says "I just thought of something hilarious and I\'m about to do it." It\'s naughty, scheming, and troublemaking — but because it\'s chibi, it\'s adorable instead of actually evil.',
+  tips:'Q版坏笑标志：尖牙+眯缝眼+挑眉+不对称笑容。"一肚子坏水"但又很可爱是精髓。尖牙是关键元素——哪怕只有一颗，也能瞬间增加"坏坏的"感觉。'}
+];
+
+function renderExprList(cat){
+  var list=document.getElementById('exprList');
+  if(!list)return;
+  var filtered=cat==='all'?EXPR_DATA:EXPR_DATA.filter(function(e){return e.cat===cat});
+  var totalEl=document.getElementById('exprTotalCount');
+  if(totalEl)totalEl.textContent=filtered.length;
+
+  var html='';
+  filtered.forEach(function(e){
+    html+='<div class="expr-card" data-id="'+e.id+'" onclick="toggleExprCard('+e.id+')">';
+    html+='<div class="expr-card-top">';
+    html+='<div class="expr-emoji">'+e.emoji+'</div>';
+    html+='<div class="expr-info">';
+    html+='<div class="expr-title">'+e.title+'</div>';
+    html+='<div class="expr-en">'+e.en+'</div>';
+    html+='</div></div>';
+    html+='<div class="expr-tags">';
+    html+='<span class="expr-tag intensity">💫 '+e.intensity+'</span>';
+    html+='<span class="expr-tag part">👤 '+e.parts[0]+'</span>';
+    html+='<span class="expr-tag type">🎭 '+e.parts.length+'部位</span>';
+    html+='</div>';
+    html+='<div class="expr-card-detail">';
+    html+='<div class="expr-part-grid">';
+    e.parts.forEach(function(p){
+      html+='<div class="expr-part-item"><b>'+p+'</b><span>参与表情构成</span></div>';
+    });
+    html+='</div>';
+    html+='<div class="expr-prompt-box">';
+    html+='<div class="expr-prompt-title">💡 表情详细描述提示词</div>';
+    html+='<div class="expr-lang-label">🇨🇳 中文版：</div>';
+    html+='<div class="expr-prompt-text" onclick="event.stopPropagation();copyExprPrompt(this)">'+e.cn+'</div>';
+    html+='<div class="expr-lang-label">🇺🇸 English：</div>';
+    html+='<div class="expr-prompt-text" onclick="event.stopPropagation();copyExprPrompt(this)">'+e.en+'</div>';
+    html+='<div class="expr-lang-label">🤖 GPT Image 2 版本：</div>';
+    html+='<div class="expr-prompt-text" onclick="event.stopPropagation();copyExprPrompt(this)">'+e.gpt+'</div>';
+    html+='</div>';
+    html+='<div class="expr-tips"><b>💡 绘画技巧：</b>'+e.tips+'</div>';
+    html+='<div class="expr-actions">';
+    html+='<button class="expr-action-btn primary" onclick="event.stopPropagation();copyFullExpr('+e.id+')">📋 复制全部</button>';
+    html+='<button class="expr-action-btn secondary" onclick="event.stopPropagation();toggleExprCard('+e.id+')">收起</button>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+  });
+  list.innerHTML=html;
+}
+
+function switchExprCat(cat){
+  document.querySelectorAll('.expr-cat').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+  });
+  renderExprList(cat);
+}
+
+function toggleExprCard(id){
+  var card=document.querySelector('.expr-card[data-id="'+id+'"]');
+  if(card)card.classList.toggle('expanded');
+}
+
+function copyExprPrompt(el){
+  var text=el.textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('提示词已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('提示词已复制','success');
+  }
+}
+
+function copyFullExpr(id){
+  var e=EXPR_DATA.find(function(x){return x.id===id});
+  if(!e)return;
+  var text='【表情】'+e.title+' ('+e.en+')\n'+
+    '情绪强度：'+e.intensity+'\n'+
+    '涉及部位：'+e.parts.join('、')+'\n'+
+    '描述：'+e.desc+'\n\n'+
+    '【中文提示词】\n'+e.cn+'\n\n'+
+    '【English Prompt】\n'+e.en+'\n\n'+
+    '【GPT Image 2 Prompt】\n'+e.gpt+'\n\n'+
+    '【绘画技巧】\n'+e.tips;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){showToast('完整表情信息已复制','success')});
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('完整表情信息已复制','success');
+  }
+}
+
+// 初始化表情列表
+document.addEventListener('DOMContentLoaded',function(){
+  renderExprList('all');
+});
 
 /* ========== 无版权音乐库 ========== */
 var MUSIC_DATA=[
