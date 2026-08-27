@@ -393,6 +393,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  <div class="nav-item" data-section="prompts" onclick="switchSection('prompts')">
  <span class="ico">📚</span><span class="lbl">提示词库</span>
  </div>
+ <div class="nav-item" data-section="expression" onclick="switchSection('expression')">
+ <span class="ico">😊</span><span class="lbl">人物表情库</span>
+ </div>
+ <div class="nav-item" data-section="music" onclick="switchSection('music')">
+ <span class="ico">🎵</span><span class="lbl">无版权音乐库</span>
+ </div>
  <div class="nav-item" data-section="weapon" onclick="switchSection('weapon')">
  <span class="ico">⚔️</span><span class="lbl">武器库提示词</span>
  </div>
@@ -3128,6 +3134,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 
 
 <!-- ========== 武器库提示词 ========== -->
+
+<!-- ========== 人物表情库 ========== -->
+<div class="section" id="sec-expression">
+ <div class="expr-page">
+  <div class="expr-head">
+   <span class="bow">😊</span>
+   <div>
+    <h2>人物表情库</h2>
+    <span class="sub">48款表情设定 · 中英双语 · 含五官细节拆解</span>
+   </div>
+   <div class="expr-stat">
+    <div class="expr-stat-item">共 <b id="exprTotalCount">48</b> 款</div>
+    <div class="expr-stat-item"><b>8</b> 个分类</div>
+   </div>
+  </div>
+
+  <div class="expr-cats" id="exprCats">
+   <button class="expr-cat active" onclick="switchExprCat('all')">🎭 全部</button>
+   <button class="expr-cat" onclick="switchExprCat('basic')">😄 基础表情</button>
+   <button class="expr-cat" onclick="switchExprCat('micro')">👁️ 微表情</button>
+   <button class="expr-cat" onclick="switchExprCat('love')">💕 恋爱心动</button>
+   <button class="expr-cat" onclick="switchExprCat('villain')">😈 反派邪恶</button>
+   <button class="expr-cat" onclick="switchExprCat('anime')">🎌 动漫夸张</button>
+   <button class="expr-cat" onclick="switchExprCat('realistic')">📸 写实细腻</button>
+   <button class="expr-cat" onclick="switchExprCat('guofeng')">🏮 古风含蓄</button>
+   <button class="expr-cat" onclick="switchExprCat('chibi')">🧸 Q版萌系</button>
+  </div>
+
+  <div class="expr-list" id="exprList">
+   <!-- 表情卡片将通过JS生成 -->
+  </div>
+ </div>
+</div>
+
 <div class="section" id="sec-weapon">
  <div class="weapon-page">
   <div class="weapon-head">
