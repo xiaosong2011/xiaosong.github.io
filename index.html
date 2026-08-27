@@ -7009,6 +7009,76 @@ function toggleSidebar(state){
  ov.classList.toggle('show',open);
 }
 
+
+/* ========== 移动端滑动手势 ========== */
+(function(){
+  var touchStartX=0;
+  var touchStartY=0;
+  var touchEndX=0;
+  var touchEndY=0;
+  var isSwiping=false;
+  var SWIPE_THRESHOLD=50; // 滑动触发阈值（像素）
+  var EDGE_ZONE=30; // 左边缘触发区域宽度（像素）
+  var VERTICAL_THRESHOLD=30; // 垂直方向阈值，超过则认为是垂直滚动
+
+  document.addEventListener('touchstart',function(e){
+    if(window.innerWidth>768)return; // 只在移动端生效
+    touchStartX=e.changedTouches[0].screenX;
+    touchStartY=e.changedTouches[0].screenY;
+    isSwiping=false;
+  },{passive:true});
+
+  document.addEventListener('touchmove',function(e){
+    if(window.innerWidth>768)return;
+    if(isSwiping)return;
+    var dx=e.changedTouches[0].screenX-touchStartX;
+    var dy=Math.abs(e.changedTouches[0].screenY-touchStartY);
+    // 如果垂直滑动距离超过阈值，认为是滚动，不触发滑动
+    if(dy>VERTICAL_THRESHOLD && Math.abs(dx)<dy){
+      isSwiping=false;
+      return;
+    }
+    if(Math.abs(dx)>10){
+      isSwiping=true;
+    }
+  },{passive:true});
+
+  document.addEventListener('touchend',function(e){
+    if(window.innerWidth>768)return;
+    touchEndX=e.changedTouches[0].screenX;
+    touchEndY=e.changedTouches[0].screenY;
+    handleSwipe();
+  },{passive:true});
+
+  function handleSwipe(){
+    var dx=touchEndX-touchStartX;
+    var dy=Math.abs(touchEndY-touchStartY);
+    
+    // 滑动距离不够，不触发
+    if(Math.abs(dx)<SWIPE_THRESHOLD)return;
+    // 垂直滑动距离大于水平，认为是滚动
+    if(dy>Math.abs(dx))return;
+    
+    var sb=document.getElementById('sidebar');
+    if(!sb)return;
+    var isOpen=sb.classList.contains('open');
+    
+    if(dx>0){
+      // 向右滑动
+      // 如果是从左边缘开始滑动，打开侧边栏
+      if(touchStartX<EDGE_ZONE && !isOpen){
+        toggleSidebar(true);
+      }
+    }else{
+      // 向左滑动
+      // 如果侧边栏是打开状态，关闭它
+      if(isOpen){
+        toggleSidebar(false);
+      }
+    }
+  }
+})();
+
 /* ========== 板块切换 ========== */
 function switchSection(id){
  document.querySelectorAll('.nav-item').forEach(function(el){
