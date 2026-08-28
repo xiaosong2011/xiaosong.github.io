@@ -3432,10 +3432,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   </div>
 
   <div class="weapon-cats" id="accessoryCats">
-   <button class="weapon-cat active" onclick="switchAccessoryCat('all')">🏆 全部</button>
-   <button class="weapon-cat" onclick="switchAccessoryCat('ancient')">🏺 古代配饰</button>
-   <button class="weapon-cat" onclick="switchAccessoryCat('modern')">⌚ 现代配饰</button>
-   <button class="weapon-cat" onclick="switchAccessoryCat('fantasy')">🔮 奇幻配饰</button>
+   <button class="weapon-cat accessory-cat active" onclick="switchAccessoryCat('all')">🏆 全部</button>
+   <button class="weapon-cat accessory-cat" onclick="switchAccessoryCat('ancient')">🏺 古代配饰</button>
+   <button class="weapon-cat accessory-cat" onclick="switchAccessoryCat('modern')">⌚ 现代配饰</button>
+   <button class="weapon-cat accessory-cat" onclick="switchAccessoryCat('fantasy')">🔮 奇幻配饰</button>
   </div>
 
   <div class="weapon-list" id="accessoryList">
@@ -5605,6 +5605,218 @@ document.addEventListener('DOMContentLoaded',function(){
 renderAccessoryList('all');
 });
 
+
+/* ========== 配饰提示词 ========== */
+var ACCESSORY_DATA=[
+ // ========== 古代配饰 ==========
+ {id:1,cat:'ancient',emoji:'📿',title:'玉佩',en:'Jade Pendant',
+  type:'挂饰',era:'古代',origin:'中国',
+  desc:'温润和田玉佩，祥云纹饰，君子佩玉之风。',
+  cn:'一块温润的和田白玉玉佩，呈如意形/圆形，玉质细腻温润，有油脂光泽（和田玉的特征），微微透光。玉佩正面雕刻着精美的祥云纹和螭龙纹，线条流畅，采用透雕和浮雕技法。玉佩的边缘有回纹装饰。玉佩顶部穿孔，系着一条红色丝绳，丝绳上串着两颗小珊瑚珠和一颗米珠。玉佩背面刻有篆体铭文。整体风格典雅内敛，有君子如玉的气质，是中国古代文人雅士必备的配饰。',
+  en:'A warm and lustrous Hetian white jade pendant, ruyi or round shape, jade texture fine and warm with oily luster (characteristic of Hetian jade), slightly translucent. Front carved with exquisite auspicious cloud patterns and chi dragon motifs, flowing lines, using openwork and relief techniques. Pendant edge has meander pattern decoration. Top of pendant has a hole, threaded with red silk cord, cord strung with two small coral beads and one rice bead. Back of pendant engraved with seal script inscription. Overall style elegant and understated, with the quality of a jade-like gentleman.',
+  gpt:'Create a beautiful macro photograph of a Hetian white jade pendant resting on dark silk. The pendant is carved in a ruyi shape with auspicious cloud and chi dragon motifs in openwork relief. The jade has a warm, lustrous, slightly oily appearance. Fine details in the carving show cloud swirls and a small dragon. A red silk cord threads through the top hole, strung with small coral beads. The lighting should be soft and warm, making the jade glow from within.',
+  tips:'玉佩关键词：和田玉、温润（油脂光泽）、透雕/浮雕、祥云纹、螭龙纹、红色丝绳。和田玉的特点是"温润"——不像翡翠那样冰冷透亮，而是有油脂感的温润光泽。'},
+ {id:2,cat:'ancient',emoji:'🎐',title:'步摇',en:'Buyao Hair Pendant',
+  type:'发饰',era:'古代',origin:'中国',
+  desc:'金步摇，花枝造型，步履摇曳，是中国古代贵妇的标志性发饰。',
+  cn:'一副精美的金步摇，整体是一株花枝造型，主干是金丝扭成的细枝条，枝条上焊接着金片剪成的花叶和蝴蝶。枝条末端悬挂着多串极细的金丝链条，每串链条下端坠着金片花苞或珍珠。步摇的基座是一朵盛开的金牡丹花，花瓣层叠，花蕊镶嵌着红宝石。当佩戴者走动时，金丝链条和花苞会随着步伐轻轻摇曳，发出细微的金属碰撞声。整体华美精巧，是汉唐贵妇和宫廷妃嫔的标志性发饰。',
+  en:'Exquisite gold buyao hair pendant, overall flower-branch shape, main stem is fine gold wire twisted into thin branches, branches welded with gold-sheet cut flowers, leaves and butterflies. Branch ends suspend multiple strands of extremely fine gold chain, each chain end with gold-sheet flower bud or pearl. Base is a blooming gold peony, petals layered, stamens inlaid with rubies. When wearer walks, gold chains and buds gently sway with steps, emitting subtle metallic clinking.',
+  gpt:'Create a stunning macro photograph of an ancient Chinese gold buyao hair ornament on a black velvet display. The ornament is shaped like a flowering branch made entirely of gold wire and gold sheet. Thin gold stems branch out with tiny gold leaves, butterflies, and flowers. Multiple ultra-fine gold chains hang from the branch tips, each ending in a tiny gold flower bud or pearl. At the base, a detailed gold peony blooms with layered petals and ruby stamens.',
+  tips:'步摇关键词：金丝扭枝、悬挂金链/金片花苞、牡丹基座、红宝石、步步摇曳。步摇的核心是"动"——静止时是精美花枝，走动时摇曳生姿。'},
+ {id:3,cat:'ancient',emoji:'🌸',title:'发簪',en:'Hair Pin',
+  type:'发饰',era:'古代',origin:'中国',
+  desc:'银鎏金发簪，绒花/点翠装饰，是中国古代女子日常发饰。',
+  cn:'一支银鎏金发簪，簪身是细长的银丝，表面鎏金，簪头是一朵盛开的绒花（用蚕丝绒做的花朵），花瓣层层叠叠，颜色是正红色。绒花旁边点缀着点翠（翠鸟羽毛镶嵌）的叶片，呈现出独特的孔雀蓝色光泽。簪头还垂下一根细链，链端坠着一颗珍珠和小金铃。簪身刻有缠枝纹。整体造型精致秀美，色彩对比鲜明，是明清时期女子出嫁和日常的重要发饰。',
+  en:'Silver gilded hair pin, pin body is slender silver wire, surface gilded, pin head is a blooming velvet flower (flower made from silk floss), petals layered, color bright red. Beside velvet flower decorated with diancui (kingfisher feather inlay) leaves, showing unique peacock-blue luster. Pin head also dangles a fine chain, chain end with pearl and small gold bell.',
+  gpt:'Create a beautiful close-up photograph of a traditional Chinese silver-gilt hair pin on a dark background. The pin is long and slender with a gilded surface. At the top, a vibrant red velvet flower blooms with layered petals. Beside it, small leaves made from kingfisher feather inlay show a stunning peacock-blue iridescent color. A fine chain dangles from the head, ending in a small white pearl and tiny gold bell.',
+  tips:'发簪关键词：绒花（蚕丝绒）、点翠（翠鸟羽毛）、鎏金银身、缠枝纹、珍珠坠饰。点翠的蓝色是独一味——孔雀蓝/翠蓝色。'},
+ {id:4,cat:'ancient',emoji:'🕯️',title:'香囊',en:'Incense Sachet',
+  type:'挂饰',era:'古代',origin:'中国',
+  desc:'金银丝绣香囊，锦缎材质，内置香料，是古代随身香氛配饰。',
+  cn:'一个精美的古代香囊，呈椭圆形/葫芦形，外面是深红色锦缎面料，上面用金线和银线绣着牡丹和凤凰图案（盘金绣）。香囊的口部用金线收口，系着一条红色丝绳。香囊正面有一个圆形的镂空金属窗（金银丝编成的网格），可以看到里面包裹的香料。香囊内部有丝绸内衬，装着艾草、沉香、檀香等混合香料。香囊底部垂着两条丝穗（红色和金色）。整体造型精致华美，既可以挂在腰间作为装饰，又有熏香衣物的功能。',
+  en:'Exquisite ancient incense sachet, oval/gourd shape, outer dark red brocade fabric, embroidered with gold and silver thread peony and phoenix patterns. Sachet mouth gathered with gold thread, tied with red silk cord. Front has circular openwork metal window (gold-silver wire mesh), can see wrapped spices inside. Sachet interior has silk lining, containing mugwort, agarwood, sandalwood and other mixed spices.',
+  gpt:'Create a beautiful still life photograph of an ancient Chinese incense sachet resting on a dark wooden surface. The sachet is gourd-shaped, made of deep red brocade with stunning gold and silver thread embroidery of peonies and a phoenix. The top is gathered and tied with a red silk cord. On the front, a circular window of fine gold wire mesh reveals dried herbs and spices inside. Two silk tassels in red and gold hang from the bottom.',
+  tips:'香囊关键词：锦缎面料、盘金绣（金银线）、镂空金属窗、香料内胆、丝穗。香囊是"看得见的香"——金属网格窗是核心结构。'},
+ {id:5,cat:'ancient',emoji:'💍',title:'金步摇冠',en:'Gold Buyao Crown',
+  type:'冠饰',era:'古代',origin:'中国',
+  desc:'金步摇冠，花树造型，宫廷最高规格发饰，出土于辽代墓葬。',
+  cn:'一顶金步摇冠，整体呈花树造型，由金丝焊接而成。主干是一根粗金丝，向上分出多个枝杈，每个枝杈上焊接有金片剪成的花朵和树叶。最引人注目的是枝条上悬挂着无数极细的金丝链条和金片坠饰，形如流苏瀑布，微风吹过或头部移动时，金丝链条和金片坠饰便摇曳闪光，如同金色的雨。冠的基座是一个金片圈，上面有锤揲和錾刻的莲纹和兽面纹。整件器物金光耀眼，工艺极其精湛。',
+  en:'Gold buyao crown, overall flower-tree shape, welded from gold wire. Main trunk is thick gold wire, branching upward into multiple branches, each branch welded with gold-sheet cut flowers and leaves. Most striking are countless ultra-fine gold chains and gold-sheet pendants hanging from branches, like a waterfall of tassels. Crown base is a gold-sheet ring, with repousse and engraving lotus and animal mask patterns.',
+  gpt:'Create a stunning photograph of an ancient gold buyao crown displayed on a black velvet bust form. The crown is shaped like a flowering tree made entirely of gold wire and gold sheet. The main trunk branches upward, each branch covered with tiny gold flowers and leaves. Most spectacularly, hundreds of ultra-fine gold chains hang from the branches, each ending in tiny gold pendants. The lighting should make the gold glow brilliantly against the black background.',
+  tips:'金步摇冠关键词：金丝焊接花树、金片坠饰瀑布、金色流苏摇曳、锤揲錾刻莲纹。核心视觉是"金色的雨"——无数金丝链条悬挂。'},
+ {id:6,cat:'ancient',emoji:'🔵',title:'点翠耳坠',en:'Diancui Earrings',
+  type:'耳饰',era:'古代',origin:'中国',
+  desc:'点翠耳坠，翠鸟羽毛镶嵌，孔雀蓝色泽，是清代宫廷最高工艺。',
+  cn:'一对精美的点翠耳坠，整体呈水滴形/长坠形。顶部是一个金丝扭成的小花篮造型，花篮中镶嵌着点翠（翠鸟羽毛）的花瓣，呈现出独特的孔雀蓝色光泽，羽毛纹理在光线下有微微的虹彩。花篮下方垂挂着三层珍珠串和金链，每层之间用小金珠相隔。最底端是一颗较大的水滴形珍珠（东珠）。耳坠的背面是银质耳钩。整体色彩搭配极为高级——孔雀蓝的点翠+暖金的金属+冷白的珍珠。',
+  en:'Pair of exquisite diancui earrings, overall teardrop/long pendant shape. Top is small gold wire flower basket shape, basket inlaid with diancui (kingfisher feather) flower petals, showing unique peacock-blue luster, feather texture has slight iridescence. Below basket hang three layers of pearl strings and gold chains, each layer separated by small gold beads. Very bottom is larger teardrop pearl (dongzhu).',
+  gpt:'Create a stunning macro photograph of a pair of ancient Chinese diancui earrings displayed on black silk. The earrings are long pendant style. At the top, a tiny gold wire basket holds flower petals made from kingfisher feather inlay, showing an impossible peacock-blue color with slight iridescence. Below, three cascading layers of pearls and gold chains create a waterfall effect, ending in a single large teardrop pearl at the bottom of each earring.',
+  tips:'点翠耳坠关键词：翠鸟羽毛镶嵌、孔雀蓝虹彩、金丝花篮、三层珍珠串坠、东珠。点翠的蓝色无法用任何颜料复制。'},
+ // ========== 现代配饰 ==========
+ {id:7,cat:'modern',emoji:'⌚',title:'机械腕表',en:'Mechanical Watch',
+  type:'腕饰',era:'现代',origin:'瑞士',
+  desc:'高端机械腕表，蓝宝石表镜，陀飞轮工艺，精密机械美学。',
+  cn:'一块高端机械腕表，圆形表盘，表壳是316L精钢（或者玫瑰金/白金），表圈镶嵌着细密的钻石或者陶瓷圈。表盘是白色/黑色的太阳纹放射纹盘面，3点位置有日期窗。表盘上可以看到复杂的机芯——陀飞轮（6点位置，一个旋转的镂空框架，里面有摆轮和游丝在运作），或者背透设计可以看到机芯背面。指针是抛光的剑形/刀形指针，有夜光涂层。表带是钢链或者鳄鱼皮表带，折叠扣。整体造型精密、高端、有机械美感。',
+  en:'High-end mechanical watch, round dial, case is 316L steel (or rose gold/white gold), bezel set with fine diamonds or ceramic ring. Dial is white/black sunburst radial pattern, 3 o\'clock position has date window. Dial shows complex movement — tourbillon (6 o\'clock, rotating openwork frame containing balance wheel and hairspring). Hands are polished sword/dauphine hands with luminous coating. Bracelet is steel chain or alligator leather strap, folding clasp.',
+  gpt:'Create a stunning macro photograph of a luxury mechanical watch on a dark surface. The watch has a round case in rose gold with a ceramic or diamond-set bezel. The dial is a deep black with sunburst radial pattern. At 6 o\'clock, a tourbillon is visible — a rotating openwork cage containing the balance wheel. The hands are polished rose gold sword-shaped with luminous tips. The strap is dark brown alligator leather with a folding clasp.',
+  tips:'机械表关键词：陀飞轮、背透机芯、太阳纹表盘、夜光指针、蓝宝石表镜、鳄鱼皮表带。陀飞轮是最直观的"高级感"。'},
+ {id:8,cat:'modern',emoji:'🕶️',title:'设计师墨镜',en:'Designer Sunglasses',
+  type:'面部配饰',era:'现代',origin:'意大利',
+  desc:'高端设计师墨镜，醋酸纤维镜框，偏光镜片，时尚配饰。',
+  cn:'一副高端设计师墨镜，镜框是意大利醋酸纤维（板材）材质，表面有玳瑁色/纯黑/透明色的渐变效果，在光线下可以看到材质的温润光泽。镜片是偏光镜片，颜色是深灰/棕/墨绿，表面有防反射涂层，镜片微微反光。镜框造型是经典的飞行员/方形/猫眼形。镜腿内侧有品牌激光蚀刻标识。铰链是金属铰链，有精密的弹簧机制。鼻托是可调节的独立鼻托。整体造型时尚、精致、有设计感。',
+  en:'High-end designer sunglasses, frames are Italian acetate material, surface has tortoiseshell/pure black/transparent gradient effect, warm lustrous gloss visible in light. Lenses are polarized, color dark gray/brown/dark green, surface has anti-reflective coating, lenses slightly reflective. Frame shape is classic aviator/square/cat-eye. Inner temple has brand laser-etched logo. Hinges are metal hinges with precise spring mechanism.',
+  gpt:'Create a striking product photograph of premium designer sunglasses on a clean light background. The frames are Italian acetate with a rich tortoiseshell pattern that shows depth and warmth. The lenses are dark with a subtle green-brown tint and have a slight mirror-like anti-reflective coating. The shape is a refined cat-eye or square silhouette. The lighting should be soft and even, highlighting the lustrous quality of the acetate material.',
+  tips:'墨镜关键词：醋酸纤维（板材）、玳瑁色渐变、偏光镜片反光、金属弹簧铰链、独立鼻托。板材有温润的光泽和质感。'},
+ {id:9,cat:'modern',emoji:'📿',title:'钻石项链',en:'Diamond Necklace',
+  type:'颈饰',era:'现代',origin:'多国',
+  desc:'铂金镶钻项链，圆形切割，火彩耀眼，是现代珠宝经典。',
+  cn:'一条铂金镶钻项链，链条是细致的铂金蛇骨链/珠链，闪烁着冷白色的金属光泽。主石是一颗圆形明亮式切割的钻石（约1-2克拉），镶嵌在铂金四爪/六爪镶嵌座上。钻石的切工是完美的比例，在光线下展现出耀眼的火彩（白光、蓝光、彩虹色闪烁）。项链的搭扣是隐蔽式保险扣。整体造型经典、简约、极致奢华，是订婚和重要场合的标志性珠宝。',
+  en:'Platinum diamond necklace, chain is fine platinum snake chain/bead chain, shimmering cold white metallic luster. Main stone is round brilliant cut diamond (about 1-2 carats), set in platinum four/six prong setting. Diamond cut is perfect proportions, showing dazzling fire in light (white, blue, rainbow colors flashing). Necklace clasp is concealed safety clasp.',
+  gpt:'Create a breathtaking macro photograph of a platinum diamond necklace displayed on dark blue velvet. The chain is a fine platinum snake chain. The centerpiece is a single round brilliant-cut diamond of about 2 carats, held in a classic four-prong platinum setting. The diamond should show spectacular fire — breaking white light into rainbow colors, with blue and orange flashes visible.',
+  tips:'钻石项链关键词：铂金蛇骨链、圆形明亮式切割、四爪镶嵌、火彩（彩虹色闪烁）、隐蔽搭扣。钻石的核心是"火彩"。'},
+ {id:10,cat:'modern',emoji:'✨',title:'珍珠耳钉',en:'Pearl Stud Earrings',
+  type:'耳饰',era:'现代',origin:'日本/大溪地',
+  desc:'Akoya珍珠耳钉，正圆强光，是最经典的日常珠宝。',
+  cn:'一对Akoya珍珠耳钉，每颗珍珠约7-8mm，正圆形，表面光滑无瑕。珍珠光泽是极强光（镜面光泽），在光线下可以看到清晰的干涉色（粉色和绿色晕彩）。珍珠颜色是白透粉（极光白）。耳钉的镶嵌是简单的18K白金镶钉座，让珍珠紧贴耳垂。背面是银针和硅胶耳堵。珍珠表面有微微的纹理（天然珍珠的特征，不是完全像塑料一样光滑）。整体造型简约极致。',
+  en:'Pair of Akoya pearl stud earrings, each pearl about 7-8mm, perfectly round, surface smooth and flawless. Pearl luster is extremely strong (mirror luster), clear interference colors visible in light (pink and green overtones). Pearl color is white with pink overtone (aurora white). Earring setting is simple 18K white gold peg setting, pearl close to earlobe.',
+  gpt:'Create a beautiful macro photograph of a pair of Akoya pearl stud earrings on a soft white background. Each pearl is about 7-8mm, perfectly round, with a mirror-like luster that reflects the light source as a sharp bright spot. The surface shows subtle pink and green interference colors that shift as you move. The pearls are set on simple 18K white gold posts.',
+  tips:'珍珠耳钉关键词：Akoya、正圆、极强光（镜面反射）、干涉色晕彩、18K白金镶钉。真珍珠有"镜面光泽"和干涉色。'},
+ {id:11,cat:'modern',emoji:'⌚',title:'智能手表',en:'Smart Watch',
+  type:'腕饰',era:'现代',origin:'多国',
+  desc:'高端智能手表，AMOLED屏幕，健康监测，科技与时尚融合。',
+  cn:'一块高端智能手表，方形或圆形表盘，表壳是钛合金或不锈钢材质，表面是蓝宝石玻璃。表盘是AMOLED屏幕，显示着精美的表盘界面（可以自定义），有数字时间、日期、心率等信息。表圈是哑光陶瓷或金属。表带是氟橡胶运动表带或米兰表带。表冠和侧边按钮是物理按键，有触觉反馈。屏幕边缘有细窄的黑边，屏占比很高。整体造型科技感强但不过于极客，兼顾运动和商务风格。',
+  en:'High-end smart watch, square or round dial, case is titanium alloy or stainless steel, surface is sapphire glass. Dial is AMOLED screen, displaying exquisite watch face (customizable), with digital time, date, heart rate etc. Bezel is matte ceramic or metal. Strap is fluoroelastomer sport band or Milanese band. Crown and side button are physical buttons with haptic feedback.',
+  gpt:'Create a clean product photograph of a premium smartwatch against a minimalist light background. The watch has a titanium case with a sapphire glass face. The AMOLED display is active, showing an elegant watch face with the time, date, and three complications showing heart rate, steps, and weather. The bezel is matte ceramic in a dark color. The strap is a sporty fluoroelastomer band.',
+  tips:'智能手表关键词：AMOLED屏幕、蓝宝石玻璃、钛合金/陶瓷表圈、表冠触觉反馈、氟橡胶表带。核心视觉是"屏幕内容"。'},
+ {id:12,cat:'modern',emoji:'📌',title:'胸针',en:'Brooch',
+  type:'胸饰',era:'现代',origin:'法国',
+  desc:'高级珠宝胸针，花鸟造型，金属镶嵌工艺，是正装点睛之笔。',
+  cn:'一枚高级珠宝胸针，造型是一只展翅的凤凰/盛开的花朵。主体是18K金（黄金或玫瑰金）打造的，表面有细腻的拉丝工艺和抛光工艺交替。翅膀/花瓣上镶嵌着不同切割方式的宝石——圆形钻石做羽毛尖端、长方形蓝宝石做翅膀主色、水滴形祖母绿做花叶。胸针中心是一颗较大的红宝石或粉色蓝宝石。背面是精密的别针机关，有安全锁扣。整体造型华美、立体。',
+  en:'High jewelry brooch, shaped as a phoenix with spread wings / blooming flower. Body is 18K gold (yellow or rose gold), surface has fine alternation of brushed and polished finishes. Wings/petals set with different cut gemstones — round diamonds for feather tips, rectangular sapphires for wing main color, teardrop emeralds for leaves. Brooch center is larger ruby or pink sapphire.',
+  gpt:'Create a stunning macro photograph of a high-jewelry brooch on a dark fabric background. The brooch is shaped as a phoenix with spread wings, crafted in rose gold with alternating brushed and polished finishes. The wings are set with graduated round diamonds along the edges, rectangular blue sapphires filling the wing surfaces, and small teardrop emeralds accenting the body. At the heart of the phoenix, a single red ruby glows.',
+  tips:'胸针关键词：3D立体造型、多切割宝石混镶、拉丝+抛光工艺交替、别针安全锁扣。胸针是3D立体的珠宝件。'},
+ // ========== 奇幻配饰 ==========
+ {id:13,cat:'fantasy',emoji:'💍',title:'魔法戒指',en:'Magic Ring',
+  type:'戒指',era:'奇幻',origin:'奇幻世界',
+  desc:'魔法师戒指，符文雕刻，宝石内核，散发魔法能量光芒。',
+  cn:'一枚魔法师的戒指，戒身是暗银色或者陨铁材质（有暗淡的金属光泽，表面有不规则的陨石纹理）。戒身表面雕刻着发光的魔法符文（古代文字/几何图案），符文发出微弱的蓝色或紫色光芒。戒指顶部镶嵌着一颗宝石——蓝宝石（散发蓝色光晕）、红宝石（散发红色光晕）或黑曜石（散发黑色雾气）。宝石内部有流动的光芒，仿佛有生命。戒指周围有微弱的魔法能量粒子在飘浮。整体造型神秘、古老、充满力量感。',
+  en:'A sorcerer ring, band is dark silver or meteorite iron material (dim metallic luster, irregular meteorite texture on surface). Band surface carved with glowing magical runes (ancient script/geometric patterns), runes emit faint blue or purple glow. Ring top inlaid with gemstone — sapphire (emits blue halo), ruby (emits red halo), or obsidian (emits black mist). Inside gemstone flows light, as if alive.',
+  gpt:'Create a dramatic macro photograph of a magical sorcerer ring on a dark stone surface. The band is made of dark meteorite iron with visible Widmanstatten patterns etched into the surface. Glowing blue runes are carved into the band, each one pulsing with soft light. At the top, a large sapphire is set, and inside the gemstone, swirling light moves like a tiny galaxy. Around the ring, tiny particles of blue light float upward.',
+  tips:'魔法戒指关键词：陨铁/暗银材质、发光符文、宝石内部流动光芒、魔法粒子飘浮。核心是"发光"——符文和宝石都要有自主光源。'},
+ {id:14,cat:'fantasy',emoji:'👑',title:'精灵冠饰',en:'Elf Circlet',
+  type:'冠饰',era:'奇幻',origin:'精灵族',
+  desc:'精灵族额冠，银丝花叶造型，月光石镶嵌，优雅空灵。',
+  cn:'一件精灵族的额冠（circlet），整体是银丝扭成的花枝造型，极细的银丝编织成藤蔓和叶片图案，每一片银叶都有精致的叶脉纹理。额冠的正前方是一颗月光石（moonstone），呈乳白色半透明，内部有蓝色的月光效应（adularescence）在移动时闪烁。月光石周围环绕着细小的银丝花瓣。额冠两端渐渐变细，末端是银丝扭成的小卷草。整体造型极其纤细精致，仿佛是用月光和银丝编织的。',
+  en:'An elven circlet, overall silver wire twisted into flower-vine shape, extremely fine silver wire woven into vine and leaf patterns, each silver leaf has fine vein texture. Front center is a moonstone, milky white translucent, internal blue moonstone sheen (adularescence) flashes when moved. Moonstone surrounded by tiny silver wire petals. Both ends gradually taper, ending in small silver wire scrollwork.',
+  gpt:'Create an ethereal photograph of an elven circlet displayed on a moss-covered stone in dappled forest light. The circlet is made of incredibly fine silver wire woven into vine and leaf patterns. At the center front, a cabochon moonstone glows with a soft blue-white adularescence. Small silver wire petals frame the moonstone. The entire piece should look impossibly delicate, as if it would float rather than fall.',
+  tips:'精灵冠饰关键词：银丝花叶编织、月光石（蓝白色sheen）、极纤细精致、悬浮感。月光石的特征是"游彩"——内部有移动的蓝色光芒。'},
+ {id:15,cat:'fantasy',emoji:'🔮',title:'龙晶吊坠',en:'Dragon Crystal Pendant',
+  type:'颈饰',era:'奇幻',origin:'龙族',
+  desc:'龙晶吊坠，龙血宝石，内部封印火焰，充满原始力量。',
+  cn:'一枚龙晶吊坠，吊坠主体是一颗不规则的深红色/黑红色宝石，形状像一颗龙牙或者水滴。宝石是半透明的，内部有流动的暗红色光芒，仿佛封印着龙血或火焰。在光线下，宝石内部隐约可见微小的火焰在跳动。宝石表面有不规则的裂纹纹理，裂纹中有金色的光（类似金缮工艺）。吊坠的底座是暗金色的金属，造型是龙爪抓握宝石的样子，龙爪有精细的鳞片纹理。链条是粗犷的暗银色锁链。整体造型充满原始力量感。',
+  en:'Dragon crystal pendant, pendant main body is irregular deep red/black-red gemstone, shape like dragon tooth or teardrop. Gemstone is translucent, inside flows dark red light, as if sealing dragon blood or flame. In light, faintly visible tiny flames dancing inside. Gemstone surface has irregular crack texture, cracks filled with gold light (similar to kintsugi). Pendant base is dark gold metal, shaped as dragon claws gripping gemstone.',
+  gpt:'Create an epic photograph of a dragon crystal pendant on a dark volcanic rock surface. The pendant features a large, irregular deep crimson gemstone shaped like a dragon tooth, gripped by dark gold metal claws with intricate scale textures. The gemstone is translucent, and inside it, actual flames seem to dance. Gold-filled cracks run across the surface like kintsugi. The chain is a heavy dark silver link chain.',
+  tips:'龙晶吊坠关键词：龙牙/水滴形、内部流动火焰、金色裂纹（金缮）、龙爪底座、暗银锁链。核心视觉是"活的火焰"。'},
+ {id:16,cat:'fantasy',emoji:'🌙',title:'月光石手链',en:'Moonstone Bracelet',
+  type:'腕饰',era:'奇幻',origin:'月精灵',
+  desc:'月光石手链，银链串联，每颗宝石散发柔和蓝光，安静治愈。',
+  cn:'一条月光石手链，链条是细致的银丝链（拜占庭链/编链），上面串着多颗圆润的月光石珠子（约8-10mm）。每颗月光石都是乳白色半透明的，内部有蓝色的月光效应（adularescence），在不同角度下蓝色光芒会游动。珠子之间用银丝花托隔开。手链的搭扣是一个银制的弯月形扣。在黑暗中，月光石发出柔和的蓝白色荧光，仿佛凝聚了月光。整体造型安静、治愈、空灵。',
+  en:'Moonstone bracelet, chain is fine silver wire chain (Byzantine chain/braided chain), strung with multiple round moonstone beads (about 8-10mm). Each moonstone is milky white translucent, internal blue moonstone effect (adularescence), blue light moves at different angles. Beads separated by silver wire flower settings. Bracelet clasp is a silver crescent moon clasp. In darkness, moonstones emit soft blue-white fluorescence.',
+  gpt:'Create a dreamy macro photograph of a moonstone bracelet on a white silk cloth under soft lighting. The bracelet is a fine silver Byzantine chain strung with perfectly round moonstone beads. Each bead is milky white with a blue adularescence that glows from within. Between the beads, delicate silver wire flower settings add detail. The clasp is a small silver crescent moon.',
+  tips:'月光石手链关键词：银丝编链、月光石珠、蓝色游彩（adularescence）、弯月搭扣、柔和荧光。月光石有蓝色游彩。'},
+ {id:17,cat:'fantasy',emoji:'🛡️',title:'符文臂环',en:'Rune Arm Band',
+  type:'臂饰',era:'奇幻',origin:'矮人族',
+  desc:'矮人符文臂环，厚重金属，发光符文，增强力量和防御。',
+  cn:'一只矮人族风格的符文臂环，整体是厚重的青铜或暗铁材质，表面有粗糙的锤打纹理。臂环是开口式（C形），可以调节大小。臂环表面雕刻着一排矮人符文（几何线条组成的方形文字），符文槽内填充着发光的材料（熔岩橙色或橙色光芒）。臂环两端是锤头/兽头造型，眼睛镶嵌着红宝石。臂环表面有矮人风格的几何纹饰和铆钉装饰。整体造型粗犷、厚重、充满力量感，佩戴在二头肌位置。',
+  en:'Dwarf-style rune arm band, overall heavy bronze or dark iron material, surface has rough hammer texture. Arm band is open style (C-shape), adjustable size. Surface carved with row of dwarf runes (geometric line square script), rune grooves filled with glowing material (lava orange or orange light). Both ends are hammer head/beast head shape, eyes inlaid with rubies. Surface has dwarf-style geometric patterns and rivet decorations.',
+  gpt:'Create a powerful photograph of a dwarven rune arm band on an anvil in a forge. The arm band is made of heavy dark iron with visible hammer marks. It is C-shaped, open at one end. Along the outer surface, a row of geometric dwarf runes is carved, each groove filled with glowing orange light. At both terminals, stylized ram heads with ruby eyes add decoration. Rivets and geometric patterns cover the remaining surface.',
+  tips:'符文臂环关键词：厚重青铜/暗铁、锤打纹理、发光符文槽、兽头端饰+红宝石眼、铆钉装饰。核心对比是"粗糙外表+精致符文"。'},
+ {id:18,cat:'fantasy',emoji:'🦋',title:'幻蝶胸针',en:'Phantom Butterfly Brooch',
+  type:'胸饰',era:'奇幻',origin:'妖精族',
+  desc:'幻蝶胸针，半透明翅膀，月光和星尘材质，随时振翅欲飞。',
+  cn:'一枚幻蝶胸针，造型是一只展翅的蝴蝶，翅膀是半透明的水晶/月光石材质，内部有流动的蓝色和紫色光芒。翅膀边缘是银丝勾勒的，翅脉是精细的银丝线。翅膀表面有细小的星尘粒子在闪烁（像微小的钻石碎屑）。蝴蝶的身体是银制的，镶嵌着两颗小蓝宝石做眼睛。胸针别在衣服上时，翅膀会微微振动（魔法效果），周围有蓝色和紫色的光粒子飘散。整体造型空灵、梦幻、不真实。',
+  en:'Phantom butterfly brooch, shaped as butterfly with spread wings, wings are translucent crystal/moonstone material, inside flows blue and purple light. Wing edges outlined in silver wire, wing veins are fine silver wire lines. Wing surface has tiny stardust particles sparkling (like tiny diamond dust). Butterfly body is silver, inlaid with two small sapphires as eyes. When pinned on clothing, wings vibrate slightly (magic effect), surrounded by blue and purple light particles dispersing.',
+  gpt:'Create a magical photograph of a phantom butterfly brooch on dark velvet. The butterfly has spread wings made of translucent material that resembles moonstone, with blue and purple light flowing inside them. The wing edges and veins are defined by impossibly fine silver wire. Across the wing surfaces, tiny points of light sparkle like diamond dust. The body is silver with two small sapphire eyes. Around the brooch, tiny blue and purple light particles drift upward.',
+  tips:'幻蝶胸针关键词：半透明翅膀材质、内部流动蓝紫光芒、银丝翅脉、星尘粒子闪烁、振翅微动。核心视觉是"活的"。'}
+];
+
+function renderAccessoryList(cat){
+  var list=document.getElementById('accessoryList');
+  if(!list)return;
+  var filtered=cat==='all'?ACCESSORY_DATA:ACCESSORY_DATA.filter(function(a){return a.cat===cat});
+  var totalEl=document.getElementById('accessoryTotalCount');
+  if(totalEl)totalEl.textContent=filtered.length;
+  var html='';
+  filtered.forEach(function(a){
+    html+='<div class="weapon-card accessory-card" data-id="'+a.id+'" onclick="toggleAccessoryCard('+a.id+')">';
+    html+='<div class="weapon-card-top">';
+    html+='<div class="weapon-emoji accessory-emoji">'+a.emoji+'</div>';
+    html+='<div class="weapon-info">';
+    html+='<div class="weapon-title">'+a.title+'</div>';
+    html+='<div class="weapon-en">'+a.en+'</div>';
+    html+='</div></div>';
+    html+='<div class="weapon-tags">';
+    html+='<span class="weapon-tag accessory-tag type">💎 '+a.type+'</span>';
+    html+='<span class="weapon-tag accessory-tag era">📜 '+a.era+'</span>';
+    html+='<span class="weapon-tag accessory-tag origin">🌍 '+a.origin+'</span>';
+    html+='</div>';
+    html+='<div class="weapon-card-detail">';
+    html+='<div class="weapon-detail-grid">';
+    html+='<div class="weapon-detail-item accessory-detail-item"><b>配饰类型</b><span>'+a.type+'</span></div>';
+    html+='<div class="weapon-detail-item accessory-detail-item"><b>时代</b><span>'+a.era+'</span></div>';
+    html+='<div class="weapon-detail-item accessory-detail-item"><b>起源</b><span>'+a.origin+'</span></div>';
+    html+='<div class="weapon-detail-item accessory-detail-item"><b>说明</b><span>'+a.desc.substring(0,30)+'...</span></div>';
+    html+='</div>';
+    html+='<div class="weapon-prompt-box">';
+    html+='<div class="accessory-prompt-title">💡 配饰详细描述提示词</div>';
+    html+='<div class="weapon-lang-label">🇨🇳 中文版：</div>';
+    html+='<div class="weapon-prompt-text accessory-prompt-text" onclick="event.stopPropagation();copyAccessoryPrompt(this)">'+a.cn+'</div>';
+    html+='<div class="weapon-lang-label">🇺🇸 English：</div>';
+    html+='<div class="weapon-prompt-text accessory-prompt-text" onclick="event.stopPropagation();copyAccessoryPrompt(this)">'+a.en+'</div>';
+    html+='<div class="weapon-lang-label">🤖 GPT Image 2 版本：</div>';
+    html+='<div class="weapon-prompt-text accessory-prompt-text" onclick="event.stopPropagation();copyAccessoryPrompt(this)">'+a.gpt+'</div>';
+    html+='</div>';
+    html+='<div class="weapon-tips accessory-tips"><b>💡 绘画技巧：</b>'+a.tips+'</div>';
+    html+='<div class="weapon-actions">';
+    html+='<button class="weapon-action-btn accessory-action-btn primary" onclick="event.stopPropagation();copyFullAccessory('+a.id+')">📋 复制全部</button>';
+    html+='<button class="weapon-action-btn accessory-action-btn secondary" onclick="event.stopPropagation();toggleAccessoryCard('+a.id+')">收起</button>';
+    html+='</div>';
+    html+='</div>';
+    html+='</div>';
+  });
+  list.innerHTML=html;
+}
+
+function switchAccessoryCat(cat){
+  document.querySelectorAll('.accessory-cat').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf(cat)>-1);
+  });
+  renderAccessoryList(cat);
+}
+
+function toggleAccessoryCard(id){
+  var card=document.querySelector('.accessory-card[data-id="'+id+'"]');
+  if(card)card.classList.toggle('expanded');
+}
+
+function copyAccessoryPrompt(el){
+  var text=el.textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      showToast('已复制到剪贴板');
+    });
+  }
+}
+
+function copyFullAccessory(id){
+  var a=ACCESSORY_DATA.find(function(x){return x.id===id});
+  if(!a)return;
+  var text='【'+a.title+' / '+a.en+'】\n\n类型：'+a.type+'\n时代：'+a.era+'\n起源：'+a.origin+'\n\n'+a.desc+'\n\n--- 中文提示词 ---\n'+a.cn+'\n\n--- English Prompt ---\n'+a.en+'\n\n--- GPT Image 2 Prompt ---\n'+a.gpt+'\n\n--- 绘画技巧 ---\n'+a.tips;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      showToast('已复制完整配饰提示词');
+    });
+  }
+}
 
 /* ========== 特效提示词 ========== */
 var EFFECT_DATA=[
