@@ -338,6 +338,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .weapon-card,.effect-card,.accessory-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;transition:all .2s;cursor:pointer}
 .weapon-card:hover{box-shadow:0 6px 20px rgba(255,107,53,.1);border-color:#ff6b35;transform:translateY(-2px)}
 .effect-card:hover{box-shadow:0 6px 20px rgba(155,89,182,.1);border-color:#9b59b6;transform:translateY(-2px)}
+/* 配饰卡片紫色主题 */
+.accessory-card:hover{box-shadow:0 6px 20px rgba(155,89,182,.1);border-color:#9b59b6;transform:translateY(-2px)}
+.accessory-cat:hover{border-color:#9b59b6;color:#9b59b6}
+.accessory-cat.active{background:#9b59b6;color:#fff;border-color:#9b59b6}
+.accessory-emoji{background:linear-gradient(135deg,#f3e5f5,#e1bee7)!important}
+.accessory-tag.type{background:#f3e5f5;color:#9b59b6}
+.accessory-detail-item{border-left:2px solid #9b59b6!important}
+.accessory-prompt-title{font-size:12px;font-weight:700;color:#9b59b6;margin-bottom:6px}
+.accessory-prompt-text:hover{border-color:#9b59b6;background:rgba(155,89,182,.03)!important}
+.accessory-tips{background:#f3e5f520!important;border-color:#9b59b6!important}
+.accessory-tips b{color:#9b59b6!important}
+.accessory-action-btn.primary{background:#9b59b6;color:#fff}
+.accessory-action-btn.primary:hover{opacity:.9}
+.accessory-action-btn.secondary:hover{color:#9b59b6;border-color:#9b59b6}
 .weapon-card-top,.effect-card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .weapon-emoji,.effect-emoji{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
 .weapon-emoji{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
@@ -5592,22 +5606,7 @@ renderAccessoryList('all');
 });
 
 
-/* 配饰卡片紫色主题 */
-.accessory-card:hover{box-shadow:0 6px 20px rgba(155,89,182,.1);border-color:#9b59b6;transform:translateY(-2px)}
-.accessory-emoji{background:linear-gradient(135deg,#f3e5f5,#e1bee7)!important}
-.accessory-cat:hover{border-color:#9b59b6;color:#9b59b6}
-.accessory-cat.active{background:#9b59b6;color:#fff;border-color:#9b59b6}
-.accessory-tag.type{background:#f3e5f5;color:#9b59b6}
-.accessory-detail-item{border-left:2px solid #9b59b6!important}
-.accessory-prompt-title{font-size:12px;font-weight:700;color:#9b59b6;margin-bottom:6px}
-.accessory-prompt-text:hover{border-color:#9b59b6;background:rgba(155,89,182,.03)!important}
-.accessory-tips{background:#f3e5f520!important;border-color:#9b59b6!important}
-.accessory-tips b{color:#9b59b6!important}
-.accessory-action-btn.primary{background:#9b59b6;color:#fff}
-.accessory-action-btn.primary:hover{opacity:.9}
-.accessory-action-btn.secondary:hover{color:#9b59b6;border-color:#9b59b6}
-
-/* ========== 特效提示词库 ========== */
+/* ========== 特效提示词 ========== */
 var EFFECT_DATA=[
  // ========== 魔法特效 ==========
  {id:1,cat:'magic',emoji:'🔮',title:'魔法阵',en:'Magic Circle',
@@ -7901,7 +7900,7 @@ function switchSection(id){
  // Update nav item active state
  document.querySelectorAll('.nav-item.has-submenu').forEach(function(el){
  var key=el.dataset.section;
- var isActive=id===key || (key==='prompts' && ['framework','expression','weapon','effect','music','prompts'].indexOf(id)>-1) || (key==='styleguide' && id==='styleguide') || (key==='agents' && id==='agents');
+ var isActive=id===key || (key==='prompts' && ['framework','expression','weapon','accessory','effect','music','prompts'].indexOf(id)>-1) || (key==='styleguide' && id==='styleguide') || (key==='agents' && id==='agents');
  el.classList.toggle('active',isActive);
  if(isActive && key!==id){
    var submenu=document.getElementById('submenu-'+key);
