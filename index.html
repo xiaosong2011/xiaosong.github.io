@@ -320,22 +320,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .expr-action-btn.secondary:hover{color:#e91e63;border-color:#e91e63}
 
 /* 武器库 & 特效库 - 复用表情库样式体系，用不同主色调 */
-.weapon-page,.effect-page{padding:16px}
-.weapon-head,.effect-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.weapon-head h2,.effect-head h2{font-size:18px;font-weight:800;color:var(--ink);margin:0}
-.weapon-head .sub,.effect-head .sub{font-size:12px;color:var(--ink-3)}
-.weapon-stat,.effect-stat{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap}
-.weapon-stat-item,.effect-stat-item{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg);color:var(--ink-2)}
+.weapon-page,.effect-page,.accessory-page{padding:16px}
+.weapon-head,.effect-head,.accessory-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.weapon-head h2,.effect-head h2,.accessory-head h2{font-size:18px;font-weight:800;color:var(--ink);margin:0}
+.weapon-head .sub,.effect-head .sub,.accessory-head .sub{font-size:12px;color:var(--ink-3)}
+.weapon-stat,.effect-stat,.accessory-stat{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap}
+.weapon-stat-item,.effect-stat-item,.accessory-stat-item{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg);color:var(--ink-2)}
 .weapon-stat-item b{color:#ff6b35}
 .effect-stat-item b{color:#9b59b6}
-.weapon-cats,.effect-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.weapon-cat,.effect-cat{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:all .2s;white-space:nowrap}
+.weapon-cats,.effect-cats,.accessory-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.weapon-cat,.effect-cat,.accessory-cat{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);transition:all .2s;white-space:nowrap}
 .weapon-cat:hover{border-color:#ff6b35;color:#ff6b35}
 .weapon-cat.active{background:#ff6b35;color:#fff;border-color:#ff6b35}
 .effect-cat:hover{border-color:#9b59b6;color:#9b59b6}
 .effect-cat.active{background:#9b59b6;color:#fff;border-color:#9b59b6}
-.weapon-list,.effect-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
-.weapon-card,.effect-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;transition:all .2s;cursor:pointer}
+.weapon-list,.effect-list,.accessory-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.weapon-card,.effect-card,.accessory-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;transition:all .2s;cursor:pointer}
 .weapon-card:hover{box-shadow:0 6px 20px rgba(255,107,53,.1);border-color:#ff6b35;transform:translateY(-2px)}
 .effect-card:hover{box-shadow:0 6px 20px rgba(155,89,182,.1);border-color:#9b59b6;transform:translateY(-2px)}
 .weapon-card-top,.effect-card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
@@ -534,6 +534,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   </div>
   <div class="submenu-item" data-sec="weapon" onclick="event.stopPropagation();handleSubmenuTap(this)">
    <span class="sm-ico">⚔️</span>武器库提示词
+  </div>
+  <div class="submenu-item" data-sec="accessory" onclick="event.stopPropagation();handleSubmenuTap(this)">
+   <span class="sm-ico">💎</span>配饰提示词
   </div>
   <div class="submenu-item" data-sec="effect" onclick="event.stopPropagation();handleSubmenuTap(this)">
    <span class="sm-ico">✨</span>特效提示词
@@ -3399,6 +3402,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  </div>
 </div>
 
+<!-- ========== 配饰提示词 ========== -->
+<div class="section" id="sec-accessory">
+ <div class="weapon-page">
+  <div class="weapon-head">
+   <span class="bow">💎</span>
+   <div>
+    <h2>配饰提示词</h2>
+    <span class="sub">精选配饰设定 · 中英双语 · GPT Image 2 专业版</span>
+   </div>
+   <div class="weapon-stat">
+    <div class="weapon-stat-item">共 <b id="accessoryTotalCount">18</b> 款</div>
+    <div class="weapon-stat-item"><b>3</b> 个分类</div>
+   </div>
+  </div>
+
+  <div class="weapon-cats" id="accessoryCats">
+   <button class="weapon-cat active" onclick="switchAccessoryCat('all')">🏆 全部</button>
+   <button class="weapon-cat" onclick="switchAccessoryCat('ancient')">🏺 古代配饰</button>
+   <button class="weapon-cat" onclick="switchAccessoryCat('modern')">⌚ 现代配饰</button>
+   <button class="weapon-cat" onclick="switchAccessoryCat('fantasy')">🔮 奇幻配饰</button>
+  </div>
+
+  <div class="weapon-list" id="accessoryList">
+   <!-- 配饰卡片将通过JS生成 -->
+  </div>
+ </div>
+</div>
+
 <!-- ========== 特效提示词 ========== -->
 <div class="section" id="sec-effect">
  <div class="effect-page">
@@ -5557,7 +5588,24 @@ function copyFullWeapon(id){
 // 初始化武器列表
 document.addEventListener('DOMContentLoaded',function(){
   renderWeaponList('all');
+renderAccessoryList('all');
 });
+
+
+/* 配饰卡片紫色主题 */
+.accessory-card:hover{box-shadow:0 6px 20px rgba(155,89,182,.1);border-color:#9b59b6;transform:translateY(-2px)}
+.accessory-emoji{background:linear-gradient(135deg,#f3e5f5,#e1bee7)!important}
+.accessory-cat:hover{border-color:#9b59b6;color:#9b59b6}
+.accessory-cat.active{background:#9b59b6;color:#fff;border-color:#9b59b6}
+.accessory-tag.type{background:#f3e5f5;color:#9b59b6}
+.accessory-detail-item{border-left:2px solid #9b59b6!important}
+.accessory-prompt-title{font-size:12px;font-weight:700;color:#9b59b6;margin-bottom:6px}
+.accessory-prompt-text:hover{border-color:#9b59b6;background:rgba(155,89,182,.03)!important}
+.accessory-tips{background:#f3e5f520!important;border-color:#9b59b6!important}
+.accessory-tips b{color:#9b59b6!important}
+.accessory-action-btn.primary{background:#9b59b6;color:#fff}
+.accessory-action-btn.primary:hover{opacity:.9}
+.accessory-action-btn.secondary:hover{color:#9b59b6;border-color:#9b59b6}
 
 /* ========== 特效提示词库 ========== */
 var EFFECT_DATA=[
