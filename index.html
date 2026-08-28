@@ -174,6 +174,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .dash-compare-table td{padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;color:var(--ink-2)}
 .dash-compare-table td:first-child{text-align:left;font-weight:600;color:var(--ink)}
 .dash-compare-table tbody tr:hover{background:#f8f9fa}
+/* 新剧日历 */
+.dash-calendar{display:flex;flex-direction:column;gap:0;border-left:3px solid var(--accent);margin-left:8px;padding-left:20px}
+.dash-cal-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;position:relative}
+.dash-cal-item:before{content:'';position:absolute;left:-27px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent)}
+.dash-cal-item.new-release:before{background:#e74c3c;box-shadow:0 0 0 2px #e74c3c;animation:pulse 2s infinite}
+.dash-cal-date{font-size:13px;font-weight:800;color:var(--accent);min-width:60px;flex-shrink:0;text-align:center;padding:4px 8px;border-radius:8px;background:#e8f0ff}
+.dash-cal-date.today{background:#e74c3c;color:#fff}
+.dash-cal-content{flex:1;min-width:0}
+.dash-cal-platform{font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;display:inline-block;margin-bottom:4px}
+.dash-cal-platform.hongguo{background:#fff3e0;color:#e65100}
+.dash-cal-platform.douyin{background:#f3e5f5;color:#7b1fa2}
+.dash-cal-platform.fanqie{background:#e8f5e9;color:#2e7d32}
+.dash-cal-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.dash-cal-meta{font-size:11px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.dash-cal-metric{font-size:12px;font-weight:700;color:#e74c3c}
+@media(max-width:768px){.dash-cal-date{min-width:48px;font-size:12px}.dash-cal-title{font-size:13px}.dash-cal-item:before{left:-25px}}
 @media(max-width:768px){.dash-stats{grid-template-columns:repeat(2,1fr)}.dash-bar-wrap{width:120px;max-width:30%}.dash-bar-val{min-width:50px;font-size:11px}.dash-compare-table{font-size:11px}.dash-compare-table th,.dash-compare-table td{padding:6px}}
 
 /* 提示词详情模态框 */
@@ -4128,15 +4144,103 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
  &nbsp;·&nbsp; 风格图鉴独立版 v1.0
 <!-- ========== 数据看板 ========== -->
 <div class="section" id="sec-dashboard">
- <div class="page-head"><span class="bow">📊</span><h1>数据看板</h1><span class="sub">· 红果短剧 · 番茄小说 · 抖音漫剧</span></div>
+ <div class="page-head"><span class="bow">📊</span><h1>数据看板</h1><span class="sub">· 新剧日历 · 红果短剧 · 番茄小说 · 抖音漫剧</span></div>
 
  <!-- 数据更新时间 -->
  <div class="card" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
   <div style="font-size:13px;color:var(--ink-2)">
    <span style="color:var(--accent)">●</span> 数据来源：网文大数据（wangwendashuju.com）<br>
-   <span style="font-size:11px;color:var(--ink-3);margin-left:14px">统计截至 2026-08-27 · 日更数据</span>
+   <span style="font-size:11px;color:var(--ink-3);margin-left:14px">统计截至 2026-08-28 · 日更数据</span>
   </div>
   <div style="font-size:11px;color:var(--ink-3);background:var(--tag-bg);padding:4px 12px;border-radius:20px">每日更新</div>
+ </div>
+
+ <!-- 新剧日历 -->
+ <div class="card">
+  <h3 class="dash-section-title">📅 新剧上映日历</h3>
+  <div style="font-size:11px;color:var(--ink-3);margin-bottom:12px">最近上线新剧时间线 · 跨平台汇总</div>
+  <div class="dash-calendar">
+   <div class="dash-cal-item new-release">
+    <span class="dash-cal-date today">08-24</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform douyin">抖音漫剧</span>
+     <div class="dash-cal-title">我年终奖80w降到1w9，领导却慌了</div>
+     <div class="dash-cal-meta">番荔枝剧场 · 3D动态漫 · 77集 · <span class="dash-cal-metric">新增1.6亿</span> · 累计2.3亿</div>
+    </div>
+   </div>
+   <div class="dash-cal-item new-release">
+    <span class="dash-cal-date">08-23</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform douyin">抖音漫剧</span>
+     <div class="dash-cal-title">假穷真爱</div>
+     <div class="dash-cal-meta">麦子剧场 · AI真人演绎 · 68集 · <span class="dash-cal-metric">新增9563万</span> · 累计2.9亿</div>
+    </div>
+   </div>
+   <div class="dash-cal-item new-release">
+    <span class="dash-cal-date">08-21</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform douyin">抖音漫剧</span>
+     <div class="dash-cal-title">菌香深处见人心</div>
+     <div class="dash-cal-meta">燕子剧场 · 3D动态漫 · 50集 · <span class="dash-cal-metric">新增1.5亿</span> · 累计4亿</div>
+    </div>
+   </div>
+   <div class="dash-cal-item new-release">
+    <span class="dash-cal-date">08-21</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform douyin">抖音漫剧</span>
+     <div class="dash-cal-title">塘埂上的人心</div>
+     <div class="dash-cal-meta">空白漫 · AI真人演绎 · 53集 · <span class="dash-cal-metric">新增9556万</span> · 累计5.4亿</div>
+    </div>
+   </div>
+   <div class="dash-cal-item new-release">
+    <span class="dash-cal-date">08-18</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform hongguo">红果短剧</span>
+     <div class="dash-cal-title">咱家剑宗团宠小师妹第五季</div>
+     <div class="dash-cal-meta">四川天漫 · 萌宝/修真 · 118集 · <span class="dash-cal-metric">6189万热度</span></div>
+    </div>
+   </div>
+   <div class="dash-cal-item">
+    <span class="dash-cal-date">08-14</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform douyin">抖音漫剧</span>
+     <div class="dash-cal-title">谁说纨绔不能当状元</div>
+     <div class="dash-cal-meta">孤灵剧场 · 3D动态漫 · 788集 · <span class="dash-cal-metric">新增1.1亿</span> · 累计20.5亿</div>
+    </div>
+   </div>
+   <div class="dash-cal-item">
+    <span class="dash-cal-date">08-13</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform hongguo">红果短剧</span>
+     <div class="dash-cal-title">老公的工资，婆婆的账</div>
+     <div class="dash-cal-meta">容量短剧 · 家庭/伦理 · 65集 · <span class="dash-cal-metric">6012万热度</span></div>
+    </div>
+   </div>
+   <div class="dash-cal-item">
+    <span class="dash-cal-date">08-13</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform hongguo">红果短剧</span>
+     <div class="dash-cal-title">闪婚，她甜的过头</div>
+     <div class="dash-cal-meta">花花夜读 · 爱情/都市 · 78集 · <span class="dash-cal-metric">5881万热度</span></div>
+    </div>
+   </div>
+   <div class="dash-cal-item">
+    <span class="dash-cal-date">08-12</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform hongguo">红果短剧</span>
+     <div class="dash-cal-title">好雨知时节</div>
+     <div class="dash-cal-meta">甜豆包剧场 · 爱情/日久生情 · 89集 · <span class="dash-cal-metric">7813万热度</span></div>
+    </div>
+   </div>
+   <div class="dash-cal-item">
+    <span class="dash-cal-date">08-12</span>
+    <div class="dash-cal-content">
+     <span class="dash-cal-platform hongguo">红果短剧</span>
+     <div class="dash-cal-title">谁说纨绔不能当状元</div>
+     <div class="dash-cal-meta">半亩文剧社 · 脑洞/穿越 · 788集 · <span class="dash-cal-metric">6479万热度</span></div>
+    </div>
+   </div>
+  </div>
  </div>
 
  <!-- 平台切换 -->
@@ -4264,35 +4368,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">咱家剑宗团宠小师妹第五季</span>
      <span class="dash-new-tag">萌宝/修真</span>
-     <span class="dash-new-heat">6319万</span>
+     <span class="dash-new-heat">6189万</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">08-13</span>
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">老公的工资，婆婆的账</span>
      <span class="dash-new-tag">家庭/伦理</span>
-     <span class="dash-new-heat">5985万</span>
+     <span class="dash-new-heat">6012万</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">08-13</span>
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">闪婚，她甜的过头</span>
      <span class="dash-new-tag">爱情/都市</span>
-     <span class="dash-new-heat">5825万</span>
+     <span class="dash-new-heat">5881万</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">08-12</span>
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">好雨知时节</span>
      <span class="dash-new-tag">爱情/都市</span>
-     <span class="dash-new-heat">7833万</span>
+     <span class="dash-new-heat">7813万</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">08-12</span>
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">谁说纨绔不能当状元</span>
      <span class="dash-new-tag">脑洞/穿越</span>
-     <span class="dash-new-heat">6331万</span>
+     <span class="dash-new-heat">6479万</span>
     </div>
    </div>
   </div>
@@ -4329,57 +4433,57 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
     <div class="dash-bar-row">
      <div class="dash-bar-rank">1</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">念力：每十分钟加10吨杀疯了</div>
-      <div class="dash-bar-meta">落魄山隋右 · 都市高武 · 10.6万字</div>
+      <div class="dash-bar-title">全班同学拜大宗师，我拜菩提祖师</div>
+      <div class="dash-bar-meta">青青孖妗 · 都市高武 · 12万字</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:100%;background:linear-gradient(90deg,#ff6b35,#ff8c42)"></div>
+      <div class="dash-bar-fill" style="width:98%;background:linear-gradient(90deg,#ff6b35,#ff8c42)"></div>
      </div>
-     <div class="dash-bar-val">5.7万在读</div>
+     <div class="dash-bar-val">5.0万在读</div>
     </div>
     <div class="dash-bar-row">
      <div class="dash-bar-rank">2</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">星铁，破绷就变强？开局带坏小鸟</div>
-      <div class="dash-bar-meta">知更鸟为什么不会飞 · 动漫衍生 · 10.9万字</div>
+      <div class="dash-bar-title">猎魔人小姐，我真不是血族</div>
+      <div class="dash-bar-meta">爱收集邮票的飞鸟 · 都市高武 · 10.5万字</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:75%;background:linear-gradient(90deg,#ff8c42,#ffa726)"></div>
+      <div class="dash-bar-fill" style="width:100%;background:linear-gradient(90deg,#ff8c42,#ffa726)"></div>
      </div>
-     <div class="dash-bar-val">4.3万在读</div>
+     <div class="dash-bar-val">5.1万在读</div>
     </div>
     <div class="dash-bar-row">
      <div class="dash-bar-rank">3</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">崩铁：你们怎么都是女孩子</div>
-      <div class="dash-bar-meta">炼气期大修士 · 动漫衍生 · 10.7万字</div>
+      <div class="dash-bar-title">综漫：开局帝皇模板奴役魔仙女王</div>
+      <div class="dash-bar-meta">疯亦想成神 · 动漫衍生 · 10.4万字</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:60%;background:linear-gradient(90deg,#ffa726,#ffb74d)"></div>
+      <div class="dash-bar-fill" style="width:84%;background:linear-gradient(90deg,#ffa726,#ffb74d)"></div>
      </div>
-     <div class="dash-bar-val">3.4万在读</div>
+     <div class="dash-bar-val">4.3万在读</div>
     </div>
     <div class="dash-bar-row">
      <div class="dash-bar-rank">4</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">成为戴拿的我被斯菲亚女王追杀</div>
-      <div class="dash-bar-meta">买个橙汁 · 动漫衍生 · 10.7万字</div>
+      <div class="dash-bar-title">综漫：捡碎片的我开局拼出虚式茈</div>
+      <div class="dash-bar-meta">情报五条悟 · 动漫衍生 · 10.2万字</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:53%;background:linear-gradient(90deg,#ffb74d,#ffcc02)"></div>
+      <div class="dash-bar-fill" style="width:80%;background:linear-gradient(90deg,#ffb74d,#ffcc02)"></div>
      </div>
-     <div class="dash-bar-val">3.0万在读</div>
+     <div class="dash-bar-val">4.1万在读</div>
     </div>
     <div class="dash-bar-row">
      <div class="dash-bar-rank">5</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">名义：小艾登门，开局停职侯亮平</div>
-      <div class="dash-bar-meta">崖间鹤 · 男频衍生 · 10.4万字</div>
+      <div class="dash-bar-title">我问老爹有多强？反手关掉我系统</div>
+      <div class="dash-bar-meta">云间炖星辰 · 都市高武 · 10.8万字</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:53%;background:linear-gradient(90deg,#ffcc02,#fdd835)"></div>
+      <div class="dash-bar-fill" style="width:75%;background:linear-gradient(90deg,#ffcc02,#fdd835)"></div>
      </div>
-     <div class="dash-bar-val">3.0万在读</div>
+     <div class="dash-bar-val">3.8万在读</div>
     </div>
    </div>
   </div>
@@ -4387,13 +4491,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   <div class="card">
    <h3 class="dash-section-title">🏷️ 热门题材分布</h3>
    <div class="dash-tags">
-    <span class="dash-tag" style="background:#e3f2fd;color:#1565c0">动漫衍生</span>
     <span class="dash-tag" style="background:#e8f5e9;color:#2e7d32">都市高武</span>
-    <span class="dash-tag" style="background:#fff3e0;color:#e65100">男频衍生</span>
-    <span class="dash-tag" style="background:#f3e5f5;color:#7b1fa2">穿越</span>
-    <span class="dash-tag" style="background:#fff8e1;color:#f57f17">逆袭</span>
-    <span class="dash-tag" style="background:#f1f8e9;color:#558b2f">星铁</span>
-    <span class="dash-tag" style="background:#ede7f6;color:#512da8">崩铁</span>
+    <span class="dash-tag" style="background:#e3f2fd;color:#1565c0">动漫衍生</span>
+    <span class="dash-tag" style="background:#fff3e0;color:#e65100">玄幻</span>
+    <span class="dash-tag" style="background:#f3e5f5;color:#7b1fa2">脑洞</span>
+    <span class="dash-tag" style="background:#fff8e1;color:#f57f17">穿越</span>
+    <span class="dash-tag" style="background:#f1f8e9;color:#558b2f">科幻</span>
+    <span class="dash-tag" style="background:#ede7f6;color:#512da8">悬疑</span>
    </div>
   </div>
 
@@ -4403,37 +4507,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
     <div class="dash-new-item">
      <span class="dash-new-date">首秀</span>
      <span class="dash-new-badge">NEW</span>
-     <span class="dash-new-title">星铁，破绷就变强？开局带坏小鸟</span>
+     <span class="dash-new-title">全班同学拜大宗师，我拜菩提祖师</span>
+     <span class="dash-new-tag">都市高武</span>
+     <span class="dash-new-heat">5.0万在读</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">首秀</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">猎魔人小姐，我真不是血族</span>
+     <span class="dash-new-tag">都市高武</span>
+     <span class="dash-new-heat">5.1万在读</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">首秀</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">综漫：开局帝皇模板奴役魔仙女王</span>
      <span class="dash-new-tag">动漫衍生</span>
      <span class="dash-new-heat">4.3万在读</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">首秀</span>
      <span class="dash-new-badge">NEW</span>
-     <span class="dash-new-title">崩铁：你们怎么都是女孩子</span>
+     <span class="dash-new-title">综漫：捡碎片的我开局拼出虚式茈</span>
      <span class="dash-new-tag">动漫衍生</span>
-     <span class="dash-new-heat">3.4万在读</span>
+     <span class="dash-new-heat">4.1万在读</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">首秀</span>
      <span class="dash-new-badge">NEW</span>
-     <span class="dash-new-title">成为戴拿的我被斯菲亚女王追杀</span>
-     <span class="dash-new-tag">动漫衍生</span>
-     <span class="dash-new-heat">3.0万在读</span>
-    </div>
-    <div class="dash-new-item">
-     <span class="dash-new-date">首秀</span>
-     <span class="dash-new-badge">NEW</span>
-     <span class="dash-new-title">名义：小艾登门，开局停职侯亮平</span>
-     <span class="dash-new-tag">男频衍生</span>
-     <span class="dash-new-heat">3.0万在读</span>
-    </div>
-    <div class="dash-new-item">
-     <span class="dash-new-date">首秀</span>
-     <span class="dash-new-badge">NEW</span>
-     <span class="dash-new-title">念力：每十分钟加10吨杀疯了</span>
+     <span class="dash-new-title">我问老爹有多强？反手关掉我系统</span>
      <span class="dash-new-tag">都市高武</span>
-     <span class="dash-new-heat">5.7万在读</span>
+     <span class="dash-new-heat">3.8万在读</span>
     </div>
    </div>
   </div>
@@ -4470,57 +4574,57 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
     <div class="dash-bar-row">
      <div class="dash-bar-rank">1</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">菌香深处见人心</div>
-      <div class="dash-bar-meta">燕子剧场 · 3D动态漫 · 50集 · 累计4亿</div>
+      <div class="dash-bar-title">我年终奖80w降到1w9，领导却慌了</div>
+      <div class="dash-bar-meta">番荔枝剧场 · 3D动态漫 · 77集 · 累计2.3亿</div>
      </div>
      <div class="dash-bar-wrap">
       <div class="dash-bar-fill" style="width:100%;background:linear-gradient(90deg,#ff6b35,#ff8c42)"></div>
      </div>
-     <div class="dash-bar-val">新增2.5亿</div>
+     <div class="dash-bar-val">新增1.6亿</div>
     </div>
     <div class="dash-bar-row">
      <div class="dash-bar-rank">2</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">菌香深处见人心</div>
+      <div class="dash-bar-meta">燕子剧场 · 3D动态漫 · 50集 · 累计4亿</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:94%;background:linear-gradient(90deg,#ff8c42,#ffa726)"></div>
+     </div>
+     <div class="dash-bar-val">新增1.5亿</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">3</div>
      <div class="dash-bar-info">
       <div class="dash-bar-title">谁说纨绔不能当状元</div>
       <div class="dash-bar-meta">孤灵剧场 · 3D动态漫 · 788集 · 累计20.5亿</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:52%;background:linear-gradient(90deg,#ff8c42,#ffa726)"></div>
+      <div class="dash-bar-fill" style="width:69%;background:linear-gradient(90deg,#ffa726,#ffb74d)"></div>
      </div>
-     <div class="dash-bar-val">新增1.3亿</div>
-    </div>
-    <div class="dash-bar-row">
-     <div class="dash-bar-rank">3</div>
-     <div class="dash-bar-info">
-      <div class="dash-bar-title">我年终奖80w降到1w9，领导却慌了</div>
-      <div class="dash-bar-meta">番荔枝剧场 · 3D动态漫 · 77集 · 累计2.3亿</div>
-     </div>
-     <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:48%;background:linear-gradient(90deg,#ffa726,#ffb74d)"></div>
-     </div>
-     <div class="dash-bar-val">新增1.2亿</div>
+     <div class="dash-bar-val">新增1.1亿</div>
     </div>
     <div class="dash-bar-row">
      <div class="dash-bar-rank">4</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">假穷真爱</div>
-      <div class="dash-bar-meta">麦子剧场 · AI真人演绎 · 68集 · 累计2.9亿</div>
+      <div class="dash-bar-title">福宝治愈全世界，家有萌娃岁岁安</div>
+      <div class="dash-bar-meta">3D动态漫 · 萌宝/治愈</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:38%;background:linear-gradient(90deg,#ffb74d,#ffcc02)"></div>
+      <div class="dash-bar-fill" style="width:63%;background:linear-gradient(90deg,#ffb74d,#ffcc02)"></div>
      </div>
-     <div class="dash-bar-val">新增9563万</div>
+     <div class="dash-bar-val">新增1.0亿</div>
     </div>
     <div class="dash-bar-row">
      <div class="dash-bar-rank">5</div>
      <div class="dash-bar-info">
-      <div class="dash-bar-title">塘埂上的人心</div>
-      <div class="dash-bar-meta">空白漫 · AI真人演绎 · 53集 · 累计5.4亿</div>
+      <div class="dash-bar-title">这一次，禾禾有家了</div>
+      <div class="dash-bar-meta">3D动态漫 · 剧情/家庭</div>
      </div>
      <div class="dash-bar-wrap">
-      <div class="dash-bar-fill" style="width:38%;background:linear-gradient(90deg,#ffcc02,#fdd835)"></div>
+      <div class="dash-bar-fill" style="width:59%;background:linear-gradient(90deg,#ffcc02,#fdd835)"></div>
      </div>
-     <div class="dash-bar-val">新增9556万</div>
+     <div class="dash-bar-val">新增9468万</div>
     </div>
    </div>
   </div>
@@ -4547,7 +4651,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">我年终奖80w降到1w9，领导却慌了</span>
      <span class="dash-new-tag">3D动态漫</span>
-     <span class="dash-new-heat">新增1.2亿</span>
+     <span class="dash-new-heat">新增1.6亿</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">08-23</span>
@@ -4561,7 +4665,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">菌香深处见人心</span>
      <span class="dash-new-tag">3D动态漫</span>
-     <span class="dash-new-heat">新增2.5亿</span>
+     <span class="dash-new-heat">新增1.5亿</span>
     </div>
     <div class="dash-new-item">
      <span class="dash-new-date">08-21</span>
@@ -4575,7 +4679,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
      <span class="dash-new-badge">NEW</span>
      <span class="dash-new-title">谁说纨绔不能当状元</span>
      <span class="dash-new-tag">3D动态漫</span>
-     <span class="dash-new-heat">新增1.3亿</span>
+     <span class="dash-new-heat">新增1.1亿</span>
     </div>
    </div>
   </div>
@@ -4602,26 +4706,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
     </tr>
     <tr>
      <td>Top1 数据</td>
-     <td><b style="color:#ff6b35">7833万</b></td>
-     <td><b style="color:#ff6b35">5.7万</b></td>
-     <td><b style="color:#ff6b35">2.5亿</b></td>
+     <td><b style="color:#ff6b35">7813万</b></td>
+     <td><b style="color:#ff6b35">5.1万</b></td>
+     <td><b style="color:#ff6b35">1.6亿</b></td>
     </tr>
     <tr>
      <td>Top5 均值</td>
-     <td>6499万</td>
-     <td>3.9万</td>
-     <td>1.3亿</td>
+     <td>6475万</td>
+     <td>4.4万</td>
+     <td>1.2亿</td>
     </tr>
     <tr>
      <td>最热题材</td>
      <td>爱情 / 都市</td>
-     <td>动漫衍生</td>
+     <td>都市高武</td>
      <td>3D动态漫 / 逆袭</td>
     </tr>
     <tr>
      <td>新剧数量</td>
      <td>5部（本周）</td>
-     <td>1897部（在榜）</td>
+     <td>1915部（在榜）</td>
      <td>903部（在榜）</td>
     </tr>
     <tr>
@@ -4639,9 +4743,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   <div style="font-size:12px;color:var(--ink-3);line-height:1.8">
    <b>📌 数据说明</b><br>
    · 数据来源：<a href="https://www.wangwendashuju.com/" target="_blank" style="color:var(--accent)">网文大数据</a>（wangwendashuju.com）<br>
-   · 统计日期：2026-08-27（UTC+8）<br>
+   · 统计日期：2026-08-28（UTC+8）<br>
    · 红果短剧：共99条数据，展示Top 5（热播榜）<br>
-   · 番茄小说：共1897条数据，展示Top 5（首秀榜）<br>
+   · 番茄小说：共1915条数据，展示Top 5（首秀榜）<br>
    · 抖音漫剧：共903条数据，展示Top 5（日榜新增播放）<br>
    · 数据为日更快照，非实时接口。完整榜单需开通网文大数据会员<br>
    · 仅供创作参考，不作为商业决策唯一依据
