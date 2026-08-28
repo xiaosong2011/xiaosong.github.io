@@ -135,6 +135,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .pl-card-arrow{position:absolute;right:14px;top:14px;font-size:16px;color:var(--ink-3);transition:transform .2s}
 .pl-card:hover .pl-card-arrow{transform:translateX(4px);color:var(--accent)}
 
+/* 数据看板样式 */
+.dash-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.dash-tab{padding:10px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2);transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.dash-tab:hover{border-color:var(--accent);color:var(--accent)}
+.dash-tab.active{background:linear-gradient(135deg,#2e86de,#54a0ff);color:#fff;border-color:#2e86de}
+.dash-panel{display:none;animation:dashFade .3s ease}
+.dash-panel.active{display:block}
+@keyframes dashFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.dash-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+.dash-stat-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;box-shadow:var(--shadow)}
+.dash-stat-num{font-size:24px;font-weight:800;line-height:1.2}
+.dash-stat-label{font-size:11px;color:var(--ink-3);margin-top:4px}
+.dash-stat-sub{font-size:10px;color:var(--ink-3);margin-top:2px;opacity:.7}
+.dash-section-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--accent);display:inline-block}
+.dash-bar-chart{display:flex;flex-direction:column;gap:8px}
+.dash-bar-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0}
+.dash-bar-rank{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2e86de,#54a0ff);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dash-bar-info{flex:1;min-width:0}
+.dash-bar-title{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-bar-meta{font-size:11px;color:var(--ink-3);margin-top:2px}
+.dash-bar-wrap{width:200px;max-width:40%;height:10px;background:#f0f0f0;border-radius:5px;overflow:hidden;flex-shrink:0}
+.dash-bar-fill{height:100%;border-radius:5px;transition:width .8s ease;min-width:4px}
+.dash-bar-val{font-size:12px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;min-width:70px;text-align:right}
+.dash-tags{display:flex;flex-wrap:wrap;gap:8px}
+.dash-tag{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600}
+.dash-new-list{display:flex;flex-direction:column;gap:8px}
+.dash-new-item{display:flex;align-items:center;gap:8px;padding:10px;border-radius:10px;background:#f8f9fa;border:1px solid #e8e8e8;transition:all .2s}
+.dash-new-item:hover{border-color:var(--accent);background:#f0f7ff}
+.dash-new-date{font-size:11px;font-weight:700;color:var(--accent);background:#e8f0ff;padding:3px 8px;border-radius:6px;flex-shrink:0}
+.dash-new-badge{font-size:10px;font-weight:700;color:#fff;background:#e74c3c;padding:2px 6px;border-radius:4px;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.dash-new-title{font-size:13px;font-weight:600;color:var(--ink);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-new-tag{font-size:11px;color:var(--ink-3);background:#f0f0f0;padding:3px 8px;border-radius:6px;flex-shrink:0}
+.dash-new-heat{font-size:12px;font-weight:700;color:#e74c3c;flex-shrink:0}
+.dash-compare-table{width:100%;border-collapse:collapse;font-size:12px}
+.dash-compare-table th{background:linear-gradient(135deg,#2e86de,#54a0ff);color:#fff;padding:10px;text-align:center;font-weight:600;border-radius:8px}
+.dash-compare-table td{padding:8px 10px;text-align:center;border-bottom:1px solid #e8e8e8;color:var(--ink-2)}
+.dash-compare-table td:first-child{text-align:left;font-weight:600;color:var(--ink)}
+.dash-compare-table tbody tr:hover{background:#f8f9fa}
+@media(max-width:768px){.dash-stats{grid-template-columns:repeat(2,1fr)}.dash-bar-wrap{width:120px;max-width:30%}.dash-bar-val{min-width:50px;font-size:11px}.dash-compare-table{font-size:11px}.dash-compare-table th,.dash-compare-table td{padding:6px}}
+
 /* 提示词详情模态框 */
 .pl-modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:9999;justify-content:center;align-items:flex-start;padding:20px;overflow-y:auto}
 .pl-modal-overlay.show{display:flex;animation:plFadeIn .25s ease}
@@ -512,6 +553,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   <div class="submenu-item" data-sec="agents" data-agent="comfy" onclick="event.stopPropagation();handleSubmenuTap(this)">
    <span class="sm-ico">🔧</span>ComfyUI工作流
   </div>
+ </div>
+
+ <div class="nav-item" data-section="dashboard" onclick="switchSection('dashboard')">
+ <span class="ico">📊</span><span class="lbl">数据看板</span>
  </div>
 
  <div class="nav-item" data-section="settings" onclick="switchSection('settings')">
@@ -4081,6 +4126,529 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <div class="footer">
  <a href="https://xiaosong2011.github.io/ajie-workbench/index.html" target="_blank">← 返回主工作台</a>
  &nbsp;·&nbsp; 风格图鉴独立版 v1.0
+<!-- ========== 数据看板 ========== -->
+<div class="section" id="sec-dashboard">
+ <div class="page-head"><span class="bow">📊</span><h1>数据看板</h1><span class="sub">· 红果短剧 · 番茄小说 · 抖音漫剧</span></div>
+
+ <!-- 数据更新时间 -->
+ <div class="card" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+  <div style="font-size:13px;color:var(--ink-2)">
+   <span style="color:var(--accent)">●</span> 数据来源：网文大数据（wangwendashuju.com）<br>
+   <span style="font-size:11px;color:var(--ink-3);margin-left:14px">统计截至 2026-08-27 · 日更数据</span>
+  </div>
+  <div style="font-size:11px;color:var(--ink-3);background:var(--tag-bg);padding:4px 12px;border-radius:20px">每日更新</div>
+ </div>
+
+ <!-- 平台切换 -->
+ <div class="card">
+  <div class="dash-tabs">
+   <button class="dash-tab active" data-dash="hongguo" onclick="switchDashTab('hongguo')">🔥 红果短剧</button>
+   <button class="dash-tab" data-dash="fanqie" onclick="switchDashTab('fanqie')">📚 番茄小说</button>
+   <button class="dash-tab" data-dash="douyin" onclick="switchDashTab('douyin')">🎬 抖音漫剧</button>
+  </div>
+ </div>
+
+ <!-- ===== 红果短剧面板 ===== -->
+ <div class="dash-panel active" id="dash-hongguo">
+  <!-- 统计概览 -->
+  <div class="dash-stats">
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#ff6b35">7833万</div>
+    <div class="dash-stat-label">最高热度</div>
+    <div class="dash-stat-sub">《好雨知时节》</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#e74c3c">5</div>
+    <div class="dash-stat-label">Top5 平均热度</div>
+    <div class="dash-stat-sub">6499万</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#9b59b6">3</div>
+    <div class="dash-stat-label">本周新剧</div>
+    <div class="dash-stat-sub">8月12日-18日上线</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#3498db">89</div>
+    <div class="dash-stat-label">最热播集数</div>
+    <div class="dash-stat-sub">《好雨知时节》</div>
+   </div>
+  </div>
+
+  <!-- 热度柱状图 -->
+  <div class="card">
+   <h3 class="dash-section-title">📊 热度榜 Top 5</h3>
+   <div class="dash-bar-chart">
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">1</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">好雨知时节</div>
+      <div class="dash-bar-meta">甜豆包剧场 · 89集 · 2026-08-12</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:100%;background:linear-gradient(90deg,#ff6b35,#ff8c42)"></div>
+     </div>
+     <div class="dash-bar-val">7833万</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">2</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">谁说纨绔不能当状元</div>
+      <div class="dash-bar-meta">半亩文剧社 · 788集 · 2026-08-12</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:81%;background:linear-gradient(90deg,#ff8c42,#ffa726)"></div>
+     </div>
+     <div class="dash-bar-val">6331万</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">3</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">咱家剑宗团宠小师妹第五季</div>
+      <div class="dash-bar-meta">四川天漫 · 118集 · 2026-08-18</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:81%;background:linear-gradient(90deg,#ffa726,#ffb74d)"></div>
+     </div>
+     <div class="dash-bar-val">6319万</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">4</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">老公的工资，婆婆的账</div>
+      <div class="dash-bar-meta">容量短剧 · 65集 · 2026-08-13</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:76%;background:linear-gradient(90deg,#ffb74d,#ffcc02)"></div>
+     </div>
+     <div class="dash-bar-val">5985万</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">5</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">闪婚，她甜的过头</div>
+      <div class="dash-bar-meta">花花夜读 · 78集 · 2026-08-13</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:74%;background:linear-gradient(90deg,#ffcc02,#fdd835)"></div>
+     </div>
+     <div class="dash-bar-val">5825万</div>
+    </div>
+   </div>
+  </div>
+
+  <!-- 题材分布 -->
+  <div class="card">
+   <h3 class="dash-section-title">🏷️ 热门题材分布</h3>
+   <div class="dash-tags">
+    <span class="dash-tag" style="background:#fff3e0;color:#e65100">爱情</span>
+    <span class="dash-tag" style="background:#fce4ec;color:#c62828">都市</span>
+    <span class="dash-tag" style="background:#e8f5e9;color:#2e7d32">日久生情</span>
+    <span class="dash-tag" style="background:#f3e5f5;color:#7b1fa2">脑洞</span>
+    <span class="dash-tag" style="background:#e3f2fd;color:#1565c0">穿越</span>
+    <span class="dash-tag" style="background:#fff8e1;color:#f57f17">逆袭</span>
+    <span class="dash-tag" style="background:#f1f8e9;color:#558b2f">萌宝</span>
+    <span class="dash-tag" style="background:#ede7f6;color:#512da8">修真</span>
+    <span class="dash-tag" style="background:#e0f7fa;color:#00838f">异界</span>
+    <span class="dash-tag" style="background:#fce4ec;color:#880e4f">家庭</span>
+    <span class="dash-tag" style="background:#fff3e0;color:#bf360c">伦理</span>
+    <span class="dash-tag" style="background:#f9fbe7;color:#827717">先婚后爱</span>
+   </div>
+  </div>
+
+  <!-- 新剧提醒 -->
+  <div class="card">
+   <h3 class="dash-section-title">🔔 新剧上线提醒</h3>
+   <div class="dash-new-list">
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-18</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">咱家剑宗团宠小师妹第五季</span>
+     <span class="dash-new-tag">萌宝/修真</span>
+     <span class="dash-new-heat">6319万</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-13</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">老公的工资，婆婆的账</span>
+     <span class="dash-new-tag">家庭/伦理</span>
+     <span class="dash-new-heat">5985万</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-13</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">闪婚，她甜的过头</span>
+     <span class="dash-new-tag">爱情/都市</span>
+     <span class="dash-new-heat">5825万</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-12</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">好雨知时节</span>
+     <span class="dash-new-tag">爱情/都市</span>
+     <span class="dash-new-heat">7833万</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-12</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">谁说纨绔不能当状元</span>
+     <span class="dash-new-tag">脑洞/穿越</span>
+     <span class="dash-new-heat">6331万</span>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <!-- ===== 番茄小说面板 ===== -->
+ <div class="dash-panel" id="dash-fanqie">
+  <div class="dash-stats">
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#ff6b35">5.7万</div>
+    <div class="dash-stat-label">最高在读</div>
+    <div class="dash-stat-sub">《念力：每十分钟加10吨》</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#e74c3c">5</div>
+    <div class="dash-stat-label">Top5 总在读</div>
+    <div class="dash-stat-sub">19.4万</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#9b59b6">3</div>
+    <div class="dash-stat-label">动漫衍生</div>
+    <div class="dash-stat-sub">最热门题材</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#3498db">10.9万</div>
+    <div class="dash-stat-label">最高字数</div>
+    <div class="dash-stat-sub">《星铁》</div>
+   </div>
+  </div>
+
+  <div class="card">
+   <h3 class="dash-section-title">📊 首秀榜 Top 5</h3>
+   <div class="dash-bar-chart">
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">1</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">念力：每十分钟加10吨杀疯了</div>
+      <div class="dash-bar-meta">落魄山隋右 · 都市高武 · 10.6万字</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:100%;background:linear-gradient(90deg,#ff6b35,#ff8c42)"></div>
+     </div>
+     <div class="dash-bar-val">5.7万在读</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">2</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">星铁，破绷就变强？开局带坏小鸟</div>
+      <div class="dash-bar-meta">知更鸟为什么不会飞 · 动漫衍生 · 10.9万字</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:75%;background:linear-gradient(90deg,#ff8c42,#ffa726)"></div>
+     </div>
+     <div class="dash-bar-val">4.3万在读</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">3</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">崩铁：你们怎么都是女孩子</div>
+      <div class="dash-bar-meta">炼气期大修士 · 动漫衍生 · 10.7万字</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:60%;background:linear-gradient(90deg,#ffa726,#ffb74d)"></div>
+     </div>
+     <div class="dash-bar-val">3.4万在读</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">4</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">成为戴拿的我被斯菲亚女王追杀</div>
+      <div class="dash-bar-meta">买个橙汁 · 动漫衍生 · 10.7万字</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:53%;background:linear-gradient(90deg,#ffb74d,#ffcc02)"></div>
+     </div>
+     <div class="dash-bar-val">3.0万在读</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">5</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">名义：小艾登门，开局停职侯亮平</div>
+      <div class="dash-bar-meta">崖间鹤 · 男频衍生 · 10.4万字</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:53%;background:linear-gradient(90deg,#ffcc02,#fdd835)"></div>
+     </div>
+     <div class="dash-bar-val">3.0万在读</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <h3 class="dash-section-title">🏷️ 热门题材分布</h3>
+   <div class="dash-tags">
+    <span class="dash-tag" style="background:#e3f2fd;color:#1565c0">动漫衍生</span>
+    <span class="dash-tag" style="background:#e8f5e9;color:#2e7d32">都市高武</span>
+    <span class="dash-tag" style="background:#fff3e0;color:#e65100">男频衍生</span>
+    <span class="dash-tag" style="background:#f3e5f5;color:#7b1fa2">穿越</span>
+    <span class="dash-tag" style="background:#fff8e1;color:#f57f17">逆袭</span>
+    <span class="dash-tag" style="background:#f1f8e9;color:#558b2f">星铁</span>
+    <span class="dash-tag" style="background:#ede7f6;color:#512da8">崩铁</span>
+   </div>
+  </div>
+
+  <div class="card">
+   <h3 class="dash-section-title">🔔 新书上线提醒</h3>
+   <div class="dash-new-list">
+    <div class="dash-new-item">
+     <span class="dash-new-date">首秀</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">星铁，破绷就变强？开局带坏小鸟</span>
+     <span class="dash-new-tag">动漫衍生</span>
+     <span class="dash-new-heat">4.3万在读</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">首秀</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">崩铁：你们怎么都是女孩子</span>
+     <span class="dash-new-tag">动漫衍生</span>
+     <span class="dash-new-heat">3.4万在读</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">首秀</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">成为戴拿的我被斯菲亚女王追杀</span>
+     <span class="dash-new-tag">动漫衍生</span>
+     <span class="dash-new-heat">3.0万在读</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">首秀</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">名义：小艾登门，开局停职侯亮平</span>
+     <span class="dash-new-tag">男频衍生</span>
+     <span class="dash-new-heat">3.0万在读</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">首秀</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">念力：每十分钟加10吨杀疯了</span>
+     <span class="dash-new-tag">都市高武</span>
+     <span class="dash-new-heat">5.7万在读</span>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <!-- ===== 抖音漫剧面板 ===== -->
+ <div class="dash-panel" id="dash-douyin">
+  <div class="dash-stats">
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#ff6b35">2.5亿</div>
+    <div class="dash-stat-label">最高新增播放</div>
+    <div class="dash-stat-sub">《菌香深处见人心》</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#e74c3c">20.5亿</div>
+    <div class="dash-stat-label">最高累计播放</div>
+    <div class="dash-stat-sub">《谁说纨绔不能当状元》</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#9b59b6">3</div>
+    <div class="dash-stat-label">3D动态漫</div>
+    <div class="dash-stat-sub">最热门类型</div>
+   </div>
+   <div class="dash-stat-card">
+    <div class="dash-stat-num" style="color:#3498db">788</div>
+    <div class="dash-stat-label">最长集数</div>
+    <div class="dash-stat-sub">《谁说纨绔不能当状元》</div>
+   </div>
+  </div>
+
+  <div class="card">
+   <h3 class="dash-section-title">📊 热播榜 Top 5（日新增播放）</h3>
+   <div class="dash-bar-chart">
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">1</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">菌香深处见人心</div>
+      <div class="dash-bar-meta">燕子剧场 · 3D动态漫 · 50集 · 累计4亿</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:100%;background:linear-gradient(90deg,#ff6b35,#ff8c42)"></div>
+     </div>
+     <div class="dash-bar-val">新增2.5亿</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">2</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">谁说纨绔不能当状元</div>
+      <div class="dash-bar-meta">孤灵剧场 · 3D动态漫 · 788集 · 累计20.5亿</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:52%;background:linear-gradient(90deg,#ff8c42,#ffa726)"></div>
+     </div>
+     <div class="dash-bar-val">新增1.3亿</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">3</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">我年终奖80w降到1w9，领导却慌了</div>
+      <div class="dash-bar-meta">番荔枝剧场 · 3D动态漫 · 77集 · 累计2.3亿</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:48%;background:linear-gradient(90deg,#ffa726,#ffb74d)"></div>
+     </div>
+     <div class="dash-bar-val">新增1.2亿</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">4</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">假穷真爱</div>
+      <div class="dash-bar-meta">麦子剧场 · AI真人演绎 · 68集 · 累计2.9亿</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:38%;background:linear-gradient(90deg,#ffb74d,#ffcc02)"></div>
+     </div>
+     <div class="dash-bar-val">新增9563万</div>
+    </div>
+    <div class="dash-bar-row">
+     <div class="dash-bar-rank">5</div>
+     <div class="dash-bar-info">
+      <div class="dash-bar-title">塘埂上的人心</div>
+      <div class="dash-bar-meta">空白漫 · AI真人演绎 · 53集 · 累计5.4亿</div>
+     </div>
+     <div class="dash-bar-wrap">
+      <div class="dash-bar-fill" style="width:38%;background:linear-gradient(90deg,#ffcc02,#fdd835)"></div>
+     </div>
+     <div class="dash-bar-val">新增9556万</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <h3 class="dash-section-title">🏷️ 热门题材分布</h3>
+   <div class="dash-tags">
+    <span class="dash-tag" style="background:#e8f5e9;color:#2e7d32">女频种田</span>
+    <span class="dash-tag" style="background:#fff3e0;color:#e65100">逆袭</span>
+    <span class="dash-tag" style="background:#e3f2fd;color:#1565c0">架空</span>
+    <span class="dash-tag" style="background:#f3e5f5;color:#7b1fa2">穿越</span>
+    <span class="dash-tag" style="background:#fff8e1;color:#f57f17">都市日常</span>
+    <span class="dash-tag" style="background:#fce4ec;color:#c62828">现代言情</span>
+    <span class="dash-tag" style="background:#f1f8e9;color:#558b2f">乡村</span>
+    <span class="dash-tag" style="background:#ede7f6;color:#512da8">剧情</span>
+   </div>
+  </div>
+
+  <div class="card">
+   <h3 class="dash-section-title">🔔 新剧上线提醒</h3>
+   <div class="dash-new-list">
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-24</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">我年终奖80w降到1w9，领导却慌了</span>
+     <span class="dash-new-tag">3D动态漫</span>
+     <span class="dash-new-heat">新增1.2亿</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-23</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">假穷真爱</span>
+     <span class="dash-new-tag">AI真人演绎</span>
+     <span class="dash-new-heat">新增9563万</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-21</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">菌香深处见人心</span>
+     <span class="dash-new-tag">3D动态漫</span>
+     <span class="dash-new-heat">新增2.5亿</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-21</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">塘埂上的人心</span>
+     <span class="dash-new-tag">AI真人演绎</span>
+     <span class="dash-new-heat">新增9556万</span>
+    </div>
+    <div class="dash-new-item">
+     <span class="dash-new-date">08-14</span>
+     <span class="dash-new-badge">NEW</span>
+     <span class="dash-new-title">谁说纨绔不能当状元</span>
+     <span class="dash-new-tag">3D动态漫</span>
+     <span class="dash-new-heat">新增1.3亿</span>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <!-- 三平台对比 -->
+ <div class="card">
+  <h3 class="dash-section-title">📈 三平台数据对比</h3>
+  <table class="dash-compare-table">
+   <thead>
+    <tr>
+     <th>维度</th>
+     <th>🔥 红果短剧</th>
+     <th>📚 番茄小说</th>
+     <th>🎬 抖音漫剧</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>数据指标</td>
+     <td>热度值</td>
+     <td>在读人数</td>
+     <td>新增播放量</td>
+    </tr>
+    <tr>
+     <td>Top1 数据</td>
+     <td><b style="color:#ff6b35">7833万</b></td>
+     <td><b style="color:#ff6b35">5.7万</b></td>
+     <td><b style="color:#ff6b35">2.5亿</b></td>
+    </tr>
+    <tr>
+     <td>Top5 均值</td>
+     <td>6499万</td>
+     <td>3.9万</td>
+     <td>1.3亿</td>
+    </tr>
+    <tr>
+     <td>最热题材</td>
+     <td>爱情 / 都市</td>
+     <td>动漫衍生</td>
+     <td>3D动态漫 / 逆袭</td>
+    </tr>
+    <tr>
+     <td>新剧数量</td>
+     <td>5部（本周）</td>
+     <td>1897部（在榜）</td>
+     <td>903部（在榜）</td>
+    </tr>
+    <tr>
+     <td>更新频率</td>
+     <td>日更</td>
+     <td>日更</td>
+     <td>日更</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+
+ <!-- 数据说明 -->
+ <div class="card" style="background:#f8f9fa;border:1px solid var(--line)">
+  <div style="font-size:12px;color:var(--ink-3);line-height:1.8">
+   <b>📌 数据说明</b><br>
+   · 数据来源：<a href="https://www.wangwendashuju.com/" target="_blank" style="color:var(--accent)">网文大数据</a>（wangwendashuju.com）<br>
+   · 统计日期：2026-08-27（UTC+8）<br>
+   · 红果短剧：共99条数据，展示Top 5（热播榜）<br>
+   · 番茄小说：共1897条数据，展示Top 5（首秀榜）<br>
+   · 抖音漫剧：共903条数据，展示Top 5（日榜新增播放）<br>
+   · 数据为日更快照，非实时接口。完整榜单需开通网文大数据会员<br>
+   · 仅供创作参考，不作为商业决策唯一依据
+  </div>
+ </div>
+</div>
+
 </div>
 </main>
 </div>
@@ -7207,6 +7775,16 @@ function switchSection(id){
  updateCloudStatusBox();
  }
  if(window.innerWidth<=768) toggleSidebar(false);
+}
+
+// 数据看板平台切换
+function switchDashTab(tab){
+ document.querySelectorAll('.dash-tab').forEach(function(el){
+  el.classList.toggle('active',el.dataset.dash===tab);
+ });
+ document.querySelectorAll('.dash-panel').forEach(function(el){
+  el.classList.toggle('active',el.id==='dash-'+tab);
+ });
 }
 
 // 子菜单点击事件委托（桌面端）
